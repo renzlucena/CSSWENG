@@ -1,0 +1,164 @@
+.sidebar
+{
+    position:fixed;
+    height: 110%;
+    width: 400px;
+    display:block;
+    margin: -10px;
+    padding: 0px;
+    background-color: #15223B;
+}
+
+
+.bottom-button
+{
+    background-color: #588BAE;
+    position: fixed;
+    display:block;
+    bottom:0px;
+    width: 400px;
+}
+
+.sidebar a
+{
+    padding: 20px;
+    font-size: 20px;
+    color: white;
+    background-color: none;
+    display: block;
+    text-decoration: none;
+}
+
+.sidebar a:hover
+{
+    color: white;
+    background-color: black;
+}
+
+.red-text{
+    color:red;
+}
+.comment-text{
+    color:#ADD8E6;
+}
+.left-align{
+    text-align: left;
+}
+
+.main
+{
+    padding-top: 80px;
+    width: 1500px;
+    height: 110%;
+    display: inline-block;
+    margin-left: 400px;
+    background-color: none;
+    text-align:center;
+}
+
+.sidebar-profile
+{
+    margin: 10px;
+    background-color: none;
+}
+
+.sidebar-profile a
+{
+    font-size: 15px;
+    margin: 0px;
+    padding: 0px;
+    background-color: none;
+    color: #588BAE;
+}
+.sidebar-profile a:hover
+{
+    color: white;
+}
+
+.sidebar-profile-text
+{
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+    background-color: none;
+}
+
+.sidebar-profile-email
+{
+    display: inline-block;
+    margin-top: 0px;
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: white;
+    background-color: none;
+}
+
+.sidebar-profile-name
+{
+    color:white;
+    margin: 0px;
+    font-size:30px;
+}
+
+.main-profile-links
+{
+    margin-top: 50px;    
+}
+
+.main-profile-links a
+{
+    text-decoration:none;
+    font-size: 23px;
+    display: block;
+    margin:10px;
+}
+
+.main-profile-welcome h1
+{
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.main-profile-welcome p
+{
+    margin:20px;
+    font-size: 23px;    
+}
+
+.main-header
+{
+    text-align: left;
+    padding-left: 50px;
+    padding-right: 50px;
+    background-color: none;
+    display: block;
+}
+.main-header h1
+{
+    font-size:30px;
+    margin-bottom: 50px;
+}
+.main-header p
+{
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    background-color: #588BAE;
+}
+
+th{
+    height: 20px;
+    background-color: #15223B;
+    color: white;
+    border: 1px solid;
+}
+td{
+    color: white;
+    padding: 0px;
+}
