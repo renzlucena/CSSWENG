@@ -3,6 +3,11 @@
 <head>
     <link rel = "stylesheet" href="agent_set.css">
     <title>Settings</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div class="container">
@@ -43,10 +48,12 @@
     
         <div class="main">
             <div class="main-header">
-                <h1>Settings</h1>     
+                <h1>Settings</p>
+                <p><b><i>Items will NOT be autosaved!</b></i></p>       
+                <p>Please be mindful before you close the page.</p>       
             </div>  
             
-            <div class="main-form">
+            <div id="main-form">
                 <img src="temp_pic.png" id="pfp" width="125" height="125">
 
                 <form>
@@ -71,29 +78,12 @@
                     </p>
                         
                     <p>
-                        <label for="banks">Payout Bank:</label>
-                        <select id="banks" name="banks">
-                            <option value=""></option>
-                            <option value="bdo">BDO</option>
-                            <option value="bpi">BPI</option>
-                            <option value="landbank">LandBank</option>
-                            <option value="metrobank">MetroBank</option>
-                            <option value="pnb">PNB</option>
-                        </select>
-
-                        <label for="accno">Account Number:</label>
-                        <input type="number" id="accno" name="accno">
-                    </p>
-                    
-                    <p>
                         <label for="fname">First Name:</label>
                         <input type="text" id="fname" name="fname"> 
     
                         <label for="lname">Last Name:</label>
                         <input type="text" id="lname" name="lname"> 
     
-                        <label for="mi">Middle Initial:</label>
-                        <input type="text" id="mi" name="mi">
                     </p>
 
                     <p>

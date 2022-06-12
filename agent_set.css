@@ -20,7 +20,7 @@
 }
 
 
-.sidebar-settings-btn
+.sidebar-assignments-btn
 {
     background-color: #588BAE;
     display: fixed;
@@ -33,7 +33,7 @@
     background-color: black;
 }
 
-.sidebar-settings-btn a:hover
+.sidebar-assignments-btn a:hover
 {
     color: white;
     background-color: black;
@@ -45,15 +45,26 @@
     background-color: black;
 }
 
-.main-form {
+
+/*active button*/
+.sidebar-settings-btn a
+{
+    color: black;
+    background-color: white;
+}
+
+.sidebar-settings-btn a:hover
+{
+    color: black;
+    background-color: white;
+}
+
+#main-form {
+    margin-left: 50px;
     text-align: justify;
 }
 
 #pfp {
     float: left;
     padding-right: 10px;
-}
-
-input {
-    margin-right: 30px;
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel = "stylesheet" href="styles.css">
+    <title>Login to Ventucillo Associates</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+
+    <script>
+        function checkForm()
+        {
+            var valid = true;
+            
+            var username = document.getElementById("username");
+            var password = document.getElementById("password");
+            
+            //if either field is empty, do not proceed.
+            if (username.value == "")
+            {
+                username.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                username.style.backgroundColor = "white";
+            }
+            if (password.value == "")
+            {
+                password.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                password.style.backgroundColor = "white";
+            }
+            return valid;
+        }
+    </script>
+
+</head>
+<body>
+    <div class="container color-dark">
+        <div class="login-panel">
+                <h1>Login</p>
+                <br><br><br>
+                <form  method="get" action="submit-login" onsubmit="return checkForm()">
+                
+                    <div>
+                        
+                        <input type="text" id="username" placeholder="Account ID"/>
+                
+                        <br><br>
+                        
+                        <input type="text" id="password" placeholder="Password"/>
+                        
+                        <br><br>
+                        
+                        <input type="checkbox" checked="checked" name="remember">
+                        Remember me
+                        
+                        <br> <br>
+                        <input type="submit" value="Log in">
+                        
+                        <br><br>
+                        <p class="small-text">In order to use our services, the Agent must agree to our <a href="terms.html">Terms and Conditions</href></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
