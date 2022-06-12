@@ -3,6 +3,12 @@
 <head>
     <link rel = "stylesheet" href="agent_ass_view.css">
     <title>Assignments</title>
+    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div class="container">
@@ -39,8 +45,7 @@
             </div>
         </div>
     
-    
-    
+
         <div class="main">
             <div class="main-header">
                 <h1>View Current Assignments</p>
@@ -49,11 +54,45 @@
             </div>  
             
             <div>            
-                <form>
-                    <input type="text">Intended User of Appraisal</input>
+                <form class="assignments-form">
+                    <input name="ref_id" type="text">Reference ID</input>
+                    <br>
+                    <input name="type_of_approach" type="text">Type of Approach</input>
+                    <br>
+                    <input name="client_f_name" type="text">Type of Approach</input>
+                    <br>
+                    <input name="client_l_name" type="text">Type of Approach</input>
+                    <br>
+                    <input name="property_images" type="text">Property Images</input>
+                    <br>
+                    <input name="lot_size" type="text">Lot Size</input>
+                    <br>
+                    <input name="trans_date" type="date">Transaction Date</input>
+                    <br>
+                    <input name="purchase_price" type="text">Purchase Price</input>
+                    <br>
+                    <input name="listing_price" type="text">Listing Price</input>
+                    <br>
+                    <label for="terms_of_sale">Terms of Sale</label>
+                    <select name="terms_of_sale">
+                        <option value="cash">Cash</option>
+                        <option value="installment">Installment</option>
+                        <option value="discount">Discounted</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                    <br>
+                    <label for="location">Location Type</label>
+                    <select name="terms_of_sale">
+                        <option value="inferior">Inferior</option>
+                        <option value="equal">Equal</option>
+                        <option value="superior">Superior</option>
+                    </select>
+                    <label>Is a Corner Lot?</label>
+                    <input type="checkbox">
+                    <br>
+                    <br>
                 </form>
             </div>
-            
         </div>
     </div>
 </body>
