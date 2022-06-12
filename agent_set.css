@@ -62,9 +62,15 @@
 #main-form {
     margin-left: 50px;
     text-align: justify;
+    overflow-y: scroll;
 }
 
 #pfp {
     float: left;
     padding-right: 10px;
+}
+
+input {
+    margin-bottom: 3px;
+    margin-top: 2px;
 }

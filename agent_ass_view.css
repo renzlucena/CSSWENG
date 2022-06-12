@@ -8,8 +8,6 @@
 }
 
 
-
-
 .sidebar-history-btn
 {
     background-color: #588BAE;
@@ -63,20 +61,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .main-assignments-btn
 {
     padding: 10px;
@@ -102,4 +86,16 @@
 {
     background-color: black;
     color: white;
+}
+
+.assignments-form {
+    margin-left: 10px;
+    text-align: justify;
+    overflow: auto;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+input {
+    margin-bottom: 5px;
 }
