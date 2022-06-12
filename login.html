@@ -40,33 +40,39 @@
 </head>
 <body>
     <div class="container color-dark">
-        <div class="login-panel">
-                <h1>Login</p>
-                <br><br><br>
-                <form  method="get" action="submit-login" onsubmit="return checkForm()">
+    
+        <div id="login-panel-container">
+        <div id="login-panel">
+            <br><br>
+            <br><br>
+            <form  method="get" action="submit-login" onsubmit="return checkForm()">
+                <img src="6227853b83e54f2e94c29519d7c234db (1).JPg" width="250">
+                <br><br>
+                <br><br>
+                <h1>Login</h1>
+                <br><br>
+                <label for="password">Username</label>
+                <input type="text" id="username" placeholder="Account ID"/>
+        
+                <br>
+                <br>
+                <label for="password">Password</label>
+                <input type="text" id="password" placeholder="Password"/>
                 
-                    <div>
-                        
-                        <input type="text" id="username" placeholder="Account ID"/>
+                <br>
+                <input type="checkbox" checked="checked" name="remember" id="remember">
+                <label for="remember">Remember Me</label>
                 
-                        <br><br>
-                        
-                        <input type="text" id="password" placeholder="Password"/>
-                        
-                        <br><br>
-                        
-                        <input type="checkbox" checked="checked" name="remember">
-                        Remember me
-                        
-                        <br> <br>
-                        <input type="submit" value="Log in">
-                        
-                        <br><br>
-                        <p class="small-text">In order to use our services, the Agent must agree to our <a href="terms.html">Terms and Conditions</href></p>
-                    </div>
-                </form>
-            </div>
+                <br> <br>
+                <input type="submit" value="Log in">
+                
+                <br>
+                <p class="bottom-part small-text">In order to use our services, the Agent must agree to our <a href="terms.html">Terms and Conditions</href></p>
+
+            </form>
+        </div>
         </div>
     </div>
 </body>
 </html>
+

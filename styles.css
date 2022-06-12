@@ -58,20 +58,31 @@ p,h1,h2,h3,h4,h5,h6,label,a,th,td
 }
 
 .container{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    
     height: 100%;
     width: 100%;
+    
+    text-align: center;
 }
 
 .color-dark
 {
     background-color: #15223B
 }
-
+.color-white
+{
+    background-color: #FFFFFF
+}
 .color-light
 {
     background-color: #ADD3E6
 }
-
+.small-text{
+    font-size: 10px;
+}
 .main
 {
     padding-top: 40px;
@@ -124,22 +135,63 @@ input[type=file]{
 	border: none;
 }
 
-.login-panel a
+#login-form-container
 {
-    margin: 0px;
-    padding: 0px;
-    margin-top: 50px;
+    margin-top: 100px;
+    
 }
 
-.login-panel{
-    background-color: #000000;
+#login-form-container
+{
+    margin-top: 100px;
+    
+}
+
+#login-panel{
+    position: fixed;
+    
+    background-color: #FFFFFF;
+    margin:auto;
+    width: 30%;
+    right: 0px;
+    left: 0px;
+    top: 0px;
     height: 100%;
-	margin: 150px auto;
-    width: 40%;
     text-align: center;
 }
 
+#login-panel form{
+    margin-top: 100px;
+    text-align: center;
+    text-align: center;
 
+}
+
+#login-panel input[type="text"]{
+    text-align: center;
+    margin: auto;
+    display: block;
+}
+
+#login-panel a
+{
+    color: #588BAE;
+}
+
+#login-panel label{
+    font-size: 16px;
+}
+#remember{
+    display: inline-block;
+}
+
+#login-panel h1{
+    color: #15223B;
+    margin: 0px auto;
+    padding-top:0px;
+    padding-bottom:0px;
+    width: 40%;
+}
 
 
 
