@@ -356,3 +356,19 @@ td{
     margin-bottom: 5px;
     font-size: 20px;
 }
+
+#main-table-bottom{
+    margin: 10px;
+}
+#main-table-bottom button:hover{
+    background-color:#588BAE;
+}
+#main-table-bottom button{
+    width: 250px;
+    margin: 10px;
+    padding: 20px;
+    font-family: 'Open Sans', sans-serif; 
+	border-radius: 5px;
+    color: #FFFFFF;
+    background-color: #15223B
+}

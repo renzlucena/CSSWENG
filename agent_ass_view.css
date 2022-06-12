@@ -7,7 +7,6 @@
     color: white;
 }
 
-
 .sidebar-history-btn
 {
     background-color: #588BAE;
@@ -61,6 +60,7 @@
 }
 
 
+
 .main-assignments-btn
 {
     padding: 10px;
@@ -88,14 +88,19 @@
     color: white;
 }
 
-.assignments-form {
-    margin-left: 10px;
-    text-align: justify;
-    overflow: auto;
-    padding: 10px;
+/* yung box sa baba */
+.main-table
+{
     overflow-y: scroll;
-}
-
-input {
-    margin-bottom: 5px;
+    width: 1400px;
+    height: 80%;
+    padding-right: 10px;
+    border: 3px solid #15223B;
+    
+    border-radius: 10px;
+	
+    display: inline-block;
+    background-color: none;
+    text-align:center;
+    background-color: #588BAE;
 }

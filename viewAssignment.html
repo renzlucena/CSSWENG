@@ -52,10 +52,9 @@
                 <p><b><i>Items will NOT be autosaved!</b></i></p>       
                 <p>Please be mindful before you close the page.</p>       
             </div>  
-            
-            <div class="assignments-form">            
-                <form>
-                    
+            <form class="assignments-form">
+                <div class="main-table">
+                        
                     <label for="ref_id">Reference ID</label>
                     <input name="ref_id" type="text">
                     <br>
@@ -111,8 +110,13 @@
                     <input type="checkbox">
                     <br>
                     <br>
-                </form>
+                </div>
+                    
+            <div id="main-table-bottom">
+                <button type="submit" formaction="#" name="save_ass">Save Details</button>
+                <button type="submit" formaction="#" name="send_ass">Send For Processing</button>
             </div>
+            </form>
         </div>
     </div>
 </body>
