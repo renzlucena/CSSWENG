@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel = "stylesheet" href="agent_set.css">
+    <title>Settings</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-profile">
+                <img src="temp_pic.png" width="100" height="100">
+                <div class="sidebar-profile-text">
+                    <p class="sidebar-profile-name">Agent LastName</p>
+                    <p class="sidebar-profile-email"><i>example-mail@xmail.com</i></p>
+                    <a href="login.html">Log Out</a>
+                </div>
+            </div>
+            
+            <div class="sidebar-profile-btn">
+                
+                <a href="profile.html">Profile</a>
+            </div>
+            <div class="sidebar-assignments-btn">
+               
+                <a  href="assignments.html">Assignments</a>
+            </div>
+            <div class="sidebar-history-btn">
+               
+                <a  href="history.html">History</a>
+            </div>
+            <div class="sidebar-settings-btn">
+                
+                <a href="settings.html">Settings</a>
+            </div>
+            
+            <div class="bottom-button">
+                
+                <a href="assignments.html">Logout</a>
+            </div>
+        </div>
+    
+    
+    
+        <div class="main">
+            <div class="main-header">
+                <h1>Settings</h1>     
+            </div>  
+            
+            <div class="main-form">
+                <img src="temp_pic.png" id="pfp" width="125" height="125">
+
+                <form>
+                    <p>
+                        <label for="pimg">Profile Image:</label>
+                        <input type="file" id="pimg" name="pimg">
+                    </p>
+
+                    <p>
+                        <label for="dname">Display Name:</label>
+                        <input type="text" id="dname" name="dname">
+                    </p>
+                    
+                    <p>
+                        <label for="licenseno">Appraiser's License No.:</label>
+                        <input type="number" id="licenseno" name="licenseno"> 
+                    </p>
+        
+                    <p>
+                        <label for="valid">Valid Thru:</label>
+                        <input type="date" id="valid" name="valid">
+                    </p>
+                        
+                    <p>
+                        <label for="banks">Payout Bank:</label>
+                        <select id="banks" name="banks">
+                            <option value=""></option>
+                            <option value="bdo">BDO</option>
+                            <option value="bpi">BPI</option>
+                            <option value="landbank">LandBank</option>
+                            <option value="metrobank">MetroBank</option>
+                            <option value="pnb">PNB</option>
+                        </select>
+
+                        <label for="accno">Account Number:</label>
+                        <input type="number" id="accno" name="accno">
+                    </p>
+                    
+                    <p>
+                        <label for="fname">First Name:</label>
+                        <input type="text" id="fname" name="fname"> 
+    
+                        <label for="lname">Last Name:</label>
+                        <input type="text" id="lname" name="lname"> 
+    
+                        <label for="mi">Middle Initial:</label>
+                        <input type="text" id="mi" name="mi">
+                    </p>
+
+                    <p>
+                        <label for="email">Email Address:</label>
+                        <input type="email" id="email" name="email"> <br>
+                        *This will be used to sign in your account
+                    </p>
+
+                    <p>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password">
+                        
+                        <label for="retypepwd">Retype Password:</label>
+                        <input type="password" id="retypepwd" name="retypepwd"> <br>
+                        *If you forget your password, please coordinate with your admin
+                    </p>
+
+                    <p>
+                        <label for="theme">Theme:</label>
+                        <select id="theme" name="theme">
+                            <option value="Light">Light</option>
+                            <option value="Dark">Dark</option>
+                        </select>
+
+                        <input type="submit" id="applysett" name="applysett" value="Apply Settings">
+                    </p>
+                </form>
+
+                
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
