@@ -1,0 +1,24 @@
+{
+  "name": "cssweng",
+  "version": "1.0.0",
+  "description": "This is the requirement for the completion of the CSSWENG course.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renzlucena/CSSWENG.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/renzlucena/CSSWENG/issues"
+  },
+  "homepage": "https://github.com/renzlucena/CSSWENG#readme",
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.3.8"
+  }
+}
