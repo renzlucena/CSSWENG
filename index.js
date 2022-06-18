@@ -7,7 +7,8 @@ const app = new express()
 const session = require('express-session');
 
 
-const viewAssignment = require('./database/models/viewAssignment')
+const viewAssignment = require('./database/models/assignment')
+const account = require('./database/models/account')
 
 app.use(express.json())
 app.use(express.urlencoded ({extended:true}))

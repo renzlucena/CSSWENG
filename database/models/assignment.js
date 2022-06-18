@@ -13,6 +13,6 @@ const assignmentSchema = new mongoose.Schema({
 	listing_price: String
 })
 
-const viewAssignment = mongoose.model('viewAssignment', assignmentSchema);
+const assignment = mongoose.model('assignment', assignmentSchema);
 
-module.exports = viewAssignment;
+module.exports = assignment;
