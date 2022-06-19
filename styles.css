@@ -43,6 +43,9 @@ p,h1,h2,h3,h4,h5,h6,label,a,th,td
 .red-text{
     color:red;
 }
+.white-text{
+    color:white;
+}
 .comment-text{
     color:#ADD8E6;
 }

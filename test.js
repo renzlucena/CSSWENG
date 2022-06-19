@@ -1,10 +1,11 @@
 const mongoose = require('mongoose')
 
-const viewAssignment = require('./database/models/viewAssignment')
+const Assignment = require('./database/models/assignment')
+const Account = require('./database/models/account')
 
-mongoose.connect('mongodb://localhost/assignment-db')
+mongoose.connect('mongodb://localhost/appraisers-db')
 
-viewAssignment.create({
+Assignment.create({
 	ref_id: 'String',
 	type_of_approach: 'String',
 	client_f_name: 'String',
