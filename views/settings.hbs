@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel = "stylesheet" href="agent_set.css">
+    <title>Settings</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-profile">
+                <img src="temp_pic.png" width="100" height="100">
+                <div class="sidebar-profile-text">
+                    <p class="sidebar-profile-name">Agent {{username}}</p>
+                    <p class="sidebar-profile-email"><i>{{email}}</i></p>
+                    <a href="login.html">Log Out</a>
+                </div>
+            </div>
+
+
+            <div class="sidebar-profile-btn">
+                <a href="/profile">Dashboard</a>
+            </div>
+            <div class="sidebar-assignments-btn">
+                <a  href="/assignments">Assignments</a>
+            </div>
+            <div class="sidebar-history-btn">
+                <a  href="history.html">History</a>
+            </div>
+            <div class="sidebar-settings-btn">
+                <a href="/settings">Profile</a>
+            </div>
+            <div class="bottom-button">
+                <a href="logout.html">Logout</a>
+            </div>
+        </div>
+
+
+
+        <div class="main">
+            <div class="main-header">
+                <h1>Settings</p>
+                <p><b><i>Items will NOT be autosaved!</b></i></p>
+                <p>Please be mindful before you close the page.</p>
+            </div>
+
+            <div class="main-table">
+                <table>
+                    <form>
+                    <tr>
+                        <th><img src="temp_pic.png" id="pfp" width="125" height="125"></th>
+                    </tr>
+                    <tr>
+                        <th><label for="pimg">Profile Image:</label></th>
+                        <td><input type="file" id="pimg" name="pimg"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="dname">Display Name:</label></th>
+                        <td><input type="text" id="dname" name="dname"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="licenseno">Appraiser's License No.:</label></th>
+                        <td><input type="number" id="licenseno" name="licenseno"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="valid">Valid Thru:</label></th>
+                        <td><input type="date" id="valid" name="valid"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="fname">First Name:</label></th>
+                        <td><input type="text" id="fname" name="fname"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="lname">Last Name:</label></th>
+                        <td><input type="text" id="lname" name="lname"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="email">Email Address:</label></th>
+                        <td><input type="email" id="email" name="email"></td>
+                        <td>*This will be used to sign in your account</td>
+                    </tr>
+                    <tr>
+                        <th><label for="password">Password:</label></th>
+                        <td><input type="password" id="password" name="password"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="retypepwd">Retype Password:</label></th>
+                        <td><input type="password" id="retypepwd" name="retypepwd"></td>
+                        <td>*If you forget your password, please coordinate with your admin</td>
+                    </tr>
+                    <tr>
+                        <th><label for="theme">Theme:</label></th>
+                        <td><select id="theme" name="theme">
+                            <option value="Light">Light</option>
+                            <option value="Dark">Dark</option>
+                        </select></td>
+                        <td><input type="submit" id="applysett" name="applysett" value="Apply Settings"></td>
+                    </tr>
+                    </form>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -44,59 +44,55 @@ app.get('/logout',(req,res)=> {
 	});
 })
 
- 
+
 app.get('/login', async(req,res)=> {
 	try{
         //see if such an account matches someone in the "Account" db (capital)
-		const account = await Account.findOne({username: req.query.username}).exec();
-        
+		const acct = await Account.findOne({username: req.query.username}).exec();
+
         //if null, username does not exist. Cannot log in
-        console.log(req.query.password + " ==? " + account.password)
-        console.log(req.query.username + " ==? " + account.username)
-		console.log(account)    //why doesnt it retrieve the data????
-        
+		//the following will throw cannot read property null if no doc exists in db
+        console.log(req.query.password) //+ " ==? " + account.password)
+        console.log(req.query.username) //+ " ==? " + account.username)
+		console.log(acct)    //why doesnt it retrieve the data????
+
         //if (account==null){
-		if (account==null){
+		if (acct==null){
             console.log("Account does not exist.")
-        //	res.redirect('/login-fail-not-exist.html');
+        	res.redirect('/login-fail-not-exist.html');
+			// will just show a red text to let you know your acct details were wrong or does not match anyone
 		}
-		else if(req.query.username==account.username){
-            //checker
-            
-            
-            //found the accoount, load all data
-			if(req.query.password == account.password)
+		else if(req.query.username==acct.username){
+            //found the accoount
+			//check password if same, if same copy all to session
+			if(req.query.password == acct.password)
 			{
-                console.log(account)
-				//keep session
-				sess =req.session;
+//                console.log(acct)
+				sess = req.session;
 				sess.username = req.query.username;
 				sess.username = req.query.password;
-                /*
-				sess.username = account.username;
-				sess.password = account.password;
-				sess.email = account.email;                
-                sess.fname = account.fname;
-                sess.lname = account.lName;
-                sess.appNum = account.appNum;
-                sess.appExp = account.appExp;
-				*/
-				// RENDER DASHBOARD/LANDING PAGE THEN GO TO IT
-	//			res.render('dashboard.hbs', {
-	//				username: account.username,
-	//				remember: account.remember,
-    //                email   : account.email,
-   //                 fname   : account.fname,
-  //                  lName   : account.lName,
- //                   appNum  : account.appNum,
+				sess.acct_id = acct.acct_id;
+				sess.email = acct.email;
+                sess.fname = acct.fname;
+                sess.lname = acct.lname;
+                sess.appNum = acct.appNum;
+                sess.appexp = acct.appexp;
+				// RENDER DASHBOARD
+				res.render('dashboard.hbs', {
+					username: acct.username,
+					remember: acct.remember,
+					email   : acct.email,
+					fname   : acct.fname,
+					lName   : acct.lName,
+					appNum  : acct.appNum,
                     //this is like in java: this.data = data
-//				})
-				res.redirect('/dashboard');
+				})
 			}
 			else
 			{
-				console.log("Password incorrect! Pass:" + account.password)
+				console.log("Password incorrect! Pass:" + acct.password)
 				res.redirect('/login-fail-not-exist.html');
+				// will just show a red text to let you know your acct details were wrong
 			}
 		}
 	}
@@ -113,6 +109,7 @@ app.get('/dashboard', (req,res)=> {
 //			username: sess.username,
             username: sess.username,
             remember: sess.remember,
+			acct_id: sess.acct_id,
             email   : sess.email,
             fname   : sess.fname,
             lname   : sess.lname,
@@ -126,6 +123,65 @@ app.get('/dashboard', (req,res)=> {
 	}
 });
 
+
+app.get('/settings', (req,res)=> {
+	sess = req.session;
+	if(sess.username){
+		res.render('settings.hbs', {
+            username: sess.username,
+            remember: sess.remember,
+			acct_id: sess.acct_id,
+            email   : sess.email,
+            fname   : sess.fname,
+            lname   : sess.lname,
+            appNum  : sess.appNum,
+        })
+	}
+	else{
+		res.redirect('/login-fail.html')
+		//if you're trying to access the profile page but you're not logged in
+	}
+});
+
+
+app.get('/assignments', (req,res)=> {
+	sess = req.session;
+	if(sess.username){
+		res.render('settings.hbs', {
+            username: sess.username,
+            remember: sess.remember,
+			acct_id: sess.acct_id,
+            email   : sess.email,
+            fname   : sess.fname,
+            lname   : sess.lname,
+            appNum  : sess.appNum,
+        })
+	}
+	else{
+		res.redirect('/login-fail.html')
+		//if you're trying to access the profile page but you're not logged in
+	}
+});
+
+app.get('/profile', (req,res)=> {
+	sess = req.session;
+	if(sess.username){
+		res.render('profile.hbs', {
+            username: sess.username,
+            remember: sess.remember,
+			acct_id: sess.acct_id,
+            email   : sess.email,
+            fname   : sess.fname,
+            lname   : sess.lname,
+            appNum  : sess.appNum,
+        })
+	}
+	else{
+		res.redirect('/login-fail.html')
+		//if you're trying to access the profile page but you're not logged in
+	}
+});
+
 app.post('/submit-post', function(req,res){
 	viewAssignment.create(req.body, (error,post) =>
 	{
@@ -133,5 +189,5 @@ app.post('/submit-post', function(req,res){
 	})
 })
 
-var server = app.listen(3000,function(){ 
+var server = app.listen(3000,function(){
 });

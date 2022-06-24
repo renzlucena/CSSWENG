@@ -7,12 +7,12 @@ const assignmentSchema = new mongoose.Schema({
 	client_f_name: String,
 	client_l_name: String,
 	property_images: String,
-	lot_size: String, 
+	lot_size: String,
 	trans_date: String,
 	purchase_price: String,
 	listing_price: String
 })
 
-const assignment = mongoose.model('assignment', assignmentSchema);
+const Assignment = mongoose.model('Assignment', assignmentSchema);
 
-module.exports = assignment;
+module.exports = Assignment;
