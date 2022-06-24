@@ -53,49 +53,60 @@
                 <p>Please be mindful before you close the page.</p>       
             </div>  
             
-            <div id="main-form">
-                <img src="temp_pic.png" id="pfp" width="125" height="125">
-
-                <form>
-                    <label for="pimg">Profile Image:</label>
-                    <input type="file" id="pimg" name="pimg"> <br>
-
-                    <label for="dname">Display Name:</label>
-                    <input type="text" id="dname" name="dname"> <br>
-
-                    <label for="licenseno">Appraiser's License No.:</label>
-                    <input type="number" id="licenseno" name="licenseno">  <br>
-
-                    <label for="valid">Valid Thru:</label>
-                    <input type="date" id="valid" name="valid"> <br>
-        
-                    <label for="fname">First Name:</label>
-                    <input type="text" id="fname" name="fname">  <br>
-    
-                    <label for="lname">Last Name:</label>
-                    <input type="text" id="lname" name="lname"> <br>
-    
-                    <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email"> <br>
-                    *This will be used to sign in your account <br>
-
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password"> <br>
-                        
-                    <label for="retypepwd">Retype Password:</label>
-                    <input type="password" id="retypepwd" name="retypepwd"> <br>
-                    *If you forget your password, please coordinate with your admin <br>
-
-                    <label for="theme">Theme:</label>
-                    <select id="theme" name="theme">
-                        <option value="Light">Light</option>
-                        <option value="Dark">Dark</option>
-                    </select>
-
-                    <input type="submit" id="applysett" name="applysett" value="Apply Settings">
-
-                </form>
-            
+            <div class="main-table">
+                <table>
+                    <form>
+                    <tr>
+                        <th><img src="temp_pic.png" id="pfp" width="125" height="125"></th>
+                    </tr>
+                    <tr>
+                        <th><label for="pimg">Profile Image:</label></th>
+                        <td><input type="file" id="pimg" name="pimg"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="dname">Display Name:</label></th>
+                        <td><input type="text" id="dname" name="dname"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="licenseno">Appraiser's License No.:</label></th>
+                        <td><input type="number" id="licenseno" name="licenseno"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="valid">Valid Thru:</label></th>
+                        <td><input type="date" id="valid" name="valid"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="fname">First Name:</label></th>
+                        <td><input type="text" id="fname" name="fname"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="lname">Last Name:</label></th>
+                        <td><input type="text" id="lname" name="lname"></td> 
+                    </tr>
+                    <tr>
+                        <th><label for="email">Email Address:</label></th>
+                        <td><input type="email" id="email" name="email"></td>
+                        <td>*This will be used to sign in your account</td>
+                    </tr>
+                    <tr>
+                        <th><label for="password">Password:</label></th>
+                        <td><input type="password" id="password" name="password"></td> 
+                    </tr>
+                    <tr>        
+                        <th><label for="retypepwd">Retype Password:</label></th>
+                        <td><input type="password" id="retypepwd" name="retypepwd"></td> 
+                        <td>*If you forget your password, please coordinate with your admin</td>
+                    </tr>
+                    <tr>   
+                        <th><label for="theme">Theme:</label></th>
+                        <td><select id="theme" name="theme">
+                            <option value="Light">Light</option>
+                            <option value="Dark">Dark</option>
+                        </select></td>
+                        <td><input type="submit" id="applysett" name="applysett" value="Apply Settings"></td>
+                    </tr> 
+                    </form>
+                </table>
             </div>
             
         </div>

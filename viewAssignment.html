@@ -54,62 +54,63 @@
             </div>  
             <form class="assignments-form" action = "/submit-post" method = "post">
                 <div class="main-table">
-                        
-                    <label for="ref_id">Reference ID</label>
-                    <input name="ref_id" type="text">
-                    <br>
-
-                    <label for="type_of_approach">Type of Approach</label>
-                    <input name="type_of_approach" type="text">
-                    <br>
-
-                    <label for="client_f_name">Client First Name</label>
-                    <input name="client_f_name" type="text">
-                    <br>
-
-                    <label for="client_l_name">Client Last Name</label>
-                    <input name="client_l_name" type="text">
-                    <br>
-
-                    <label for="property_images">Property Images</label>
-                    <input name="property_images" type="text">
-                    <br>
-
-                    <label for="lot_size">Lot Size</label>
-                    <input name="lot_size" type="text">
-                    <br>
-
-                    <label for="trans_date">Transaction Date</label>
-                    <input name="trans_date" type="date">
-                    <br>
-
-                    <label for="purchase_price">Purchase Price</label>
-                    <input name="purchase_price" type="text">
-                    <br>
-
-                    <label for="type_of_approach">Listing Price</label>
-                    <input name="listing_price" type="text">
-                    <br>
-
-                    <label for="terms_of_sale">Terms of Sale</label>
-                    <select name="terms_of_sale">
-                        <option value="cash">Cash</option>
-                        <option value="installment">Installment</option>
-                        <option value="discount">Discounted</option>
-                        <option value="unknown">Unknown</option>
-                    </select>
-                    <br>
-
-                    <label for="location">Location Type</label>
-                    <select name="terms_of_sale">
-                        <option value="inferior">Inferior</option>
-                        <option value="equal">Equal</option>
-                        <option value="superior">Superior</option>
-                    </select>
-                    <label>Is a Corner Lot?</label>
-                    <input type="checkbox">
-                    <br>
-                    <br>
+                    <table>
+                        <tr>
+                            <th><label for="ref_id">Reference ID</label></th>
+                            <td><input name="ref_id" type="text"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="type_of_approach">Type of Approach</label></th>
+                            <td><input name="type_of_approach" type="text"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="client_f_name">Client First Name</label></th>
+                            <td><input name="client_f_name" type="text"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="client_l_name">Client Last Name</label></th>
+                            <td><input name="client_l_name" type="text"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="property_images">Property Images</label></th>
+                            <td><input name="property_images" type="text"></td>
+                        </tr>    
+                        <tr>
+                            <th><label for="lot_size">Lot Size</label></th>
+                            <td><input name="lot_size" type="text"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="trans_date">Transaction Date</label></th>
+                            <td><input name="trans_date" type="date"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="purchase_price">Purchase Price</label></th>
+                            <td><input name="purchase_price" type="text"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="type_of_approach">Listing Price</label></th>
+                            <td><input name="listing_price" type="text"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="terms_of_sale">Terms of Sale</label></th>
+                            <td><select name="terms_of_sale">
+                                <option value="cash">Cash</option>
+                                <option value="installment">Installment</option>
+                                <option value="discount">Discounted</option>
+                                <option value="unknown">Unknown</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <th><label for="location">Location Type</label></th>
+                            <td><select name="terms_of_sale">
+                                <option value="inferior">Inferior</option>
+                                <option value="equal">Equal</option>
+                                <option value="superior">Superior</option>
+                            </select></td>
+                            <th><label>Is a Corner Lot?</label></th>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                    </table>    
                 </div>
                     
             <div id="main-table-bottom">

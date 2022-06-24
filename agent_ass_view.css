@@ -92,7 +92,7 @@
 .main-table
 {
     overflow-y: scroll;
-    width: 1400px;
+    width: 1200px;
     height: 80%;
     padding-right: 10px;
     border: 3px solid #15223B;
@@ -103,4 +103,8 @@
     background-color: none;
     text-align:center;
     background-color: #588BAE;
+}
+
+tr {
+    height: 50px;
 }
