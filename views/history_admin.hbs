@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel = "stylesheet" href="agent_profile.css">
-    <title>Dashboard</title>
+    <link rel = "stylesheet" href="agent_history.css">
+    <title>Assignments</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,12 +15,11 @@
             <div class="sidebar-profile">
                 <img src="temp_pic.png" width="100" height="100">
                 <div class="sidebar-profile-text">
-                    <p class="sidebar-profile-name">Agent {{username}}</p>
-                    <p class="sidebar-profile-email"><i>{{email}}</i></p>
+                    <p class="sidebar-profile-name">Agent LastName</p>
+                    <p class="sidebar-profile-email"><i>example-mail@xmail.com</i></p>
                     <a href="login.html">Log Out</a>
                 </div>
             </div>
-
 
             <div class="sidebar-profile-btn">
                 <a href="/profile">Dashboard</a>
@@ -35,31 +34,46 @@
                 <a href="/settings">Profile</a>
             </div>
             <div class="bottom-button">
-                <a href="login.html">Logout</a>
+                <a href="logout.html">Logout</a>
             </div>
         </div>
 
 
 
         <div class="main">
-            <img src="temp_pic.png" width="300">
-
-            <div class="main-profile-welcome">
-                <h1>Welcome, Agent {{fname}} {{lname}}!</h1>
-                <p class="small-text">Status: Active</p>
+            <div class="main-header">
+                <h1>History</h1>
+                <p><b><i>Here are the completed and approved assignments!</i></b></p>
+                <p>Each document is valid for printing for 5 years.</p>
             </div>
 
+            <div class="main-table">
+                <table>
+					<tr>
+						<th>REF NO.</th>
+						<th>DATE OF COMPLETION</th>
+						<th>VALID THRU</th>
+						<th>ACTION</th>
+						<th><p style="width:400" class="table-long-text">ASSIGNED AGENT</p></th>
+					</tr>
+					  
+					{#each assignment}}
+					<tr>
+						<td>{{this.ref_id}}</td>
+							<td>{{this.created_at}}</td>
+							<td>4/8/26</td>
+							<td>
+								<div class="main-assignments-status-btns">
+									<a href="viewAssignment.html">Review Assignment</a>
+								</div>
+							</td>
+							<td><p class="comment-text left-align">{{this.assigned_to}}</p>
+						</td>
+					</tr>
+				  {{/each}}
 
-            <div class="main-profile-links">
-                <h3>You have 1 new notification(s)!</h2>
-                <a href="/assignments">Go To Assignments</a>
-                <br><br><br>
-
-
-                <h3>By using our services, you agree to our Terms and Conditions.</h2>
-                <a href="terms.html">Review Terms and Conditions</a>
+                </table>
             </div>
-
         </div>
     </div>
 </body>
