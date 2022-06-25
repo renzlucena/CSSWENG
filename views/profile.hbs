@@ -23,7 +23,7 @@
 
 
             <div class="sidebar-profile-btn">
-                <a href="/profile">Dashboard</a>
+                <a href="/dashboard">Dashboard</a>
             </div>
             <div class="sidebar-assignments-btn">
                 <a  href="/assignments">Assignments</a>
@@ -32,7 +32,7 @@
                 <a  href="/history">History</a>
             </div>
             <div class="sidebar-settings-btn">
-                <a href="/settings">Profile</a>
+                <a href="/profile">Profile</a>
             </div>
             <div class="bottom-button">
                 <a href="login.html">Logout</a>
@@ -42,19 +42,22 @@
 
 
         <div class="main">
+            <p>{{this.username}} is logged in</p>
             <img src="temp_pic.png" width="300">
 
             <div class="main-profile-welcome">
-                <h1>Welcome, Agent {{this.fName}} {{this.lName}}!</h1>
+                <h1>Welcome, {{this.fname}} {{this.lname}}!</h1>
+                <p>Email Address: {{this.email}}</p>
                 <p class="small-text">Status: Active</p>
             </div>
-
+            <div>
+                <h3>Appraiser Registration Number: {{this.appnum}}</h3>
+                <h3>Appraiser Expiration Date:  {{this.appexp}}</h3>
+            </div>
 
             <div class="main-profile-links">
-                <h3>You have 1 new notification(s)!</h2>
-                <a href="/assignments">Go To Assignments</a>
-                <br><br><br>
-
+                <a href="/settings">Edit Account Details</a>
+                <br><br>
 
                 <h3>By using our services, you agree to our Terms and Conditions.</h2>
                 <a href="terms.html">Review Terms and Conditions</a>

@@ -105,7 +105,7 @@ app.get('/login', async(req,res)=> {
 app.get('/history', async(req,res)=>{
 	
 	sess = req.session
-	if(sess.username == admin)
+	if(sess.username == "admin")
 	{
 		const ass = await Assignment.find({
 			assigned_to: sess.username,
@@ -159,12 +159,54 @@ app.get('/settings', (req,res)=> {
             email   : sess.email,
             fname   : sess.fname,
             lname   : sess.lname,
-            appNum  : sess.appNum,
+            appNum  : sess.appNum
         })
 	}
 	else{
 		res.redirect('/login-fail.html')
 		//if you're trying to access the profile page but you're not logged in
+	}
+});
+
+
+app.get('/set-settings', async(req,res)=> {
+	sess = req.session;
+	if(sess.username){
+		//update db
+		try{
+			//render with new data
+			if (req.query.username!= sess.username && req.query.username != "")
+			{	
+				await Profile.findOneAndUpdate({username: sess.username},{username: req.query.username})
+				sess.username = req.query.username
+			}
+			
+			await Profile.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
+			sess.bio = req.query.bio;
+			
+			if(req.query.newPassword != "" && sess.password != req.query.newPassword)
+			{
+				await Profile.findOneAndUpdate({username: sess.username},{password: req.query.password})
+				sess.password = req.query.newPassword
+			}
+			
+			res.render('profile.hbs', {
+				username: sess.username,
+				remember: sess.remember,
+				acct_id: sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lname   : sess.lname,
+				appNum  : sess.appNum
+			})
+		}
+		catch(err)
+		{
+			res.status(500).send(err)
+		}
+	}
+	else{
+		res.redirect('/submit-login')
 	}
 });
 
