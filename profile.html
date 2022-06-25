@@ -21,7 +21,6 @@
                 </div>
             </div>
 
-
             <div class="sidebar-profile-btn">
 
                 <a href="profile.html">Dashboard</a>
@@ -45,28 +44,24 @@
             </div>
         </div>
 
-
-
         <div class="main">
+            <p>{{username}} is logged in</p>
             <img src="temp_pic.png" width="300">
 
             <div class="main-profile-welcome">
-                <h1>Welcome, Agent {{fname}} {{lname}}!</h1>
+                <h1>Welcome, {{fname}} {{lname}}!</h1>
                 <p>Email Address: {{email}}</p>
                 <p class="small-text">Status: Active</p>
             </div>
             <div>
-                Appraiser Registration Number: {{appnum}}
-                Appraiser Expiration Date:  {{appexp}}
+                <h3>Appraiser Registration Number: {{appnum}}</h3>
+                <h3>Appraiser Expiration Date:  {{appexp}}</h3>
             </div>
 
-
             <div class="main-profile-links">
-                <form action="/settings">
-                    <input type="submit">Edit Account Details</input>
-                </form>
+                <a href="settings.html">Edit Account Details</a>
                 <a href="assignments.html">Go To Assignments</a>
-                <br><br><br>
+                <br><br>
 
                 <h3>By using our services, you agree to our Terms and Conditions.</h2>
                 <a href="terms.html">Review Terms and Conditions</a>
