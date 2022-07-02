@@ -21,17 +21,11 @@
                 </div>
             </div>
 
-            <div class="sidebar-profile-btn">
-                <a href="/profile">Dashboard</a>
-            </div>
             <div class="sidebar-assignments-btn">
                 <a  href="/assignments">Assignments</a>
             </div>
             <div class="sidebar-history-btn">
                 <a  href="/history">History</a>
-            </div>
-            <div class="sidebar-settings-btn">
-                <a href="/settings">Profile</a>
             </div>
             <div class="bottom-button">
                 <a href="/logout">Logout</a>
@@ -57,7 +51,7 @@
 						<th><p style="width:400" class="table-long-text">ASSIGNED AGENT</p></th>
 					</tr>
 					  
-					{#each assignment}}
+					{{#each assignment}}
 					<tr>
 						<td>{{this.ref_id}}</td>
 							<td>{{this.created_at}}</td>

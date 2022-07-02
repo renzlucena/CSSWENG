@@ -21,7 +21,6 @@
                 </div>
             </div>
 
-
             <div class="sidebar-profile-btn">
                 <a href="/dashboard">Dashboard</a>
             </div>
@@ -58,6 +57,31 @@
                     <th>ACTION</th>
                     <th><p style="width:400" class="table-long-text">COMMENTS</p></th>
                   </tr>
+				  
+				  
+				  <!--
+				  TODO: Determine if an assignment is not assigned to anyone 
+					- if it's not assigned yet, the buttons are "Accept", "Deny"
+					- if it's assigned to the current session's user, it means they already accepted
+					- if it's deny, it should not show already (idk how to do this tbh)
+					- if it's assigned to you, the button should be "Edit Assignment"
+					
+					
+					(this is the template for accept/deny)
+				  <tr>
+                    <td>227851</td>
+                    <td>4/28/22</td>
+                    <td>Cavite, IV A</td>
+                    <td>
+                        <div class="main-assignments-status-btns">
+                            <a href="/viewAssignment">Accept</a>
+                            <a href="assignments-denied.html">Deny</a>
+                        </div>
+                    </td>
+                    <td><p class="comment-text left-align">Client gave a permit to visit the property for 2 persons. You may bring a companion.</p></td>
+                  </tr>
+				  
+				  -->
                   {{#each assignment}}
                   <tr>
                     <td>{{this.ref_id}}</td>
@@ -71,6 +95,7 @@
                     <td><p class="comment-text left-align">{{this.comment}}</p></td>
                   </tr>
                   {{/each}}
+				  
                 </table>
             </div>
         </div>

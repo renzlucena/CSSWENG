@@ -27,6 +27,13 @@ app.set('view engine','hbs')
 // css stuff and other stuff
 app.use(express.static(__dirname + '/'));
 
+//moment js https://momentjs.com/docs/
+const moment = require('moment');
+// const formatTime = moment(dateFromDB).format('mm:dd:yy')
+// moment().format();
+// hbs.registerHelper('moment', require('helper-moment'));
+// hbs.registerHelper('dateFormat', require('handlebars-dateformat'));
+
 // for session
 app.use(session({
 	secret: 'hatdog',
@@ -40,9 +47,8 @@ app.get('/logout',(req,res)=> {
 	req.session.destroy((err)=> {
 		if(err){
 			return console.log(err);
-			res.redirect('/login');
-
 		}
+		res.redirect('/login');
 	});
 })
 
@@ -69,7 +75,6 @@ app.get('/login', async(req,res)=> {
 			//check password if same, if same copy all to session
 			if(req.query.password == acct.password)
 			{
-//                console.log(acct)
 				sess = req.session,
 				sess.username = req.query.username,
 				sess.password = req.query.password,
@@ -79,6 +84,23 @@ app.get('/login', async(req,res)=> {
                 sess.lname = acct.lname,
                 sess.appNum = acct.appNum,
                 sess.appexp = acct.appexp
+				
+				if(req.query.username == "admin")
+				{
+					res.redirect('/assignments');
+
+					// res.render('assignments_admin.hbs', {
+						// username: acct.username,
+						// remember: acct.remember,
+						// password: acct.password,
+						// acct_id : acct.acct_id,
+						// email   : acct.email,
+						// fname   : acct.fname,
+						// lName   : acct.lName,
+						// appNum  : acct.appNum,
+						// appexp : acct.appexp
+						// //this is like in java: this.data = data
+				}
 				
 				// RENDER DASHBOARD
 				res.render('dashboard.hbs', {
@@ -111,41 +133,101 @@ app.get('/login', async(req,res)=> {
 app.get('/history', async(req,res)=>{
 
 	sess = req.session
-	if(sess.username == "admin")
-	{	//show all if admin
-		const ass = await Assignment.find({})
-		res.render('history_admin.hbs', {
-			assignment : ass,
-			username: sess.username,
-			remember: sess.remember,
-			password: sess.password,
-			acct_id : sess.acct_id,
-			email   : sess.email,
-			fname   : sess.fname,
-			lName   : sess.lName,
-			appNum  : sess.appNum,
-			appexp : sess.appexp
-		});
-		console.log(ass)
-	}
-	else if (sess.username != "admin")
+	if(sess.username)
 	{
-		const ass = await Assignment.find({
-			assigned_to: sess.username,
-			comment: "Approved."})
+		if(sess.username == "admin")
+		{	//show all if admin
+			const ass = await Assignment.find({})
+			res.render('history_admin.hbs', {
+				assignment : ass,
+				username: sess.username,
+				remember: sess.remember,
+				password: sess.password,
+				acct_id : sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lName   : sess.lName,
+				appNum  : sess.appNum,
+				appExp : sess.appExp
+			});
+			console.log(ass)
+		}
+		else// if (sess.username != "admin")
+		{
+			const ass = await Assignment.find({
+				assigned_to: sess.username,
+				comment: "Approved."})
+			
+			res.render('history.hbs', {
+				assignment : ass,
+				username: sess.username,
+				password: sess.password,
+				remember: sess.remember,
+				acct_id: sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lname   : sess.lname,
+				appNum  : sess.appNum,
+				appExp  : sess.appExp
+			});
+		}
+	}
+	else
+	{		
+		res.redirect('/login-fail.html')
+	}
+});
+
+//TODO!
+app.get('/admin-process', async(req,res)=>{
+	
+})
+//TODO
+app.get('/viewAssignment/:ref_id', async(req,res)=>{
+	sess = req.session
+	// console.log(req)
+	var id = req.params.ref_id
+	if(sess.username)
+	{
 		
-		res.render('history.hbs', {
-			assignment : ass,
-			username: sess.username,
-			remember: sess.remember,
-			password: sess.password,
-			acct_id : sess.acct_id,
-			email   : sess.email,
-			fname   : sess.fname,
-			lName   : sess.lName,
-			appNum  : sess.appNum,
-			appexp : sess.appexp
+		if(sess.username == "admin")
+		{	//if admin, cannot edit, but can comment
+			const ass = await Assignment.find({
+				ref_id : id
+				}).exec()
+				
+			res.render('viewAssignment_admin.hbs', {
+				assignment : ass,
+				username: sess.username,
+				remember: sess.remember,
+				password: sess.password,
+				acct_id : sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lName   : sess.lName,
+				appNum  : sess.appNum,
+				appExp : sess.appExp
+			});
+		}
+		else// if (sess.username != "admin")
+		{
+			const ass = await Assignment.find({
+				assigned_to: sess.username,
+				ref_id: id}).exec()
+			
+			res.render('viewAssignment.hbs', {
+				assignment : ass,
+				username: sess.username,
+				password: sess.password,
+				remember: sess.remember,
+				acct_id: sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lname   : sess.lname,
+				appNum  : sess.appNum,
+				appExp  : sess.appExp
 		});
+		}
 	}
 	else
 	{		
@@ -176,7 +258,8 @@ res)=> {
 	}
 });
 
-
+//TODO make this functional, as in working if you click save
+//  check if there are changes and save only the ones that are not blank
 app.get('/settings', (req,res)=> {
 	sess = req.session;
 	if(sess.username){
@@ -241,18 +324,46 @@ app.get('/set-settings', async(req,res)=> {
 });
 
 
-app.get('/assignments', (req,res)=> {
+
+app.get('/assignments', async(req,res)=> {
 	sess = req.session;
 	if(sess.username){
-		res.render('assignments.hbs', {
-            username: sess.username,
-            remember: sess.remember,
-			acct_id: sess.acct_id,
-            email   : sess.email,
-            fname   : sess.fname,
-            lname   : sess.lname,
-            appNum  : sess.appNum,
-        })
+		if(sess.username=="admin")
+		{ // if admin, show unfinished assignments
+			const ass = await Assignment.find({
+				comment: {$ne: "Approved."}})	//ne = not equal
+			
+			res.render('assignments_admin.hbs', {
+				assignment:ass,
+				username: sess.username,
+				password: sess.password,
+				remember: sess.remember,
+				acct_id: sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lname   : sess.lname,
+				appNum  : sess.appNum,
+				appExp  : sess.appExp
+			})
+		}
+		else{
+			const ass = await Assignment.find({
+				assigned_to: sess.username,
+				comment: {$ne: "Approved."}})	//ne = not equal
+			
+			res.render('assignments.hbs', {
+				assignment:ass,
+				username: sess.username,
+				password: sess.password,
+				remember: sess.remember,
+				acct_id: sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lname   : sess.lname,
+				appNum  : sess.appNum,
+				appExp  : sess.appExp
+			})
+		}
 	}
 	else{
 		res.redirect('/login-fail.html')
@@ -265,12 +376,14 @@ app.get('/profile', (req,res)=> {
 	if(sess.username){
 		res.render('profile.hbs', {
             username: sess.username,
+			password: sess.password,
             remember: sess.remember,
 			acct_id: sess.acct_id,
             email   : sess.email,
             fname   : sess.fname,
             lname   : sess.lname,
             appNum  : sess.appNum,
+			appExp  : sess.appExp
         })
 	}
 	else{
@@ -288,3 +401,18 @@ app.post('/submit-post', function(req,res){
 
 var server = app.listen(3000,function(){
 });
+
+
+/*		THIS IS THE PDF THING	
+https://www.geeksforgeeks.org/how-to-create-pdf-document-in-node-js/	*/
+const PDFDocument = require('pdfkit');
+
+// this is the output file
+const doc = new PDFDocument;
+
+doc
+.fontSize(15)
+
+
+
+
