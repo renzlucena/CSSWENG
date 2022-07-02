@@ -40,6 +40,8 @@ app.get('/logout',(req,res)=> {
 	req.session.destroy((err)=> {
 		if(err){
 			return console.log(err);
+			res.redirect('/login');
+
 		}
 	});
 })
@@ -52,8 +54,8 @@ app.get('/login', async(req,res)=> {
 
         //if null, username does not exist. Cannot log in
 		//the following will throw cannot read property null if no doc exists in db
-        console.log(req.query.password) //+ " ==? " + account.password)
-        console.log(req.query.username) //+ " ==? " + account.username)
+        // console.log(req.query.password) //+ " ==? " + account.password)
+        // console.log(req.query.username) //+ " ==? " + account.username)
 		console.log(acct)    //why doesnt it retrieve the data????
 
         //if (account==null){
@@ -68,23 +70,27 @@ app.get('/login', async(req,res)=> {
 			if(req.query.password == acct.password)
 			{
 //                console.log(acct)
-				sess = req.session;
-				sess.username = req.query.username;
-				sess.username = req.query.password;
-				sess.acct_id = acct.acct_id;
-				sess.email = acct.email;
-                sess.fname = acct.fname;
-                sess.lname = acct.lname;
-                sess.appNum = acct.appNum;
-                sess.appexp = acct.appexp;
+				sess = req.session,
+				sess.username = req.query.username,
+				sess.password = req.query.password,
+				sess.acct_id = acct.acct_id,
+				sess.email = acct.email,
+                sess.fname = acct.fname,
+                sess.lname = acct.lname,
+                sess.appNum = acct.appNum,
+                sess.appexp = acct.appexp
+				
 				// RENDER DASHBOARD
 				res.render('dashboard.hbs', {
 					username: acct.username,
 					remember: acct.remember,
+					password: acct.password,
+					acct_id : acct.acct_id,
 					email   : acct.email,
 					fname   : acct.fname,
 					lName   : acct.lName,
 					appNum  : acct.appNum,
+					appexp : acct.appexp
                     //this is like in java: this.data = data
 				})
 			}
@@ -108,25 +114,48 @@ app.get('/history', async(req,res)=>{
 	if(sess.username == "admin")
 	{	//show all if admin
 		const ass = await Assignment.find({})
-		res.render('history_admin.hbs', {ass});
+		res.render('history_admin.hbs', {
+			assignment : ass,
+			username: sess.username,
+			remember: sess.remember,
+			password: sess.password,
+			acct_id : sess.acct_id,
+			email   : sess.email,
+			fname   : sess.fname,
+			lName   : sess.lName,
+			appNum  : sess.appNum,
+			appexp : sess.appexp
+		});
+		console.log(ass)
 	}
 	else if (sess.username != "admin")
 	{
 		const ass = await Assignment.find({
 			assigned_to: sess.username,
 			comment: "Approved."})
-		res.render('history.hbs', {ass});
+		res.render('history.hbs', {
+			assignment : ass,
+			username: sess.username,
+			remember: sess.remember,
+			password: sess.password,
+			acct_id : sess.acct_id,
+			email   : sess.email,
+			fname   : sess.fname,
+			lName   : sess.lName,
+			appNum  : sess.appNum,
+			appexp : sess.appexp
+		});
+		console.log(ass)
 	}
 	else
 	{		
-		console.log(ass)
 		res.redirect('/login-fail.html')
 	}
 });
 
 
-
-app.get('/dashboard', (req,res)=> {
+app.get('/dashboard', (req,
+res)=> {
 	sess = req.session;
 	if(sess.username){ //username exists
 		res.render('dashboard.hbs', {
@@ -153,6 +182,7 @@ app.get('/settings', (req,res)=> {
 	if(sess.username){
 		res.render('settings.hbs', {
             username: sess.username,
+			password: sess.password,
             remember: sess.remember,
 			acct_id: sess.acct_id,
             email   : sess.email,
@@ -191,6 +221,7 @@ app.get('/set-settings', async(req,res)=> {
 			
 			res.render('profile.hbs', {
 				username: sess.username,
+				password: sess.password,
 				remember: sess.remember,
 				acct_id: sess.acct_id,
 				email   : sess.email,
