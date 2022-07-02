@@ -16,8 +16,8 @@
                 <img src="temp_pic.png" width="100" height="100">
                 <div class="sidebar-profile-text">
                     <p class="sidebar-profile-name">Admin</p>
-                    <p class="sidebar-profile-email"><i>example-mail@xmail.com</i></p>
-                    <a href="login.html">Log Out</a>
+                    <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
+                    <a href="/logout">Log Out</a>
                 </div>
             </div>
             
@@ -37,7 +37,7 @@
 
             <div class="bottom-button">
                 
-                <a href="logout.html">Logout</a>
+                <a href="/logout">Logout</a>
             </div>
         </div>
     
@@ -65,8 +65,7 @@
                     <td>Cavite, IV A</td>
                     <td>
                         <div class="main-assignments-status-btns">
-                            <a href="viewAssignment.html">Accept</a>
-                            
+                            <a href="/viewAssignment">Accept</a>
                             <a href="assignments-denied.html">Deny</a>
                         </div>
                     </td>
@@ -78,7 +77,7 @@
                     <td>Cavite, IV A</td>
                     <td>
                         <div class="main-assignments-status-btns">
-                            <a href="viewAssignment.html">Review Assignment</a>
+                            <a href="/viewAssignment">Review Assignment</a>
                         </div>
                     </td>
                     <td><p class="comment-text left-align">Submitted for approval.</p></td>
@@ -89,7 +88,7 @@
                     <td>Cavite, IV A</td>
                     <td>
                         <div class="main-assignments-status-btns">
-                            <a href="viewAssignment.html">Edit Assignment</a>
+                            <a href="/viewAssignment">Edit Assignment</a>
                         </div>
                     </td>
                     <td><p class="comment-text left-align">Recheck the land size field. It cannot be 0.</p></td>

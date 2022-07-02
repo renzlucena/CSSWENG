@@ -33,14 +33,14 @@
 
 
 
-.sidebar-profile-btn
+.sidebar-settings-btn
 {
     background-color: #588BAE;
     display: fixed;
 }
 
 
-.sidebar-profile-btn a:hover
+.sidebar-settings-btn a:hover
 {
     color: white;
     background-color: black;
@@ -54,13 +54,13 @@
 
 
 /*active button*/
-.sidebar-settings-btn a
+.sidebar-profile-btn a
 {
     color: black;
     background-color: white;
 }
 
-.sidebar-settings-btn a:hover
+.sidebar-profile-btn a:hover
 {
     color: black;
     background-color: white;

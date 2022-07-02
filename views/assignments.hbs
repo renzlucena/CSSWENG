@@ -15,9 +15,9 @@
             <div class="sidebar-profile">
                 <img src="temp_pic.png" width="100" height="100">
                 <div class="sidebar-profile-text">
-                    <p class="sidebar-profile-name">Agent LastName</p>
-                    <p class="sidebar-profile-email"><i>example-mail@xmail.com</i></p>
-                    <a href="login.html">Log Out</a>
+                    <p class="sidebar-profile-name">Agent {{this.username}}</p>
+                    <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
+                    <a href="/logout">Log Out</a>
                 </div>
             </div>
             
@@ -35,7 +35,7 @@
                 <a href="/profile">Profile</a>
             </div>
             <div class="bottom-button">
-                <a href="login.html">Logout</a>
+                <a href="/logout">Logout</a>
             </div>
         </div>
     

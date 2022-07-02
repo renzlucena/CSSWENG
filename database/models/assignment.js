@@ -19,9 +19,8 @@ const assignmentSchema = new mongoose.Schema({
 	area: Number,
 	completed_on: Date,
 	comment: String,
-	assigned_to: String
-	//created_at: { type: Date, required: true, default: Date.now }
-	//expiring_at: created_at    : { type: Date, required: true, default: Date.now + 36)
+	assigned_to: String,
+	created_at: { type: Date, required: true, default: Date.now }
 })
 
 const Assignment = mongoose.model('Assignment', assignmentSchema);

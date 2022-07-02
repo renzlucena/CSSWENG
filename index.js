@@ -103,24 +103,23 @@ app.get('/login', async(req,res)=> {
 
 
 app.get('/history', async(req,res)=>{
-	
+
 	sess = req.session
 	if(sess.username == "admin")
-	{
-		const ass = await Assignment.find({
-			assigned_to: sess.username,
-			comment: "Approved."})
-		res.render('history.hbs', {ass});		
+	{	//show all if admin
+		const ass = await Assignment.find({})
+		res.render('history_admin.hbs', {ass});
 	}
 	else if (sess.username != "admin")
 	{
 		const ass = await Assignment.find({
 			assigned_to: sess.username,
 			comment: "Approved."})
-		res.render('history_admin.hbs', {ass});		
+		res.render('history.hbs', {ass});
 	}
 	else
-	{
+	{		
+		console.log(ass)
 		res.redirect('/login-fail.html')
 	}
 });
@@ -131,8 +130,8 @@ app.get('/dashboard', (req,res)=> {
 	sess = req.session;
 	if(sess.username){ //username exists
 		res.render('dashboard.hbs', {
-//			username: sess.username,
             username: sess.username,
+			password: sess.password,
             remember: sess.remember,
 			acct_id: sess.acct_id,
             email   : sess.email,
