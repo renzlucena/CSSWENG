@@ -133,6 +133,7 @@ app.get('/history', async(req,res)=>{
 		const ass = await Assignment.find({
 			assigned_to: sess.username,
 			comment: "Approved."})
+		
 		res.render('history.hbs', {
 			assignment : ass,
 			username: sess.username,
@@ -145,7 +146,6 @@ app.get('/history', async(req,res)=>{
 			appNum  : sess.appNum,
 			appexp : sess.appexp
 		});
-		console.log(ass)
 	}
 	else
 	{		
