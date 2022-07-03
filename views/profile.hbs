@@ -42,7 +42,6 @@
 
 
         <div class="main">
-            <p>{{this.username}} is logged in</p>
             <img src="temp_pic.png" width="300">
 
             <div class="main-profile-welcome">
@@ -51,16 +50,16 @@
                 <p class="small-text">Status: Active</p>
             </div>
             <div>
-                <h3>Appraiser Registration Number: {{this.appnum}}</h3>
-                <h3>Appraiser Expiration Date:  {{this.appexp}}</h3>
+				<h3>Username: {{this.username}}</h3>
+                <h3>Appraiser Registration Number: {{this.appNum}}</h3>
+                <h3>Appraiser Expiration Date:  {{this.appExp}}</h3>
             </div>
-
+			
+			
+			<br><br><br><br>
             <div class="main-profile-links">
+				<h3>To deactivate account, contact admin.</h3>
                 <a href="/settings">Edit Account Details</a>
-                <br><br>
-
-                <h3>By using our services, you agree to our Terms and Conditions.</h2>
-                <a href="/terms">Review Terms and Conditions</a>
             </div>
 
         </div>
