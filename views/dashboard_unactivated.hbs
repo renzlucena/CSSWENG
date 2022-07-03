@@ -25,15 +25,6 @@
             <div class="sidebar-profile-btn">
                 <a href="/dashboard">Dashboard</a>
             </div>
-            <div class="sidebar-assignments-btn">
-                <a  href="/assignments">Assignments</a>
-            </div>
-            <div class="sidebar-history-btn">
-                <a  href="/history">History</a>
-            </div>
-            <div class="sidebar-settings-btn">
-                <a href="/profile">Profile</a>
-            </div>
             <div class="bottom-button">
                 <a href="/logout">Logout</a>
             </div>
@@ -44,14 +35,18 @@
         <div class="main">
 <!--TODO: make this look better-->           
             <div class="main-profile-links">
-                <h3>You have (not yet coded) new notification(s)!</h2>
-                <h3>You have (not yet coded) of assignments that are about to reach the deadline</h2>
-                <a href="assignments.html">Go To Assignments</a>
+				<br><br><br>
+				<h2>Welcome, {{this.fname}}!</h2>
+                <h3>Your account has been created by admin.</h3>
+				<br>
+				<p>Your username is "{{this.username}}".</p>
+				<p>Your email address is "{{this.email}}".</p>
+				<p>Your password is your <b>Account Number</b> + <b>First Letter of First Name</b> + <b>First Five Letters of Last Name</b>. Example: 1234jdelac</p>
+				<p class="red-text">Please change your password as soon as you can.</p>
+				<h3>If any of your information is incorrect, please coordinate with the admin.</h3>
                 <br><br><br>
-                
-                
-                <h3>By using our services, you agree to our Terms and Conditions.</h2>
-                <a href="/terms">Review Terms and Conditions</a>
+                <h3>To activate your account, please read and agree to our</h2>
+                <a href="/terms">Terms and Conditions</a>
             </div>
             
         </div>

@@ -5,7 +5,7 @@ const accountSchema = new mongoose.Schema({
 	acct_id: String,
 	username: String,
 	password: String,
-	status: 0,	//0- inactive, need to activate! 1-active, 2-active, but on vacation. Cannot accept new assignemnts
+	status: Boolean,	//false- inactive     true-active
 	email: String,
 	fname: String,
 	lname: String,

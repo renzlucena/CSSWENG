@@ -42,13 +42,19 @@ app.use(session({
 }));
 var sess;
 
+
+// land here
+app.get('/',(req,res)=> {
+	res.redirect('login.html');
+})
+
 // destroy session at log out
 app.get('/logout',(req,res)=> {
 	req.session.destroy((err)=> {
 		if(err){
 			return console.log(err);
 		}
-		res.redirect('/login');
+		res.redirect('login.html');
 	});
 })
 
@@ -62,9 +68,8 @@ app.get('/login', async(req,res)=> {
 		//the following will throw cannot read property null if no doc exists in db
         // console.log(req.query.password) //+ " ==? " + account.password)
         // console.log(req.query.username) //+ " ==? " + account.username)
-		console.log(acct)    //why doesnt it retrieve the data????
-
-        //if (account==null){
+		console.log(acct)
+		
 		if (acct==null){
             console.log("Account does not exist.")
         	res.redirect('/login-fail-not-exist.html');
@@ -78,20 +83,27 @@ app.get('/login', async(req,res)=> {
 				sess = req.session,
 				sess.username = req.query.username,
 				sess.password = req.query.password,
-				sess.acct_id = acct.acct_id,
-				sess.email = acct.email,
-                sess.fname = acct.fname,
-                sess.lname = acct.lname,
-                sess.appNum = acct.appNum,
-                sess.appexp = acct.appexp
+				sess.acct_id  = acct.acct_id,
+				sess.email	  = acct.email,
+				sess.status   = acct.status,
+                sess.fname	  = acct.fname,
+                sess.lname    = acct.lname,
+                sess.appNum   = acct.appNum,
+                sess.appexp   = acct.appexp
 				
 				if(req.query.username == "admin")
 				{
 					res.redirect('/assignments');
+				}
+				else
+				{
+					res.redirect('/dashboard');
 
-					// res.render('assignments_admin.hbs', {
+					// RENDER DASHBOARD
+					// res.render('dashboard.hbs', {
 						// username: acct.username,
 						// remember: acct.remember,
+						// status: sess.status,
 						// password: acct.password,
 						// acct_id : acct.acct_id,
 						// email   : acct.email,
@@ -99,22 +111,9 @@ app.get('/login', async(req,res)=> {
 						// lName   : acct.lName,
 						// appNum  : acct.appNum,
 						// appexp : acct.appexp
-						// //this is like in java: this.data = data
+						// //this is like in java: this.data = data	
+					// })
 				}
-				
-				// RENDER DASHBOARD
-				res.render('dashboard.hbs', {
-					username: acct.username,
-					remember: acct.remember,
-					password: acct.password,
-					acct_id : acct.acct_id,
-					email   : acct.email,
-					fname   : acct.fname,
-					lName   : acct.lName,
-					appNum  : acct.appNum,
-					appexp : acct.appexp
-                    //this is like in java: this.data = data
-				})
 			}
 			else
 			{
@@ -122,6 +121,10 @@ app.get('/login', async(req,res)=> {
 				res.redirect('/login-fail-not-exist.html');
 				// will just show a red text to let you know your acct details were wrong
 			}
+		}
+		else //username is not found.
+		{
+			res.redirect('/login-fail-not-exist.html');
 		}
 	}
 	catch(err){
@@ -141,6 +144,7 @@ app.get('/history', async(req,res)=>{
 			res.render('history_admin.hbs', {
 				assignment : ass,
 				username: sess.username,
+				status: sess.status,
 				remember: sess.remember,
 				password: sess.password,
 				acct_id : sess.acct_id,
@@ -161,6 +165,7 @@ app.get('/history', async(req,res)=>{
 			res.render('history.hbs', {
 				assignment : ass,
 				username: sess.username,
+				status: sess.status,
 				password: sess.password,
 				remember: sess.remember,
 				acct_id: sess.acct_id,
@@ -199,6 +204,7 @@ app.get('/viewAssignment/:ref_id', async(req,res)=>{
 			res.render('viewAssignment_admin.hbs', {
 				assignment : ass,
 				username: sess.username,
+				status: sess.status,
 				remember: sess.remember,
 				password: sess.password,
 				acct_id : sess.acct_id,
@@ -219,6 +225,7 @@ app.get('/viewAssignment/:ref_id', async(req,res)=>{
 				assignment : ass,
 				username: sess.username,
 				password: sess.password,
+				status: sess.status,
 				remember: sess.remember,
 				acct_id: sess.acct_id,
 				email   : sess.email,
@@ -236,20 +243,43 @@ app.get('/viewAssignment/:ref_id', async(req,res)=>{
 });
 
 
-app.get('/dashboard', (req,
-res)=> {
+app.get('/dashboard', (req,res)=> {
 	sess = req.session;
 	if(sess.username){ //username exists
-		res.render('dashboard.hbs', {
-            username: sess.username,
-			password: sess.password,
-            remember: sess.remember,
-			acct_id: sess.acct_id,
-            email   : sess.email,
-            fname   : sess.fname,
-            lname   : sess.lname,
-            appNum  : sess.appNum,
-        })
+		if(sess.username=="admin")
+		{
+			res.render('dashboard.hbs', {
+				username: sess.username,
+				email   : sess.email,
+				fname   : sess.fname,
+				lname   : sess.lname
+			}
+		)}
+		else{	//regular user - non admin
+			if(sess.status) //activa yung account
+			{
+				res.render('dashboard.hbs', {
+					username: sess.username,
+					password: sess.password,
+					status: sess.status,
+					remember: sess.remember,
+					acct_id: sess.acct_id,
+					email   : sess.email,
+					fname   : sess.fname,
+					lname   : sess.lname,
+					appNum  : sess.appNum,
+					appExp  : sess.appExp
+				})
+			}
+			else{
+				res.render('dashboard_unactivated.hbs', {
+					username: sess.username,
+					email   : sess.email,
+					fname   : sess.fname,
+					lname   : sess.lname
+				})
+			}
+		}
 	}
 	else{
 		res.redirect('/login-fail.html')
@@ -265,9 +295,10 @@ app.get('/settings', (req,res)=> {
 	if(sess.username){
 		res.render('settings.hbs', {
             username: sess.username,
+			status  : sess.status,
 			password: sess.password,
             remember: sess.remember,
-			acct_id: sess.acct_id,
+			acct_id : sess.acct_id,
             email   : sess.email,
             fname   : sess.fname,
             lname   : sess.lname,
@@ -281,6 +312,26 @@ app.get('/settings', (req,res)=> {
 });
 
 
+app.get('/term-accept', async(req,res)=> {
+	sess = req.session;
+	if(sess.username){
+		try{
+			//render with new data
+			await Account.findOneAndUpdate({username: sess.username},{status: true})
+			sess.status = true
+			res.redirect('/profile')
+		}
+		catch(err)
+		{
+			res.status(500).send(err)
+		}
+	}
+	else{
+		res.redirect('/login-fail.html')
+	}
+});
+
+
 app.get('/set-settings', async(req,res)=> {
 	sess = req.session;
 	if(sess.username){
@@ -289,29 +340,21 @@ app.get('/set-settings', async(req,res)=> {
 			//render with new data
 			if (req.query.username!= sess.username && req.query.username != "")
 			{	
-				await Profile.findOneAndUpdate({username: sess.username},{username: req.query.username})
+				await Account.findOneAndUpdate({username: sess.username},{username: req.query.username})
 				sess.username = req.query.username
 			}
 			
-			await Profile.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
+			await Account.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
 			sess.bio = req.query.bio;
 			
 			if(req.query.newPassword != "" && sess.password != req.query.newPassword)
 			{
-				await Profile.findOneAndUpdate({username: sess.username},{password: req.query.password})
+				await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
 				sess.password = req.query.newPassword
 			}
 			
-			res.render('profile.hbs', {
-				username: sess.username,
-				password: sess.password,
-				remember: sess.remember,
-				acct_id: sess.acct_id,
-				email   : sess.email,
-				fname   : sess.fname,
-				lname   : sess.lname,
-				appNum  : sess.appNum
-			})
+			res.redirect('/profile')
+			
 		}
 		catch(err)
 		{
@@ -336,6 +379,7 @@ app.get('/assignments', async(req,res)=> {
 			res.render('assignments_admin.hbs', {
 				assignment:ass,
 				username: sess.username,
+				status: sess.status,
 				password: sess.password,
 				remember: sess.remember,
 				acct_id: sess.acct_id,
@@ -354,6 +398,7 @@ app.get('/assignments', async(req,res)=> {
 			res.render('assignments.hbs', {
 				assignment:ass,
 				username: sess.username,
+				status: sess.status,
 				password: sess.password,
 				remember: sess.remember,
 				acct_id: sess.acct_id,
@@ -376,6 +421,7 @@ app.get('/profile', (req,res)=> {
 	if(sess.username){
 		res.render('profile.hbs', {
             username: sess.username,
+			status: sess.status,
 			password: sess.password,
             remember: sess.remember,
 			acct_id: sess.acct_id,
@@ -392,6 +438,7 @@ app.get('/profile', (req,res)=> {
 	}
 });
 
+//TODO: idk if we need this or why do we have this?
 app.post('/submit-post', function(req,res){
 	viewAssignment.create(req.body, (error,post) =>
 	{
@@ -399,8 +446,48 @@ app.post('/submit-post', function(req,res){
 	})
 })
 
+app.get('/terms', function(req,res){
+	sess = req.session;
+	if(sess.username){
+		if (sess.status)
+		{
+			res.render('terms_active.hbs', {
+				username: sess.username,
+				password: sess.password,
+				status	: sess.status,
+				remember: sess.remember,
+				acct_id : sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lname   : sess.lname,
+				appNum  : sess.appNum,
+				appExp  : sess.appExp			
+				})
+		}
+		else{
+			res.render('terms.hbs', {
+				username: sess.username,
+				password: sess.password,
+				status	: sess.status,
+				remember: sess.remember,
+				acct_id	: sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lname   : sess.lname,
+				appNum  : sess.appNum,
+				appExp  : sess.appExp
+			})
+		}
+	}
+	else{
+		res.redirect('/login-fail.html')
+		//if you're trying to access the profile page but you're not logged in
+	}
+})
+
 var server = app.listen(3000,function(){
 });
+
 
 
 /*		THIS IS THE PDF THING	
