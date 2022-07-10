@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <html>
 <head>
     <link rel = "stylesheet" href="agent_dashboard.css">
@@ -8,10 +9,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 
+	<script>
+		function openNav() {
+			if(document.getElementById("sidebar").style.width=="0%")
+			{			
+				document.getElementById("sidebar").style.width = "110%";
+				document.getElementById("bottom-button").style.width = "110%";
+			}
+			else{
+				document.getElementById("sidebar").style.width = "0%";
+				document.getElementById("bottom-button").style.width = "0%";
+
+			}
+		}
+	</script>
+
+
 </head>
 <body>
     <div class="container">
-        <div class="sidebar">
+        <div id="sidebar">
             <div class="sidebar-profile">
                 <img src="temp_pic.png" width="100" height="100">
                 <div class="sidebar-profile-text">
@@ -21,7 +38,7 @@
                 </div>
             </div>
 
-
+			  
             <div class="sidebar-profile-btn">
                 <a href="/dashboard">Dashboard</a>
             </div>
@@ -29,7 +46,11 @@
                 <a href="/logout">Logout</a>
             </div>
         </div>
-
+		
+		
+		<div class="openbtn" >
+			<a href="#" onclick="openNav()">☰</a>
+		</div>
 
 
         <div class="main">

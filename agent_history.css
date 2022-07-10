@@ -50,8 +50,8 @@
 /*active button*/
 .sidebar-history-btn a
 {
-    color: black;
-    background-color: white;
+    background-color: white !important;
+    color: black !important;
 }
 
 .sidebar-history-btn a:hover
@@ -59,6 +59,7 @@
     color: black;
     background-color: white;
 }
+
 
 .main-assignments-btn
 {

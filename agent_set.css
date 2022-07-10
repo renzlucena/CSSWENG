@@ -49,8 +49,8 @@
 /*active button*/
 .sidebar-settings-btn a
 {
-    color: black;
-    background-color: white;
+    background-color: white !important;
+    color: black !important;
 }
 
 .sidebar-settings-btn a:hover
@@ -58,6 +58,11 @@
     color: black;
     background-color: white;
 }
+
+
+
+
+
 
 .main-table {
     overflow-y: scroll;

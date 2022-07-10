@@ -10,7 +10,7 @@ td
 }
 
 
-.sidebar
+#sidebar
 {
     position:fixed;
     height: 110%;
@@ -31,7 +31,7 @@ td
     width: 400px;
 }
 
-.sidebar a
+#sidebar a
 {
     padding: 20px;
     font-size: 20px;
@@ -41,7 +41,7 @@ td
     text-decoration: none;
 }
 
-.sidebar a:hover
+#sidebar a:hover
 {
     color: white;
     background-color: black;
@@ -292,8 +292,9 @@ td{
 }
 .sidebar-profile-text a
 {
-    font-size: 16px;
-    text-decoration:underline;
+    font-size: 16px !important;
+    text-decoration:underline !important;
+	padding:0px !important;
 }
 
 .sidebar-profile-email
@@ -372,4 +373,191 @@ td{
 	border-radius: 5px;
     color: #FFFFFF;
     background-color: #15223B
+}
+
+.openBtn{
+	z-index:1000;
+	position:absolute;
+	display: none;
+	padding:100px;
+}
+	
+@media screen and (max-width: 912px){
+
+	.main-header
+	{
+		text-align: left;
+		padding-left: 0px;
+		padding-right: 0px;
+		background-color: none;
+		display: block;
+	}
+	.main-header h1
+	{
+		font-size:20px;
+		margin-bottom: 50px;
+	}
+	.main-header p
+	{
+		margin-top: 15px;
+		margin-bottom: 5px;
+		font-size: 15px;
+	}
+	
+	.container{
+		position: fixed;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+		height: 110%;
+		width: 100%;
+	}
+	
+	.main
+	{
+		width: 80%;
+		height: 91%;
+		display: absolute;
+		position:fixed;
+		top:0px;
+		bottom:0px;
+		padding-top:0px;
+		text-align:center;
+		margin: 10%
+	}
+	
+	.main-table
+	{
+		overflow-y: scroll;
+		width: 100% !important;
+		height: 70%  !important;
+		padding-right: 0px;
+		border: 3px solid #15223B;
+		
+		border-radius: 10px;
+		
+		display: inline-block;
+		background-color: none;
+		text-align:center;
+		background-color: #588BAE;
+	}
+	
+	.main-table tr{
+		font-size: 10px;
+	}
+	.main-table a{
+		background:0px !important;
+		font-size:10px !important;
+		color: white !important;
+		text-decoration: underline !important;
+	}
+	.main-table a:hover{
+		background:0px !important;
+		font-size:10px !important;
+	}
+	
+	.main-profile-links
+	{
+		margin-top: 0px;    
+	}
+
+	
+	#sidebar
+	{
+		position:fixed;
+		height: 110%;
+		width: 0%;
+		z-index:10;
+		display:block;
+		margin: -10px;
+		padding: 0px;
+		background-color: #15223B;
+		overflow-x: hidden;
+		transition: 0.5s;
+	}
+	
+	h3{
+		font-size: 16px;
+	}
+	
+	#login-form-container
+	{
+		margin-top: 10px;
+		
+	}
+
+	#login-panel{
+		position: fixed;
+		background-color: #FFFFFF;
+		margin:auto;
+		width: 100%;
+		right: 0px;
+		left: 0px;
+		top: 0px;
+		height: 100%;
+		text-align: center;
+	}
+
+	#login-panel form{
+		position: relative;
+		right: 0px;
+		left: 0px;
+		margin-top: 20px;
+		text-align: center;
+
+	}
+
+	#login-panel input[type="text"]{
+		text-align: center;
+		margin: auto;
+		display: block;
+	}
+
+	#login-panel a
+	{
+		color: #588BAE;
+	}
+
+	#login-panel label{
+		font-size: 16px;
+	}
+	#remember{
+		display: inline-block;
+	}
+
+	#login-panel h1{
+		color: #15223B;
+		margin: 0px auto;
+		padding-top:0px;
+		padding-bottom:0px;
+		width: 40%;
+	}
+	.bottom-part{
+		margin-bottom: 10px;
+	}
+	
+	.bottom-button{
+		background-color: #588BAE;
+		position: fixed;
+		display:block;
+		bottom:0px;
+		width: 0%;
+	}
+	
+	.openbtn{
+		z-index:100 !important;
+		position:fixed;
+		right:0px;
+		margin-top: 5px;
+		display:absolute;
+	}
+	
+	.openbtn a{
+		font-size:25px;
+		text-align:right;
+		padding: 15px;
+		text-decoration:none !important;
+		background-color: #588BAE;
+	}
+	
 }

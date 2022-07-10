@@ -53,8 +53,8 @@
 /*active button*/
 .sidebar-profile-btn a
 {
-    color: black;
-    background-color: white;
+    background-color: white !important;
+    color: black !important;
 }
 
 .sidebar-profile-btn a:hover
@@ -132,4 +132,49 @@
     background-color: none;
     text-align:center;
     background-color: #588BAE;
+}
+
+
+
+@media screen and (max-width: 912px){
+/* yung box sa baba */
+	.main-table-terms
+	{
+		overflow-y: scroll;
+		width: 100%;
+		height: 75%;
+		border: 3px solid #15223B;
+		
+		border-radius: 10px;
+		
+		display: inline-block;
+		background-color: none;
+		text-align:center;
+		background-color: #588BAE;
+	}
+
+
+	.main-table-terms p{
+		color: #FFFFFF;
+		text-align: justify;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+
+	
+	.main-table-terms-active
+	{
+		overflow-y: scroll;
+		width: 100%;
+		height: 50%;
+		padding-right: 0px;
+		border: 3px solid #15223B;
+		
+		border-radius: 10px;
+		
+		display: inline-block;
+		background-color: none;
+		text-align:center;
+		background-color: #588BAE;
+	}
 }

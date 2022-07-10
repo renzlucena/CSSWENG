@@ -9,12 +9,14 @@
 
 .sidebar-history-btn
 {
+	color: white;
     background-color: #588BAE;
     display: fixed;
 }
 
 .sidebar-profile-btn
 {
+	color: white;
     background-color: #588BAE;
     display: fixed;
 }
@@ -22,6 +24,7 @@
 
 .sidebar-settings-btn
 {
+	color: white;
     background-color: #588BAE;
     display: fixed;
 }
@@ -49,8 +52,8 @@
 /*active button*/
 .sidebar-assignments-btn a
 {
-    color: black;
-    background-color: white;
+    background-color: white !important;
+    color: black !important;
 }
 
 .sidebar-assignments-btn a:hover
