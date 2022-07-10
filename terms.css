@@ -142,7 +142,7 @@
 	{
 		overflow-y: scroll;
 		width: 100%;
-		height: 75%;
+		height: 55% !important;
 		border: 3px solid #15223B;
 		
 		border-radius: 10px;
@@ -152,8 +152,7 @@
 		text-align:center;
 		background-color: #588BAE;
 	}
-
-
+	
 	.main-table-terms p{
 		color: #FFFFFF;
 		text-align: justify;

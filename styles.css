@@ -404,6 +404,7 @@ td{
 		font-size: 15px;
 	}
 	
+	
 	.container{
 		position: fixed;
 		bottom: 0px;
@@ -458,7 +459,8 @@ td{
 	
 	.main-profile-links
 	{
-		margin-top: 0px;    
+		top:0px !important;
+		margin-top: 0px !important;
 	}
 
 	
@@ -476,8 +478,19 @@ td{
 		transition: 0.5s;
 	}
 	
+	.main-header h1{
+		margin-bottom:0px;
+	}
+	
+	h1{
+		margin:5px;
+	}
 	h3{
 		font-size: 16px;
+		margin:0px;
+	}
+	p{
+		margin:2px;
 	}
 	
 	#login-form-container
@@ -538,10 +551,10 @@ td{
 	
 	.bottom-button{
 		background-color: #588BAE;
-		position: fixed;
+		position: relative;
 		display:block;
 		bottom:0px;
-		width: 0%;
+		width: 0% !important;
 	}
 	
 	.openbtn{
@@ -560,4 +573,21 @@ td{
 		background-color: #588BAE;
 	}
 	
+	#main-table-bottom{
+		margin: 0px;
+		padding:0px;
+	}
+	#main-table-bottom button:hover{
+		background-color:#588BAE;
+	}
+	#main-table-bottom button{
+		width: 130px;
+		margin: 5px;
+		padding: 5px;
+		font-family: 'Open Sans', sans-serif; 
+		border-radius: 5px;
+		color: #FFFFFF;
+		font-size:10px;
+		background-color: #15223B
+	}
 }
