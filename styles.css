@@ -382,11 +382,30 @@ td{
 	display: none;
 	padding:100px;
 }
-	
-@media screen and (max-width: 912px){
 
+.pager{
+	display: flex;
+	text-align:right;
+	right:0px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+}
+
+
+
+@media screen and (max-width: 912px){
+	.pager{
+		display: flex;
+		text-align:right;
+		margin-right: 50px;
+		margin-bottom: 0px;
+		margin-top: 20px;
+		color: 15223B;
+	}
+	
 	.main-header
 	{
+		margin-top: -15px;
 		text-align: left;
 		padding-left: 0px;
 		padding-right: 0px;
@@ -400,40 +419,30 @@ td{
 	}
 	.main-header p
 	{
-		margin-top: 15px;
 		margin-bottom: 5px;
 		font-size: 15px;
 	}
 	
-	
-	.container{
-		position: fixed;
-		bottom: 0px;
-		left: 0px;
-		right: 0px;
-		height: 110%;
-		width: 100%;
-	}
-	
 	.main
 	{
-		width: 80%;
+		width: 100%;
 		height: 91%;
 		display: absolute;
-		position:fixed;
+		position: fixed;
 		top:0px;
+		left:0px;
+		right:0px;
 		bottom:0px;
 		padding-top:0px;
 		text-align:center;
-		margin: 10%
+		margin: 10%;
 	}
 	
 	.main-table
 	{
 		overflow-y: scroll;
 		width: 100% !important;
-		height: 70%  !important;
-		padding-right: 0px;
+		height: 100%  !important;
 		border: 3px solid #15223B;
 		
 		border-radius: 10px;
@@ -442,8 +451,12 @@ td{
 		background-color: none;
 		text-align:center;
 		background-color: #588BAE;
+		margin-right:50px;
 	}
-	
+	.assignments-form{
+		margin-right:50px;
+		margin-left:-30px;
+	}
 	.main-table tr{
 		font-size: 10px;
 	}
@@ -462,6 +475,13 @@ td{
 	{
 		top:0px !important;
 		margin-top: 0px !important;
+	}
+	
+	td{
+		width: 10px;
+	}	
+	th{
+		font-size: 14px;
 	}
 
 	
@@ -590,6 +610,48 @@ td{
 		color: #FFFFFF;
 		font-size:10px;
 		background-color: #15223B
+	}
+	
+	
+	
+	/* Login page styles */
+	input[type=text]{
+		font-family: 'Open Sans', sans-serif; 
+		width: 250px;
+		padding: 5px;
+		border-radius: 5px;
+		border: 1px solid #000000;
+
+	}
+	input[type=file]{
+		font-family: 'Open Sans', sans-serif; 
+		width: 190px;
+		padding: 0px;
+		border-radius: 5px;
+		border: 1px solid #000000;
+
+	}
+	input[type=number]{
+		font-family: 'Open Sans', sans-serif; 
+		width: 250px;
+		padding: 5px;
+		border-radius: 5px;
+		border: 1px solid #000000;
+	}
+	input[type=email]{
+		font-family: 'Open Sans', sans-serif; 
+		width: 250px;
+		padding: 5px;
+		border-radius: 5px;
+		border: 1px solid #000000;
+	}
+	input[type=password]{
+		font-family: 'Open Sans', sans-serif; 
+		width: 250px;
+		padding: 5px;
+		border-radius: 5px;
+		border: 1px solid #000000;
+		text-align: center;
 	}
 }
 
@@ -801,33 +863,6 @@ td{
 		padding-bottom:0px;
 		width: 40%;
 	}
-	.bottom-part{
-		margin-bottom: 10px;
-	}
-	
-	.bottom-button{
-		background-color: #588BAE;
-		position: relative;
-		display:block;
-		bottom:0px;
-		width: 0% !important;
-	}
-	
-	.openbtn{
-		z-index:100 !important;
-		position:fixed;
-		right:0px;
-		margin-top: 5px;
-		display:absolute;
-	}
-	
-	.openbtn a{
-		font-size:25px;
-		text-align:right;
-		padding: 15px;
-		text-decoration:none !important;
-		background-color: #588BAE;
-	}
 	
 	#main-table-bottom{
 		margin: 0px;
@@ -845,5 +880,45 @@ td{
 		color: #FFFFFF;
 		font-size:10px;
 		background-color: #15223B
+	}
+}
+
+
+@media screen and (max-height: 915px){
+
+	.main-table
+	{
+		overflow-y: scroll;
+		width: 100% !important;
+		height: 600px  !important;
+		padding-right: 0px;
+		border: 3px solid #15223B;
+		
+		border-radius: 10px;
+		
+		display: inline-block;
+		background-color: none;
+		text-align:center;
+		background-color: #588BAE;
+	}
+	
+	.main-table tr{
+		font-size: 10px;
+	}
+	.main-table a{
+		background:0px !important;
+		font-size:10px !important;
+		color: white !important;
+		text-decoration: underline !important;
+	}
+	.main-table a:hover{
+		background:0px !important;
+		font-size:10px !important;
+	}
+	
+	.main-profile-links
+	{
+		top:0px !important;
+		margin-top: 0px !important;
 	}
 }

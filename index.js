@@ -404,7 +404,8 @@ app.get('/view/:ref_id', async(req,res)=>{
 			console.log(ass.ref_id)
 			*/
 			
-			res.render('viewAssignment.hbs',{
+			//this is the main property page
+			res.render('viewAssignment_0.hbs',{
 				ref_id : ass.ref_id,
 				client_f_name : ass.client_f_name,
 				client_l_name : ass.client_l_name,

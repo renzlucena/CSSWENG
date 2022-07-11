@@ -4,6 +4,7 @@
 <html>
 <head>
     <link rel = "stylesheet" href="/agent_ass_view.css" type="text/css" >
+    <link rel = "stylesheet" href="/pager0.css" type="text/css" >
 	<link rel = "stylesheet" href="/styles.css" type="text/css" >
 
     <title>Assignment No. {{this.ref_id}}</title>
@@ -11,48 +12,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-
-	<script>
-        function checkForm()
-        {
-            var valid = true;
-            
-            var username = document.getElementById("username");
-            var password = document.getElementById("password");
-            
-            //if either field is empty, do not proceed.
-            if (username.value == "")
-            {
-                username.style.backgroundColor = "red";
-                valid = false;
-            }
-            else{
-                username.style.backgroundColor = "white";
-            }
-            if (password.value == "")
-            {
-                password.style.backgroundColor = "red";
-                valid = false;
-            }
-            else{
-                password.style.backgroundColor = "white";
-            }
-            return valid;
-        }
-		
-		function openNav() {
-			if(document.getElementById("sidebar").style.width=="0%")
-			{			
-				document.getElementById("sidebar").style.width = "110%";
-				document.getElementById("bottom-button").style.width = "110%";
-			}
-			else{
-				document.getElementById("sidebar").style.width = "0%";
-				document.getElementById("bottom-button").style.width = "0%";
-
-			}
-		}
-	</script>
 
 </head>
 <body>
@@ -102,11 +61,17 @@
             </div>
 
 			<div class="pager">
-				<a href="viewAssignment_0">Property</a>
-				<a href="viewAssignment_1">Comparable I</a>
-				<a href="viewAssignment_2">Comparable II</a>
+				<div class="pager0">
+					<a href="viewAssignment_0">Property</a>
+				</div>
+				<div class="pager1">
+					<a href="viewAssignment_1">Comparable I</a>
+				</div>
+				<div class="pager2">
+					<a href="viewAssignment_2">Comparable II</a>
+				</div>
 			</div>
-            <form class="assignments-form" action = "/assignments" method = "get" onsubmit="return checkForm()">
+            <form class="assignments-form" action = "/assignments" method = "get">
                 <div class="main-table">            
 					<table>
 						<tr>
