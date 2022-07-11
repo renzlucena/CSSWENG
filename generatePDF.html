@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel = "stylesheet" href="styles.css">
+    <title>Generate PDF</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.3.0-beta.2/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.3.0-beta.2/vfs_fonts.min.js"></script>
+    <script src='build/pdfmake.min.js'></script>
+    <script src='build/vfs_fonts.js'></script>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-profile">
+                <img src="temp_pic.png" width="100" height="100">
+                <div class="sidebar-profile-text">
+                    <p class="sidebar-profile-name">Agent LastName</p>
+                    <p class="sidebar-profile-email"><i>example-mail@xmail.com</i></p>
+                    <a href="login.html">Log Out</a>
+                </div>
+            </div>
+            
+            <div class="sidebar-profile-btn">
+                
+                <a href="profile.html">Profile</a>
+            </div>
+            <div class="sidebar-assignments-btn">
+               
+                <a  href="assignments.html">Assignments</a>
+            </div>
+            <div class="sidebar-history-btn">
+               
+                <a  href="history.html">History</a>
+            </div>
+            <div class="sidebar-settings-btn">
+                
+                <a href="settings.html">Settings</a>
+            </div>
+            
+            <div class="bottom-button">
+                
+                <a href="logout.html">Logout</a>
+            </div>
+        </div>
+    
+    
+    
+        <div class="main">
+            <div class="main-header">
+                <h1>Generate PDF</h1>
+            </div>  
+            
+            <div class="main-pdf">
+                <!--<textarea name="pdfinput" style="width:80%;" rows="30"></textarea>-->            
+                <button>Download PDF</button>
+                <!--<embed src="" type="application/pdf" width="80%" height="80%" />-->
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    var docDefinition = {
+        header: {text: 'Appraisal of Real Property for Kind of Lot', alignment: 'left'},
+        content: [
+            {text: 'Appraisal of Real Estate For Kind of Lot', style: 'title'},
+            {text: 'Kamagong Street Ridgewood, Ayala Westgrove Heights, Silang Cavite', style: 'titletext'},
+            {text: 'As Of: May 5, 2021', style: 'h1'},
+            {text: 'Prepared for XXX Enterprises Unlimited, Inc. Paseo De Roxas, Makati', style: 'h1'},
+            {text: 'Prepared By', style: 'h1'},
+            {text: 'Ma. Cristina D. Ventucillo, REA Lic. No. 10728 Taft Avenue, Pasay City', style: 'titletext', 
+            pageBreak: 'after'},
+
+            {text: 'Transmittal Letter', style: 'h2'},
+            {columns: [
+            {
+                text: 'Mr. XXX XXX',
+                text: 'XXX Enterprises Unlimited, Inc.'
+            }
+            ]}, 
+            {columns: [
+            {
+                text: 'May 8, 2021',
+                text: 'Re: Summary Appraisal Report Vacant Land - 406 sqm Ayala Westgrove Heights, Brgy. Carmen, Silang Cavite'
+            }
+            ]}, 
+            {text: 'Dear Mr. XXX,'},
+            {text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is May 5, 2021.'},
+            {text: 'Submitted herewith is my report containing facts and data gathered.'}, 
+            {text: 'The method of appraising is detailed in the attached narrative report as of May 5, 2021. It is my opinion that the Market Value with Fee Simple Interest in the subject property, subject to the attached limiting conditions, is”'},
+            {text: 'Twelve Million Seven Hundred Eighty Nine Thousand Pesos (Php12,789,000.00)', style: 'appraisalval'},
+            {text: 'It has been a pleasure to serve you in this matter'}, 
+            {text: 'Respectfully submitted,', margin: [20, 0, 5, 5]},
+            {text: 'Ma. Cristina D. Ventucillo,', margin: [20, 0, 5, 0]},
+            {text: 'Certified Real Estate Appraiser # 10728', margin: [20, 0, 5, 0], pageBreak: 'after'},
+
+            {text: 'Appraisal Summary', style: 'h2'},
+        ],
+        defaultStyle:{
+            fontSize: 15,
+            alignment: 'justify'
+        },
+        styles:{
+            title: {
+                fontSize: 24,
+                bold: true,
+                alignment: center
+            },
+            h1: {
+                fontSize: 24,
+                alignment: center
+            },
+            h2: {
+                fontSize: 20,
+                bold: true,
+                alignment: center
+            },
+            titletext: {
+                alignment: center
+            },
+            appraisalval: {
+                fontSize: 18,
+                alignment: center,
+                color: 'green'
+            }
+        }
+    };
+    //function pdf() {
+    pdfMake.createPdf(docDefinition).open();
+    //}
+</script>
+</html>
