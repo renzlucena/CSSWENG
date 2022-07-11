@@ -183,25 +183,179 @@ app.get('/history', async(req,res)=>{
 	}
 });
 
-//TODO!
-app.get('/admin-process', async(req,res)=>{
+
+app.get('/save-ass', async(req,res)=> {
+	sess = req.session;
+	if(sess.username){
+		try{
+			//edit comment  to "Submitted."
+			// await Assignment.findOneAndUpdate({ref_id: req.params.ref_id},{comment: "Submitted."})
+			// sess.status = true
+			// res.redirect('/assignment')
+			// ref_id: String,
+	// type_of_approach: String,
+	// client_f_name: String,
+	// client_l_name: String,
+	// property_images: String,
+	// lot_size: String,
+	// trans_date: String,
+	// purchase_price: String,
+	// listing_price: String,
+	// terms_of_sale: String,
+	// location: String,
+	// corner: Boolean,
+	// shape: String,
+	// topo: String,
+	// area: Number,
+	// completed_on: Date,
+	// comment: String,
+	// assigned_to: String,
+	// created_at:
 	
-})
-//TODO
-app.get('/viewAssignment/:ref_id', async(req,res)=>{
-	sess = req.session
-	// console.log(req)
-	var id = req.params.ref_id
+	
+	
+	
+	
+			//dont care for empty, save all edits
+			// await Assignment.findOneAndUpdate({lot_size: res.query.lot_size},{username: req.query.username})
+			// sess.username = req.query.username
+			
+			
+			// await Account.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
+			// sess.bio = req.query.bio;
+			
+			// if(req.query.newPassword != "" && sess.password != req.query.newPassword)
+			// {
+				// await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
+				// sess.password = req.query.newPassword
+			// }
+			
+			res.redirect('/viewAssignment/:ref_id')
+		}
+		catch(err)
+		{
+			res.status(500).send(err)
+		}
+	}
+	else{
+		res.redirect('/login-fail.html')
+	}
+});
+
+
+
+
+app.get('/set-settings', async(req,res)=> {
+	sess = req.session;
+	if(sess.username){
+		//update db
+		try{
+			//render with new data
+			if (req.query.username!= sess.username && req.query.username != "")
+			{	
+				await Account.findOneAndUpdate({username: sess.username},{username: req.query.username})
+				sess.username = req.query.username
+			}
+			
+			await Account.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
+			sess.bio = req.query.bio;
+			
+			if(req.query.newPassword != "" && sess.password != req.query.newPassword)
+			{
+				await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
+				sess.password = req.query.newPassword
+			}
+			
+			res.redirect('/profile')
+			
+		}
+		catch(err)
+		{
+			res.status(500).send(err)
+		}
+	}
+	else{
+		res.redirect('/submit-login')
+	}
+});
+
+
+app.get('/submit-ass', async(req,res)=> {
+	sess = req.session;
+	if(sess.username){
+		try{
+			//edit comment  to "Submitted."
+			await Assignment.findOneAndUpdate({ref_id: req.params.ref_id},{comment: "Submitted."})
+			sess.status = true
+			res.redirect('/assignment')
+		}
+		catch(err)
+		{
+			res.status(500).send(err)
+		}
+	}
+	else{
+		res.redirect('/login-fail.html')
+	}
+});
+
+
+
+//TODO!	//change the comment to "Approved.", if approved, can be printed
+app.get('/admin-approve', async(req,res)=>{
+	sess = req.session;
 	if(sess.username)
 	{
-		
-		if(sess.username == "admin")
-		{	//if admin, cannot edit, but can comment
-			const ass = await Assignment.find({
-				ref_id : id
-				}).exec()
-				
-			res.render('viewAssignment_admin.hbs', {
+		try{
+			// await Assignment.findOneAndUpdate({res: sess.username},{comment: true})
+			// const ass = await Assignment.findOneAndUpdate({res: req.params.ref_id},{comment: "test"})
+			// req.params.ref_id
+			console.log(req.params.ref_id)
+			res.redirect('/history')
+		}
+		catch(err){
+			console.log(err)
+		}
+	}
+	else{
+		res.redirect('/login-fail.html')
+	}
+})
+
+//this submits the comment and updates the assignment
+app.get('/admin-comment', async(req,res)=>{
+	sess = req.session;
+	if(sess.username)
+	{
+		try{
+			// await Assignment.findOneAndUpdate({res: sess.username},{comment: true})
+			// const ass = await Assignment.findOneAndUpdate({res: req.params.ref_id},{comment: "test"})
+			// req.params.ref_id
+			const ass = await Assignment.findOneAndUpdate({
+				res: req.params.ref_id},
+				{comment: req.params.comment})
+			
+			res.redirect('/history')
+		}
+		catch(err){
+			console.log(err)
+		}
+	}
+	else{
+		res.redirect('/login-fail.html')
+	}
+})
+
+
+app.get('/viewAssignment', function(req,res){
+	res.redirect('/assignments')
+});
+
+//TODO make this functional, as in working if you click save
+app.get('/admin-add-assignment', function(req,res) {
+	viewAssignment.create(req.body, (error,post) =>
+	{
+		res.render('addAssignment.hbs', {
 				assignment : ass,
 				username: sess.username,
 				status: sess.status,
@@ -214,15 +368,50 @@ app.get('/viewAssignment/:ref_id', async(req,res)=>{
 				appNum  : sess.appNum,
 				appExp : sess.appExp
 			});
+	})
+});
+
+
+
+app.get('/view/:ref_id', async(req,res)=>{
+	sess = req.session
+	var ref_id = req.params.ref_id
+
+
+	console.log(req.params)
+	const ass = await Assignment.find({
+		assigned_to: sess.username,
+		ref_id: req.params.ref_id}).exec()
+	console.log(ass)
+	
+	if(sess.username)
+	{
+		if(sess.username == "admin")
+		{	//if admin, cannot edit, but can comment
+			// const ass = await Assignment.findOne({
+				// id : ref_id
+				// }).exec()
+			
 		}
 		else// if (sess.username != "admin")
 		{
-			const ass = await Assignment.find({
+			const ass = await Assignment.findOne({
 				assigned_to: sess.username,
-				ref_id: id}).exec()
+				ref_id: req.params.ref_id}).exec()
 			
-			res.render('viewAssignment.hbs', {
-				assignment : ass,
+			/*
+			console.log(sess.username+" -> " +ass)
+			console.log(ass.ref_id)
+			*/
+			
+			res.render('viewAssignment.hbs',{
+				ref_id : ass.ref_id,
+				client_f_name : ass.client_f_name,
+				client_l_name : ass.client_l_name,
+				loc_brgy : ass.loc_brgy,
+				loc_city : ass.loc_city,
+				loc_region : ass.loc_region,
+				
 				username: sess.username,
 				password: sess.password,
 				status: sess.status,
@@ -233,7 +422,7 @@ app.get('/viewAssignment/:ref_id', async(req,res)=>{
 				lname   : sess.lname,
 				appNum  : sess.appNum,
 				appExp  : sess.appExp
-		});
+			});
 		}
 	}
 	else
@@ -243,7 +432,92 @@ app.get('/viewAssignment/:ref_id', async(req,res)=>{
 });
 
 
-app.get('/dashboard', (req,res)=> {
+
+//TODO (FOR SOME REASONS NOT WORKING YUNG CSS????)
+app.get('/viewAssignment/:ref_id', async(req,res)=>{
+	sess = req.session
+	var ref_id = req.params.ref_id
+
+/*
+	console.log(req.params)
+	const ass = await Assignment.find({
+		assigned_to: sess.username,
+		ref_id: req.params.ref_id}).exec()
+	console.log(ass)
+	*/
+	
+	if(sess.username)
+	{
+		if(sess.username == "admin")
+		{	//if admin, cannot edit, but can comment
+			// const ass = await Assignment.findOne({
+				// id : ref_id
+				// }).exec()
+				
+			console.log(ass)
+			
+			res.render('/viewAssignment_admin.hbs', {
+				ref_id : id,
+				client_f_name : ass.client_f_name,
+				client_l_name : ass.client_l_name,
+				loc_brgy : ass.loc_brgy,
+				loc_city : ass.loc_city,
+				loc_region : ass.loc_region,
+				
+				username: sess.username,
+				status: sess.status,
+				remember: sess.remember,
+				password: sess.password,
+				acct_id : sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lName   : sess.lName,
+				appNum  : sess.appNum,
+				appExp : sess.appExp
+			});
+			
+			// sess.currentAss = ref_id
+		}
+		else// if (sess.username != "admin")
+		{
+			/*
+			const ass = await Assignment.findOne({
+				assigned_to: sess.username,
+				ref_id: req.params.ref_id}).exec()
+			*/
+			/*
+			console.log(sess.username+" -> " +ass)
+			console.log(ass.ref_id)
+			*/
+			
+			res.redirect('/view/'+req.params.ref_id);
+			/*
+			res.render('/view/'+ass.ref_id,
+			{
+				assignment = ass
+				
+				username: sess.username,
+				password: sess.password,
+				status: sess.status,
+				remember: sess.remember,
+				acct_id: sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lname   : sess.lname,
+				appNum  : sess.appNum,
+				appExp  : sess.appExp
+			});
+			*/
+		}
+	}
+	else
+	{		
+		res.redirect('/login-fail.html')
+	}
+});
+
+
+app.get('/dashboard', async(req,res)=> {
 	sess = req.session;
 	if(sess.username){ //username exists
 		if(sess.username=="admin")
@@ -258,6 +532,21 @@ app.get('/dashboard', (req,res)=> {
 		else{	//regular user - non admin
 			if(sess.status) //activa yung account
 			{
+				
+				//eto yung you have blank new comments saka mag eexpire na dates
+				const assNum = await Assignment.find({
+					assigned_to: sess.username,
+					comment: {$ne: "Approved."},
+					comment: {$ne: "Submitted."},
+					comment: {$ne: ""},
+					}).count()
+					//so if the comment is not approved, and submitted, and not blank also, it's from the admin
+					
+				const assDl = await Assignment.find({
+					createdAt: { $gt: { $add: [ "$someDate", -1000 * 3600 * 24 * 3 ] } }
+					});
+
+
 				res.render('dashboard.hbs', {
 					username: sess.username,
 					password: sess.password,
@@ -268,7 +557,9 @@ app.get('/dashboard', (req,res)=> {
 					fname   : sess.fname,
 					lname   : sess.lname,
 					appNum  : sess.appNum,
-					appExp  : sess.appExp
+					appExp  : sess.appExp,
+					newnotif: assNum,
+					// deadlines:
 				})
 			}
 			else{
@@ -287,6 +578,16 @@ app.get('/dashboard', (req,res)=> {
 		//if you're trying to access the profile page but you're not logged in
 	}
 });
+
+// app.post('/submit-post', function(req,res){
+	// viewAssignment.create(req.body, (error,post) =>
+	// {
+        // res.redirect('/')
+	// })
+// })
+
+
+
 
 //TODO make this functional, as in working if you click save
 //  check if there are changes and save only the ones that are not blank

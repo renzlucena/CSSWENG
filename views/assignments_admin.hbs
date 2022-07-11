@@ -28,7 +28,6 @@
     <div class="container">
         <div id="sidebar">
             <div class="sidebar-profile">
-                <img src="temp_pic.png" width="100" height="100">
                 <div class="sidebar-profile-text">
                     <p class="sidebar-profile-name">Admin</p>
                     <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
@@ -39,6 +38,10 @@
 
             <div class="sidebar-assignments-btn">
                 <a  href="/assignments">Assignments</a>
+            </div>
+			
+			<div class="sidebar-add-btn">
+                <a  href="/admin-add-assignment">Add New Assignment</a>
             </div>
 			
             <div class="sidebar-history-btn">
@@ -78,7 +81,7 @@
 					<td>{{this.created_at}}</td>
 					<td>
 						<div class="main-assignments-status-btns">
-							<a href="/viewAssignment/ref_id">Edit Assignment</a>
+							<a href="/viewAssignment/{{ref_id}}">Edit Assignment</a>
 						</div>
 					</td>
 					<td><p class="comment-text left-align">{{this.comment}}</p></td>

@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <html>
 <head>
-    <link rel = "stylesheet" href="agent_ass_view.css">
+    <link rel = "stylesheet" href="agent_add_view.css">
     <title>Create Assignment</title>
     
     
@@ -20,7 +20,6 @@
 			else{
 				document.getElementById("sidebar").style.width = "0%";
 				document.getElementById("bottom-button").style.width = "0%";
-
 			}
 		}
 	</script>
@@ -30,17 +29,22 @@
     <div class="container">
         <div id="sidebar">
             <div class="sidebar-profile">
-                <img src="temp_pic.png" width="100" height="100">
                 <div class="sidebar-profile-text">
                     <p class="sidebar-profile-name">Agent {{this.username}}</p>
                     <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
                     <a href="/logout">Log Out</a>
                 </div>
             </div>
+			
             
             <div class="sidebar-assignments-btn">
                 <a  href="/assignments">Assignments</a>
             </div>
+			
+			<div class="sidebar-add-btn">
+                <a  href="/admin-add-assignment">Add New Assignment</a>
+            </div>
+			
             <div class="sidebar-history-btn">
                 <a  href="/history">History</a>
             </div>
@@ -59,7 +63,7 @@
                 <p><b><i>Items will NOT be autosaved!</b></i></p>       
                 <p>Please be mindful before you close the page.</p>       
             </div>  
-            <form class="assignments-form" action = "/submit-post" method = "post">
+            <form class="assignments-form" action = "/assignments" method = "post">
                 <div class="main-table">
                     <table>
                         <tr>
@@ -121,8 +125,8 @@
                 </div>
                     
             <div id="main-table-bottom">
-                <button type = "submit" name="save_ass">Save Details</button>
-                <button type="submit" name="send_ass">Send For Processing</button>
+                <button type = "submit" formaction="/admin-add-assignment" name="save_ass">Save Details</button>
+                <button type="submit" formaction="/admin-process" name="send_ass">Send For Processing</button>
             </div>
             </form>
         </div>
