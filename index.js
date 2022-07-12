@@ -385,11 +385,10 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 		{	//if admin, cannot edit, but can comment
 			try{
 				const ass = await Assignment.findOne({
-					id : ref_id
+						ref_id : req.params.ref_id
 					}).exec()
-					
-					
-							//	in history
+
+					//	in history
 					if(ass.comment == "Approved.")
 					{
 						res.render('history_0_admin.hbs',{
@@ -518,6 +517,9 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						appExp  : sess.appExp
 					});
 				}
+				
+				console.log(ass.comparative1)
+				console.log(ass.comparative2)
 			}
 			catch(err)
 			{
@@ -529,7 +531,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 			try{
 		
 				const ass = await Assignment.findOne({
-					ref_id : ref_id
+					ref_id : req.params.ref_id
 					}).exec()
 						//	in history
 				if(ass.comment == "Approved.")
@@ -661,14 +663,15 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						appExp  : sess.appExp
 					});
 				}
+				
+				console.log(ass.comparative1)
+				console.log(ass.comparative2)
 			}
 			catch(err)
 			{
 				console.log(err)
 			}
 		}
-		console.log(ass.comparative1)
-		console.log(ass.comparative2)
 	}
 	else
 	{		
