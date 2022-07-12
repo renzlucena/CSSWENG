@@ -8,61 +8,43 @@
 	<link rel = "stylesheet" href="/styles.css" type="text/css" >
 
     <title>Assignment No. {{this.ref_id}}</title>
-
+    
 	<script>
-
+		
 		function computeValues1()
 			{
-        var mainFinalPrice = main.listingPrice
-        var comp1FinalPrice = comp1.listingPrice
-        var comp2FinalPrice = comp2.listingPrice
-
-        if(main.lot_size > comp1.lotSize && comp1.lotSize > comp2.lotSize){
-        	mainFinalPrice += (mainFinalPrice*0.1)
-        }
-        else{
-        	mainFinalPrice -= (mainFinalPrice*0.1)
-        }
-
-        if(main.corner == true && comp1.corner == false && comp2.corner == false){
-        	mainFinalPrice += (mainFinalPrice*0.1)
-        }
-        else{
-        	mainFinalPrice -= (mainFinalPrice*0.1)
-        }
-
-        if(main.school == true && comp1.school == false && comp2.school == false){
-        	mainFinalPrice += (mainFinalPrice*0.1)
-        }
-        else{
-        	mainFinalPrice -= (mainFinalPrice*0.1)
-        }
-
-        if(main.hospital== true && comp1.hospital == false && comp2.hospital == false){
-        	mainFinalPrice += (mainFinalPrice*0.1)
-        }
-        else{
-        	mainFinalPrice -= (mainFinalPrice*0.1)
-        }
-
-        if(main.mall == true && comp1.mall == false && comp2.mall == false){
-        	mainFinalPrice += (mainFinalPrice*0.1)
-        }
-        else{
-        	mainFinalPrice -= (mainFinalPrice*0.1)
-        }
-
-
+				var value=0;
+				
 				var computationText = document.getElementById("computation1");
-
+				
 				//do the thing here
-
-				return mainFinalPrice;
+				
+				return value;
 			}
-
+		function computeValues2()
+			{
+				var value=0;
+				
+				var computationText = document.getElementById("computation2");
+				
+				//do the thing here
+				
+				return value;
+			}
+		function computeValues3()
+			{
+				var value=0;
+				
+				var computationText = document.getElementById("computation3");
+				
+				//do the thing here
+				
+				return value;
+			}
+	
 	</script>
-
-
+	
+	
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
@@ -79,49 +61,49 @@
                     <a href="login.html">Log Out</a>
                 </div>
             </div>
-
+            
             <div class="sidebar-profile-btn">
-
+                
                 <a href="/dashboard">Profile</a>
             </div>
             <div class="sidebar-assignments-btn">
-
+               
                 <a  href="/assignments">Assignments</a>
             </div>
             <div class="sidebar-history-btn">
-
+               
                 <a  href="/history">History</a>
             </div>
             <div class="sidebar-settings-btn">
-
+                
                 <a href="/profile">Settings</a>
             </div>
-
+            
             <div class="bottom-button">
-
+                
                 <a href="/logout">Logout</a>
             </div>
         </div>
-
+    
 		<div class="openbtn" >
 			<a href="#" onclick="openNav()">☰</a>
 		</div>
-
+		
         <div class="main">
             <div class="main-header">
                 <h1>View Current Assignments</p>
-                <p><b><i>Items will NOT be autosaved!</b></i></p>
+                <p><b><i>Items will NOT be autosaved!</b></i></p>       
                 <p>Please be mindful before you close the page.</p>
             </div>
 
             <form class="assignments-form" action = "/assignments" method = "get">
-                <div class="main-table">
+                <div class="main-table">            
 					<table>
                         <tr>
                             <th><label for="ref_id">Reference ID</label></th>
                             <td><input name="ref_id" type="text" value="{{this.ref_id}}" readonly></td>
                         </tr>
-
+						
 					    <tr>
                             <th><label for="type_of_approach">Type of Approach</label></th>
 							<td><input name="type_of_approach" type="text" value="{{this.type_of_approach}}" readonly></td>
@@ -139,16 +121,16 @@
 						</tr>
 						<tr>
                             <th><label for="lot_loc">Lot Location</label></th>
-                            <td><input name="lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
-                            <td><input name="lot_loc" type="text" value="{{this.lot_brgy1}}, {{this.lot_city1}}, {{this.lot_region1}}" readonly></td>
-                            <td><input name="lot_loc" type="text" value="{{this.lot_brgy2}}, {{this.lot_city2}}, {{this.lot_region2}}" readonly></td>
+                            <td><input name="lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}"></td>
+                            <td><input name="lot_loc" type="text" value="{{this.lot_brgy1}}, {{this.lot_city1}}, {{this.lot_region1}}"></td>
+                            <td><input name="lot_loc" type="text" value="{{this.lot_brgy2}}, {{this.lot_city2}}, {{this.lot_region2}}"></td>
                         </tr>
-
+						
 						<tr>
-                            <th><label for="property_type" readonly >Property Type</label></th>
-							<td><input name="property_type" type="text" value="{{this.property_type}}" readonly></td>
-							<td><input name="property_type" type="text" value="{{this.property_type1}}" readonly></td>
-							<td><input name="property_type" type="text" value="{{this.property_type2}}" readonly></td>
+                            <th><label for="property_type" >Property Type</label></th>
+							<td><input name="property_type" type="text" value="{{this.property_type}}"></td>
+							<td><input name="property_type" type="text" value="{{this.property_type1}}"></td>
+							<td><input name="property_type" type="text" value="{{this.property_type2}}"></td>
 
 							<!-- <td><select name="property_type"> -->
                                 <!-- <option value="residential">Residential</option> -->
@@ -158,10 +140,10 @@
                             <!-- </select></td> -->
                         </tr>
 						<tr>
-                            <th><label for="property_interest" readonly >Property Interest</label></th>
-							<td><input name="property_interest" type="text" value="{{this.property_interest}}" readonly></td>
-							<td><input name="property_interest" type="text" value="{{this.property_interest1}}" readonly></td>
-							<td><input name="property_interest" type="text" value="{{this.property_interest2}}" readonly></td>
+                            <th><label for="property_interest" >Property Interest</label></th>
+							<td><input name="property_interest" type="text" value="{{this.property_interest}}"></td>
+							<td><input name="property_interest" type="text" value="{{this.property_interest1}}"></td>
+							<td><input name="property_interest" type="text" value="{{this.property_interest2}}"></td>
 
 							<!-- <td><select name="property_interest"> -->
                                 <!-- <option value="fee_simple">Fee Simple</option> -->
@@ -170,79 +152,79 @@
                         </tr>
                         <tr>
                             <th><label for="property_images">Property Images</label></th>
-                            <td><input type="file" id="pimg" name="property_images" readonly></td>
+                            <td><input type="file" id="pimg" name="property_images"></td>
                         </tr>
-
+						
                         <tr>
                             <th><label for="lot_size">Lot Size</label></th>
-                            <td><input name="lot_size" type="text" this="{{this.lot_size}}" readonly></td>
-                            <td><input name="lot_size" type="text" this="{{this.lot_size1}}" readonly></td>
-                            <td><input name="lot_size" type="text" this="{{this.lot_size2}}" readonly></td>
+                            <td><input name="lot_size" type="text" this="{{this.lot_size}}"></td>
+                            <td><input name="lot_size" type="text" this="{{this.lot_size1}}"></td>
+                            <td><input name="lot_size" type="text" this="{{this.lot_size2}}"></td>
                         </tr>
-
+						
                         <tr>
                             <th><label for="trans_date">Transaction Date</label></th>
-                            <td><input name="trans_date" type="date" value="{{this.trans_date}}" readonly></td>
+                            <td><input name="trans_date" type="date" value="{{this.trans_date}}"></td>
                         </tr>
-
+						
                         <tr>
                             <th><label for="purchase_price">Purchase Price</label></th>
-                            <td><input name="purchase_price" type="text" value="{{this.purchase_price}}" readonly></td>
-                            <td><input name="purchase_price" type="text" value="{{this.purchase_price1}}" readonly></td>
-                            <td><input name="purchase_price" type="text" value="{{this.purchase_price2}}" readonly></td>
+                            <td><input name="purchase_price" type="text" value="{{this.purchase_price}}"></td>
+                            <td><input name="purchase_price" type="text" value="{{this.purchase_price1}}"></td>
+                            <td><input name="purchase_price" type="text" value="{{this.purchase_price2}}"></td>
                         </tr>
-
+						
                         <tr>
                             <th><label for="type_of_approach">Listing Price</label></th>
-                            <td><input name="listing_price" type="text" value="{{this.listing_price}}" readonly></td>
-                            <td><input name="listing_price" type="text" value="{{this.listing_price1}}" readonly></td>
-                            <td><input name="listing_price" type="text" value="{{this.listing_price2}}" readonly></td>
+                            <td><input name="listing_price" type="text" value="{{this.listing_price}}"></td>
+                            <td><input name="listing_price" type="text" value="{{this.listing_price1}}"></td>
+                            <td><input name="listing_price" type="text" value="{{this.listing_price2}}"></td>
                         </tr>
-
+						
                         <tr>
                             <th><label for="terms_of_sale">Terms of Sale</label></th>
-                            <td><input name="terms_of_sale" type="text" value="{{this.terms_of_sale}}" readonly></td>
-                            <td><input name="terms_of_sale" type="text" value="{{this.terms_of_sale1}}" readonly></td>
-                            <td><input name="terms_of_sale" type="text" value="{{this.terms_of_sale2}}" readonly></td>
+                            <td><input name="terms_of_sale" type="text" value="{{this.terms_of_sale}}"></td>
+                            <td><input name="terms_of_sale" type="text" value="{{this.terms_of_sale1}}"></td>
+                            <td><input name="terms_of_sale" type="text" value="{{this.terms_of_sale2}}"></td>
                         </tr>
-
+						
                         <tr>
                             <th><label for="location">Location Type</label></th>
-                            <td><input name="location" type="text" value="{{this.location}}" readonly></td>
-                            <td><input name="location" type="text" value="{{this.location1}}" readonly></td>
-                            <td><input name="location" type="text" value="{{this.location2}}" readonly></td>
+                            <td><input name="location" type="text" value="{{this.location}}"></td>
+                            <td><input name="location" type="text" value="{{this.location1}}"></td>
+                            <td><input name="location" type="text" value="{{this.location2}}"></td>
 						<tr>
                             <th><label>Is a Corner Lot?</label></th>
-                            <td><input name="corner" type="checkbox" readonly value="{{this.corner}}"></td>
-                            <td><input name="corner" type="checkbox" readonly value="{{this.corner1}}"></td>
-                            <td><input name="corner" type="checkbox" readonly value="{{this.corner2}}"></td>
-                        </tr>
+                            <td><input name="corner" type="checkbox" value="{{this.corner}}"></td>
+                            <td><input name="corner" type="checkbox" value="{{this.corner1}}"></td>
+                            <td><input name="corner" type="checkbox" value="{{this.corner2}}"></td>
+                        </tr>						
 						<tr>
                             <<th><label>Has nearby Hospital(s)?</label></th>
-                            <td><input name="hospital" type="checkbox" readonly value="{{this.hospital}}"></td>
-                            <td><input name="hospital" type="checkbox" readonly value="{{this.hospital1}}"></td>
-                            <td><input name="hospital" type="checkbox" readonly value="{{this.hospital2}}"></td>
-                        </tr>
+                            <td><input name="hospital" type="checkbox" value="{{this.hospital}}"></td>
+                            <td><input name="hospital" type="checkbox" value="{{this.hospital1}}"></td>
+                            <td><input name="hospital" type="checkbox" value="{{this.hospital2}}"></td>
+                        </tr>			
 						<tr>
 							<th><label>Has nearby School(s)?</label></th>
-                            <td><input name="school" type="checkbox" readonly value="{{this.school}}"></td>
-                            <td><input name="school" type="checkbox" readonly value="{{this.school1}}"></td>
-                            <td><input name="school" type="checkbox" readonly value="{{this.school2}}"></td>
+                            <td><input name="school" type="checkbox" value="{{this.school}}"></td>
+                            <td><input name="school" type="checkbox" value="{{this.school1}}"></td>
+                            <td><input name="school" type="checkbox" value="{{this.school2}}"></td>
                         </tr>
 						<tr>
                             <th><label>Has nearby Shop/Mall(s)?</label></th>
-                            <td><input name="mall" type="checkbox" readonly value="{{this.mall}}"></td>
-                            <td><input name="mall" type="checkbox" readonly value="{{this.mall1}}"></td>
-                            <td><input name="mall" type="checkbox" readonly value="{{this.mall2}}"></td>
+                            <td><input name="mall" type="checkbox" value="{{this.mall}}"></td>
+                            <td><input name="mall" type="checkbox" value="{{this.mall1}}"></td>
+                            <td><input name="mall" type="checkbox" value="{{this.mall2}}"></td>
 						</tr>
-
+						
 						<tr>
 							<th></th>
 							<th>MAIN PROPERTY</th>
 							<th>COMPARABLE I</th>
 							<th>COMPARABLE II</th>
 						</tr>
-
+						
 						<tr>
                             <th><label for="computation">Computation</label></th>
                             <td><input name="computation" id="computation1" type="text" value="return computeValues1()" readonly></td>
