@@ -171,9 +171,9 @@
                     </table>     
                 </div>
             <div id="main-table-bottom">
-				<input name="comment" type="checkbox">
-                <button type = "submit" name="save_ass" formaction="/save-ass">Return and Comment</button>
-                <button type="submit" name="send_ass" formaction="/submit-ass">Approve</button>
+				<input name="comment" id="comment" value="{{this.comment}}" type="text">
+                <button type = "submit" name="save_ass" formaction="/admin-comment">Return and Comment</button>
+                <button type="submit" name="send_ass" formaction="/admin-approve">Approve</button>
             </div>
             </form>
         </div>
