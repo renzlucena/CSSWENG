@@ -328,6 +328,9 @@ app.get('/admin-approve', async(req,res)=>{
 	}
 })
 
+hbs.registerHelper('eq', (a, b) => a == b)
+
+
 //this submits the comment and updates the assignment
 app.get('/acceptAssignment/:ref_id', async(req,res)=>{
 	sess = req.session;
@@ -1043,7 +1046,8 @@ app.get('/assignments', async(req,res)=> {
 		if(sess.username=="admin")
 		{ // if admin, show unfinished assignments
 			const ass = await Assignment.find({
-				comment: {$ne: "Approved."}})	//ne = not equal
+				comment: {$ne: "Approved."}
+				})	//ne = not equal
 			
 			res.render('assignments_admin.hbs', {
 				assignment:ass,
@@ -1061,7 +1065,7 @@ app.get('/assignments', async(req,res)=> {
 		}
 		else{
 			const ass = await Assignment.find({
-				assigned_to: sess.username,
+				//assigned_to: sess.username,
 				comment: {$ne: "Approved."}})	//ne = not equal
 			
 			res.render('assignments.hbs', {

@@ -12,14 +12,13 @@
 	<script>
 		function openNav() {
 			if(document.getElementById("sidebar").style.width=="0%")
-			{			
+			{
 				document.getElementById("sidebar").style.width = "110%";
 				document.getElementById("bottom-button").style.width = "110%";
 			}
 			else{
 				document.getElementById("sidebar").style.width = "0%";
 				document.getElementById("bottom-button").style.width = "0%";
-
 			}
 		}
 	</script>
@@ -100,20 +99,36 @@
                 </tr>
 
 				  -->
-				  
-                  {{#each assignment}}
-						<tr>
-							<td>{{this.ref_id}}</td>
-							<td>{{this.created_at}}</td>
-							<td>{{this.location}}</td>
-							<td>
-								<div class="main-assignments-status-btns">
-									<a href="/viewAssignment/0/{{ref_id}}">Edit Assignment</a>
-								</div>
-							</td>
-							<td><p class="comment-text left-align">{{this.comment}}</p></td>
-						</tr>
-                  {{/each}}
+				<!-- {{#if (eq assigned_to "")}} -->
+					<!-- {{#each assignment}} -->
+						<!-- <tr> -->
+							<!-- <td>{{this.ref_id}}</td> -->
+							<!-- <td>{{this.created_at}}</td> -->
+							<!-- <td>{{this.location}}</td> -->
+							<!-- <td> -->
+								<!-- <div class="main-assignments-status-btns"> -->
+									<!-- <a href="/acceptAssignment/{{ref_id}}">Accept</a> -->
+								<!-- </div> -->
+							<!-- </td> -->
+							<!-- <td><p class="comment-text left-align">{{this.comment}}</p></td> -->
+						<!-- </tr> -->
+					<!-- {{/each}} -->
+				<!-- {{/if}} -->
+			
+				
+				{{#each assignment}}
+					<tr>
+						<td>{{this.ref_id}}</td>
+						<td>{{this.created_at}}</td>
+						<td>{{this.location}}</td>
+						<td>
+							<div class="main-assignments-status-btns">
+								<a href="/viewAssignment/0/{{ref_id}}">Edit Assignment</a>
+							</div>
+						</td>
+						<td><p class="comment-text left-align">{{this.comment}}</p></td>
+					</tr>
+				{{/each}}
 
                 </table>
             </div>
