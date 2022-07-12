@@ -787,7 +787,8 @@ app.post('/submit-assignment', function(req,res) {
 	{
 		ref_id : req.body.ref_id,
 		client_f_name : req.body.client_f_name,
-		client_l_name : req.body.client_f_name,
+		
+		client_l_name : req.body.client_l_name,
 		loc_brgy : req.body.loc_brgy,
 		loc_city : req.body.loc_city,
 		loc_region : req.body.loc_region,
@@ -845,7 +846,7 @@ app.post('/submit-assignment', function(req,res) {
 		}
 	})
 	
-	res.redirect('/assignments_admin')
+	res.redirect('/assignments')
 
 	/*
 	res.redirect('/view/0/'+req.params.ref_id);
