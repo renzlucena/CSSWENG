@@ -191,7 +191,7 @@ app.get('/save-ass', async(req,res)=> {
 			//edit comment  to "Submitted."
 			// await Assignment.findOneAndUpdate({ref_id: req.params.ref_id},{comment: "Submitted."})
 			// sess.status = true
-			// res.redirect('/assignment')
+			// res.redirect('/assignments')
 			// ref_id: String,
 	// type_of_approach: String,
 	// client_f_name: String,
@@ -287,7 +287,7 @@ app.get('/submit-ass', async(req,res)=> {
 			//edit comment  to "Submitted."
 			await Assignment.findOneAndUpdate({ref_id: req.params.ref_id},{comment: "Submitted."})
 			sess.status = true
-			res.redirect('/assignment')
+			res.redirect('/assignments')
 		}
 		catch(err)
 		{
@@ -345,73 +345,103 @@ app.get('/admin-comment', async(req,res)=>{
 		res.redirect('/login-fail.html')
 	}
 })
-
-
-app.get('/viewAssignment', function(req,res){
-	res.redirect('/assignments')
-});
-
 //TODO make this functional, as in working if you click save
 app.get('/admin-add-assignment', function(req,res) {
-	viewAssignment.create(req.body, (error,post) =>
-	{
-		res.render('addAssignment.hbs', {
-				assignment : ass,
-				username: sess.username,
-				status: sess.status,
-				remember: sess.remember,
-				password: sess.password,
-				acct_id : sess.acct_id,
-				email   : sess.email,
-				fname   : sess.fname,
-				lName   : sess.lName,
-				appNum  : sess.appNum,
-				appExp : sess.appExp
-			});
-	})
+	sess = req.session
+	
+	res.render('addAssignment.hbs',{
+		username: sess.username,
+		password: sess.password,
+		status: sess.status,
+		remember: sess.remember,
+		acct_id: sess.acct_id,
+		email   : sess.email,
+		fname   : sess.fname,
+		lname   : sess.lname,
+		appNum  : sess.appNum,
+		appExp  : sess.appExp
+	});
+				
 });
-
-
 
 app.get('/view/0/:ref_id', async(req,res)=>{
 	sess = req.session
 	var ref_id = req.params.ref_id
-
-
-	console.log(req.params)
-	const ass = await Assignment.find({
-		assigned_to: sess.username,
-		ref_id: req.params.ref_id}).exec()
-	console.log(ass)
 	
 	if(sess.username)
 	{//TODO
 		if(sess.username == "admin")
 		{	//if admin, cannot edit, but can comment
-			// const ass = await Assignment.findOne({
-				// id : ref_id
-				// }).exec()
-			
+			const ass = await Assignment.findOne({
+				id : ref_id
+				}).exec()
+				
+				res.render('viewAssignment_0_admin.hbs',{
+					ref_id : ass.ref_id,
+					type_of_approach: ass.type_of_approach,
+					client_f_name : ass.client_f_name,
+					client_l_name : ass.client_l_name,
+					loc_brgy : ass.loc_brgy,
+					loc_city : ass.loc_city,
+					loc_region : ass.loc_region,
+					
+					property_images: ass.property_images,
+					lot_size: ass.lot_size,
+					trans_date: ass.trans_date,
+					purchase_price: ass.purchase_price,
+					listing_price: ass.listing_price,
+					terms_of_sale: ass.terms_of_sale,
+					corner: ass.corner,
+					shape: ass.shape,
+					topo: ass.topo,
+					area: ass.area,
+					completed_on: ass.completed_on,
+					comment: ass.comment,
+					assigned_to: ass.assigned_to,
+					created_at: ass.created_at,
+					
+					username: sess.username,
+					password: sess.password,
+					status: sess.status,
+					remember: sess.remember,
+					acct_id: sess.acct_id,
+					email   : sess.email,
+					fname   : sess.fname,
+					lname   : sess.lname,
+					appNum  : sess.appNum,
+					appExp  : sess.appExp
+				});
+				
 		}
 		else// if (sess.username != "admin")
 		{
+		
 			const ass = await Assignment.findOne({
-				assigned_to: sess.username,
-				ref_id: req.params.ref_id}).exec()
-			
-			/*
-			console.log(sess.username+" -> " +ass)
-			console.log(ass.ref_id)
-			*/
-			
-			//this is the main property page
+				ref_id : ref_id
+				}).exec()
 			res.render('viewAssignment_0.hbs',{
 				ref_id : ass.ref_id,
+				type_of_approach: ass.type_of_approach,
 				client_f_name : ass.client_f_name,
 				client_l_name : ass.client_l_name,
 				loc_brgy : ass.loc_brgy,
 				loc_city : ass.loc_city,
 				loc_region : ass.loc_region,
+				
+				property_images: ass.property_images,
+				lot_size: ass.lot_size,
+				trans_date: ass.trans_date,
+				purchase_price: ass.purchase_price,
+				listing_price: ass.listing_price,
+				terms_of_sale: ass.terms_of_sale,
+				corner: ass.corner,
+				shape: ass.shape,
+				topo: ass.topo,
+				area: ass.area,
+				completed_on: ass.completed_on,
+				comment: ass.comment,
+				assigned_to: ass.assigned_to,
+				created_at: ass.created_at,
 				
 				username: sess.username,
 				password: sess.password,
@@ -438,41 +468,33 @@ app.get('/view/1/:ref_id', async(req,res)=>{
 	sess = req.session
 	var ref_id = req.params.ref_id
 
-
-	console.log(req.params)
-	const ass = await Assignment.find({
-		assigned_to: sess.username,
-		ref_id: req.params.ref_id}).exec()
-	console.log(ass)
-	
 	if(sess.username)
-	{//TODO
+	{
 		if(sess.username == "admin")
 		{	//if admin, cannot edit, but can comment
-			// const ass = await Assignment.findOne({
-				// id : ref_id
-				// }).exec()
-			
-		}
-		else// if (sess.username != "admin")
-		{
 			const ass = await Assignment.findOne({
-				assigned_to: sess.username,
-				ref_id: req.params.ref_id}).exec()
+				ref_id: req.params.ref_id
+			}).exec()
 			
-			/*
-			console.log(sess.username+" -> " +ass)
-			console.log(ass.ref_id)
-			*/
-			
-			//this is the main property page
-			res.render('viewAssignment_1.hbs',{
+			res.render('viewAssignment_1_admin.hbs',{
 				ref_id : ass.ref_id,
+				type_of_approach: ass.type_of_approach,
 				client_f_name : ass.client_f_name,
 				client_l_name : ass.client_l_name,
 				loc_brgy : ass.loc_brgy,
 				loc_city : ass.loc_city,
 				loc_region : ass.loc_region,
+				
+				lot_size: ass.comparative2.lot_size,
+				trans_date: ass.comparative2.trans_date,
+				purchase_price: ass.comparative2.purchase_price,
+				listing_price: ass.comparative2.listing_price,
+				terms_of_sale: ass.comparative2.terms_of_sale,
+				corner: ass.comparative2.corner,
+				shape: ass.comparative2.shape,
+				topo: ass.comparative2.topo,
+				area: ass.comparative2.area,
+				comment: ass.comment,
 				
 				username: sess.username,
 				password: sess.password,
@@ -484,7 +506,48 @@ app.get('/view/1/:ref_id', async(req,res)=>{
 				lname   : sess.lname,
 				appNum  : sess.appNum,
 				appExp  : sess.appExp
-			});
+				
+			}).exec()
+		}
+		else// if (sess.username != "admin")
+		{
+			const ass = await Assignment.findOne({
+				assigned_to: sess.username})
+			.exec()
+		
+			res.render('viewAssignment_1.hbs',{
+				ref_id : ass.ref_id,
+				type_of_approach: ass.type_of_approach,
+				client_f_name : ass.client_f_name,
+				client_l_name : ass.client_l_name,
+				loc_brgy : ass.loc_brgy,
+				loc_city : ass.loc_city,
+				loc_region : ass.loc_region,
+				
+				property_images: ass.comparative1.property_images,
+				lot_size: ass.comparative1.lot_size,
+				trans_date: ass.comparative1.trans_date,
+				purchase_price: ass.comparative1.purchase_price,
+				listing_price: ass.comparative1.listing_price,
+				terms_of_sale: ass.comparative1.terms_of_sale,
+				corner: ass.comparative1.corner,
+				shape: ass.comparative1.shape,
+				topo: ass.comparative1.topo,
+				area: ass.comparative1.area,
+				comment: ass.comment,
+				
+				username: sess.username,
+				password: sess.password,
+				status: sess.status,
+				remember: sess.remember,
+				acct_id: sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lname   : sess.lname,
+				appNum  : sess.appNum,
+				appExp  : sess.appExp
+				
+			}).exec()
 		}
 	}
 	else
@@ -499,41 +562,41 @@ app.get('/view/2/:ref_id', async(req,res)=>{
 	sess = req.session
 	var ref_id = req.params.ref_id
 
-
+/*
 	console.log(req.params)
 	const ass = await Assignment.find({
 		assigned_to: sess.username,
 		ref_id: req.params.ref_id}).exec()
 	console.log(ass)
-	
+	*/
 	if(sess.username)
 	{//TODO
 		if(sess.username == "admin")
-		{	//if admin, cannot edit, but can comment
-			// const ass = await Assignment.findOne({
-				// id : ref_id
-				// }).exec()
-			
-		}
-		else// if (sess.username != "admin")
-		{
+		{	
 			const ass = await Assignment.findOne({
-				assigned_to: sess.username,
-				ref_id: req.params.ref_id}).exec()
-			
-			/*
-			console.log(sess.username+" -> " +ass)
-			console.log(ass.ref_id)
-			*/
-			
-			//this is the main property page
-			res.render('viewAssignment_2.hbs',{
+				ref_id : ref_id
+				}).exec()
+				
+			res.render('viewAssignment_2_admin.hbs',{
 				ref_id : ass.ref_id,
+				type_of_approach: ass.type_of_approach,
 				client_f_name : ass.client_f_name,
 				client_l_name : ass.client_l_name,
 				loc_brgy : ass.loc_brgy,
 				loc_city : ass.loc_city,
 				loc_region : ass.loc_region,
+				
+				property_images: ass.comparative2.property_images,
+				lot_size: ass.comparative2.lot_size,
+				trans_date: ass.comparative2.trans_date,
+				purchase_price: ass.comparative2.purchase_price,
+				listing_price: ass.comparative2.listing_price,
+				terms_of_sale: ass.comparative2.terms_of_sale,
+				corner: ass.comparative2.corner,
+				shape: ass.comparative2.shape,
+				topo: ass.comparative2.topo,
+				area: ass.comparative2.area,
+				comment: ass.comment,
 				
 				username: sess.username,
 				password: sess.password,
@@ -545,8 +608,51 @@ app.get('/view/2/:ref_id', async(req,res)=>{
 				lname   : sess.lname,
 				appNum  : sess.appNum,
 				appExp  : sess.appExp
-			});
+				
+			}).exec()
 		}
+		else
+		{
+		
+			const ass = await Assignment.findOne({
+				ref_id : ref_id
+			}).exec()
+	
+			res.render('viewAssignment_2.hbs',{
+				ref_id : ass.ref_id,
+				type_of_approach: ass.type_of_approach,
+				client_f_name : ass.client_f_name,
+				client_l_name : ass.client_l_name,
+				loc_brgy : ass.loc_brgy,
+				loc_city : ass.loc_city,
+				loc_region : ass.loc_region,
+				
+				property_images: ass.comparative2.property_images,
+				lot_size: ass.comparative2.lot_size,
+				trans_date: ass.comparative2.trans_date,
+				purchase_price: ass.comparative2.purchase_price,
+				listing_price: ass.comparative2.listing_price,
+				terms_of_sale: ass.comparative2.terms_of_sale,
+				corner: ass.comparative2.corner,
+				shape: ass.comparative2.shape,
+				topo: ass.comparative2.topo,
+				area: ass.comparative2.area,
+				comment: ass.comment,
+				
+				username: sess.username,
+				password: sess.password,
+				status: sess.status,
+				remember: sess.remember,
+				acct_id: sess.acct_id,
+				email   : sess.email,
+				fname   : sess.fname,
+				lname   : sess.lname,
+				appNum  : sess.appNum,
+				appExp  : sess.appExp
+				
+			}).exec()
+		}
+		
 	}
 	else
 	{		
@@ -568,10 +674,11 @@ app.get('/viewAssignment/0/:ref_id', async(req,res)=>{
 		assigned_to: sess.username,
 		ref_id: req.params.ref_id}).exec()
 	console.log(ass)
-	*/
 	
+	*/
 	if(sess.username)
 	{
+		/*
 		if(sess.username == "admin")
 		{	//if admin, cannot edit, but can comment
 			// const ass = await Assignment.findOne({
@@ -604,10 +711,10 @@ app.get('/viewAssignment/0/:ref_id', async(req,res)=>{
 		}
 		else// if (sess.username != "admin")
 		{
-
+*/
 			
 			res.redirect('/view/0/'+req.params.ref_id);
-		}
+		/*}*/
 	}
 	else
 	{		
@@ -632,67 +739,8 @@ app.get('/viewAssignment/1/:ref_id', async(req,res)=>{
 	
 	if(sess.username)
 	{
-		if(sess.username == "admin")
-		{	//if admin, cannot edit, but can comment
-			// const ass = await Assignment.findOne({
-				// id : ref_id
-				// }).exec()
-				
-			console.log(ass)
+		res.redirect('/view/1/'+req.params.ref_id);
 			
-			res.render('/viewAssignment_admin.hbs', {
-				ref_id : id,
-				client_f_name : ass.client_f_name,
-				client_l_name : ass.client_l_name,
-				loc_brgy : ass.loc_brgy,
-				loc_city : ass.loc_city,
-				loc_region : ass.loc_region,
-				
-				username: sess.username,
-				status: sess.status,
-				remember: sess.remember,
-				password: sess.password,
-				acct_id : sess.acct_id,
-				email   : sess.email,
-				fname   : sess.fname,
-				lName   : sess.lName,
-				appNum  : sess.appNum,
-				appExp : sess.appExp
-			});
-			
-			// sess.currentAss = ref_id
-		}
-		else// if (sess.username != "admin")
-		{
-			/*
-			const ass = await Assignment.findOne({
-				assigned_to: sess.username,
-				ref_id: req.params.ref_id}).exec()
-			*/
-			/*
-			console.log(sess.username+" -> " +ass)
-			console.log(ass.ref_id)
-			*/
-			
-			res.redirect('/view/1/'+req.params.ref_id);
-			/*
-			res.render('/view/'+ass.ref_id,
-			{
-				assignment = ass
-				
-				username: sess.username,
-				password: sess.password,
-				status: sess.status,
-				remember: sess.remember,
-				acct_id: sess.acct_id,
-				email   : sess.email,
-				fname   : sess.fname,
-				lname   : sess.lname,
-				appNum  : sess.appNum,
-				appExp  : sess.appExp
-			});
-			*/
-		}
 	}
 	else
 	{		
@@ -706,82 +754,89 @@ app.get('/viewAssignment/2/:ref_id', async(req,res)=>{
 	sess = req.session
 	var ref_id = req.params.ref_id
 
-/*
-	console.log(req.params)
-	const ass = await Assignment.find({
-		assigned_to: sess.username,
-		ref_id: req.params.ref_id}).exec()
-	console.log(ass)
-	*/
 	
 	if(sess.username)
 	{
-		if(sess.username == "admin")
-		{	//if admin, cannot edit, but can comment
-			// const ass = await Assignment.findOne({
-				// id : ref_id
-				// }).exec()
-				
-			console.log(ass)
-			
-			res.render('/viewAssignment_admin.hbs', {
-				ref_id : id,
-				client_f_name : ass.client_f_name,
-				client_l_name : ass.client_l_name,
-				loc_brgy : ass.loc_brgy,
-				loc_city : ass.loc_city,
-				loc_region : ass.loc_region,
-				
-				username: sess.username,
-				status: sess.status,
-				remember: sess.remember,
-				password: sess.password,
-				acct_id : sess.acct_id,
-				email   : sess.email,
-				fname   : sess.fname,
-				lName   : sess.lName,
-				appNum  : sess.appNum,
-				appExp : sess.appExp
-			});
-			
-			// sess.currentAss = ref_id
-		}
-		else// if (sess.username != "admin")
-		{
-			/*
-			const ass = await Assignment.findOne({
-				assigned_to: sess.username,
-				ref_id: req.params.ref_id}).exec()
-			*/
-			/*
-			console.log(sess.username+" -> " +ass)
-			console.log(ass.ref_id)
-			*/
-			
-			res.redirect('/view/2/'+req.params.ref_id);
-			/*
-			res.render('/view/'+ass.ref_id,
-			{
-				assignment = ass
-				
-				username: sess.username,
-				password: sess.password,
-				status: sess.status,
-				remember: sess.remember,
-				acct_id: sess.acct_id,
-				email   : sess.email,
-				fname   : sess.fname,
-				lname   : sess.lname,
-				appNum  : sess.appNum,
-				appExp  : sess.appExp
-			});
-			*/
-		}
+		res.redirect('/view/2/'+req.params.ref_id);
 	}
 	else
 	{		
 		res.redirect('/login-fail.html')
 	}
+});
+
+
+
+
+//TODO make this functional, as in working if you click save
+app.post('/submit-assignment', function(req,res) {
+	sess = req.session
+	
+	var ref_id = req.body.ref_id
+	
+	Assignment.create(
+	{
+		ref_id : req.body.ref_id,
+		client_f_name : req.body.client_f_name,
+		client_l_name : req.body.client_f_name,
+		loc_brgy : req.body.loc_brgy,
+		loc_city : req.body.loc_city,
+		loc_region : req.body.loc_region,
+	
+		//add empty comparative
+		comparative1 : {
+			lot_size: 0,
+			listing_price: 0,
+			terms_of_sale: "",
+			loc_city: "",
+			loc_region: "",
+			loc_brgy: "",
+			corner: 0,
+			school: 0,
+			hospital: 0,
+			mall: 0,
+			shape: "",
+			topo: "",
+			area: 0
+		},
+
+		//add empty comparative
+		comparative2 : {
+			lot_size: 0,
+			listing_price: 0,
+			terms_of_sale: "",
+			loc_city: "",
+			loc_region: "",
+			loc_brgy: "",
+			corner: 0,
+			school: 0,
+			hospital: 0,
+			mall: 0,
+			shape: "",
+			topo: "",
+			area: 0
+		}
+	})
+	
+	res.redirect('/assignments_admin')
+
+	/*
+	res.redirect('/view/0/'+req.params.ref_id);
+	{
+		username: sess.username,
+		password: sess.password,
+		status: sess.status,
+		email   : sess.email,
+		fname   : sess.fname,
+		lname   : sess.lname,
+
+		ref_id : req.body.ref_id
+		client_f_name : req.body.client_f_name
+		client_l_name : req.body.client_f_name
+		loc_brgy : req.body.loc_brgy
+		loc_city : req.body.loc_city
+		loc_region : req.body.loc_region
+	})*/
 });
 
 
@@ -1057,6 +1112,9 @@ app.get('/terms', function(req,res){
 var server = app.listen(3000,function(){
 });
 
+app.get('/viewAssignment', function(req,res){
+	res.redirect('/assignments')
+});
 
 
 /*		THIS IS THE PDF THING	

@@ -22,6 +22,77 @@
 				document.getElementById("bottom-button").style.width = "0%";
 			}
 		}
+		
+		function checkForm()
+        {
+            var valid = true;
+            
+            var ref_id = document.getElementById("ref_id");
+            var client_f_name = document.getElementById("client_f_name");
+            var client_l_name = document.getElementById("client_l_name");
+            var loc_city = document.getElementById("loc_city");
+            var loc_region = document.getElementById("loc_region");
+            var loc_brgy = document.getElementById("loc_brgy");
+			
+            //if either field is empty, do not proceed.
+            if (ref_id.value == "")
+            {
+                ref_id.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                ref_id.style.backgroundColor = "white";
+            }
+            if (client_f_name.value == "")
+            {
+                client_f_name.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                client_f_name.style.backgroundColor = "white";
+            }
+            return valid;
+			
+            if (client_l_name.value == "")
+            {
+                client_l_name.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                client_l_name.style.backgroundColor = "white";
+            }
+            return valid;
+			
+            if (loc_city.value == "")
+            {
+                loc_city.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                loc_city.style.backgroundColor = "white";
+            }
+            return valid;
+			
+            if (loc_region.value == "")
+            {
+                loc_region.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                loc_region.style.backgroundColor = "white";
+            }
+            return valid;
+        
+			if (loc_brgy.value == "")
+            {
+                loc_brgy.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                loc_brgy.style.backgroundColor = "white";
+            }
+            return valid;
+        }
 	</script>
 
 </head>
@@ -68,11 +139,7 @@
                     <table>
                         <tr>
                             <th><label for="ref_id">Reference ID</label></th>
-                            <td><input name="ref_id" type="text"></td>
-                        </tr>
-                        <tr>
-                            <th><label for="type_of_approach">Type of Approach</label></th>
-                            <td><input name="type_of_approach" type="text"></td>
+                            <td><input name="ref_id" type="number"></td>
                         </tr>
                         <tr>
                             <th><label for="client_f_name">Client First Name</label></th>
@@ -82,52 +149,29 @@
                             <th><label for="client_l_name">Client Last Name</label></th>
                             <td><input name="client_l_name" type="text"></td>
                         </tr>
-                        <tr>
-                            <th><label for="property_images">Property Images</label></th>
-                            <td><input name="property_images" type="text"></td>
-                        </tr>    
-                        <tr>
-                            <th><label for="lot_size">Lot Size</label></th>
-                            <td><input name="lot_size" type="text"></td>
+						<tr>
+                            <th></th>
+                            <th>Lot Location</th>
+                        </tr>      
+						<tr>
+                            <th><label for="lot_brgy">Lot Baranggay</label></th>
+                            <td><input name="lot_brgy" type="text"></td>
+                        </tr>  
+						<tr>
+                            <th><label for="lot_city">Lot City</label></th>
+                            <td><input name="lot_city" type="text"></td>
                         </tr>
+						
                         <tr>
-                            <th><label for="trans_date">Transaction Date</label></th>
-                            <td><input name="trans_date" type="date"></td>
-                        </tr>
-                        <tr>
-                            <th><label for="purchase_price">Purchase Price</label></th>
-                            <td><input name="purchase_price" type="text"></td>
-                        </tr>
-                        <tr>
-                            <th><label for="type_of_approach">Listing Price</label></th>
-                            <td><input name="listing_price" type="text"></td>
-                        </tr>
-                        <tr>
-                            <th><label for="terms_of_sale">Terms of Sale</label></th>
-                            <td><select name="terms_of_sale">
-                                <option value="cash">Cash</option>
-                                <option value="installment">Installment</option>
-                                <option value="discount">Discounted</option>
-                                <option value="unknown">Unknown</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <th><label for="location">Location Type</label></th>
-                            <td><select name="terms_of_sale">
-                                <option value="inferior">Inferior</option>
-                                <option value="equal">Equal</option>
-                                <option value="superior">Superior</option>
-                            </select></td>
-                            <th><label>Is a Corner Lot?</label></th>
-                            <td><input type="checkbox"></td>
+                            <th><label for="lot_region">Lot Region</label></th>
+                            <td><input name="lot_region" type="text"></td>
                         </tr>
                     </table>    
                 </div>
                     
-            <div id="main-table-bottom">
-                <button type = "submit" formaction="/admin-add-assignment" name="save_ass">Save Details</button>
-                <button type="submit" formaction="/admin-process" name="send_ass">Send For Processing</button>
-            </div>
+				<div id="main-table-bottom">
+					<button type = "submit" formaction="/submit-assignment" name="save_ass" onsubmit="return checkForm()">Add Assignment</button>
+				</div>
             </form>
         </div>
     </div>
