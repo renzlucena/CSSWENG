@@ -329,6 +329,32 @@ app.get('/admin-approve', async(req,res)=>{
 })
 
 //this submits the comment and updates the assignment
+app.get('/acceptAssignment/:ref_id', async(req,res)=>{
+	sess = req.session;
+	if(sess.username)
+	{
+		try{
+			// await Assignment.findOneAndUpdate({res: sess.username},{comment: true})
+			// const ass = await Assignment.findOneAndUpdate({res: req.params.ref_id},{comment: "test"})
+			// req.params.ref_id
+			
+			const ass = await Assignment.findOneAndUpdate(
+				{ref_id: req.query.ref_id},
+				{assigned_to: sess.username + req.assigned_to
+				})
+			
+			res.redirect('/history')
+		}
+		catch(err){
+			console.log(err)
+		}
+	}
+	else{
+		res.redirect('/login-fail.html')
+	}
+})
+
+//this submits the comment and updates the assignment
 app.get('/admin-comment', async(req,res)=>{
 	sess = req.session;
 	if(sess.username)
