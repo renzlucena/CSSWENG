@@ -12,7 +12,7 @@
 	<script>
 		function openNav() {
 			if(document.getElementById("sidebar").style.width=="0%")
-			{			
+			{
 				document.getElementById("sidebar").style.width = "110%";
 				document.getElementById("bottom-button").style.width = "110%";
 			}
@@ -39,11 +39,11 @@
             <div class="sidebar-assignments-btn">
                 <a  href="/assignments">Assignments</a>
             </div>
-			
+
 			<div class="sidebar-add-btn">
                 <a  href="addAssignment.hbs">Add New Assignment</a>
             </div>
-			
+
             <div class="sidebar-history-btn">
                 <a  href="/history">History</a>
             </div>
@@ -55,7 +55,16 @@
 		<div class="openbtn" >
 			<a href="#" onclick="openNav()">☰</a>
 		</div>
-		
+
+
+    <div class="pager">
+      <a href="history_0_admin">Comparable 0</a>
+      <a href="history_1_admin">Comparable I</a>
+      <a href="history_2_admin">Comparable II</a>
+    </div>
+          <form class="history-form" action = "/history" method = "get" onsubmit="return checkForm()">
+              <div class="main-table">
+
         <div class="main">
             <div class="main-header">
                 <h1>History</h1>
@@ -72,7 +81,7 @@
 						<th>ACTION</th>
 						<th><p style="width:400" class="table-long-text">ASSIGNED AGENT</p></th>
 					</tr>
-					  
+
 					{{#each assignment}}
 					<tr>
 						<td>{{this.ref_id}}</td>
