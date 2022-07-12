@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <html>
 <head>
-    <link rel = "stylesheet" href="agent_add_view.css">
+    <link rel = "stylesheet" href="agent_profile.css">
     <title>Create Assignment</title>
     
     
@@ -112,7 +112,7 @@
                 <a  href="/assignments">Assignments</a>
             </div>
 			
-			<div class="sidebar-add-btn">
+			<div class="sidebar-profile-btn">
                 <a  href="/admin-add-assignment">Add New Assignment</a>
             </div>
 			
@@ -139,15 +139,15 @@
                     <table>
                         <tr>
                             <th><label for="ref_id">Reference ID</label></th>
-                            <td><input name="ref_id" type="number"></td>
+                            <td><input name="ref_id" id="ref_id" type="number"></td>
                         </tr>
                         <tr>
                             <th><label for="client_f_name">Client First Name</label></th>
-                            <td><input name="client_f_name" type="text"></td>
+                            <td><input name="client_f_name" id="client_f_name" type="text"></td>
                         </tr>
                         <tr>
                             <th><label for="client_l_name">Client Last Name</label></th>
-                            <td><input name="client_l_name" type="text"></td>
+                            <td><input name="client_l_name" id="client_l_name" type="text"></td>
                         </tr>
 						<tr>
                             <th></th>
@@ -155,16 +155,16 @@
                         </tr>      
 						<tr>
                             <th><label for="lot_brgy">Lot Baranggay</label></th>
-                            <td><input name="lot_brgy" type="text"></td>
+                            <td><input name="lot_brgy" id="lot_brgy" type="text"></td>
                         </tr>  
 						<tr>
                             <th><label for="lot_city">Lot City</label></th>
-                            <td><input name="lot_city" type="text"></td>
+                            <td><input name="lot_city" id="lot_city" type="text"></td>
                         </tr>
 						
                         <tr>
                             <th><label for="lot_region">Lot Region</label></th>
-                            <td><input name="lot_region" type="text"></td>
+                            <td><input name="lot_region" id="lot_region" type="text"></td>
                         </tr>
                     </table>    
                 </div>

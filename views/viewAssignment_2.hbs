@@ -95,14 +95,9 @@
                             <td><input name="client_f_name" type="text" value="{{this.client_l_name}}, {{this.client_f_name}}" readonly></td>
                         </tr>
                         <tr>
-                            <th><label for="client_l_name">Lot Location</label></th>
-                            <td><input name="client_l_name" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
+                            <th><label for="lot_loc">Lot Location</label></th>
+                            <td><input name="lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
                         </tr>      
-						<tr>
-                            <th><label for="client_l_name">Lot Location</label></th>
-                            <td><input name="client_l_name" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
-                        </tr>
-						
 						<tr>
                             <th><label for="property_type" readonly >Property Type</label></th>
 							<td><input name="property_type" type="text" value="{{this.property_type}}" readonly></td>
@@ -173,19 +168,19 @@
                             </select></td>
 						<tr>
                             <th><label>Is a Corner Lot?</label></th>
-                            <td><input name="isCornerLot" type="checkbox"></td>
+                            <td><input name="corner" type="checkbox" readonly></td>
                         </tr>						
 						<tr>
                             <<th><label>Has nearby Hospital(s)?</label></th>
-                            <td><input name="isNearHospital" type="checkbox"></td>
+                            <td><input name="hospital" type="checkbox" readonly></td>
                         </tr>			
 						<tr>
 							<th><label>Has nearby School(s)?</label></th>
-                            <td><input name="isNearSchool" type="checkbox"></td>
+                            <td><input name="school" type="checkbox" readonly></td>
                         </tr>
 						<tr>
                             <th><label>Has nearby Shop/Mall(s)?</label></th>
-                            <td><input name="isNearMall" type="checkbox"></td>
+                            <td><input name="mall" type="checkbox" readonly></td>
 						</tr>
                     </table>    
                 </div>

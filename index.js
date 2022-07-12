@@ -132,7 +132,6 @@ app.get('/login', async(req,res)=> {
 	}
 });
 
-
 app.get('/history', async(req,res)=>{
 
 	sess = req.session
@@ -140,7 +139,10 @@ app.get('/history', async(req,res)=>{
 	{
 		if(sess.username == "admin")
 		{	//show all if admin
-			const ass = await Assignment.find({})
+			const ass = await Assignment.find({
+				comment: "Approved."
+			})
+			
 			res.render('history_admin.hbs', {
 				assignment : ass,
 				username: sess.username,
@@ -381,295 +383,298 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 	{//TODO
 		if(sess.username == "admin")
 		{	//if admin, cannot edit, but can comment
-			const ass = await Assignment.findOne({
-				id : ref_id
-				}).exec()
-				
-				res.render('viewAssignment_0_admin.hbs',{
-					ref_id : ass.ref_id,
-					type_of_approach: ass.type_of_approach,
-					client_f_name : ass.client_f_name,
-					client_l_name : ass.client_l_name,
-					loc_brgy : ass.loc_brgy,
-					loc_city : ass.loc_city,
-					loc_region : ass.loc_region,
+			try{
+				const ass = await Assignment.findOne({
+					id : ref_id
+					}).exec()
 					
-					property_images: ass.property_images,
-					lot_size: ass.lot_size,
-					trans_date: ass.trans_date,
-					purchase_price: ass.purchase_price,
-					listing_price: ass.listing_price,
-					terms_of_sale: ass.terms_of_sale,
-					corner: ass.corner,
-					shape: ass.shape,
-					topo: ass.topo,
-					area: ass.area,
-					completed_on: ass.completed_on,
-					comment: ass.comment,
-					assigned_to: ass.assigned_to,
-					created_at: ass.created_at,
 					
-					username: sess.username,
-					password: sess.password,
-					status: sess.status,
-					remember: sess.remember,
-					acct_id: sess.acct_id,
-					email   : sess.email,
-					fname   : sess.fname,
-					lname   : sess.lname,
-					appNum  : sess.appNum,
-					appExp  : sess.appExp
-				});
-				
+							//	in history
+					if(ass.comment == "Approved.")
+					{
+						res.render('history_0_admin.hbs',{
+							ref_id : ass.ref_id,
+							type_of_approach: ass.type_of_approach,
+							client_f_name : ass.client_f_name,
+							client_l_name : ass.client_l_name,
+							loc_brgy : ass.loc_brgy,
+							loc_city : ass.loc_city,
+							loc_region : ass.loc_region,
+							
+							property_images: ass.property_images,
+							lot_size: ass.lot_size,
+							trans_date: ass.trans_date,
+							purchase_price: ass.purchase_price,
+							listing_price: ass.listing_price,
+							terms_of_sale: ass.terms_of_sale,
+							corner: ass.corner,
+							shape: ass.shape,
+							topo: ass.topo,
+							area: ass.area,
+							completed_on: ass.completed_on,
+							comment: ass.comment,
+							assigned_to: ass.assigned_to,
+							created_at: ass.created_at,
+							
+							//comparable 1
+							lot_size1: ass.comparative1.lot_size,
+							purchase_price1: ass.comparative1.purchase_price,
+							listing_price1: ass.comparative1.listing_price,
+							terms_of_sale1: ass.comparative1.terms_of_sale,
+							corner1: ass.comparative1.corner,
+							school1: ass.comparative1.school,
+							mall1: ass.comparative1.mall,
+							hospital1: ass.comparative1.hospital,
+							shape1: ass.comparative1.shape,
+							topo1: ass.comparative1.topo,
+							area1: ass.comparative1.area,
+							
+							//comparable 2
+							lot_size2: ass.comparative2.lot_size,
+							purchase_price2: ass.comparative2.purchase_price,
+							listing_price2: ass.comparative2.listing_price,
+							terms_of_sale2: ass.comparative2.terms_of_sale,
+							corner2: ass.comparative2.corner,
+							school2: ass.comparative2.school,
+							mall2: ass.comparative2.mall,
+							hospital2: ass.comparative2.hospital,
+							shape2: ass.comparative2.shape,
+							topo2: ass.comparative2.topo,
+							area2: ass.comparative2.area,
+							
+							username: sess.username,
+							password: sess.password,
+							status: sess.status,
+							remember: sess.remember,
+							acct_id: sess.acct_id,
+							email   : sess.email,
+							fname   : sess.fname,
+							lname   : sess.lname,
+							appNum  : sess.appNum,
+							appExp  : sess.appExp
+						});
+				}
+				else{	//	in assignemnts
+					
+					res.render('viewAssignment_0_admin.hbs',{
+						ref_id : ass.ref_id,
+						type_of_approach: ass.type_of_approach,
+						client_f_name : ass.client_f_name,
+						client_l_name : ass.client_l_name,
+						loc_brgy : ass.loc_brgy,
+						loc_city : ass.loc_city,
+						loc_region : ass.loc_region,
+						
+						property_images: ass.property_images,
+						lot_size: ass.lot_size,
+						trans_date: ass.trans_date,
+						purchase_price: ass.purchase_price,
+						listing_price: ass.listing_price,
+						terms_of_sale: ass.terms_of_sale,
+						corner: ass.corner,
+						shape: ass.shape,
+						topo: ass.topo,
+						area: ass.area,
+						completed_on: ass.completed_on,
+						comment: ass.comment,
+						assigned_to: ass.assigned_to,
+						created_at: ass.created_at,
+						
+						//comparable 1
+						lot_size1: ass.comparative1.lot_size,
+						purchase_price1: ass.comparative1.purchase_price,
+						listing_price1: ass.comparative1.listing_price,
+						terms_of_sale1: ass.comparative1.terms_of_sale,
+						corner1: ass.comparative1.corner,
+						school1: ass.comparative1.school,
+						mall1: ass.comparative1.mall,
+						hospital1: ass.comparative1.hospital,
+						shape1: ass.comparative1.shape,
+						topo1: ass.comparative1.topo,
+						area1: ass.comparative1.area,
+						
+						//comparable 2
+						lot_size2: ass.comparative2.lot_size,
+						purchase_price2: ass.comparative2.purchase_price,
+						listing_price2: ass.comparative2.listing_price,
+						terms_of_sale2: ass.comparative2.terms_of_sale,
+						corner2: ass.comparative2.corner,
+						school2: ass.comparative2.school,
+						mall2: ass.comparative2.mall,
+						hospital2: ass.comparative2.hospital,
+						shape2: ass.comparative2.shape,
+						topo2: ass.comparative2.topo,
+						area2: ass.comparative2.area,
+						
+						username: sess.username,
+						password: sess.password,
+						status: sess.status,
+						remember: sess.remember,
+						acct_id: sess.acct_id,
+						email   : sess.email,
+						fname   : sess.fname,
+						lname   : sess.lname,
+						appNum  : sess.appNum,
+						appExp  : sess.appExp
+					});
+				}
+			}
+			catch(err)
+			{
+				console.log(err)
+			}
 		}
 		else// if (sess.username != "admin")
 		{
+			try{
 		
-			const ass = await Assignment.findOne({
-				ref_id : ref_id
-				}).exec()
-			res.render('viewAssignment_0.hbs',{
-				ref_id : ass.ref_id,
-				type_of_approach: ass.type_of_approach,
-				client_f_name : ass.client_f_name,
-				client_l_name : ass.client_l_name,
-				loc_brgy : ass.loc_brgy,
-				loc_city : ass.loc_city,
-				loc_region : ass.loc_region,
-				
-				property_images: ass.property_images,
-				lot_size: ass.lot_size,
-				trans_date: ass.trans_date,
-				purchase_price: ass.purchase_price,
-				listing_price: ass.listing_price,
-				terms_of_sale: ass.terms_of_sale,
-				corner: ass.corner,
-				shape: ass.shape,
-				topo: ass.topo,
-				area: ass.area,
-				completed_on: ass.completed_on,
-				comment: ass.comment,
-				assigned_to: ass.assigned_to,
-				created_at: ass.created_at,
-				
-				username: sess.username,
-				password: sess.password,
-				status: sess.status,
-				remember: sess.remember,
-				acct_id: sess.acct_id,
-				email   : sess.email,
-				fname   : sess.fname,
-				lname   : sess.lname,
-				appNum  : sess.appNum,
-				appExp  : sess.appExp
-			});
+				const ass = await Assignment.findOne({
+					ref_id : ref_id
+					}).exec()
+						//	in history
+				if(ass.comment == "Approved.")
+				{
+					res.render('history_0.hbs',{
+						ref_id : ass.ref_id,
+						type_of_approach: ass.type_of_approach,
+						client_f_name : ass.client_f_name,
+						client_l_name : ass.client_l_name,
+						loc_brgy : ass.loc_brgy,
+						loc_city : ass.loc_city,
+						loc_region : ass.loc_region,
+						
+						property_images: ass.property_images,
+						lot_size: ass.lot_size,
+						trans_date: ass.trans_date,
+						purchase_price: ass.purchase_price,
+						listing_price: ass.listing_price,
+						terms_of_sale: ass.terms_of_sale,
+						corner: ass.corner,
+						shape: ass.shape,
+						topo: ass.topo,
+						area: ass.area,
+						completed_on: ass.completed_on,
+						comment: ass.comment,
+						assigned_to: ass.assigned_to,
+						created_at: ass.created_at,
+						
+						//comparable 1
+						lot_size1: ass.comparative1.lot_size,
+						purchase_price1: ass.comparative1.purchase_price,
+						listing_price1: ass.comparative1.listing_price,
+						terms_of_sale1: ass.comparative1.terms_of_sale,
+						corner1: ass.comparative1.corner,
+						school1: ass.comparative1.school,
+						mall1: ass.comparative1.mall,
+						hospital1: ass.comparative1.hospital,
+						shape1: ass.comparative1.shape,
+						topo1: ass.comparative1.topo,
+						area1: ass.comparative1.area,
+						
+						//comparable 2
+						lot_size2: ass.comparative2.lot_size,
+						purchase_price2: ass.comparative2.purchase_price,
+						listing_price2: ass.comparative2.listing_price,
+						terms_of_sale2: ass.comparative2.terms_of_sale,
+						corner2: ass.comparative2.corner,
+						school2: ass.comparative2.school,
+						mall2: ass.comparative2.mall,
+						hospital2: ass.comparative2.hospital,
+						shape2: ass.comparative2.shape,
+						topo2: ass.comparative2.topo,
+						area2: ass.comparative2.area,
+						
+						username: sess.username,
+						password: sess.password,
+						status: sess.status,
+						remember: sess.remember,
+						acct_id: sess.acct_id,
+						email   : sess.email,
+						fname   : sess.fname,
+						lname   : sess.lname,
+						appNum  : sess.appNum,
+						appExp  : sess.appExp
+					});
+					
+				}
+				else{	//	in assignemnts
+					
+					res.render('viewAssignment_0.hbs',{
+						ref_id : ass.ref_id,
+						type_of_approach: ass.type_of_approach,
+						client_f_name : ass.client_f_name,
+						client_l_name : ass.client_l_name,
+						loc_brgy : ass.loc_brgy,
+						loc_city : ass.loc_city,
+						loc_region : ass.loc_region,
+						
+						property_images: ass.property_images,
+						lot_size: ass.lot_size,
+						trans_date: ass.trans_date,
+						purchase_price: ass.purchase_price,
+						listing_price: ass.listing_price,
+						terms_of_sale: ass.terms_of_sale,
+						corner: ass.corner,
+						shape: ass.shape,
+						topo: ass.topo,
+						area: ass.area,
+						completed_on: ass.completed_on,
+						comment: ass.comment,
+						assigned_to: ass.assigned_to,
+						created_at: ass.created_at,
+						
+						//comparable 1
+						lot_size1: ass.comparative1.lot_size,
+						purchase_price1: ass.comparative1.purchase_price,
+						listing_price1: ass.comparative1.listing_price,
+						terms_of_sale1: ass.comparative1.terms_of_sale,
+						corner1: ass.comparative1.corner,
+						school1: ass.comparative1.school,
+						mall1: ass.comparative1.mall,
+						hospital1: ass.comparative1.hospital,
+						shape1: ass.comparative1.shape,
+						topo1: ass.comparative1.topo,
+						area1: ass.comparative1.area,
+						
+						//comparable 2
+						lot_size2: ass.comparative2.lot_size,
+						purchase_price2: ass.comparative2.purchase_price,
+						listing_price2: ass.comparative2.listing_price,
+						terms_of_sale2: ass.comparative2.terms_of_sale,
+						corner2: ass.comparative2.corner,
+						school2: ass.comparative2.school,
+						mall2: ass.comparative2.mall,
+						hospital2: ass.comparative2.hospital,
+						shape2: ass.comparative2.shape,
+						topo2: ass.comparative2.topo,
+						area2: ass.comparative2.area,
+						
+						username: sess.username,
+						password: sess.password,
+						status: sess.status,
+						remember: sess.remember,
+						acct_id: sess.acct_id,
+						email   : sess.email,
+						fname   : sess.fname,
+						lname   : sess.lname,
+						appNum  : sess.appNum,
+						appExp  : sess.appExp
+					});
+				}
+			}
+			catch(err)
+			{
+				console.log(err)
+			}
 		}
+		console.log(ass.comparative1)
+		console.log(ass.comparative2)
 	}
 	else
 	{		
 		res.redirect('/login-fail.html')
 	}
 });
-
-
-// Comparative 1   TODO: remove the pictures part(?) need confirmation
-app.get('/view/1/:ref_id', async(req,res)=>{
-	sess = req.session
-	var ref_id = req.params.ref_id
-
-	if(sess.username)
-	{
-		if(sess.username == "admin")
-		{	//if admin, cannot edit, but can comment
-			const ass = await Assignment.findOne({
-				ref_id: req.params.ref_id
-			}).exec()
-			
-			res.render('viewAssignment_1_admin.hbs',{
-				ref_id : ass.ref_id,
-				type_of_approach: ass.type_of_approach,
-				client_f_name : ass.client_f_name,
-				client_l_name : ass.client_l_name,
-				loc_brgy : ass.loc_brgy,
-				loc_city : ass.loc_city,
-				loc_region : ass.loc_region,
-				
-				lot_size: ass.comparative2.lot_size,
-				trans_date: ass.comparative2.trans_date,
-				purchase_price: ass.comparative2.purchase_price,
-				listing_price: ass.comparative2.listing_price,
-				terms_of_sale: ass.comparative2.terms_of_sale,
-				corner: ass.comparative2.corner,
-				shape: ass.comparative2.shape,
-				topo: ass.comparative2.topo,
-				area: ass.comparative2.area,
-				comment: ass.comment,
-				
-				username: sess.username,
-				password: sess.password,
-				status: sess.status,
-				remember: sess.remember,
-				acct_id: sess.acct_id,
-				email   : sess.email,
-				fname   : sess.fname,
-				lname   : sess.lname,
-				appNum  : sess.appNum,
-				appExp  : sess.appExp
-				
-			}).exec()
-		}
-		else// if (sess.username != "admin")
-		{
-			const ass = await Assignment.findOne({
-				assigned_to: sess.username})
-			.exec()
-		
-			res.render('viewAssignment_1.hbs',{
-				ref_id : ass.ref_id,
-				type_of_approach: ass.type_of_approach,
-				client_f_name : ass.client_f_name,
-				client_l_name : ass.client_l_name,
-				loc_brgy : ass.loc_brgy,
-				loc_city : ass.loc_city,
-				loc_region : ass.loc_region,
-				
-				property_images: ass.comparative1.property_images,
-				lot_size: ass.comparative1.lot_size,
-				trans_date: ass.comparative1.trans_date,
-				purchase_price: ass.comparative1.purchase_price,
-				listing_price: ass.comparative1.listing_price,
-				terms_of_sale: ass.comparative1.terms_of_sale,
-				corner: ass.comparative1.corner,
-				shape: ass.comparative1.shape,
-				topo: ass.comparative1.topo,
-				area: ass.comparative1.area,
-				comment: ass.comment,
-				
-				username: sess.username,
-				password: sess.password,
-				status: sess.status,
-				remember: sess.remember,
-				acct_id: sess.acct_id,
-				email   : sess.email,
-				fname   : sess.fname,
-				lname   : sess.lname,
-				appNum  : sess.appNum,
-				appExp  : sess.appExp
-				
-			}).exec()
-		}
-	}
-	else
-	{		
-		res.redirect('/login-fail.html')
-	}
-});
-
-
-// Comparative 2 -> TODO: remove the pictures part(?) need confirmation
-app.get('/view/2/:ref_id', async(req,res)=>{
-	sess = req.session
-	var ref_id = req.params.ref_id
-
-/*
-	console.log(req.params)
-	const ass = await Assignment.find({
-		assigned_to: sess.username,
-		ref_id: req.params.ref_id}).exec()
-	console.log(ass)
-	*/
-	if(sess.username)
-	{//TODO
-		if(sess.username == "admin")
-		{	
-			const ass = await Assignment.findOne({
-				ref_id : ref_id
-				}).exec()
-				
-			res.render('viewAssignment_2_admin.hbs',{
-				ref_id : ass.ref_id,
-				type_of_approach: ass.type_of_approach,
-				client_f_name : ass.client_f_name,
-				client_l_name : ass.client_l_name,
-				loc_brgy : ass.loc_brgy,
-				loc_city : ass.loc_city,
-				loc_region : ass.loc_region,
-				
-				property_images: ass.comparative2.property_images,
-				lot_size: ass.comparative2.lot_size,
-				trans_date: ass.comparative2.trans_date,
-				purchase_price: ass.comparative2.purchase_price,
-				listing_price: ass.comparative2.listing_price,
-				terms_of_sale: ass.comparative2.terms_of_sale,
-				corner: ass.comparative2.corner,
-				shape: ass.comparative2.shape,
-				topo: ass.comparative2.topo,
-				area: ass.comparative2.area,
-				comment: ass.comment,
-				
-				username: sess.username,
-				password: sess.password,
-				status: sess.status,
-				remember: sess.remember,
-				acct_id: sess.acct_id,
-				email   : sess.email,
-				fname   : sess.fname,
-				lname   : sess.lname,
-				appNum  : sess.appNum,
-				appExp  : sess.appExp
-				
-			}).exec()
-		}
-		else
-		{
-		
-			const ass = await Assignment.findOne({
-				ref_id : ref_id
-			}).exec()
-	
-			res.render('viewAssignment_2.hbs',{
-				ref_id : ass.ref_id,
-				type_of_approach: ass.type_of_approach,
-				client_f_name : ass.client_f_name,
-				client_l_name : ass.client_l_name,
-				loc_brgy : ass.loc_brgy,
-				loc_city : ass.loc_city,
-				loc_region : ass.loc_region,
-				
-				property_images: ass.comparative2.property_images,
-				lot_size: ass.comparative2.lot_size,
-				trans_date: ass.comparative2.trans_date,
-				purchase_price: ass.comparative2.purchase_price,
-				listing_price: ass.comparative2.listing_price,
-				terms_of_sale: ass.comparative2.terms_of_sale,
-				corner: ass.comparative2.corner,
-				shape: ass.comparative2.shape,
-				topo: ass.comparative2.topo,
-				area: ass.comparative2.area,
-				comment: ass.comment,
-				
-				username: sess.username,
-				password: sess.password,
-				status: sess.status,
-				remember: sess.remember,
-				acct_id: sess.acct_id,
-				email   : sess.email,
-				fname   : sess.fname,
-				lname   : sess.lname,
-				appNum  : sess.appNum,
-				appExp  : sess.appExp
-				
-			}).exec()
-		}
-		
-	}
-	else
-	{		
-		res.redirect('/login-fail.html')
-	}
-});
-
-
 
 
 //THIS IS THE "PROPERTY" VIEW
@@ -733,50 +738,6 @@ app.get('/viewAssignment/0/:ref_id', async(req,res)=>{
 
 
 
-//THIS IS THE "COMPARATIVE 1" VIEW
-app.get('/viewAssignment/1/:ref_id', async(req,res)=>{
-	sess = req.session
-	var ref_id = req.params.ref_id
-
-/*
-	console.log(req.params)
-	const ass = await Assignment.find({
-		assigned_to: sess.username,
-		ref_id: req.params.ref_id}).exec()
-	console.log(ass)
-	*/
-	
-	if(sess.username)
-	{
-		res.redirect('/view/1/'+req.params.ref_id);
-			
-	}
-	else
-	{		
-		res.redirect('/login-fail.html')
-	}
-});
-
-
-//THIS IS THE "COMPARATIVE II" VIEW
-app.get('/viewAssignment/2/:ref_id', async(req,res)=>{
-	sess = req.session
-	var ref_id = req.params.ref_id
-
-	
-	if(sess.username)
-	{
-		res.redirect('/view/2/'+req.params.ref_id);
-	}
-	else
-	{		
-		res.redirect('/login-fail.html')
-	}
-});
-
-
-
-
 //TODO make this functional, as in working if you click save
 app.post('/submit-assignment', function(req,res) {
 	sess = req.session
@@ -809,7 +770,6 @@ app.post('/submit-assignment', function(req,res) {
 		area: 0,
 		comment: "",
 		assigned_to: "",
-	
 	
 		//add empty comparative
 		comparative1 : {
