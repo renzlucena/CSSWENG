@@ -945,7 +945,7 @@ app.get('/term-accept', async(req,res)=> {
 });
 
 
-app.get('/set-settings', async(req,res)=> {
+app.put('/set-settings', async(req,res)=> {
 	sess = req.session;
 	if(sess.username){
 		//update db
@@ -964,6 +964,36 @@ app.get('/set-settings', async(req,res)=> {
 			{
 				await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
 				sess.password = req.query.newPassword
+			}
+
+			if(req.query.email != "" && sess.email != req.query.email)
+			{
+				await Account.findOneAndUpdate({email: sess.email},{email: req.query.email})
+				sess.email = req.query.email
+			}
+
+			if(req.query.fname != "" && req.query.fname != sess.fname)
+			{
+				await Account.findOneAndUpdate({fname: sess.fname},{email: req.query.fname})
+				sess.fname = req.query.fname
+			}
+
+			if(req.query.lname != "" && req.query.lname != sess.lname)
+			{
+				await Account.findOneAndUpdate({lname: sess.lname},{lname: req.query.lname})
+				sess.lname = req.query.lname
+			}
+
+			if(req.query.appexp != "" && req.query.appexp != sess.appexp)
+			{
+				await Account.findOneAndUpdate({appexp: sess.appexp},{appexp: req.query.appexp})
+				sess.appexp = req.query.appexp
+			}
+
+			if(req.query.appnum != "" && req.query.appnum != sess.appnum)
+			{
+				await Account.findOneAndUpdate({appnum: sess.appnum},{appnum: req.query.appnum})
+				sess.appnum = req.query.appnum
 			}
 			
 			res.redirect('/profile')
