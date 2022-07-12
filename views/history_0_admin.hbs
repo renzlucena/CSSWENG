@@ -22,71 +22,162 @@
                   </div>
               </div>
 
-              <div class="sidebar-assignments-btn">
-                  <a  href="/assignments">Assignments</a>
-              </div>
-
-  			<div class="sidebar-profile-btn">
-                  <a  href="addAssignment.hbs">Add New Assignment</a>
-              </div>
-
-              <div class="sidebar-history-btn">
-                  <a  href="/history">History</a>
-              </div>
-              <div class="bottom-button">
-                  <a href="/logout">Logout</a>
-              </div>
+            <div class="sidebar-assignments-btn">
+                <a  href="/assignments">Assignments</a>
+            </div>
+			
+			<div class="sidebar-profile-btn">
+                <a  href="/admin-add-assignment">Add New Assignment</a>
+            </div>
+			
+            <div class="sidebar-history-btn">
+                <a  href="/history">History</a>
+            </div>
+			
+            <div class="bottom-button">
+                <a href="/logout">Logout</a>
+            </div>
           </div>
 
   		<div class="openbtn" >
   			<a href="#" onclick="openNav()">☰</a>
   		</div>
 
-          <div class="main">
-              <div class="main-header">
-                  <h1>History</h1>
-                  <p><b><i>Here are the completed and approved assignments!</i></b></p>
-                  <p>Each document is valid for printing for 5 years.</p>
-              </div>
-              <div class="pager">
-        				<div class="pager0">
-        					<a href="">Property</a>
-        				</div>
-        				<div class="pager1">
-        					<a href="/history/1/admin/{{ref_id}}">Comparable I</a>
-        				</div>
-        				<div class="pager2">
-        					<a href="/history/2/admin/{{ref_id}}">Comparable II</a>
-        				</div>
-        			</div>
-              <div class="main-table">
-                  <table>
-  					<tr>
-  						<th>REF NO.</th>
-  						<th>DATE OF COMPLETION</th>
-  						<th>VALID THRU</th>
-  						<th>ACTION</th>
-  						<th><p style="width:400" class="table-long-text">ASSIGNED AGENT</p></th>
-  					</tr>
+		<div class="main">
+			<div class="main-header">
+				<h1>View Past Assignment</p>
+				<p><b><i>You may not edit them anymore after being approved.</b></i></p>       
+				<p>You may print them anytime.</p>
+			</div>
 
-  					{{#each assignment}}
-  					<tr>
-  						<td>{{this.ref_id}}</td>
-  							<td>{{this.created_at}}</td>
-  							<td>4/8/26</td>
-  							<td>
-  								<div class="main-assignments-status-btns">
-  									<a href="/viewAssignment/0/{{ref_id}}">Review Assignment</a>
-  								</div>
-  							</td>
-  							<td><p class="comment-text left-align">{{this.assigned_to}}</p>
-  						</td>
-  					</tr>
-  				  {{/each}}
+			<form class="assignments-form" action = "/history" method = "get">
+				<div class="main-table">            
+					<table>
+						<tr>
+							<th><label for="ref_id">Reference ID</label></th>
+							<td><input name="ref_id" type="text" value="{{this.ref_id}}" readonly></td>
+						</tr>
+						
+						<tr>
+							<th><label for="type_of_approach">Type of Approach</label></th>
+							<td><input name="type_of_approach" type="text" value="{{this.type_of_approach}}" readonly></td>
+						</tr>
+						
+						<tr>
+							<th><label for="client_f_name">Client Name</label></th>
+							<td><input name="client_f_name" type="text" value="{{this.client_l_name}}, {{this.client_f_name}}" readonly></td>
+						</tr>
+						<!-- From here are editable by agents -->
+						<tr>
+							<th></th>
+							<th>MAIN PROPERTY</th>
+							<th>COMPARABLE I</th>
+							<th>COMPARABLE II</th>
+						</tr>
+						<tr>
+							<th><label for="lot_loc">Lot Location</label></th>
+							<td><input name="lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
+							<td><input name="lot_loc" type="text" value="{{this.lot_brgy1}}, {{this.lot_city1}}, {{this.lot_region1}}" readonly></td>
+							<td><input name="lot_loc" type="text" value="{{this.lot_brgy2}}, {{this.lot_city2}}, {{this.lot_region2}}" readonly></td>
+						</tr>
+						
+						<tr>
+							<th><label for="property_type" readonly >Property Type</label></th>
+							<td><input name="property_type" type="text" value="{{this.property_type}}" readonly></td>
+							<td><input name="property_type" type="text" value="{{this.property_type1}}" readonly></td>
+							<td><input name="property_type" type="text" value="{{this.property_type2}}" readonly></td>
 
-                  </table>
-              </div>
-          </div>
-      </div>
-  </body>
-  </html>
+							<!-- <td><select name="property_type"> -->
+								<!-- <option value="residential">Residential</option> -->
+								<!-- <option value="commercial">Commercial</option> -->
+								<!-- <option value="industrial">Insutrial</option> -->
+								<!-- <option value="special">Special</option> -->
+							<!-- </select></td> -->
+						</tr>
+						<tr>
+							<th><label for="property_interest" readonly >Property Interest</label></th>
+							<td><input name="property_interest" type="text" value="{{this.property_interest}}" readonly></td>
+							<td><input name="property_interest" type="text" value="{{this.property_interest1}}" readonly></td>
+							<td><input name="property_interest" type="text" value="{{this.property_interest2}}" readonly></td>
+
+							<!-- <td><select name="property_interest"> -->
+								<!-- <option value="fee_simple">Fee Simple</option> -->
+								<!-- <option value="lease_hold">Lease Hold</option> -->
+							<!-- </select></td> -->
+						</tr>
+						<tr>
+							<th><label for="property_images">Property Images</label></th>
+							<td><input type="file" id="pimg" name="property_images" readonly></td>
+						</tr>
+						
+						<tr>
+							<th><label for="lot_size">Lot Size</label></th>
+							<td><input name="lot_size" type="text" this="{{this.lot_size}}" readonly></td>
+							<td><input name="lot_size" type="text" this="{{this.lot_size1}}" readonly></td>
+							<td><input name="lot_size" type="text" this="{{this.lot_size2}}" readonly></td>
+						</tr>
+						
+						<tr>
+							<th><label for="trans_date">Transaction Date</label></th>
+							<td><input name="trans_date" type="date" value="{{this.trans_date}}" readonly></td>
+						</tr>
+						
+						<tr>
+							<th><label for="purchase_price">Purchase Price</label></th>
+							<td><input name="purchase_price" type="text" value="{{this.purchase_price}}" readonly></td>
+							<td><input name="purchase_price" type="text" value="{{this.purchase_price1}}" readonly></td>
+							<td><input name="purchase_price" type="text" value="{{this.purchase_price2}}" readonly></td>
+						</tr>
+						
+						<tr>
+							<th><label for="type_of_approach">Listing Price</label></th>
+							<td><input name="listing_price" type="text" value="{{this.listing_price}}" readonly></td>
+							<td><input name="listing_price" type="text" value="{{this.listing_price1}}" readonly></td>
+							<td><input name="listing_price" type="text" value="{{this.listing_price2}}" readonly></td>
+						</tr>
+						
+						<tr>
+							<th><label for="terms_of_sale">Terms of Sale</label></th>
+							<td><input name="terms_of_sale" type="text" value="{{this.terms_of_sale}}" readonly></td>
+							<td><input name="terms_of_sale" type="text" value="{{this.terms_of_sale1}}" readonly></td>
+							<td><input name="terms_of_sale" type="text" value="{{this.terms_of_sale2}}" readonly></td>
+						</tr>
+						
+						<tr>
+							<th><label for="location">Location Type</label></th>
+							<td><input name="location" type="text" value="{{this.location}}" readonly></td>
+							<td><input name="location" type="text" value="{{this.location}}" readonly></td>
+							<td><input name="location" type="text" value="{{this.location}}" readonly></td>
+						<tr>
+							<th><label>Is a Corner Lot?</label></th>
+							<td><input name="corner" type="checkbox" readonly value="{{this.corner}}"></td>
+						</tr>						
+						<tr>
+							<<th><label>Has nearby Hospital(s)?</label></th>
+							<td><input name="hospital" type="checkbox" readonly value="{{this.hospital}}"></td>
+						</tr>			
+						<tr>
+							<th><label>Has nearby School(s)?</label></th>
+							<td><input name="school" type="checkbox" readonly value="{{this.school}}"></td>
+						</tr>
+						<tr>
+							<th><label>Has nearby Shop/Mall(s)?</label></th>
+							<td><input name="mall" type="checkbox" readonly value="{{this.mall}}"></td>
+						</tr>
+						
+						<tr>
+                            <th><label for="computation">Computation</label></th>
+                            <td><input name="computation" id="computation1" type="text" value="return computeValues1()" readonly></td>
+                            <td><input name="computation" id="computation2" type="text" value="return computeValues2()" readonly></td>
+                            <td><input name="computation" id="computation3" type="text" value="return computeValues3()" readonly></td>
+                        </tr>
+					</table>    
+				</div>
+			<div id="main-table-bottom">
+				<button type="submit" name="save_ass" onclick="openPDF()">Save Document to PDF...</button>
+			</div>
+			</form>
+		</div>
+	</div>
+	</body>
+</html>

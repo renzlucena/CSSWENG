@@ -9,6 +9,42 @@
 
     <title>Assignment No. {{this.ref_id}}</title>
     
+	<script>
+		
+		function computeValues1()
+			{
+				var value=0;
+				
+				var computationText = document.getElementById("computation1");
+				
+				//do the thing here
+				
+				return value;
+			}
+		function computeValues2()
+			{
+				var value=0;
+				
+				var computationText = document.getElementById("computation2");
+				
+				//do the thing here
+				
+				return value;
+			}
+		function computeValues3()
+			{
+				var value=0;
+				
+				var computationText = document.getElementById("computation3");
+				
+				//do the thing here
+				
+				return value;
+			}
+	
+	</script>
+	
+	
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
@@ -181,7 +217,21 @@
                             <td><input name="mall" type="checkbox" readonly value="{{this.mall1}}"></td>
                             <td><input name="mall" type="checkbox" readonly value="{{this.mall2}}"></td>
 						</tr>
-                    </table>    
+						
+						<tr>
+							<th></th>
+							<th>MAIN PROPERTY</th>
+							<th>COMPARABLE I</th>
+							<th>COMPARABLE II</th>
+						</tr>
+						
+						<tr>
+                            <th><label for="computation">Computation</label></th>
+                            <td><input name="computation" id="computation1" type="text" value="return computeValues1()" readonly></td>
+                            <td><input name="computation" id="computation2" type="text" value="return computeValues2()" readonly></td>
+                            <td><input name="computation" id="computation3" type="text" value="return computeValues3()" readonly></td>
+                        </tr>
+                    </table>
                 </div>
             <div id="main-table-bottom">
                 <button type = "submit" name="save_ass" formaction="/save-ass">Save Details</button>
