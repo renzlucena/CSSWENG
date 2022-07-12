@@ -60,10 +60,10 @@
 					<a href="">Property</a>
 				</div>
 				<div class="pager1">
-					<a href="/view/1/{{ref_id'}}">Comparable I</a>
+					<a href="/view/1/{{ref_id}}">Comparable I</a>
 				</div>
 				<div class="pager2">
-					<a href="/view/2/{{ref_id'}}">Comparable II</a>
+					<a href="/view/2/{{ref_id}}">Comparable II</a>
 				</div>
 			</div>
 			
@@ -123,32 +123,32 @@
 						</tr>
                         <tr>
                             <th><label for="property_images">Property Images</label></th>
-                            <td><input type="file" id="pimg" name="property_images"></td>
+                            <td><input type="file" id="pimg" name="property_images" readonly ></td>
                         </tr>
 						
                         <tr>
                             <th><label for="lot_size">Lot Size</label></th>
-                            <td><input name="lot_size" type="text" this="{{this.lot_size}}"></td>
+                            <td><input name="lot_size" type="text" this="{{this.lot_size}}" readonly ></td>
                         </tr>
 						
                         <tr>
                             <th><label for="trans_date">Transaction Date</label></th>
-                            <td><input name="trans_date" type="date" value="{{this.trans_date}}"></td>
+                            <td><input name="trans_date" type="date" value="{{this.trans_date}}" readonly ></td>
                         </tr>
 						
                         <tr>
                             <th><label for="purchase_price">Purchase Price</label></th>
-                            <td><input name="purchase_price" type="text" value="{{this.purchase_price}}"></td>
+                            <td><input name="purchase_price" type="text" value="{{this.purchase_price}}" readonly ></td>
                         </tr>
 						
                         <tr>
                             <th><label for="type_of_approach">Listing Price</label></th>
-                            <td><input name="listing_price" type="text" value="{{this.listing_price}}"></td>
+                            <td><input name="listing_price" type="text" value="{{this.listing_price}}" readonly ></td>
                         </tr>
 						
                         <tr>
                             <th><label for="terms_of_sale">Terms of Sale</label></th>
-                            <td><select name="terms_of_sale">
+                            <td><select name="terms_of_sale" readonly >
                                 <option value="cash">Cash</option>
                                 <option value="installment">Installment</option>
                                 <option value="discount">Discounted</option>
@@ -158,32 +158,33 @@
 						
                         <tr>
                             <th><label for="location">Location Type</label></th>
-                            <td><select name="terms_of_sale">
+                            <td><select name="terms_of_sale" readonly >
                                 <option value="inferior">Inferior</option>
                                 <option value="equal">Equal</option>
                                 <option value="superior">Superior</option>
                             </select></td>
 						<tr>
                             <th><label>Is a Corner Lot?</label></th>
-                            <td><input name="isCornerLot" type="checkbox"></td>
+                            <td><input name="isCornerLot" type="checkbox" readonly ></td>
                         </tr>						
 						<tr>
-                            <<th><label>Has nearby Hospital(s)?</label></th>
-                            <td><input name="isNearHospital" type="checkbox"></td>
+                            <th><label>Has nearby Hospital(s)?</label></th>
+                            <td><input name="isNearHospital" type="checkbox" readonly ></td>
                         </tr>			
 						<tr>
 							<th><label>Has nearby School(s)?</label></th>
-                            <td><input name="isNearSchool" type="checkbox"></td>
+                            <td><input name="isNearSchool" type="checkbox" readonly ></td>
                         </tr>
 						<tr>
                             <th><label>Has nearby Shop/Mall(s)?</label></th>
-                            <td><input name="isNearMall" type="checkbox"></td>
+                            <td><input name="isNearMall" type="checkbox" readonly ></td>
 						</tr>
                     </table>    
                 </div>
             <div id="main-table-bottom">
-                <button type = "submit" name="save_ass" formaction="/save-ass">Save Details</button>
-                <button type="submit" name="send_ass" formaction="/submit-ass">Send For Processing</button>
+				<input name="comment" type="checkbox">
+                <button type = "submit" name="save_ass" formaction="/save-ass">Return and Comment</button>
+                <button type="submit" name="send_ass" formaction="/submit-ass">Approve</button>
             </div>
             </form>
         </div>

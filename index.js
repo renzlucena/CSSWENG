@@ -282,11 +282,13 @@ app.get('/set-settings', async(req,res)=> {
 
 app.get('/submit-ass', async(req,res)=> {
 	sess = req.session;
+//	console.log(req.query)
 	if(sess.username){
 		try{
 			//edit comment  to "Submitted."
-			await Assignment.findOneAndUpdate({ref_id: req.params.ref_id},{comment: "Submitted."})
-			sess.status = true
+			await Assignment.findOneAndUpdate(
+				{ref_id: req.query.ref_id},
+				{comment: "Submitted."})
 			res.redirect('/assignments')
 		}
 		catch(err)
@@ -310,7 +312,11 @@ app.get('/admin-approve', async(req,res)=>{
 			// await Assignment.findOneAndUpdate({res: sess.username},{comment: true})
 			// const ass = await Assignment.findOneAndUpdate({res: req.params.ref_id},{comment: "test"})
 			// req.params.ref_id
-			console.log(req.params.ref_id)
+			//console.log(req.params.ref_id)
+			await Assignment.findOneAndUpdate(
+				{ref_id: req.query.ref_id},
+				{comment: "Approved."})
+				
 			res.redirect('/history')
 		}
 		catch(err){
@@ -331,9 +337,11 @@ app.get('/admin-comment', async(req,res)=>{
 			// await Assignment.findOneAndUpdate({res: sess.username},{comment: true})
 			// const ass = await Assignment.findOneAndUpdate({res: req.params.ref_id},{comment: "test"})
 			// req.params.ref_id
-			const ass = await Assignment.findOneAndUpdate({
-				res: req.params.ref_id},
-				{comment: req.params.comment})
+			
+			const ass = await Assignment.findOneAndUpdate(
+				{ref_id: req.query.ref_id},
+				{comment: "Returned: " + req.query.comment
+				})
 			
 			res.redirect('/history')
 		}
@@ -345,6 +353,7 @@ app.get('/admin-comment', async(req,res)=>{
 		res.redirect('/login-fail.html')
 	}
 })
+
 //TODO make this functional, as in working if you click save
 app.get('/admin-add-assignment', function(req,res) {
 	sess = req.session
@@ -782,6 +791,24 @@ app.post('/submit-assignment', function(req,res) {
 		loc_brgy : req.body.loc_brgy,
 		loc_city : req.body.loc_city,
 		loc_region : req.body.loc_region,
+		
+		
+		type_of_approach: "Market Approach",
+		terms_of_sale: "",
+		property_images: "",
+		lot_size: 0,
+		purchase_price: 0,
+		listing_price: 0,
+		corner: 0,
+		school: 0,
+		hospital: 0,
+		mall: 0,
+		shape: "",
+		topo: "",
+		area: 0,
+		comment: "",
+		assigned_to: "",
+	
 	
 		//add empty comparative
 		comparative1 : {
