@@ -391,7 +391,15 @@ td{
 	margin-bottom: 5px;
 }
 
+.percentage{
+	display: inline;
+	width: 10% !important;
+}
 
+.text-next-to-percentage{
+	display: inline;
+	width: 46% !important;
+}
 
 @media screen and (max-width: 912px){
 	.pager{

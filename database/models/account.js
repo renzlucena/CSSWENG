@@ -9,7 +9,6 @@ const accountSchema = new mongoose.Schema({
 	email: String,
 	fname: String,
 	lname: String,
-	appexp: Date,
 	appnum: Number
 })
 
