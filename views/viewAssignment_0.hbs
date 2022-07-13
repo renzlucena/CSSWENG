@@ -8,28 +8,27 @@
 	<link rel = "stylesheet" href="/styles.css" type="text/css" >
 
     <title>Assignment No. {{this.ref_id}}</title>
-
 	<script>
 
-		function test()
+		<!-- function test() -->
+		<!-- { -->
+			<!-- var username = document.getElementById("zoning"); -->
+            <!-- <!-- var password = document.getElementById("password"); --> -->
+			
+			<!-- username.value = "aa" -->
+			<!-- username.innerHTML = "aa" -->
+			
+			<!-- <!-- document.getElementById("shape1").value = "test" --> -->
+			<!-- <!-- document.getElementById("zoning1").value = "test" --> -->
+		<!-- } -->
+		  <!-- <!-- document.getElementById("demo").innerHTML = "YOU CLICKED ME!"; --> -->
+		function computer()
 		{
-			var username = document.getElementById("zoning");
-            <!-- var password = document.getElementById("password"); -->
-			
-			username.value = "aa"
-			username.innerHTML = "aa"
-			
-			<!-- document.getElementById("shape1").value = "test" -->
-			<!-- document.getElementById("zoning1").value = "test" -->
-		}
-		  <!-- document.getElementById("demo").innerHTML = "YOU CLICKED ME!"; -->
-		function computeValues()
-			{
-
 			var value = 0;
 			var value1 = 0;
 			var value2 = 0;
 
+			//COMPARATIVE 1
 			var ref_date1 = document.getElementById("ref_date_percent1");
 			var property_type1 = document.getElementById("property_type_percent1");
 			var property_interest1 = document.getElementById("property_interest_percent1");
@@ -45,7 +44,8 @@
 			var mall1 = document.getElementById("mall_percent1");
 			var public_transpo1 = document.getElementById("public_transpo1");
 			var zoning1 = document.getElementById("zoning_percent1");
-
+	
+			//COMPARATIVE 2
 			var ref_date2 = document.getElementById("ref_date_percent2");
 			var property_type2 = document.getElementById("property_type_percent2");
 			var property_interest2 = document.getElementById("property_interest_percent2");
@@ -67,6 +67,7 @@
 			var computationText2 = document.getElementById("computation2");
 
 			var startingValue1 = document.getElementById("price_per_sqm1");
+/*
 			value1 = startingValue1;
 
 			value1 = startingValue1 + (startingValue1*ref_date1*0.01) +
@@ -89,33 +90,40 @@
 			value2 = startingValue2;
 
 			value2 = startingValue2 + (startingValue2*ref_date2*0.01) +
-			(startingValue2*property_type2*0.01) +
-			(startingValue2*property_interest2*0.01) +
-			(startingValue2*lot_size2*0.01) +
-			(startingValue2*shape2*0.01) +
-			(startingValue2*topo2*0.01) +
-			(startingValue2*frontage2*0.01) +
-			(startingValue2*terms_of_sale2*0.01) +
-			(startingValue2*corner2*0.01) +
-			(startingValue2*prime2*0.01) +
-			(startingValue2*hospital2*0.01) +
-			(startingValue2*school2*0.01) +
-			(startingValue2*mall2*0.01)
-			(startingValue2*public_transpo2*0.01) +
-			(startingValue2*zoning2*0.01);
+				(startingValue2*property_type2*0.01) +
+				(startingValue2*property_interest2*0.01) +
+				(startingValue2*lot_size2*0.01) +
+				(startingValue2*shape2*0.01) +
+				(startingValue2*topo2*0.01) +
+				(startingValue2*frontage2*0.01) +
+				(startingValue2*terms_of_sale2*0.01) +
+				(startingValue2*corner2*0.01) +
+				(startingValue2*prime2*0.01) +
+				(startingValue2*hospital2*0.01) +
+				(startingValue2*school2*0.01) +
+				(startingValue2*mall2*0.01)
+				(startingValue2*public_transpo2*0.01) +
+				(startingValue2*zoning2*0.01);
+*/
 
 			var computationText = document.getElementById("computation");
-			computationText.value = value;
+			computationText.value = value.toString();	//something's wrong with calculation ^
 			var computationText1 = document.getElementById("computation1");
-			computationText1.value = value1;
+			computationText1.value = "sahbdasda";
 			var computationText2 = document.getElementById("computation2");
-			computationText2.value = value2;
+			computationText2.value = "asdjabdjabs";
 
 			<!-- computationText.value = startingValue1; -->
 			<!-- computationText1.value = startValue2; -->
 			<!-- computationText2.setAttribute("value", "Hi") -->
 			
 		}
+		
+	</script>
+		
+	<script>
+
+		
 
 
 		//prevent unsaved stuff
@@ -496,10 +504,12 @@
                 </div>
             <div id="main-table-bottom">
                 <button method = "get" type = "submit" name="save_ass" formaction="/save-ass">Save Details</button>
-                <button method="get" type="submit" name="send-ass" formaction="/send-ass">Send for Processing (EDIT DOCU LAMAN PAGE MUNA)</button>
+                <button type="button" onclick="computer()">COMPUTE</button>
+				<button method="get" type="submit" name="send-ass" formaction="/send-ass">Send for Processing (EDIT DOCU LAMAN PAGE MUNA)</button>
             </div>
             </form>
-			<button type="button" id="computation_btn" onclick="test()">COMPUTE</button>
+			
+
 
         </div>
     </div>
