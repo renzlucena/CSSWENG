@@ -12,22 +12,22 @@ const imageSchema = new mongoose.Schema({
 
 const boolnum = new mongoose.Schema({
 	bool: Boolean,
-	num: Number
+	num: Number,
 },{ _id : false });
 
 const numnum = new mongoose.Schema({
 	num1: Number,
-	num2: Number
+	num2: Number,
 },{ _id : false });
 
 const strnum = new mongoose.Schema({
 	str: String,
-	num: Number
+	num: Number,
 },{ _id : false });
 
 const datenum = new mongoose.Schema({
 	date: { type: Date, required: false, default: Date.now },
-	num: Number
+	num: Number,
 },{ _id : false });
 
 const comparativeSchema = new mongoose.Schema({
@@ -47,7 +47,6 @@ const comparativeSchema = new mongoose.Schema({
 	prime: boolnum,
 	hospital: boolnum,
 	school: boolnum,
-	mall: boolnum,
 	public_transpo: strnum,
 	improvement: boolnum,
 	zoning: strnum,
@@ -84,7 +83,6 @@ const assignmentSchema = new mongoose.Schema({
 	prime: Boolean,
 	hospital: Boolean,
 	school: Boolean,
-	mall: Boolean,
 	public_transpo: String,
 	improvement: Boolean,
 	zoning: String,
