@@ -9,57 +9,6 @@
 
     <title>Assignment No. {{this.ref_id}}</title>
     
-	<script>
-		
-		function computeValues1()
-			{
-				var value=0;
-				
-				var computationText = document.getElementById("computation1");
-				
-				//do the thing here
-				
-				return value;
-			}
-		function computeValues2()
-			{
-				var value=0;
-				
-				var computationText = document.getElementById("computation2");
-				
-				//do the thing here
-				
-				return value;
-			}
-		function computeValues3()
-			{
-				var value=0;
-				
-				var computationText = document.getElementById("computation3");
-				
-				//do the thing here
-				
-				return value;
-			}
-		
-			
-		//prevent unsaved stuff
-        window.addEventListener('beforeunload', function (e) {
-            // TODO complete this
-            if (fname !== '' ||
-                lname !== '' ||
-                subject !== '') {
-  
-                // Cancel the event and
-                // show alert that the unsaved
-                // changes would be lost
-                e.preventDefault();
-                e.returnValue = '';
-            }
-	
-	</script>
-	
-	
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
@@ -71,33 +20,28 @@
             <div class="sidebar-profile">
                 <img src="/temp_pic.png" width="100" height="100">
                 <div class="sidebar-profile-text">
-                    <p class="sidebar-profile-name">{{this.username}}</p>
+                    <p class="sidebar-profile-name">Admin</p>
                     <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
-                    <a href="login.html">Log Out</a>
+                    <a href="/logout">Log Out</a>
                 </div>
             </div>
             
-            <div class="sidebar-profile-btn">
-                
-                <a href="/dashboard">Profile</a>
-            </div>
             <div class="sidebar-assignments-btn">
-               
                 <a  href="/assignments">Assignments</a>
             </div>
+			
+			<div class="sidebar-profile-btn">
+                <a  href="/admin-add-assignment">Add New Assignment</a>
+            </div>
+			
             <div class="sidebar-history-btn">
-               
                 <a  href="/history">History</a>
             </div>
-            <div class="sidebar-settings-btn">
-                
-                <a href="/profile">Settings</a>
-            </div>
-            
+			
             <div class="bottom-button">
-                
                 <a href="/logout">Logout</a>
             </div>
+			
         </div>
     
 		<div class="openbtn" >
@@ -105,10 +49,9 @@
 		</div>
 		
         <div class="main">
-            <div class="main-header">
-                <h1>Assess Property</p>
-                <p><b><i>Items will NOT be autosaved!</b></i></p>       
-                <p>Please be mindful before you close the page.</p>
+			<div class="main-header">
+                <h1>View Assignment</p>
+                <p><b><i>Admin may not edit, but can comment, return, and approve, and export the PDF of the Assignment.</b></i></p>
             </div>
 
             <form class="assignments-form" action = "/assignments" method = "get">
@@ -154,7 +97,7 @@
 							<th>COMPARABLE I</th>
 							<th>COMPARABLE II</th>
 						</tr>
-
+						
 						<tr>	<!-- price_per_sqm -->
                             <th><label for="price_per_sqm">Price per SQM</label></th>
                             <td><input name="price_per_sqm" id="price_per_sqm" type="text" value="{{this.price_per_sqm}}"></td>
@@ -182,11 +125,11 @@
 
 						<tr>	<!-- property_type -->
                             <th><label for="property_type">Property Type</label></th>
-                            <td><input name="property_type" type="text" value="{{this.property_type}}"></td>
-                            <td><input name="property_type" class="text-next-to-percentage" type="text" value="{{this.property_type1}}">
+                            <td><input name="property_type" id="property_type" type="text" value="{{this.property_type}}"></td>
+                            <td><input name="property_type" id="property_type1" class="text-next-to-percentage" type="text" value="{{this.property_type1}}">
 								<input class="percentage" id="property_type_percent1" name="property_type" type="number" value="{{this.property_type_percent1}}"> %
 							</td>
-                            <td><input name="property_type" class="text-next-to-percentage" type="text" value="{{this.property_type2}}">
+                            <td><input name="property_type" id="property_type2" class="text-next-to-percentage" type="text" value="{{this.property_type2}}">
 								<input class="percentage" id="property_type_percent2" name="property_type" type="number" value="{{this.property_type_percent2}}"> %
 							</td>
                         </tr>
@@ -221,10 +164,10 @@
                             <th><label for="lot_size">Property Area Size</label></th>
                             <td><input name="lot_size" type="text" value="{{this.lot_size}}" readonly></td>
                             <td><input name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size1}}">
-								<input class="percentage" id="lot_size_percent1" name="property_interest" type="number" value="{{this.lot_size_percent1}}"> %
+								<input class="percentage" id="lot_size_percent1" name="lot_size" type="number" value="{{this.lot_size_percent1}}"> %
 							</td>
                             <td><input name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size2}}">
-								<input class="percentage" id="lot_size_percent2" name="property_interest" type="number" value="{{this.lot_size_percent2}}"> %
+								<input class="percentage" id="lot_size_percent2" name="lot_size" type="number" value="{{this.lot_size_percent2}}"> %
 							</td>
                         </tr>
 						
@@ -380,19 +323,15 @@
 						<tr>
                             <th><label for="computation">Computation</label></th>
                             <td><input name="computation" id="computation1" type="text" value="return computeValues1()" readonly></td>
-                            <td><input class="text-next-to-percentage" name="computation" id="computation2" type="text" value="return computeValues2()" readonly>
+                            <td><input class="text-next-to-percentage" name="computation" id="computation2" type="number" value="return computeValues2()" readonly>
 								<input class="percentage" id="computation_percent2" name="computation" type="number" value="{{this.computation_percent2}}"> %
 							</td>
-                            <td><input class="text-next-to-percentage" name="computation" id="computation3" type="text" value="return computeValues3()" readonly>
+                            <td><input class="text-next-to-percentage" name="computation" id="computation3" type="number" value="return computeValues3()" readonly>
 								<input class="percentage" id="computation_percent2" name="computation" type="number" value="{{this.computation_percent2}}"> %
 							</td>
                         </tr>
                     </table>
                 </div>
-            <div id="main-table-bottom">
-                <button type = "submit" name="save_ass" formaction="/save-ass">Save Details</button>
-                <button type="submit" name="send-ass" formaction="/send-ass">Send for Processing (EDIT DOCU LAMAN PAGE MUNA)</button>
-            </div>
             </form>
         </div>
     </div>

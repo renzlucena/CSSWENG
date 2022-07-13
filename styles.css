@@ -58,6 +58,8 @@ td
 }
 .left-align{
     text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 
@@ -121,6 +123,8 @@ input[type=number]{
 	padding: 5px;
 	border-radius: 5px;
     border: 1px solid #000000;
+	text-align: center;
+
 }
 input[type=email]{
     font-family: 'Open Sans', sans-serif; 
@@ -138,12 +142,31 @@ input[type=password]{
 	text-align: center;
 }
 
+input[type=submit]{
+    font-family: 'Open Sans', sans-serif; 
+	width: 250px;
+	height: 35px;
+	padding: 5px;
+	border-radius: 5px;
+	color: #FFFFFF;
+    border: 1px solid #000000;
+	background-color: #588BAE !important;
+	text-align: center;
+}
 input[type=file]{
     font-family: 'Open Sans', sans-serif; 
 	margin-left: 50px;
 	padding: 10px;
 	border-radius: 5px;
 	border: none;
+	background-color: #588BAE !important;
+}
+
+select{
+	height: 30px;
+	border: 1px solid #000000;
+	border-radius: 5px;
+	text-align: center;
 }
 
 #login-form-container
@@ -363,17 +386,17 @@ td{
 #main-table-bottom{
     margin: 10px;
 }
-#main-table-bottom button:hover{
+button:hover{
     background-color:#588BAE;
 }
-#main-table-bottom button{
+button{
     width: 250px;
     margin: 10px;
     padding: 20px;
     font-family: 'Open Sans', sans-serif; 
 	border-radius: 5px;
     color: #FFFFFF;
-    background-color: #15223B
+    background-color: #15223B;
 }
 
 .openBtn{
@@ -401,15 +424,50 @@ td{
 	width: 46% !important;
 }
 
+.main-assignments-status-btns 
+{
+	display:inline;
+}
+.main-assignments-status-btns p
+{
+    color: #ADD8E6;
+}
+.main-assignments-status-btns button
+{
+    padding: 5px;
+	width:100px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+}
+.main-assignments-status-btns button:hover
+{
+    background-color: black;
+    color: white;
+}
+
+input:read-only {
+    background-color: #AEC6CF;
+}
+
+.inline{
+	display: inline;
+}
+
+.comment textarea{
+    font-family: 'Open Sans', sans-serif; 
+	width: 800px;
+	height: 100px;
+	text-align: justify;
+	text-justify: inter-word;
+}
+.comment p{
+	margin-bottom: 0px !important;
+}
+
 @media screen and (max-width: 912px){
-	.pager{
-		display: flex;
-		text-align:right;
-		margin-right: 50px;
-		margin-bottom: 0px;
-		margin-top: 20px;
-		color: 15223B;
-	}
 	
 	.main-header
 	{

@@ -30,7 +30,7 @@
         <div id="sidebar">
             <div class="sidebar-profile">
                 <div class="sidebar-profile-text">
-                    <p class="sidebar-profile-name">Agent {{this.username}}</p>
+                    <p class="sidebar-profile-name">Admin</p>
                     <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
                     <a href="/logout">Log Out</a>
                 </div>
@@ -41,7 +41,7 @@
             </div>
 			
 			<div class="sidebar-profile-btn">
-                <a  href="addAssignment.hbs">Add New Assignment</a>
+                <a  href="/admin-add-assignment">Add New Assignment</a>
             </div>
 			
             <div class="sidebar-history-btn">
@@ -71,6 +71,10 @@
 						<th>VALID THRU</th>
 						<th>ACTION</th>
 						<th><p style="width:400" class="table-long-text">ASSIGNED AGENT</p></th>
+					</tr>
+					
+					<tr>
+						<th></th>
 					</tr>
 					  
 					{{#each assignment}}

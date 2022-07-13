@@ -60,78 +60,65 @@
         <div class="main">
             <div class="main-header">
                 <h1>Assignments</h1>
-                <p><b><i>You have 1 pending assignment(s)!</b></i></p>
+                <p><b><i>You have {{how_many_ongoing}} ongoing assignment(s)!</b></i></p>
                 <p>Please confirm immediately to secure the job or it might be reassigned.
                 If the assignments is not finished in one week, it will be reopened to all agents week, it will be reopened to all agents.</p>
             </div>
 
-            <div class="main-table">
-                <table>
-                  <tr>
-                    <th>REF NO.</th>
-                    <th>DATE OF REQUEST</th>
-                    <th>CITY, REGION</th>
-                    <th>ACTION</th>
-                    <th><p style="width:400" class="table-long-text">COMMENTS</p></th>
-                  </tr>
-
-
-				  <!--
-				  TODO: Determine if an assignment is not assigned to anyone
-					- if it's not assigned yet, the buttons are "Accept", "Deny"
-					- if it's assigned to the current session's user, it means they already accepted
-					- if it's deny, it should not show already (idk how to do this tbh)
-					- if it's assigned to you, the button should be "Edit Assignment"
-
-
-					(this is the template for accept/deny)
-				<tr>
-                  <td>227851</td>
-                  <td>4/28/22</td>
-                  <td>Cavite, IV A</td>
-                  <td>
-                      <div class="main-assignments-status-btns">
-                          <a href="/viewAssignment">Accept</a>
-                          <a href="assignments-denied.html">Deny</a>
-                      </div>
-                  </td>
-                  <td><p class="comment-text left-align">Client gave a permit to visit the property for 2 persons. You may bring a companion.</p></td>
-                </tr>
-
-				  -->
-				<!-- {{#if (eq assigned_to "")}} -->
-					<!-- {{#each assignment}} -->
-						<!-- <tr> -->
-							<!-- <td>{{this.ref_id}}</td> -->
-							<!-- <td>{{this.created_at}}</td> -->
-							<!-- <td>{{this.location}}</td> -->
-							<!-- <td> -->
-								<!-- <div class="main-assignments-status-btns"> -->
-									<!-- <a href="/acceptAssignment/{{ref_id}}">Accept</a> -->
-								<!-- </div> -->
-							<!-- </td> -->
-							<!-- <td><p class="comment-text left-align">{{this.comment}}</p></td> -->
-						<!-- </tr> -->
-					<!-- {{/each}} -->
-				<!-- {{/if}} -->
+			<form method="get" action="/assignments">
+				<div class="main-table">
+					<table>
+						<tr>
+							<th>REF NO.</th>
+							<th>DATE OF REQUEST</th>
+							<th>CITY, REGION</th>
+							<th>ACTION</th>
+						</tr>
+						<tr>
+							<th colspan='4'>New Assignments</th>
+						</tr>
 			
-				
-				{{#each assignment}}
+					{{#each assignment_new}}
+						<tr>
+							<td><p>{{this.ref_id}}</p></td>
+							<td><p>{{this.created_at}}</p></td>
+							<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+							<td>
+								<div class="main-assignments-status-btns">
+									{{#if can_accept}}
+										<button type="submit" name="accept" formaction="/accept-assignment/{{ref_id}}">Accept</button>
+									{{else}}
+										<button disabled type="submit" name="deny" formaction="/">Deny</button>
+									{{/if}}
+								</div>
+							</td>
+						</tr>
+					{{/each}}
+					
 					<tr>
-						<td>{{this.ref_id}}</td>
-						<td>{{this.created_at}}</td>
-						<td>{{this.location}}</td>
-						<td>
-							<div class="main-assignments-status-btns">
-								<a href="/viewAssignment/0/{{ref_id}}">Edit Assignment</a>
-							</div>
-						</td>
-						<td><p class="comment-text left-align">{{this.comment}}</p></td>
+						<th colspan='5'>Assigned Assignments</th>
 					</tr>
-				{{/each}}
-
-                </table>
-            </div>
+				
+					{{#each assignment_ass}}
+						<tr>
+							<td><p>{{this.ref_id}}</p></td>
+							<td><p>{{this.created_at}}</p></td>
+							<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+							<td>
+								<div class="main-assignments-status-btns">
+									<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit Assignment</button>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>Admin's Comment:</th>
+							<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
+						</tr>
+					{{/each}}
+					
+					</table>
+				</div>
+			</form>
         </div>
     </div>
 </body>

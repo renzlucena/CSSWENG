@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <html>
 <head>
-    <link rel = "stylesheet" href="agent_profile.css">
+    <link rel = "stylesheet" href="agent_add_view.css">
     <title>Create Assignment</title>
     
     
@@ -101,7 +101,7 @@
         <div id="sidebar">
             <div class="sidebar-profile">
                 <div class="sidebar-profile-text">
-                    <p class="sidebar-profile-name">Agent {{this.username}}</p>
+                    <p class="sidebar-profile-name">Admin</p>
                     <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
                     <a href="/logout">Log Out</a>
                 </div>
@@ -130,16 +130,15 @@
 		
         <div class="main">
             <div class="main-header">
-                <h1>View Current Assignments</p>
-                <p><b><i>Items will NOT be autosaved!</b></i></p>       
-                <p>Please be mindful before you close the page.</p>       
+                <h1>Create Assignments</p>
+                <p><b><i>Create New Empty Assignment</b></i></p>
             </div>  
             <form class="assignments-form" action = "/assignments" method = "post">
                 <div class="main-table">
                     <table>
                         <tr>
                             <th><label for="ref_id">Reference ID</label></th>
-                            <td><input name="ref_id" id="ref_id" type="number"></td>
+                            <td><input name="ref_id" id="ref_id" type="text" value="{{this.ref_id}}" readonly></td>
                         </tr>
                         <tr>
                             <th><label for="client_f_name">Client First Name</label></th>
@@ -150,21 +149,61 @@
                             <td><input name="client_l_name" id="client_l_name" type="text"></td>
                         </tr>
 						<tr>
+                            <th><label for="client_contact_num">Client Contact Number</label></th>
+                            <td><input name="client_contact_num" id="client_contact_num" type="text"></td>
+                        </tr>
+						<tr>
+                            <th><label for="client_email">Client Email</label></th>
+                            <td><input name="client_email" id="client_email" type="text"></td>
+                        </tr>
+						<tr>
                             <th></th>
                             <th>Lot Location</th>
-                        </tr>      
+                        </tr>
 						<tr>
                             <th><label for="lot_brgy">Lot Baranggay</label></th>
                             <td><input name="lot_brgy" id="lot_brgy" type="text"></td>
-                        </tr>  
+                        </tr>
+
 						<tr>
                             <th><label for="lot_city">Lot City</label></th>
                             <td><input name="lot_city" id="lot_city" type="text"></td>
                         </tr>
-						
+
                         <tr>
                             <th><label for="lot_region">Lot Region</label></th>
-                            <td><input name="lot_region" id="lot_region" type="text"></td>
+							<td><select id="lot_region" name="lot_region">
+								<option value="Region I">Region I (Ilocos Region)</option>
+								<option value="Region II">Region II (Cagayan Valley)</option>
+								<option value="Region III">Region III (Central Luzon)</option>
+								<option value="Region IV">Region IV-A (CALABARZON)</option>
+								<option value="Region V">Region V (Bicol Region)</option>
+								<option value="Region VI">Region VI (Western Visayas)</option>
+								<option value="Region VII">Region VII (Central Visayas)</option>
+								<option value="Region VIII">Region VIII (Eastern Visayas)</option>
+								<option value="Region IX">Region IX (Zamboanga Peninsula)</option>
+								<option value="Region X">Region X (Northern Mindanao)</option>
+								<option value="Region XI">Region XI (Davao Region)</option>
+								<option value="Region XII">Region XII (SOCCSKSARGEN)</option>
+								<option value="NCR">NCR (National Capital Region)</option>
+								<option value="CAR">CAR (Cordillera Administrative Region)</option>
+								<option value="ARMM">ARMM (Autonomous Region in Muslim Mindanao Region)</option>
+								<option value="RXIII">Region XIII (Caraga)</option>
+								<option value="MIMAROPA">MIMAROPA</option>
+							</select></td>
+                        </tr>
+
+                        <tr>
+                            <th><label for="lot_size">Lot Size</label></th>
+                            <td><input name="lot_size" id="lot_size" type="number">
+							SQM
+							</td>
+                        </tr>
+						
+						<tr>
+                            <th><label for="zonal">Zonal Value</label></th>
+                            <td><input name="zonal" id="zonal" type="number">
+							</td>
                         </tr>
                     </table>    
                 </div>
