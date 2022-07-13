@@ -11,41 +11,87 @@
 
 	<script>
 
-		function computeValues1()
+		function computeValues()
 			{
+
 				var value = 0;
+        var value1 = 0;
+        var value2 = 0;
 
-				var computationText = document.getElementById("computation1");
+        var ref_date1 = document.getElementById("ref_date_percent1");
+        var property_type1 = document.getElementById("property_type_percent1");
+        var property_interest1 = document.getElementById("property_interest_percent1");
+        var lot_size1 = document.getElementById("lot_size_percent1");
+        var shape1 = document.getElementById("shape_percent1");
+        var topo1 = document.getElementById("topo_percent1");
+        var frontage1 = document.getElementById("frontage_percent1");
+        var terms_of_sale1 = document.getElementById("terms_of_sale_percent1");
+        var corner1 = document.getElementById("corner_percent1");
+        var prime1 = document.getElementById("prime_percent1");
+        var hospital1 = document.getElementById("hospital_percent1");
+        var school1 = document.getElementById("school_percent1");
+        var mall1 = document.getElementById("mall_percent1");
+        var public_transpo1 = document.getElementById("public_transpo1");
+        var zoning1 = document.getElementById("zoning_percent1");
 
-				value = {{this.price_per_sqm}};
+        var ref_date2 = document.getElementById("ref_date_percent2");
+        var property_type2 = document.getElementById("property_type_percent2");
+        var property_interest2 = document.getElementById("property_interest_percent2");
+        var lot_size2 = document.getElementById("lot_size_percent2");
+        var shape2 = document.getElementById("shape_percent2");
+        var topo2 = document.getElementById("topo_percent2");
+        var frontage2 = document.getElementById("frontage_percent2");
+        var terms_of_sale2 = document.getElementById("terms_of_sale_percent2");
+        var corner2 = document.getElementById("corner_percent2");
+        var prime2 = document.getElementById("prime_percent2");
+        var hospital2 = document.getElementById("hospital_percent2");
+        var school2 = document.getElementById("school_percent2");
+        var mall2 = document.getElementById("mall_percent2");
+        var public_transpo2 = document.getElementById("public_transpo2");
+        var zoning2 = document.getElementById("zoning_percent2");
 
-				return value;
-			}
-		function computeValues2()
-			{
-				var value=0;
+				var computationText = document.getElementById("computation");
+        var computationText = document.getElementById("computation1");
+        var computationText = document.getElementById("computation2");
 
-				var computationText = document.getElementById("computation2");
+				var startingValue1 = document.getElementById("price_per_sqm1");
+        value1 = startingValue1;
 
-				//do the thing here
-        value = {{this.price_per_sqm1}}
-        value = value + ({{this.price_per_sqm1}}*(0.01*X_percent1))
+        value1 = startingValue1 + (startingValue1*ref_date1*0.01) +
+        (startingValue1*property_type1*0.01) +
+        (startingValue1*property_interest1*0.01) +
+        (startingValue1*lot_size1*0.01) +
+        (startingValue1*shape1*0.01) +
+        (startingValue1*topo1*0.01) +
+        (startingValue1*frontage1*0.01) +
+        (startingValue1*terms_of_sale1*0.01) +
+        (startingValue1*corner1*0.01) +
+        (startingValue1*prime1*0.01) +
+        (startingValue1*hospital1*0.01) +
+        (startingValue1*school1*0.01) +
+        (startingValue1*mall1*0.01)
+        (startingValue1*public_transpo1*0.01) +
+        (startingValue1*zoning1*0.01);
 
-        value =
+        var startingValue2 = document.getElementById("price_per_sqm1");
+        value2 = startingValue2;
 
-				return value;
-			}
-		function computeValues3()
-			{
-				var value=0;
+        value1 = startingValue1 + (startingValue2*ref_date2*0.01) +
+        (startingValue2*property_type2*0.01) +
+        (startingValue2*property_interest2*0.01) +
+        (startingValue2*lot_size2*0.01) +
+        (startingValue2*shape2*0.01) +
+        (startingValue2*topo2*0.01) +
+        (startingValue2*frontage2*0.01) +
+        (startingValue2*terms_of_sale2*0.01) +
+        (startingValue2*corner2*0.01) +
+        (startingValue2*prime2*0.01) +
+        (startingValue2*hospital2*0.01) +
+        (startingValue2*school2*0.01) +
+        (startingValue2*mall2*0.01)
+        (startingValue2*public_transpo2*0.01) +
+        (startingValue2*zoning2*0.01);
 
-				var computationText = document.getElementById("computation3");
-
-				//do the thing here
-        value = {{this.price_per_sqm2}}
-        value = value + ({{this.price_per_sqm2}}*(0.01*X_percent1))
-
-				return value;
 			}
 
 
@@ -282,7 +328,7 @@
                             <th><label>Is a Corner Lot?</label></th>
                             <td><input name="corner" type="checkbox" value="{{this.corner}}"></td>
                             <td><input name="corner" type="checkbox" value="{{this.corner1}}">
-								<input class="percentage" id="corner_percent2" name="corner" type="number" value="{{this.corner_percent2}}"> %
+								<input class="percentage" id="corner_percent2" name="corner" type="number" value="{{this.corner_percent1}}"> %
 							</td>
                             <td><input name="corner" type="checkbox" value="{{this.corner2}}">
 								<input class="percentage" id="corner_percent2" name="corner" type="number" value="{{this.corner_percent2}}"> %
@@ -292,7 +338,7 @@
                             <th><label>Is Prime Lot?</label></th>
                             <td><input name="prime" type="checkbox" value="{{this.prime}}"></td>
                             <td><input name="prime" type="checkbox" value="{{this.prime1}}">
-								<input class="percentage" id="prime_percent2" name="prime" type="number" value="{{this.prime_percent2}}"> %
+								<input class="percentage" id="prime_percent2" name="prime" type="number" value="{{this.prime_percent1}}"> %
 							</td>
                             <td><input name="prime" type="checkbox" value="{{this.prime2}}">
 								<input class="percentage" id="prime_percent2" name="prime" type="number" value="{{this.prime_percent2}}"> %
@@ -303,7 +349,7 @@
                             <th><label>Has nearby Hospital(s)?</label></th>
                             <td><input name="hospital" type="checkbox" value="{{this.hospital}}"></td>
                             <td><input name="hospital" type="checkbox" value="{{this.hospital1}}">
-								<input class="percentage" id="hospital_percent2" name="hospital" type="number" value="{{this.hospital_percent2}}"> %
+								<input class="percentage" id="hospital_percent2" name="hospital" type="number" value="{{this.hospital_percent1}}"> %
 							</td>
                             <td><input name="hospital" type="checkbox" value="{{this.hospital2}}">
 								<input class="percentage" id="hospital_percent2" name="hospital" type="number" value="{{this.hospital_percent2}}"> %
@@ -313,7 +359,7 @@
 							<th><label>Has nearby School(s)?</label></th>
                             <td><input name="school" type="checkbox" value="{{this.school}}"></td>
                             <td><input name="school" type="checkbox" value="{{this.school1}}">
-								<input class="percentage" id="school_percent2" name="school" type="number" value="{{this.school_percent2}}"> %
+								<input class="percentage" id="school_percent2" name="school" type="number" value="{{this.school_percent1}}"> %
 							</td>
                             <td><input name="school" type="checkbox" value="{{this.school2}}">
 								<input class="percentage" id="school_percent2" name="school" type="number" value="{{this.school_percent2}}"> %
@@ -323,7 +369,7 @@
                             <th><label>Has nearby Shop/Mall(s)?</label></th>
                             <td><input name="mall" type="checkbox" value="{{this.mall}}"></td>
                             <td><input name="mall" type="checkbox" value="{{this.mall1}}">
-								<input class="percentage" id="mall_percent2" name="mall" type="number" value="{{this.mall_percent2}}"> %
+								<input class="percentage" id="mall_percent2" name="mall" type="number" value="{{this.mall_percent1}}"> %
 							</td>
                             <td><input name="mall" type="checkbox" value="{{this.mall2}}">
 								<input class="percentage" id="mall_percent2" name="mall" type="number" value="{{this.mall_percent2}}"> %
@@ -359,7 +405,7 @@
                             <th><label>Has Improvement(s)?</label></th>
                             <td><input name="improvement" type="checkbox" value="{{this.improvement}}"></td>
                             <td><input name="improvement" type="checkbox" value="{{this.improvement1}}">
-								<input class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
+								<input class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent1}}"> %
 							</td>
                             <td><input name="improvement" type="checkbox" value="{{this.improvement2}}">
 								<input class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
