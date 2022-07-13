@@ -188,7 +188,7 @@ app.get('/history', async(req,res)=>{
 app.get('/save-ass', async(req,res)=> {
 	sess = req.session;
 	if(sess.username){
-		// console.log(req.query.)
+		console.log(req.query)
 		var today = new Date()
 		try{
 			//edit comment  to "Submitted."
@@ -204,11 +204,12 @@ app.get('/save-ass', async(req,res)=> {
 					completed_on: today,
 
 					price_per_sqm: req.query.price_per_sqm[0],
-					ref_date: req.query.ref_date[0],
+					ref_date: req.query.ref_date[0].getDate(),
 					lot_loc: req.query.lot_loc[0],
 					property_type: req.query.property_type[0],
 					property_interest: req.query.property_interest[0],
 					// property_images: [imageSchema], //REPORT AS MISSING FEATURE NALANG, WE CAN'T IMPLEMENT THIS AT THIS TIME...
+					
 					lot_size: req.query.lot_size[0],
 					shape: req.query.shape[0],
 					topo: req.query.topo[0],
@@ -227,58 +228,52 @@ app.get('/save-ass', async(req,res)=> {
 
 					//add empty comparative
 					comparative1 : {
-						price_per_sqm: req.query.price_per_sqm[1]
-
-						/*
-						ref_date: {date: null, num: 0}, //idk if this works
-						lot_loc: "",
-						property_type: {str: "", num:0},
-						property_interest: {str:"",num:0},
-						//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
+						price_per_sqm: req.query.price_per_sqm[1],
+						ref_date: req.query.ref_date[1].getDate(),
+						lot_loc: req.query.lot_loc[1],
+						property_type: req.query.property_type[1],
+						property_interest: req.query.property_interest[1],
 						// property_images: [imageSchema],
-						lot_size: {num1: 0, num2: 0},
-						shape: {str: "", num:0},
-						topo: {str: "", num:0},
-						frontage: {str: "", num:0},
-						terms_of_sale: {str: "", num:0},
-						corner: {bool:0,num:0},
-						prime: {bool:0,num:0},
-						hospital: {bool:0,num:0},
-						school: {bool:0,num:0},
-						mall: {bool:0,num:0},
-						public_transpo: {str:"", num:0},
-						improvement: {bool:0,num:0},
-						zoning: {str: "", num:0},
-						computation: {num1: 0, num2: 0}
-
-						*/
+						lot_size: req.query.lot_size[1],
+						shape: req.query.shape[1],
+						topo: req.query.topo[1],
+						frontage: req.query.frontage[1],
+						terms_of_sale: req.query.terms_of_sale[1],
+						corner: req.query.corner[1],
+						prime: req.query.prime[1],
+						hospital: req.query.hospital[1],
+						school: req.query.school[1],
+						mall: req.query.mall[1],
+						public_transpo: req.query.public_transpo[1],
+						improvement: req.query.improvement[1],
+						zoning: req.query.zoning[1],
+						computation: req.query.computation[1]						
 					},
 
 					//add empty comparative
 					comparative2 : {
 						price_per_sqm: req.query.price_per_sqm[2],
-						/*
-						ref_date: {date: null, num: 0},
-						lot_loc: "",
-						property_type: {str: "", num:0},
-						property_interest: {str:"",num:0},
+						ref_date: req.query.ref_date[2].getDate(),
+						lot_loc: req.query.lot_loc[2],
+						property_type: req.query.property_type[2],
+						property_interest: req.query.property_interest[2],
 						// property_images: [imageSchema],
-						lot_size: {num1: 0, num2: 0},
-						shape: {str: "", num:0},
-						topo: {str: "", num:0},
-						frontage: {str: "", num:0},
-						terms_of_sale: {str: "", num:0},
-						corner: {bool:0,num:0},
-						prime: {bool:0,num:0},
-						hospital: {bool:0,num:0},
-						school: {bool:0,num:0},
-						mall: {bool:0,num:0},
-						public_transpo: {str: "", num:0},
-						improvement: {bool:0,num:0},
-						zoning: {str: "", num:0},
-						computation: {num1: 0, num2: 0}
-						*/
+						lot_size: req.query.lot_size[2],
+						shape: req.query.shape[2],
+						topo: req.query.topo[2],
+						frontage: req.query.frontage[2],
+						terms_of_sale: req.query.terms_of_sale[2],
+						corner: req.query.corner[2],
+						prime: req.query.prime[2],
+						hospital: req.query.hospital[2],
+						school: req.query.school[2],
+						mall: req.query.mall[2],
+						public_transpo: req.query.public_transpo[2],
+						improvement: req.query.improvement[2],
+						zoning: req.query.zoning[2],
+						computation: req.query.computation[1]						
 					}
+						
 				})
 
 
@@ -354,6 +349,105 @@ app.get('/set-settings', async(req,res)=> {
 		res.redirect('/submit-login')
 	}
 });
+
+/*app.get('/create-document', async(req,res))=>
+{
+	sess.username)
+	
+	
+	
+	//ADD NEW DOCUMENT
+		try{
+			Assignment.create(
+			{
+				ref_id: req.body.ref_id,
+				type_of_approach: "Market Approach",
+				client_f_name: req.body.client_f_name,
+				client_l_name: req.body.client_l_name,
+				client_contact_num: req.body.client_contact_num,
+				client_email: req.body.client_email,
+				lot_brgy: req.body.lot_brgy,
+				lot_city: req.body.lot_city,
+				lot_region: req.body.lot_region,
+				zonal: req.body.zonal,
+				assigned_to: "",
+
+				//no dates because they have default values already
+				price_per_sqm: 0,
+				lot_loc: "",
+				property_type: "",
+				property_interest: "",
+				// property_images: [imageSchema], //REPORT AS MISSING FEATURE NALANG, WE CAN'T IMPLEMENT THIS AT THIS TIME...
+				lot_size: req.body.lot_size,
+				shape: "",
+				topo: "",
+				frontage: "",
+				terms_of_sale: "",
+				corner: false,
+				prime: false,
+				hospital: false,
+				school: false,
+				mall:   false,
+				public_transpo: "",
+				improvement: false,
+				zoning: "",
+				computation: {num1: 0, num2: 0},
+				//don't set comment because it has a default value that marks it as "New!"
+
+				//add empty comparative
+				comparative1 : {
+					price_per_sqm: 0,
+					ref_date: {date: null, num: 0}, //idk if this works
+					lot_loc: "",
+					property_type: {str: "", num:0},
+					property_interest: {str:"",num:0},
+					//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
+					// property_images: [imageSchema],
+					lot_size: {num1: 0, num2: 0},
+					shape: {str: "", num:0},
+					topo: {str: "", num:0},
+					frontage: {str: "", num:0},
+					terms_of_sale: {str: "", num:0},
+					corner: {bool:0,num:0},
+					prime: {bool:0,num:0},
+					hospital: {bool:0,num:0},
+					school: {bool:0,num:0},
+					mall: {bool:0,num:0},
+					public_transpo: {str:"", num:0},
+					improvement: {bool:0,num:0},
+					zoning: {str: "", num:0},
+					computation: {num1: 0, num2: 0}
+				},
+
+				//add empty comparative
+				comparative2 : {
+					price_per_sqm: 0,
+					ref_date: {date: null, num: 0},
+					lot_loc: "",
+					property_type: {str: "", num:0},
+					property_interest: {str:"",num:0},
+					// property_images: [imageSchema],
+					lot_size: {num1: 0, num2: 0},
+					shape: {str: "", num:0},
+					topo: {str: "", num:0},
+					frontage: {str: "", num:0},
+					terms_of_sale: {str: "", num:0},
+					corner: {bool:0,num:0},
+					prime: {bool:0,num:0},
+					hospital: {bool:0,num:0},
+					school: {bool:0,num:0},
+					mall: {bool:0,num:0},
+					public_transpo: {str: "", num:0},
+					improvement: {bool:0,num:0},
+					zoning: {str: "", num:0},
+					computation: {num1: 0, num2: 0}
+				}
+			})
+		}
+		catch(err)
+		{console.log(err)}
+}
+		*/
 
 // SEND ASSIGNMENT TO ADMIN FOR FEEDBACK
 app.get('/send-ass', async(req,res)=> {
@@ -752,7 +846,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							completed_on	: ass.completed_on,
 							expiring_on 	: ass.expiring_on,
 
-				// SUPJECT PROPERTY
 							price_per_sqm	: ass.price_per_sqm,
 							lot_loc			: ass.lot_loc,
 							property_type	: ass.property_type,
@@ -777,7 +870,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							//comment
 							comment: ass.comment,
 
-				// COMPARATIVE I
+						// COMPARATIVE I
 							price_per_sqm1		: ass.comparative1.price_per_sqm,
 							ref_date1			: ass.comparative1.ref_date.date, //idk if this works
 							lot_loc1			: ass.comparative1.lot_loc,
