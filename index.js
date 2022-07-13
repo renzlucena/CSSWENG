@@ -1101,7 +1101,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime1				: ass.comparative1.prime.bool,
 							hospital1			: ass.comparative1.hospital.bool,
 							school1				: ass.comparative1.school.bool,
-							mall1         : ass.comparative1.mall.bool,
+							mall1         		: ass.comparative1.mall.bool,
 							public_transpo1		: ass.comparative1.public_transpo.str,
 							improvement1		: ass.comparative1.improvement.bool,
 							zoning1				: ass.comparative1.zoning.str,
@@ -1623,29 +1623,49 @@ app.get('/assignments', async(req,res)=> {
 
 			if (howmany==0)
 			{
-				await Account.findOneAndUpdate({username: sess.username},
-					{can_accept: true})
+				sess.can_accept=true
 			}
 			else{
-				await Account.findOneAndUpdate({username: sess.username},
-					{can_accept: false})
+				sess.can_accept=false
 			}
-			res.render('assignments.hbs', {
-				how_many_ongoing : howmany,
-				assignment_new:ass_new,
-				assignment_ass:ass,
+			
+			if (sess.can_accept)
+			{
+				res.render('assignments.hbs', {
+					how_many_ongoing : howmany,
+					assignment_new:ass_new,
+					assignment_ass:ass,
 
-				username: sess.username,
-				password: sess.password,
-				remember: sess.remember,
-				status: sess.status,
-				email: sess.email,
-				fname: sess.fname,
-				lname: sess.lname,
-				appnum: sess.appnum,
-				can_accept: sess.can_accept
+					username: sess.username,
+					password: sess.password,
+					remember: sess.remember,
+					status: sess.status,
+					email: sess.email,
+					fname: sess.fname,
+					lname: sess.lname,
+					appnum: sess.appnum,
+					can_accept: sess.can_accept
 
-			})
+				})
+			}
+			else{
+				res.render('assignments_cant_accept.hbs', {
+					how_many_ongoing : howmany,
+					assignment_new:ass_new,
+					assignment_ass:ass,
+
+					username: sess.username,
+					password: sess.password,
+					remember: sess.remember,
+					status: sess.status,
+					email: sess.email,
+					fname: sess.fname,
+					lname: sess.lname,
+					appnum: sess.appnum,
+					can_accept: sess.can_accept
+
+				})
+			}
 		}
 	}
 	else{
