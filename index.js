@@ -69,7 +69,7 @@ app.get('/login', async(req,res)=> {
         // console.log(req.query.password) //+ " ==? " + account.password)
         // console.log(req.query.username) //+ " ==? " + account.username)
 		console.log(acct)
-		
+
 		if (acct==null){
             console.log("Account does not exist.")
         	res.redirect('/login-fail-not-exist.html');
@@ -90,7 +90,7 @@ app.get('/login', async(req,res)=> {
                 sess.lname    = acct.lname,
                 sess.appNum   = acct.appNum,
                 sess.appexp   = acct.appexp
-				
+
 				if(req.query.username == "admin")
 				{
 					res.redirect('/assignments');
@@ -111,7 +111,7 @@ app.get('/login', async(req,res)=> {
 						// lName   : acct.lName,
 						// appNum  : acct.appNum,
 						// appexp : acct.appexp
-						// //this is like in java: this.data = data	
+						// //this is like in java: this.data = data
 					// })
 				}
 			}
@@ -142,10 +142,10 @@ app.get('/history', async(req,res)=>{
 			const ass = await Assignment.find({
 				comment: "Approved."
 			})
-			
+
 			res.render('history_admin.hbs', {
 				assignment : ass,
-				
+
 				username: sess.username,
 				password: sess.password,
 				remember: sess.remember,
@@ -154,7 +154,7 @@ app.get('/history', async(req,res)=>{
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
-				can_accept: sess.can_accept		
+				can_accept: sess.can_accept
 			});
 			console.log(ass)
 		}
@@ -163,7 +163,7 @@ app.get('/history', async(req,res)=>{
 			const ass = await Assignment.find({
 				assigned_to: sess.username,
 				comment: "Approved."})
-			
+
 			res.render('history.hbs', {
 				assignment : ass,
 				username: sess.username,
@@ -174,12 +174,12 @@ app.get('/history', async(req,res)=>{
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
-				can_accept: sess.can_accept		
+				can_accept: sess.can_accept
 			});
 		}
 	}
 	else
-	{		
+	{
 		res.redirect('/login-fail.html')
 	}
 });
@@ -192,7 +192,7 @@ app.get('/save-ass', async(req,res)=> {
 		var today = new Date()
 		try{
 			//edit comment  to "Submitted."
-			
+
 			await Assignment.findOneAndUpdate(
 				{ref_id: req.params.ref_id},
 				{
@@ -200,10 +200,10 @@ app.get('/save-ass', async(req,res)=> {
 					lot_brgy: req.query.lot_brgy,
 					lot_city: req.query.lot_city,
 					lot_region: req.query.lot_region,
-			
+
 					completed_on: today,
-					
-					price_per_sqm: req.query.price_per_sqm[0],						
+
+					price_per_sqm: req.query.price_per_sqm[0],
 					ref_date: req.query.ref_date[0],
 					lot_loc: req.query.lot_loc[0],
 					property_type: req.query.property_type[0],
@@ -218,6 +218,7 @@ app.get('/save-ass', async(req,res)=> {
 					prime: req.query.prime[0],
 					hospital: req.query.hospital[0],
 					school: req.query.school[0],
+					mall: req.query.mall[0],
 					public_transpo: req.query.public_transpo[0],
 					improvement: req.query.improvement[0],
 					zoning: req.query.zoning[0],
@@ -227,7 +228,7 @@ app.get('/save-ass', async(req,res)=> {
 					//add empty comparative
 					comparative1 : {
 						price_per_sqm: req.query.price_per_sqm[1]
-						
+
 						/*
 						ref_date: {date: null, num: 0}, //idk if this works
 						lot_loc: "",
@@ -244,11 +245,12 @@ app.get('/save-ass', async(req,res)=> {
 						prime: {bool:0,num:0},
 						hospital: {bool:0,num:0},
 						school: {bool:0,num:0},
+						mall: {bool:0,num:0},
 						public_transpo: {str:"", num:0},
 						improvement: {bool:0,num:0},
 						zoning: {str: "", num:0},
 						computation: {num1: 0, num2: 0}
-						
+
 						*/
 					},
 
@@ -270,6 +272,7 @@ app.get('/save-ass', async(req,res)=> {
 						prime: {bool:0,num:0},
 						hospital: {bool:0,num:0},
 						school: {bool:0,num:0},
+						mall: {bool:0,num:0},
 						public_transpo: {str: "", num:0},
 						improvement: {bool:0,num:0},
 						zoning: {str: "", num:0},
@@ -277,23 +280,23 @@ app.get('/save-ass', async(req,res)=> {
 						*/
 					}
 				})
-	
-	
-	
+
+
+
 			//dont care for empty, save all edits
 			// await Assignment.findOneAndUpdate({lot_size: res.query.lot_size},{username: req.query.username})
 			// sess.username = req.query.username
-			
-			
+
+
 			// await Account.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
 			// sess.bio = req.query.bio;
-			
+
 			// if(req.query.newPassword != "" && sess.password != req.query.newPassword)
 			// {
 				// await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
 				// sess.password = req.query.newPassword
 			// }
-			
+
 			//res.redirect('/viewAssignment/'+ req.params.ref_id)
 		}
 		catch(err)
@@ -316,22 +319,22 @@ app.get('/set-settings', async(req,res)=> {
 		try{
 			//render with new data
 			if (req.query.username!= sess.username && req.query.username != "")
-			{	
+			{
 				await Account.findOneAndUpdate({username: sess.username},{username: req.query.username})
 				sess.username = req.query.username
 			}
-			
+
 			await Account.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
 			sess.bio = req.query.bio;
-			
+
 			if(req.query.newPassword != "" && sess.password != req.query.newPassword)
 			{
 				await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
 				sess.password = req.query.newPassword
 			}
-			
+
 			res.redirect('/profile')
-			
+
 		}
 		catch(err)
 		{
@@ -382,7 +385,7 @@ app.get('/admin-approve', async(req,res)=>{
 			await Assignment.findOneAndUpdate(
 				{ref_id: req.query.ref_id},
 				{comment: "Approved."})
-				
+
 			res.redirect('/history')
 		}
 		catch(err){
@@ -403,12 +406,12 @@ app.get('/admin-comment', async(req,res)=>{
 			// await Assignment.findOneAndUpdate({res: sess.username},{comment: true})
 			// const ass = await Assignment.findOneAndUpdate({res: req.params.ref_id},{comment: "test"})
 			// req.params.ref_id
-			
+
 			const ass = await Assignment.findOneAndUpdate(
 				{ref_id: req.query.ref_id},
 				{comment: "Returned: " + req.query.comment
 				})
-			
+
 			res.redirect('/history')
 		}
 		catch(err){
@@ -431,21 +434,21 @@ app.get('/admin-add-assignment', async(req,res)=>{
 	sess = req.session
 	// try{
 	var year = new Date();
-	
+
 	// console.log(year.getFullYear().toString())
-	
+
 	//const count = await Assignment.countDocuments().exec()
-		
+
 	// res.render('addAssignment.hbs',{
-		
+
 		// ref_id	:	year.getDate.toString	//test
 	// });
-		
-	
+
+
 	if(sess.username=="admin")
 	{
 		const count = await Assignment.countDocuments().exec()
-		
+
 		res.render('addAssignment.hbs',{
 			username: sess.username,
 			password: sess.password,
@@ -455,22 +458,22 @@ app.get('/admin-add-assignment', async(req,res)=>{
 			fname: sess.fname,
 			lname: sess.lname,
 			appnum: sess.appnum,
-			can_accept: sess.can_accept,	
-			
+			can_accept: sess.can_accept,
+
 			ref_id	:	(year.getFullYear()-2000).toString()+year.getMonth().toString()+padLeadingZeros((count+1), 3)
-			
+
 		});
 	}
 	else{
 		res.redirect('/login-fail.html')
 	}
-	
+
 });
 
 app.get('/view/0/:ref_id', async(req,res)=>{
 	sess = req.session
 	var ref_id = req.params.ref_id
-	
+
 	if(sess.username)
 	{
 		if(sess.username == "admin")
@@ -492,13 +495,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							lot_region		: ass.lot_region,
 							zonal			: ass.zonal,
 							assigned_to		: ass.assigned_to,
-							
+
 							//dates
 							ref_date		: ass.ref_date,
 							created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
 							completed_on	: ass.completed_on,
 							expiring_on 	: ass.expiring_on,
-							
+
 				// SUPJECT PROPERTY
 							price_per_sqm	: ass.price_per_sqm,
 							lot_loc			: ass.lot_loc,
@@ -514,14 +517,16 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime			: ass.prime,
 							hospital		: ass.hospital,
 							school			: ass.school,
+							mall				: ass.mall,
+
 							public_transpo	: ass.public_transpo,
 							improvement		: ass.improvement,
 							zoning			: ass.zoning,
 							computation		: ass.computation,
-							
+
 							//comment
 							comment: ass.comment,
-							
+
 				// COMPARATIVE I
 							price_per_sqm1		: ass.comparative1.price_per_sqm,
 							ref_date1			: ass.comparative1.ref_date.date, //idk if this works
@@ -538,11 +543,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime1				: ass.comparative1.prime.bool,
 							hospital1			: ass.comparative1.hospital.bool,
 							school1				: ass.comparative1.school.bool,
+							mall1				: ass.comparative1.mall.bool,
 							public_transpo1		: ass.comparative1.public_transpo.str,
 							improvement1		: ass.comparative1.improvement.bool,
 							zoning1				: ass.comparative1.zoning.str,
 							computation1		: ass.comparative1.computation.num1,
-	
+
 				// COMPARATIVE I - percent1's
 							ref_date_percent1			: ass.comparative1.ref_date.num,
 							property_type_percent1		: ass.comparative1.property_type.num,
@@ -556,11 +562,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime_percent1				: ass.comparative1.prime.num,
 							hospital_percent1			: ass.comparative1.hospital.num,
 							school_percent1				: ass.comparative1.school.num,
+							mall_percent1				: ass.comparative1.mall.bool,
 							public_transpo_percent1		: ass.comparative1.public_transpo.num,
 							improvement_percent1		: ass.comparative1.improvement.num,
 							zoning_percent1				: ass.comparative1.zoning.num,
 							computation_percent1		: ass.comparative1.computation.num2,
-							
+
 				//	COMPARATIVE II
 							price_per_sqm2		: ass.comparative2.price_per_sqm,
 							ref_date2			: ass.comparative2.ref_date.date, //idk if this works
@@ -577,11 +584,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime2				: ass.comparative2.prime.bool,
 							hospital2			: ass.comparative2.hospital.bool,
 							school2				: ass.comparative2.school.bool,
+							mall_percent2				: ass.comparative2.mall.bool,
 							public_transpo2		: ass.comparative2.public_transpo.str,
 							improvement2		: ass.comparative2.improvement.bool,
 							zoning2				: ass.comparative2.zoning.str,
 							computation2		: ass.comparative2.computation.num1,
-	
+
 				// COMPARATIVE II - percent2's
 							ref_date_percent2			: ass.comparative2.ref_date.num,
 							property_type_percent2		: ass.comparative2.property_type.num,
@@ -595,6 +603,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime_percent2				: ass.comparative2.prime.num,
 							hospital_percent2			: ass.comparative2.hospital.num,
 							school_percent2				: ass.comparative2.school.num,
+							mall_percent2				: ass.comparative2.mall.bool,
 							public_transpo_percent2		: ass.comparative2.public_transpo.num,
 							improvement_percent2		: ass.comparative2.improvement.num,
 							zoning_percent2				: ass.comparative2.zoning.num,
@@ -608,11 +617,11 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							fname: sess.fname,
 							lname: sess.lname,
 							appnum: sess.appnum,
-							can_accept: sess.can_accept		
+							can_accept: sess.can_accept
 						});
 				}
 					//	IF REVIEWING SUBMITTED ASSIGNMENTS (comment="Submitted.")
-				else if (ass.comment == "Submitted."){	
+				else if (ass.comment == "Submitted."){
 					res.render('viewAssignment_0_admin.hbs',{
 						ref_id 			: ass.ref_id,
 						type_of_approach: ass.type_of_approach,
@@ -623,13 +632,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						lot_region		: ass.lot_region,
 						zonal			: ass.zonal,
 						assigned_to		: ass.assigned_to,
-						
+
 						//dates
 						ref_date		: ass.ref_date,
 						created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
 						completed_on	: ass.completed_on,
 						expiring_on 	: ass.expiring_on,
-						
+
 			// SUPJECT PROPERTY
 						price_per_sqm	: ass.price_per_sqm,
 						lot_loc			: ass.lot_loc,
@@ -645,14 +654,15 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						prime			: ass.prime,
 						hospital		: ass.hospital,
 						school			: ass.school,
+						mall				: ass.mall,
 						public_transpo	: ass.public_transpo,
 						improvement		: ass.improvement,
 						zoning			: ass.zoning,
 						computation		: ass.computation,
-						
+
 						//comment
 						comment: ass.comment,
-						
+
 			// COMPARATIVE I
 						price_per_sqm1		: ass.comparative1.price_per_sqm,
 						ref_date1			: ass.comparative1.ref_date.date, //idk if this works
@@ -669,6 +679,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						prime1				: ass.comparative1.prime.bool,
 						hospital1			: ass.comparative1.hospital.bool,
 						school1				: ass.comparative1.school.bool,
+						mall1				: ass.comparative1.mall.bool,
 						public_transpo1		: ass.comparative1.public_transpo.str,
 						improvement1		: ass.comparative1.improvement.bool,
 						zoning1				: ass.comparative1.zoning.str,
@@ -687,11 +698,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						prime_percent1				: ass.comparative1.prime.num,
 						hospital_percent1			: ass.comparative1.hospital.num,
 						school_percent1				: ass.comparative1.school.num,
+						mall_percent1				: ass.comparative1.mall.bool,
 						public_transpo_percent1		: ass.comparative1.public_transpo.num,
 						improvement_percent1		: ass.comparative1.improvement.num,
 						zoning_percent1				: ass.comparative1.zoning.num,
 						computation_percent1		: ass.comparative1.computation.num,
-						
+
 			//	COMPARATIVE II
 						price_per_sqm2		: ass.comparative2.price_per_sqm,
 						ref_date2			: ass.comparative2.ref_date.date, //idk if this works
@@ -708,6 +720,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						prime2				: ass.comparative2.prime.bool,
 						hospital2			: ass.comparative2.hospital.bool,
 						school2				: ass.comparative2.school.bool,
+						mall2			: ass.comparative2.mall.bool,
 						public_transpo2		: ass.comparative2.public_transpo.str,
 						improvement2		: ass.comparative2.improvement.bool,
 						zoning2				: ass.comparative2.zoning.str,
@@ -726,6 +739,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						prime_percent2				: ass.comparative2.prime.num,
 						hospital_percent2			: ass.comparative2.hospital.num,
 						school_percent2				: ass.comparative2.school.num,
+						mall_percent2					: ass.comparative2.mall.num,
 						public_transpo_percent2		: ass.comparative2.public_transpo.num,
 						improvement_percent2		: ass.comparative2.improvement.num,
 						zoning_percent2				: ass.comparative2.zoning.num,
@@ -739,14 +753,14 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						fname: sess.fname,
 						lname: sess.lname,
 						appnum: sess.appnum,
-						can_accept: sess.can_accept		
+						can_accept: sess.can_accept
 					});
 				}
 				else{//	IF REVIEWING NEW/UNASSIGNED ASSIGNMENTS (comment="New!")
 				//Notes: Same layout as viewAssignment_0_admin.hbs, difference is no buttons at the bottom only.
 					//console.log(ass.comparative1)
 					//console.log(ass.comparative1.property_interest_percent)
-					
+
 					res.render('viewAssignment_1_admin.hbs', {
 						ref_id 			: ass.ref_id,
 						type_of_approach: ass.type_of_approach,
@@ -757,13 +771,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						lot_region		: ass.lot_region,
 						zonal			: ass.zonal,
 						assigned_to		: ass.assigned_to,
-						
+
 						//dates
 						//ref_date		: ass.ref_date,
 						created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
 						completed_on	: ass.completed_on,
 						expiring_on 	: ass.expiring_on,
-						
+
 			// SUPJECT PROPERTY
 						price_per_sqm	: ass.price_per_sqm,
 						lot_loc			: ass.lot_loc,
@@ -779,14 +793,15 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						prime			: ass.prime,
 						hospital		: ass.hospital,
 						school			: ass.school,
+						mall				: ass.mall,
 						public_transpo	: ass.public_transpo,
 						improvement		: ass.improvement,
 						zoning			: ass.zoning,
 						computation		: ass.computation,
-						
+
 						//comment
 						comment: ass.comment,
-						
+
 			// COMPARATIVE I
 						price_per_sqm1		: ass.comparative1.price_per_sqm,
 						ref_date1			: ass.comparative1.ref_date.date, //idk if this works
@@ -803,6 +818,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						prime1				: ass.comparative1.prime.bool,
 						hospital1			: ass.comparative1.hospital.bool,
 						school1				: ass.comparative1.school.bool,
+						mall1 				: ass.comparative1.mall.bool,
 						public_transpo1		: ass.comparative1.public_transpo.str,
 						improvement1		: ass.comparative1.improvement.bool,
 						zoning1				: ass.comparative1.zoning.str,
@@ -821,11 +837,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						prime_percent1				: ass.comparative1.prime.num,
 						hospital_percent1			: ass.comparative1.hospital.num,
 						school_percent1				: ass.comparative1.school.num,
+						mall_percent1					: ass.comparative1.mall.num,
 						public_transpo_percent1		: ass.comparative1.public_transpo.num,
 						improvement_percent1		: ass.comparative1.improvement.num,
 						zoning_percent1				: ass.comparative1.zoning.num,
 						computation_percent1		: ass.comparative1.computation.num,
-						
+
 			//	COMPARATIVE II
 						price_per_sqm2		: ass.comparative2.price_per_sqm,
 						ref_date2			: ass.comparative2.ref_date.date, //idk if this works
@@ -842,6 +859,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						prime2				: ass.comparative2.prime.bool,
 						hospital2			: ass.comparative2.hospital.bool,
 						school2				: ass.comparative2.school.bool,
+						mall2 				: ass.comparative2.mall.bool,
 						public_transpo2		: ass.comparative2.public_transpo.str,
 						improvement2		: ass.comparative2.improvement.bool,
 						zoning2				: ass.comparative2.zoning.str,
@@ -860,6 +878,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						prime_percent2				: ass.comparative2.prime.num,
 						hospital_percent2			: ass.comparative2.hospital.num,
 						school_percent2				: ass.comparative2.school.num,
+						mall_percent2   			: ass.comparative2.mall.num,
 						public_transpo_percent2		: ass.comparative2.public_transpo.num,
 						improvement_percent2		: ass.comparative2.improvement.num,
 						zoning_percent2				: ass.comparative2.zoning.num,
@@ -873,7 +892,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						fname: sess.fname,
 						lname: sess.lname,
 						appnum: sess.appnum,
-						can_accept: sess.can_accept		
+						can_accept: sess.can_accept
 					});
 				}
 			}
@@ -899,13 +918,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							lot_region		: ass.lot_region,
 							zonal			: ass.zonal,
 							assigned_to		: ass.assigned_to,
-							
+
 							//dates
 							ref_date		: ass.ref_date,
 							created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
 							completed_on	: ass.completed_on,
 							expiring_on 	: ass.expiring_on,
-							
+
 				// SUPJECT PROPERTY
 							price_per_sqm	: ass.price_per_sqm,
 							lot_loc			: ass.lot_loc,
@@ -921,14 +940,15 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime			: ass.prime,
 							hospital		: ass.hospital,
 							school			: ass.school,
+							mall 				: ass.mall,
 							public_transpo	: ass.public_transpo,
 							improvement		: ass.improvement,
 							zoning			: ass.zoning,
 							computation		: ass.computation,
-							
+
 							//comment
 							comment: ass.comment,
-							
+
 				// COMPARATIVE I
 							price_per_sqm1		: ass.comparative1.price_per_sqm,
 							ref_date1			: ass.comparative1.ref_date.date, //idk if this works
@@ -945,11 +965,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime1				: ass.comparative1.prime.bool,
 							hospital1			: ass.comparative1.hospital.bool,
 							school1				: ass.comparative1.school.bool,
+							mall1				: ass.comparative1.mall.bool,
 							public_transpo1		: ass.comparative1.public_transpo.str,
 							improvement1		: ass.comparative1.improvement.bool,
 							zoning1				: ass.comparative1.zoning.str,
 							computation1		: ass.comparative1.computation.num,
-	
+
 				// COMPARATIVE I - percent1's
 							ref_date_percent1			: ass.comparative1.ref_date.num,
 							property_type_percent1		: ass.comparative1.property_type.num,
@@ -963,11 +984,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime_percent1				: ass.comparative1.prime.num,
 							hospital_percent1			: ass.comparative1.hospital.num,
 							school_percent1				: ass.comparative1.school.num,
+							mall_percent1  				: ass.comparative1.mall.num,
 							public_transpo_percent1		: ass.comparative1.public_transpo.num,
 							improvement_percent1		: ass.comparative1.improvement.num,
 							zoning_percent1				: ass.comparative1.zoning.num,
 							computation_percent1		: ass.comparative1.computation.num,
-							
+
 				//	COMPARATIVE II
 							price_per_sqm2		: ass.comparative2.price_per_sqm,
 							ref_date2			: ass.comparative2.ref_date.date, //idk if this works
@@ -984,11 +1006,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime2				: ass.comparative2.prime.bool,
 							hospital2			: ass.comparative2.hospital.bool,
 							school2				: ass.comparative2.school.bool,
+							mall2         : ass.comparative2.mall.bool,
 							public_transpo2		: ass.comparative2.public_transpo.str,
 							improvement2		: ass.comparative2.improvement.bool,
 							zoning2				: ass.comparative2.zoning.str,
 							computation2		: ass.comparative2.computation.num,
-	
+
 				// COMPARATIVE II - percent2's
 							ref_date_percent2			: ass.comparative2.ref_date.num,
 							property_type_percent2		: ass.comparative2.property_type.num,
@@ -1002,6 +1025,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime_percent2				: ass.comparative2.prime.num,
 							hospital_percent2			: ass.comparative2.hospital.num,
 							school_percent2				: ass.comparative2.school.num,
+							mall_percent2         : ass.comparative2.mall.num,
 							public_transpo_percent2		: ass.comparative2.public_transpo.num,
 							improvement_percent2		: ass.comparative2.improvement.num,
 							zoning_percent2				: ass.comparative2.zoning.num,
@@ -1015,11 +1039,11 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							fname: sess.fname,
 							lname: sess.lname,
 							appnum: sess.appnum,
-							can_accept: sess.can_accept		
+							can_accept: sess.can_accept
 						});
 				}
 				else{	//	in assignemnts
-					
+
 					res.render('viewAssignment_0.hbs',{
 						ref_id 			: ass.ref_id,
 							type_of_approach: ass.type_of_approach,
@@ -1030,13 +1054,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							lot_region		: ass.lot_region,
 							zonal			: ass.zonal,
 							assigned_to		: ass.assigned_to,
-							
+
 							//dates
 							ref_date		: ass.ref_date,
 							created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
 							completed_on	: ass.completed_on,
 							expiring_on 	: ass.expiring_on,
-							
+
 				// SUPJECT PROPERTY
 							price_per_sqm	: ass.price_per_sqm,
 							lot_loc			: ass.lot_loc,
@@ -1052,14 +1076,15 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime			: ass.prime,
 							hospital		: ass.hospital,
 							school			: ass.school,
+							mall 				: ass.mall,
 							public_transpo	: ass.public_transpo,
 							improvement		: ass.improvement,
 							zoning			: ass.zoning,
 							computation		: ass.computation,
-							
+
 							//comment
 							comment: ass.comment,
-							
+
 				// COMPARATIVE I
 							price_per_sqm1		: ass.comparative1.price_per_sqm,
 							// ref_date1			: ass.comparative1.ref_date.date, //TODO: Doesnt workkkk
@@ -1076,11 +1101,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime1				: ass.comparative1.prime.bool,
 							hospital1			: ass.comparative1.hospital.bool,
 							school1				: ass.comparative1.school.bool,
+							mall1         : ass.comparative1.mall.bool,
 							public_transpo1		: ass.comparative1.public_transpo.str,
 							improvement1		: ass.comparative1.improvement.bool,
 							zoning1				: ass.comparative1.zoning.str,
 							computation1		: ass.comparative1.computation.num,
-	
+
 				// COMPARATIVE I - percent1's
 							ref_date_percent1			: ass.comparative1.ref_date.num,
 							property_type_percent1		: ass.comparative1.property_type.num,
@@ -1094,11 +1120,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime_percent1				: ass.comparative1.prime.num,
 							hospital_percent1			: ass.comparative1.hospital.num,
 							school_percent1				: ass.comparative1.school.num,
+							mall_percent1				: ass.comparative1.mall.num,
 							public_transpo_percent1		: ass.comparative1.public_transpo.num,
 							improvement_percent1		: ass.comparative1.improvement.num,
 							zoning_percent1				: ass.comparative1.zoning.num,
 							computation_percent1		: ass.comparative1.computation.num,
-							
+
 				//	COMPARATIVE II
 							price_per_sqm2		: ass.comparative2.price_per_sqm,
 							ref_date2			: ass.comparative2.ref_date.date, //idk if this works
@@ -1115,11 +1142,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime2				: ass.comparative2.prime.bool,
 							hospital2			: ass.comparative2.hospital.bool,
 							school2				: ass.comparative2.school.bool,
+							mall2  				: ass.comparative2.mall.bool,
 							public_transpo2		: ass.comparative2.public_transpo.str,
 							improvement2		: ass.comparative2.improvement.bool,
 							zoning2				: ass.comparative2.zoning.str,
 							computation2		: ass.comparative2.computation.num,
-	
+
 				// COMPARATIVE II - percent2's
 							ref_date_percent2			: ass.comparative2.ref_date.num,
 							property_type_percent2		: ass.comparative2.property_type.num,
@@ -1133,6 +1161,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime_percent2				: ass.comparative2.prime.num,
 							hospital_percent2			: ass.comparative2.hospital.num,
 							school_percent2				: ass.comparative2.school.num,
+							mall_percent2         : ass.comparative2.mall.num,
 							public_transpo_percent2		: ass.comparative2.public_transpo.num,
 							improvement_percent2		: ass.comparative2.improvement.num,
 							zoning_percent2				: ass.comparative2.zoning.num,
@@ -1146,10 +1175,10 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							fname: sess.fname,
 							lname: sess.lname,
 							appnum: sess.appnum,
-							can_accept: sess.can_accept		
+							can_accept: sess.can_accept
 						});
 				}
-				
+
 			}
 			catch(err)
 			{
@@ -1157,7 +1186,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 			}
 	}
 	else
-	{		
+	{
 		res.redirect('/login-fail.html')
 	}
 });
@@ -1174,7 +1203,7 @@ app.get('/viewAssignment/0/:ref_id', async(req,res)=>{
 		assigned_to: sess.username,
 		ref_id: req.params.ref_id}).exec()
 	console.log(ass)
-	
+
 	*/
 	if(sess.username)
 	{
@@ -1184,9 +1213,9 @@ app.get('/viewAssignment/0/:ref_id', async(req,res)=>{
 			// const ass = await Assignment.findOne({
 				// id : ref_id
 				// }).exec()
-				
+
 			console.log(ass)
-			
+
 			res.render('/viewAssignment_admin.hbs', {
 				ref_id : id,
 				client_f_name : ass.client_f_name,
@@ -1194,7 +1223,7 @@ app.get('/viewAssignment/0/:ref_id', async(req,res)=>{
 				lot_brgy : ass.lot_brgy,
 				lot_city : ass.lot_city,
 				lot_region : ass.lot_region,
-				
+
 				username: sess.username,
 				status: sess.status,
 				remember: sess.remember,
@@ -1206,18 +1235,18 @@ app.get('/viewAssignment/0/:ref_id', async(req,res)=>{
 				appNum  : sess.appNum,
 				appExp : sess.appExp
 			});
-			
+
 			// sess.currentAss = ref_id
 		}
 		else// if (sess.username != "admin")
 		{
 */
-			
+
 			res.redirect('/view/0/'+req.params.ref_id);
 		/*}*/
 	}
 	else
-	{		
+	{
 		res.redirect('/login-fail.html')
 	}
 });
@@ -1232,7 +1261,7 @@ app.get('/accept-assignment/:ref_id', async(req,res)=>{
 			// await Assignment.findOneAndUpdate({res: sess.username},{comment: true})
 			// const ass = await Assignment.findOneAndUpdate({res: req.params.ref_id},{comment: "test"})
 			// req.params.ref_id
-			
+
 			const ass = await Assignment.findOneAndUpdate(
 				{ref_id: req.params.ref_id},{
 					assigned_to: sess.username,
@@ -1242,7 +1271,7 @@ app.get('/accept-assignment/:ref_id', async(req,res)=>{
 				{username: sess.username},{
 					can_accept:  false
 				})
-			
+
 			res.redirect('/view/0/'+req.params.ref_id)
 		}
 		catch(err){
@@ -1259,7 +1288,7 @@ app.get('/accept-assignment/:ref_id', async(req,res)=>{
 // SAVES NEW BLANK DOCUMENT FOR ASSIGNMENT
 app.post('/submit-assignment', function(req,res) {
 	sess = req.session
-	
+
 	var ref_id = req.body.ref_id
 	try{
 		Assignment.create(
@@ -1275,7 +1304,7 @@ app.post('/submit-assignment', function(req,res) {
 			lot_region: req.body.lot_region,
 			zonal: req.body.zonal,
 			assigned_to: "",
-			
+
 			//no dates because they have default values already
 			price_per_sqm: 0,
 			lot_loc: "",
@@ -1291,6 +1320,7 @@ app.post('/submit-assignment', function(req,res) {
 			prime: false,
 			hospital: false,
 			school: false,
+			mall:   false,
 			public_transpo: "",
 			improvement: false,
 			zoning: "",
@@ -1315,6 +1345,7 @@ app.post('/submit-assignment', function(req,res) {
 				prime: {bool:0,num:0},
 				hospital: {bool:0,num:0},
 				school: {bool:0,num:0},
+				mall: {bool:0,num:0},
 				public_transpo: {str:"", num:0},
 				improvement: {bool:0,num:0},
 				zoning: {str: "", num:0},
@@ -1338,6 +1369,7 @@ app.post('/submit-assignment', function(req,res) {
 				prime: {bool:0,num:0},
 				hospital: {bool:0,num:0},
 				school: {bool:0,num:0},
+				mall: {bool:0,num:0},
 				public_transpo: {str: "", num:0},
 				improvement: {bool:0,num:0},
 				zoning: {str: "", num:0},
@@ -1347,7 +1379,7 @@ app.post('/submit-assignment', function(req,res) {
 	}
 	catch(err)
 	{console.log(err)}
-	
+
 	res.redirect('/assignments')
 });
 
@@ -1366,13 +1398,13 @@ app.get('/dashboard', async(req,res)=> {
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
-				can_accept: sess.can_accept		
+				can_accept: sess.can_accept
 			}
 		)}
 		else{	//regular user - non admin
 			if(sess.status) //activa yung account
 			{
-				
+
 				//eto yung you have blank new comments saka mag eexpire na dates
 				const assNum = await Assignment.find({
 					assigned_to: sess.username,
@@ -1381,7 +1413,7 @@ app.get('/dashboard', async(req,res)=> {
 					comment: {$ne: ""},
 					}).count()
 					//so if the comment is not approved, and submitted, and not blank also, it's from the admin
-					
+
 				const assDl = await Assignment.find({
 					createdAt: { $gt: { $add: [ "$someDate", -1000 * 3600 * 24 * 3 ] } }
 					});
@@ -1397,7 +1429,7 @@ app.get('/dashboard', async(req,res)=> {
 					lname: sess.lname,
 					appnum: sess.appnum,
 					can_accept: sess.can_accept,
-					
+
 					newnotif: assNum
 					// deadlines:
 				})
@@ -1412,7 +1444,7 @@ app.get('/dashboard', async(req,res)=> {
 					fname: sess.fname,
 					lname: sess.lname,
 					appnum: sess.appnum,
-					can_accept: sess.can_accept		
+					can_accept: sess.can_accept
 				})
 			}
 		}
@@ -1448,7 +1480,7 @@ app.get('/settings', (req,res)=> {
 			fname: sess.fname,
 			lname: sess.lname,
 			appnum: sess.appnum,
-			can_accept: sess.can_accept		
+			can_accept: sess.can_accept
         })
 	}
 	else{
@@ -1485,14 +1517,14 @@ app.put('/set-settings', async(req,res)=> {
 		try{
 			//render with new data
 			if (req.query.username!= sess.username && req.query.username != "")
-			{	
+			{
 				await Account.findOneAndUpdate({username: sess.username},{username: req.query.username})
 				sess.username = req.query.username
 			}
-			
+
 			await Account.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
 			sess.bio = req.query.bio;
-			
+
 			if(req.query.newPassword != "" && sess.password != req.query.newPassword)
 			{
 				await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
@@ -1528,9 +1560,9 @@ app.put('/set-settings', async(req,res)=> {
 				await Account.findOneAndUpdate({appnum: sess.appnum},{appnum: req.query.appnum})
 				sess.appnum = req.query.appnum
 			}
-			
+
 			res.redirect('/profile')
-			
+
 		}
 		catch(err)
 		{
@@ -1556,11 +1588,11 @@ app.get('/assignments', async(req,res)=> {
 			const ass = await Assignment.find({
 				assigned_to: {$ne: ""},//ASSIGNED TO SOMEONE
 				comment: {$ne: "Approved."}})//that is not equal to Approved. (or it will go to history)
-			
+
 				res.render('assignments_admin.hbs', {
 					assignment_new:ass_new,
 					assignment_ass:ass,
-					
+
 					username: sess.username,
 					password: sess.password,
 					remember: sess.remember,
@@ -1569,7 +1601,7 @@ app.get('/assignments', async(req,res)=> {
 					fname: sess.fname,
 					lname: sess.lname,
 					appnum: sess.appnum,
-					can_accept: sess.can_accept		
+					can_accept: sess.can_accept
 				})
 		}
 		else{
@@ -1582,13 +1614,13 @@ app.get('/assignments', async(req,res)=> {
 			const ass = await Assignment.find({
 				assigned_to: sess.username,//ASSIgned to you
 				comment: {$ne: "Approved."}})//that is not equal to Approved. (or it will go to history)
-			
+
 			const howmany = await Assignment.countDocuments({
 				assigned_to: sess.username,
 				comment: {$ne: "Approved."}})
-			
+
 			console.log(sess)
-			
+
 			if (howmany==0)
 			{
 				await Account.findOneAndUpdate({username: sess.username},
@@ -1602,7 +1634,7 @@ app.get('/assignments', async(req,res)=> {
 				how_many_ongoing : howmany,
 				assignment_new:ass_new,
 				assignment_ass:ass,
-				
+
 				username: sess.username,
 				password: sess.password,
 				remember: sess.remember,
@@ -1611,8 +1643,8 @@ app.get('/assignments', async(req,res)=> {
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
-				can_accept: sess.can_accept		
-			
+				can_accept: sess.can_accept
+
 			})
 		}
 	}
@@ -1634,7 +1666,7 @@ app.get('/profile', (req,res)=> {
 			fname: sess.fname,
 			lname: sess.lname,
 			appnum: sess.appnum,
-			can_accept: sess.can_accept				
+			can_accept: sess.can_accept
         })
 	}
 	else{
@@ -1665,7 +1697,7 @@ app.get('/terms', function(req,res){
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
-				can_accept: sess.can_accept			
+				can_accept: sess.can_accept
 				})
 		}
 		else{
@@ -1678,7 +1710,7 @@ app.get('/terms', function(req,res){
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
-				can_accept: sess.can_accept		
+				can_accept: sess.can_accept
 			})
 		}
 	}
@@ -1696,7 +1728,7 @@ app.get('/viewAssignment', function(req,res){
 });
 
 
-/*		THIS IS THE PDF THING	
+/*		THIS IS THE PDF THING
 https://www.geeksforgeeks.org/how-to-create-pdf-document-in-node-js/	*/
 const PDFDocument = require('pdfkit');
 
@@ -1705,7 +1737,3 @@ const doc = new PDFDocument;
 
 doc
 .fontSize(15)
-
-
-
-
