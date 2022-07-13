@@ -449,7 +449,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							property_type1		: ass.comparative1.property_type.str,
 							property_interest1	: ass.comparative1.property_interest.str,
 							// property_images: [imageSchema],
-							lot_size1			: ass.comparative1.lot_size.num,
+							lot_size1			: ass.comparative1.lot_size.num1,
 							shape1				: ass.comparative1.shape.str,
 							topo1				: ass.comparative1.topo.str,
 							frontage1			: ass.comparative1.frontage.str,
@@ -461,13 +461,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							public_transpo1		: ass.comparative1.public_transpo.str,
 							improvement1		: ass.comparative1.improvement.bool,
 							zoning1				: ass.comparative1.zoning.str,
-							computation1		: ass.comparative1.computation.num,
+							computation1		: ass.comparative1.computation.num1,
 	
 				// COMPARATIVE I - percent1's
 							ref_date_percent1			: ass.comparative1.ref_date.num,
 							property_type_percent1		: ass.comparative1.property_type.num,
 							property_interest_percent1	: ass.comparative1.property_interest.num,
-							lot_size_percent1			: ass.comparative1.lot_size.num,
+							lot_size_percent1			: ass.comparative1.lot_size.num1,
 							shape_percent1				: ass.comparative1.shape.num,
 							topo_percent1				: ass.comparative1.topo.num,
 							frontage_percent1			: ass.comparative1.frontage.num,
@@ -479,7 +479,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							public_transpo_percent1		: ass.comparative1.public_transpo.num,
 							improvement_percent1		: ass.comparative1.improvement.num,
 							zoning_percent1				: ass.comparative1.zoning.num,
-							computation_percent1		: ass.comparative1.computation.num,
+							computation_percent1		: ass.comparative1.computation.num2,
 							
 				//	COMPARATIVE II
 							price_per_sqm2		: ass.comparative2.price_per_sqm,
@@ -488,7 +488,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							property_type2		: ass.comparative2.property_type.str,
 							property_interest2	: ass.comparative2.property_interest.str,
 							// property_images: [imageSchema],
-							lot_size2			: ass.comparative2.lot_size.num,
+							lot_size2			: ass.comparative2.lot_size.num1,
 							shape2				: ass.comparative2.shape.str,
 							topo2				: ass.comparative2.topo.str,
 							frontage2			: ass.comparative2.frontage.str,
@@ -500,13 +500,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							public_transpo2		: ass.comparative2.public_transpo.str,
 							improvement2		: ass.comparative2.improvement.bool,
 							zoning2				: ass.comparative2.zoning.str,
-							computation2		: ass.comparative2.computation.num,
+							computation2		: ass.comparative2.computation.num1,
 	
 				// COMPARATIVE II - percent2's
 							ref_date_percent2			: ass.comparative2.ref_date.num,
 							property_type_percent2		: ass.comparative2.property_type.num,
 							property_interest_percent2	: ass.comparative2.property_interest.num,
-							lot_size_percent2			: ass.comparative2.lot_size.num,
+							lot_size_percent2			: ass.comparative2.lot_size.num2,
 							shape_percent2				: ass.comparative2.shape.num,
 							topo_percent2				: ass.comparative2.topo.num,
 							frontage_percent2			: ass.comparative2.frontage.num,
@@ -518,7 +518,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							public_transpo_percent2		: ass.comparative2.public_transpo.num,
 							improvement_percent2		: ass.comparative2.improvement.num,
 							zoning_percent2				: ass.comparative2.zoning.num,
-							computation_percent2		: ass.comparative2.computation.num,
+							computation_percent2		: ass.comparative2.computation.num2,
 
 							username: sess.username,
 							password: sess.password,
@@ -1156,7 +1156,7 @@ app.get('/accept-assignment/:ref_id', async(req,res)=>{
 			const ass = await Assignment.findOneAndUpdate(
 				{ref_id: req.params.ref_id},{
 					assigned_to: sess.username,
-					comment: "The Assignment has been assigned to "+ assigned_to +"!"
+					comment: "The Assignment has been assigned to you!"
 				})
 			const acct = await Account.findOneAndUpdate(
 				{username: sess.username},{
@@ -1235,10 +1235,10 @@ app.post('/submit-assignment', function(req,res) {
 				prime: {bool:0,num:0},
 				hospital: {bool:0,num:0},
 				school: {bool:0,num:0},
-				public_transpo: {str: "", num:0},
+				public_transpo: {str:"", num:0},
 				improvement: {bool:0,num:0},
 				zoning: {str: "", num:0},
-				computation: {num1: 0, num2: 0},
+				computation: {num1: 0, num2: 0}
 			},
 
 			//add empty comparative
