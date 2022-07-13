@@ -1,0 +1,113 @@
+@import "styles.css";
+
+.sidebar-profile-text a:hover
+{
+    background-color: none;
+    margin: 0px;
+    color: white;
+}
+
+.sidebar-history-btn
+{
+	color: white;
+    background-color: #588BAE;
+    display: fixed;
+}
+
+.sidebar-profile-btn
+{
+	color: white;
+    background-color: #588BAE;
+    display: fixed;
+}
+
+
+.sidebar-settings-btn
+{
+	color: white;
+    background-color: #588BAE;
+    display: fixed;
+}
+
+
+.sidebar-profile-btn a:hover
+{
+    color: white;
+    background-color: black;
+}
+
+.sidebar-settings-btn a:hover
+{
+    color: white;
+    background-color: black;
+}
+
+.sidebar-history-btn a:hover
+{
+    color: white;
+    background-color: black;
+}
+
+
+/*active button*/
+.sidebar-assignments-btn a
+{
+    background-color: white !important;
+    color: black !important;
+}
+
+.sidebar-assignments-btn a:hover
+{
+    color: black;
+    background-color: white;
+}
+
+
+
+.main-assignments-btn
+{
+    padding: 10px;
+    color: white;
+    background-color: #588BAE;
+    text-decoration: none;
+}
+
+.main-assignments-status-btns p
+{
+    color: #ADD8E6;
+}
+.main-assignments-status-btns a
+{
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+}
+.main-assignments-status-btns a:hover
+{
+    background-color: black;
+    color: white;
+}
+
+/* yung box sa baba */
+.main-table
+{
+    overflow-y: scroll;
+    width: 1200px;
+    height: 80%;
+    padding-right: 10px;
+    border: 3px solid #15223B;
+    
+    border-radius: 10px;
+	
+    display: inline-block;
+    background-color: none;
+    text-align:center;
+    background-color: #588BAE;
+}
+
+tr {
+    height: 50px;
+}

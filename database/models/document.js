@@ -1,100 +1,73 @@
-//schema for viewAssignments
+//schema for editDocument
 const mongoose =	require('mongoose')
 
-const imageSchema = new mongoose.Schema({
-	name: String,
-	desc: String,
-	img:{
-		data: Buffer,
-		contentType: String
-	}
-},{ _id : false });
+const documentSchema = new mongoose.Schema({
+	filename: String,
+    company_name: String,
+    company_address: String,
+    appraisal_date: {type: Date, required: true},
+    appraiser_num: Number,
+    appraiser_address: String,
+    market_value: String,
+    parcel_id: String,
+    improvements: String,
+    zoning_class: String,
+    interest_appraised: String,
 
-const boolnum = new mongoose.Schema({
-	bool: Boolean,
-	num: Number,
-},{ _id : false });
+    //Start of Body of Document
+    property_identification: String,
+    //property_images: [imageSchema],
+    appraisal_objective_property_rights: String,
+    intended_use_intended_users: String,
+    effective_date_report: String,
+    statement_ownership_sales_history: String,
+    scope_of_work: String,
 
-const numnum = new mongoose.Schema({
-	num1: Number,
-	num2: Number,
-},{ _id : false });
+    //property description
+    title_no: String, 
+    utilities: String,
+    flood: String,
+    easements: String,
+    real_estate_taxes: String,
+    zoning_desc: String,
 
-const strnum = new mongoose.Schema({
-	str: String,
-	num: Number,
-},{ _id : false });
+    //area & neighborhood overview
+    description_improvements: String,
+    neighborhood: String,
+    area_development: String,
+    market_analysis: String,
 
-const datenum = new mongoose.Schema({
-	date: { type: Date, required: false, default: Date.now },
-	num: Number,
-},{ _id : false });
+    //valuation
+    highest_best_use: String,
+    legally_permissible: String,
+    physical_possibility: String,
+    financial_feasibility: String,
+    maximum_productivity: String,
+    conclusion: String,
+    valuation_process: String,
+    market_data_approach: String,
+    //comparables: ,
+    explanation_adjustments: String,
+    range_value_per_sqm: String,
+    final_value_per_sqm: Number,
 
-const comparativeSchema = new mongoose.Schema({
-	price_per_sqm: Number,
-	ref_date: datenum, //ref_date & ref_date_percent
-	lot_loc: String,
-	property_type: strnum,
-	property_interest: strnum,
-	//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
-	property_images: [imageSchema],
-	lot_size: numnum,
-	shape: strnum,
-	topo: strnum,
-	frontage: strnum,
-	terms_of_sale: strnum,
-	corner: boolnum,
-	prime: boolnum,
-	hospital: boolnum,
-	school: boolnum,
-	public_transpo: strnum,
-	improvement: boolnum,
-	zoning: strnum,
-	computation: numnum
+    //reconciliation & final value opinion
+    recon_final_value_opinion: String,
+    market_value: String,
+    market_value_per_sqm: String,
+    cost_value: String,
+    cost_value_per_sqm: String,
+    income_value: String,
+    income_value_per_sqm: String,
+    final_value_indication: String,
+    final_value_indication_per_sqm: String,
 
-},{ _id : false });
-
-const assignmentSchema = new mongoose.Schema({
-	ref_id: Number,
-	type_of_approach: String,
-	client_f_name: String,
-	client_l_name: String,
-	client_contact_num: String,
-	client_email: String,
-	lot_brgy: String,
-	lot_city: String,
-	lot_region: String,
-	created_at: { type: Date, required: true, default: Date.now },
-	assigned_to: String,
-	zonal: Number,
-	price_per_sqm: Number,
-	ref_date: { type: Date, required: false, default: Date.now },
-	lot_loc: String,
-	property_type: String,
-	property_interest: String,
-	//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
-	property_images: [imageSchema],
-	lot_size: Number,
-	shape: String,
-	topo: String,
-	frontage: String,
-	terms_of_sale: String,
-	corner: Boolean,
-	prime: Boolean,
-	hospital: Boolean,
-	school: Boolean,
-	public_transpo: String,
-	improvement: Boolean,
-	zoning: String,
-	computation: numnum,
-
-	completed_on: { type: Date, required: false, default: Date.now },
-	expiring_on: { type: Date, required: false, default: Date.now },
-	comparative1: comparativeSchema,
-	comparative2: comparativeSchema,
-	comment: {type:String, default:"New!"}
+    //comparatives
+    subject: comparativeSchema,
+    comp1: comparativeSchema,
+    comp2: comparativeSchema,
 })
 
-const Assignment = mongoose.model('Assignment', assignmentSchema);
+const Document = mongoose.model('Document', documentSchema);
 
-module.exports = Assignment;
+module.exports = Document;

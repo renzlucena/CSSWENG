@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<head>
+    <link rel = "stylesheet" href="agent_edit_doc.css" type="text/css">
+    <link rel = "stylesheet" href="/pager0.css" type="text/css" >
+	<link rel = "stylesheet" href="/styles.css" type="text/css" >
+    <title>Edit Document</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.3.0-beta.2/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.3.0-beta.2/vfs_fonts.min.js"></script>
+    <script src='pdfmake/build/pdfmake.min.js'></script>
+    <script src='pdfmake/build/vfs_fonts.js'></script>
+
+    <script>
+        var docDefinition = {
+        pageSize: 'LETTER',
+        pageMargins: [80, 60],
+        header: function(currpage){
+            if (currpage != 1){
+            return [{
+                columns: [
+                {
+                    width: '*',
+                    text: 'Appraisal of Real Property for ' + property_type, alignment: 'left', margin: [80, 20]
+                }, 
+                {
+                    width: '40',
+                    text: currpage.toString(), alignment: 'right', margin: [80, 20]
+                }
+                ],
+            }]
+            }
+        },
+        content: [
+            {text: '\n\n\n\nAppraisal of Real Estate \nFor', style: 'title'},
+            {text: property_type + '\n\n', style: 'title', color: 'green'},
+            {canvas: [
+            {
+                type: 'line',
+                x1: 0, y1: -220,
+                x2: 300, y2: -220,
+                lineWidth: 1
+            }
+            ]},
+            {text: lot_loc + '\n\n\n\n\n', style: 'titletext'},
+            {text: 'As Of: \n' + appraisal_date + '\n\n\n\n\n', style: 'h1'},
+            {text: 'Prepared for \n' + company_name + '\n' + company_address + '\n\n\n\n\n', style: 'h1'},
+            {text: 'Prepared By\n', style: 'h1'},
+            {text: assigned_to +  'REA Lic. No. ' + appraiser_num + '\n' + appraiser_address, style: 'titletext', 
+            pageBreak: 'after'},
+
+            {text: '\n\nTransmittal Letter\n\n\n', style: 'h2'},
+            {columns: [
+            {
+                text: client_f_name + ' ' + client_l_name + '\n' + company_name
+            }, 
+            {
+                text: completed_on + '\n\nRe: Summary Appraisal Report \n' + property_type + lot_size + 'sqm \n' + loc_brgy + loc_city
+            }
+            ]},  
+            {text: '\n\n\nDear Mr./Ms. ' + client_f_name + ',\n\n'},
+            {text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is ' + appraisal_date },
+            {text: '\n\nSubmitted here with is my report containing facts and data gathered.\n\n'}, 
+            {text: 'The method of appraising is detailed in the attached narrative report as of ' + appraisal_date + '. It is my opinion that the Market Value with Fee Simple Interest in the subject property, subject to the attached limiting conditions, is”'},
+            {text: '\n\n' + market_value, style: 'appraisalval'},
+            {text: '\n\nIt has been a pleasure to serve you in this matter\n\n\n\n'}, 
+            {text: 'Respectfully submitted,\n\n\n\n', margin: [0, 0, 5, 5], alignment: 'right'},
+            {text: assigned_to + ',', margin: [0, 0, 5, 0], alignment: 'right'},
+            {text: 'Certified Real Estate Appraiser # ' + appraiser_num, margin: [0, 0, 5, 0], alignment: 'right', pageBreak: 'after'},
+
+            {text: 'Appraisal Summary\n\n\n', style: 'h2'},
+            {table: {
+                heights: 40,
+                widths: ['*', '*'],
+                body: [
+                    ['Intended User of Appraisal:', company_name],
+                    ['Property Type:', property_type], 
+                    ['Property Address:', lot_loc],
+                    ['Parcel ID:', parcel_id],
+                    ['Owner: ', client_f_name + ' ' + client_l_name], 
+                    ['Land Size: ', lot_size + ' square meters'],
+                    ['Improvements: ', improvements],
+                    ['Zoning Classification:', zoning_class],
+                    ['Interest Appraised:', interest_appraised],
+                    ['Effective Date of Appraisal:', appraisal_date],
+                    ['Date of Report:', completed_on],
+                    ['Final Estimate of Value:', market_value]
+                ]
+                }, 
+                layout: 'noBorders',
+                pageBreak: 'after'
+            },
+
+            {text: 'Assumptions and Limiting Conditions\n\n', style: 'h2'},
+            {text: 'The appraisal is made subject to the following conditions and assumptions\n\n'},
+            {ol: [
+                'Any legal description or plans reported herein are assumed to be accurate. Any drawings attached to assist the reader in visualizing the property. I have made no survey of the property and assume no responsibility in connection with such matters.\n\n',
+                'No responsibility is assumed for matters legal in nature. Title is assumed to be good and marketable and in fee simple. The property is appraised as free and clear of existing liens and encumbrances.\n\n',
+                'No soil analysis or geological studies were made in conjunction with this report.\n\n',
+                'It is assumed that there are no encroachments, zoning or restriction violations affecting the subject property.\n\n',
+                'The property is assumed to be under competent and aggressive management.\n\n',
+                'Information, estimates, and opinion used in this appraisal are obtained from sources considered reliable; however, no liability for them can be assumed by the appraiser.\n\n',
+                'The value estimates reported herein apply to the entire property and any proration or division of the total into fractional interests will invalidate the value estimate.\n\n',
+                'This report may not be used for any purpose other than as stated in the report, by anyone other than the client without prior consent of the appraiser.\n\n',
+                'Neither all nor any part of the contents of this report shall be conveyed to the public through advertising, public relations, news, sales, or other media, without the prior written consent and approval of the appraiser. This pertains particularly to valuation conclusions, the identity of the appraiser, or firm with which she is associated.\n\n',
+                'The final value estimate has been concluded on the basis that property is environmentally compliant. Further, the land area was based on information provided by the owner and/or public records. If the actual land area is different from the area used in this report, the appraiser reserves the right to modify this report.\n\n', 
+                'The final value estimate has been concluded on the basis that the property is not subject to flooding nor within fault range. A certified survey is recommended.\n\n',
+                'Any erasure on appraisal date and values invalidates this report.\n\n',
+                'The appraisal report is invalid unless it bears the signature of the appraiser and conformity of client.'
+            ], pageBreak: 'after'},
+
+            {text: "Appraiser's Certification\n\n", style: 'h2'},
+            {text: 'I certify, to the best of my knowledge and belief:\n\n'},
+            {ol: [
+                'That statements of facts contained in this report are true and correct.\n\n',
+                'That I have diligently used all possible means of verifying the physical character, location and kind of neighborhood of the subject property and the comparables that are available given the travel restrictions imposed by the Inter-Agency Task Force on Emerging Infectious Diseases (IATF)\n\n', 
+                'That I have taken into consideration factors which may affect its value and the highest and best use of the property\n\n', 
+                'That the reported analyses, opinions, and conclusions in this report are limited only by the assumptions and limiting conditions stated in this report, and are my personal, unbiased professional analyses, opinions, and conclusions.\n\n',
+                'That I have no present nor contemplated future interest in the subject property.\n\n',
+                'That my compensation is not contingent upon the reporting of a predetermined value\n\n', 
+                'That my analyses, opinions, and conclusions were developed, and this report was prepared in conformity with the Philippine Valuation Standards and the Code of Conducts for real estate appraisers.\n\n\n\n\n\n\n\n'
+            ]},
+            {canvas: [
+            {
+                type: 'line',
+                x1: 250, y1: -10,
+                x2: 450, y2: -10,
+                lineWidth: 1
+            }
+            ]},
+            {text: assigned_to + '- REA #' + appraiser_num, alignment: 'right', pageBreak: 'after'},
+
+            {text: 'Assignment Description\n', style: 'h2'},
+            {text: 'A. Property Identification\n\n', style: 'h3'},
+            {text: '\t\t\t' + property_identification, preserveLeadingSpaces: true},
+            //{image: '', }
+            {text: '\nAppraisal objective and property rights\n\n', style: 'h3'},
+            {text: '\t\t\t' + appraisal_objective_property_rights, preserveLeadingSpaces: true},
+            {text: '\nIntended use and intended users\n\n', style: 'h3'},
+            {text: '\t\t\t' + intended_use_intended_users, preserveLeadingSpaces: true},
+            {text: '\nEffective Date of Appraisal/Report Date\n\n', style: 'h3'},
+            {text: '\t\t\t' + effective_date_report, preserveLeadingSpaces: true},
+            {text: '\nStatement of ownership and sales history\n\n', style: 'h3'},
+            {text: '\t\t\t' + statement_ownership_sales_history, preserveLeadingSpaces: true, pageBreak: 'after'},
+
+            {text: 'B. Scope of Work\n\n', style: 'h3'},
+            {text: '\t\t\t' + scope_of_work + '\n\n', preserveLeadingSpaces: true},
+
+            {text: 'Property Description\n\n', style: 'h2'},
+            {text: 'A. Description of Lot.\n\n', style:'h3'},
+            {table: {
+                heights: 40,
+                widths: ['*', '*'],
+                body: [
+                    ['Title No.:', title_no],
+                    ['Location:', lot_loc],
+                    ['Property Type:', property_type],
+                    ['Land Area: ', lot_size + ' square meters'],
+                    ['Shape: ', shape],
+                    ['Frontage:', frontage],
+                    ['Topography::', topo],
+                    ['Utilities:', utilities],
+                    ['Flood:', flood],
+                    ['Easements:', easements],
+                    ['Real Estate Taxes:', real_estate_taxes],
+                    ['Zoning:', zoning_desc]
+                ]
+                }, 
+                layout: 'noBorders',
+                pageBreak: 'after'
+            },
+
+            {text: 'B. Description of Improvements.\n\n', style:'h3'},
+            {text: '\t\t\t' + description_improvements +
+            '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
+
+            {text: 'Area and Neighborhood Overview\n\n', style: 'h2'},
+            {text: '\t\t\tThe purpose of this analysis is to review historic and projected economic data to ' +
+            'determine whether' + neighborhood + 'and the subject neighborhood will experience ' +
+            'future economic stability, or decline, given the current situation.\n\n\n', preserveLeadingSpaces: true,},
+            {text: 'A. Area Development.\n\n', style: 'h3'},
+            {text: '\t\t\t' + area_development +
+            '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
+
+            {text: 'B. Market Analysis\n\n', style: 'h3'},
+            {text: '\t\t\t' + market_analysis +
+            '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
+
+            {text: 'Valuation\n\n', style: 'h2'},
+            {text: 'A. Highest and Best Use\n\n', style: 'h3'},
+            {text: '\t\t\t' + highest_best_use +
+            '\n\n', preserveLeadingSpaces: true},
+            {text: 'Legally Permissible\n\n', style: 'h3'},
+            {text: '\t\t\t' + legally_permissible +
+            '\n\n', preserveLeadingSpaces: true},
+            {text: 'Physical Possibility\n\n', style: 'h3'},
+            {text: '\t\t\t' + physical_possibility +
+            '\n\n', preserveLeadingSpaces: true},
+            {text: 'Financial Feasibility\n\n', style: 'h3'},
+            {text: '\t\t\t' + financial_feasibility +
+            '\n\n', preserveLeadingSpaces: true},
+            {text: 'Maximum Productivity\n\n', style: 'h3'},
+            {text: '\t\t\t' + maximum_productivity +
+            '\n\n', preserveLeadingSpaces: true},
+            {text: 'Conclusion\n\n', style: 'h3'},
+            {text: '\t\t\t' + conclusion +
+            '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
+
+            {text: 'B. The Valuation Process\n\n', style: 'h3'},
+            {text: '\t\t\t' + valuation_process +
+            '\n\n', preserveLeadingSpaces: true},
+            {text: 'Market Data Approach.\n\n', style: 'h3'},
+            {text: '\t\t\t' + market_data_approach +
+            '\n\n', preserveLeadingSpaces: true},
+            {text: "Comparables'\n\n", style: 'h3'},
+            //{text: '\t\t\t' +
+            //'\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
+            {table: {
+                heights: 40,
+                widths: ['*', '*', '*', '*'],
+                headerRows: 1,
+                body: [
+                    [{text: 'Particulars', style: tableheader}, {text: 'Subject', style: tableheader}, {text: 'Comp 1', style: tableheader}, {text: 'Comp 2', style: tableheader}],
+                    [{text: 'Lot Area', style: tablebold}, subject.lot_size, comp1.lotsize, comp2.lotsize],
+                    [{text: 'Price / sqm', style: tablebold}, subject.price_per_sqm, comp1.price_per_sqm, comp2.price_per_sqm],
+                    [{text: 'Reference Date', style: tablebold}, subject.ref_date, comp1.ref_date, comp2.ref_date],
+                    [{text: 'Corner Lot', style: tablebold}, subject.corner, comp1.corner, comp2.corner],
+                    [{text: 'Prime Lot', style: tablebold}, subject.prime, comp1.prime, comp2.prime],
+                    [{text: 'Near a Hospital', style: tablebold}, subject.hospital, comp1.hospital, comp2.hospital],
+                    [{text: 'Near a School', style: tablebold}, subject.school, comp1.school, comp2.school],
+                    [{text: 'Has Public Transportation', style: tablebold}, subject.public_transpo, comp1.public_transpo, comp2.public_transpo],
+                    [{text: 'Shape', style: tablebold}, subject.shape, comp1.shape, comp2.shape],
+                    [{text: 'Frontage', style: tablebold}, subject.frontage, comp1.frontage, comp2.frontage],
+                    [{text: 'Topography', style: tablebold}, subject.topo, comp1.topo, comp2.topo],
+                    [{text: 'Zoning', style: tablebold}, subject.zoning, comp1.zoning, comp2.zoning],
+                    [{text: 'Improvements', style: tablebold}, subject.improvement, comp1.improvement, comp2.improvement],
+                    [{text: 'Total Adjustments', style: tablebold}, subject.computation, comp1.computation, comp2.computation]
+                ]
+            }, 
+            layout: {
+                fillColor: function (rowIndex) {
+                    return (rowIndex == 1 ) ? '#CCCCCC' : null;
+                }
+            },
+            pageBreak: 'after',
+            },
+
+            {text: 'C. Explanation of Adjustments\n\n', style: 'h3'},
+            {text: '\t\t\t' + explanation_adjustments +
+            '\n\n', preserveLeadingSpaces: true},
+            {text: "Value Indications'\n\n", style: 'h3'},
+            {table: {
+                heights: 40,
+                widths: ['*', 'auto'],
+                headerRows: 1,
+                body: [
+                    [{text: 'Value Indications', style: tableheader}, {text: 'Value per sqm.', style: tableheader}],
+                    ['Range', range_value_per_sqm], 
+                    [{text: 'Final Value Indication', style:tablebold}, final_value_per_sqm + ' per sqm'],
+                ]
+            }, 
+            layout: {
+                fillColor: function (rowIndex) {
+                    return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
+                }
+            },
+            pageBreak: 'after',
+            },
+
+            {text: 'Reconciliation and Final Value Opinion\n\n', style: 'h2'},
+            {text: '\t\t\t' + recon_final_value_opinion + '\n\n', preserveLeadingSpaces: true},
+            {table: {
+                heights: 40,
+                widths: ['*', 'auto', 'auto'],
+                headerRows: 1,
+                body: [
+                    [{text: 'Approaches to Value', style: tableheader}, {text: 'Value', style: tableheader}, {text: 'Value per sqm', style: tableheader}],
+                    ['Market Data Approach', market_value, market_value_per_sqm], 
+                    ['Cost Approach', cost_value, cost_value_per_sqm],
+                    ['Income Capitalization Approach', income_value, income_value_per_sqm],
+                    [{text: 'Final Value Indication', style: tablebold}, final_value_indication, final_value_indication_per_sqm],
+                ]
+            }, 
+            layout: {
+                fillColor: function (rowIndex) {
+                    return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
+                },
+            pageBreak: 'after',
+            }
+            },
+
+            {text: '\n\n\t\t\tBased on the investigation of the subject property and the analysis of all relevant data, the Fee Simple Market Value of the subject property, as of May 5, 2021, is:\n\n\n', preserveLeadingSpaces: true},
+            {text: market_value, style: 'appraisalval'}
+            ],
+        defaultStyle:{
+            fontSize: 11,
+            alignment: 'justify'
+        },
+        styles:{
+            title: {
+                fontSize: 18,
+                bold: true,
+                alignment: 'center'
+            },
+            h1: {
+                fontSize: 16,
+                alignment: 'center'
+            },
+            h2: {
+                fontSize: 14,
+                bold: true,
+                alignment: 'center'
+            },
+            h3: {
+                fontSize: 12,
+                bold: true,
+            },
+            titletext: {
+                alignment: 'center'
+            },
+            appraisalval: {
+                fontSize: 14,
+                alignment: 'center',
+                color: 'green'
+            },
+            tableheader: {
+                bold: true,
+                fontSize: 14
+            },
+            tablebold: {
+                bold: true
+            }
+        }   
+        };
+        function openPDF(){
+            pdfMake.createPdf(docDefinition).open();
+        }
+
+        function downloadPDF(){
+            pdfMake.createPdf(docDefinition).download();
+        }
+
+        pdfMake.createPdf(docDefinition).getDataUrl(function (outDoc) {
+        document.getElementById('pdfpreview').src = outDoc;
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-profile">
+                <img src="temp_pic.png" width="100" height="100">
+                <div class="sidebar-profile-text">
+                    <p class="sidebar-profile-name">Agent LastName</p>
+                    <p class="sidebar-profile-email"><i>example-mail@xmail.com</i></p>
+                    <a href="login.html">Log Out</a>
+                </div>
+            </div>
+            
+            <div class="sidebar-profile-btn">
+                
+                <a href="profile.html">Profile</a>
+            </div>
+            <div class="sidebar-assignments-btn">
+               
+                <a  href="assignments.html">Assignments</a>
+            </div>
+            <div class="sidebar-history-btn">
+               
+                <a  href="history.html">History</a>
+            </div>
+            <div class="sidebar-settings-btn">
+                
+                <a href="settings.html">Settings</a>
+            </div>
+            
+            <div class="bottom-button">
+                
+                <a href="logout.html">Logout</a>
+            </div>
+        </div>
+    
+        <div class="main">
+            <div class="main-header">
+                <h1>Generate PDF</h1>
+            </div>  
+            <form class="pdf-form" action = "/assignments" method = "get">
+                <div class="main-table">
+                    <table>
+                    <tr>
+                        <th><label for="filename">Filename</label></th>
+                        <td><input type="text" name="filename"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="company_name">Company Name</label></th>
+                        <td><input type="text" name="company_name"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="company_address">Company Address</label></th>
+                        <td><input type="text" name="company_address">  </td>
+                    </tr>
+                    <tr>
+                        <th><label for="appraisal_date">Appraisal Date</label></th>
+                        <td><input type="date" name="appraisal_date"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="appraiser_num">Appraiser Number</label></th>
+                        <td><input type="number" name="appraiser_num"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="appraiser_address">Appraiser Address</label></th>
+                        <td><input type="text" name="appraiser_address" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="market_value">Market Value</label></th>
+                        <td><input type="text" name="market_value" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="parcel_id">Parcel ID</label></th>
+                        <td><input type="text" name="parcel_id" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="improvements">Improvements</label></th>
+                        <td><input type="text" name="improvements" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="zoning_class">Zoning Class</label></th>
+                        <td><input type="text" name="zoning_class" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="interest_appraised">Interest Appraised</label></th>
+                        <td><input type="text" name="interest_appraised" ></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="property_identification">Property Identification</label></th>
+                        <td><textarea name="property_identification" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="appraisal_objective_property_rights">Appraisal Objective and Property Rights</label></th>
+                        <td><textarea name="appraisal_objective_property_rights" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="intended_use_intended_users">Inteded Use and Intended Users</label></th>
+                        <td><textarea name="intended_use_intended_users" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="effective_date_report">Effective Date of Report</label></th>
+                        <td><textarea name="effective_date_report" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="statement_ownership_sales_history">Statement of Ownership and Sales History</label></th>
+                        <td><textarea name="statement_ownership_sales_history" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="scope_of_work">Scope of Work</label></th>
+                        <td><textarea name="scope_of_work" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="title_no">Title No.</label></th>
+                        <td><input type="text" name="title_no"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="utilities">Utilities</label></th>
+                        <td><input type="text" name="utilities"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="flood">Flood</label></th>
+                        <td><input type="text" name="flood" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="easements">Easements</label></th>
+                        <td><input type="text" name="easements" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="real_estate_taxes">Real Estate Tax</label></th>
+                        <td><input type="text" name="real_estate_taxes"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="zoning_desc">Zoning Description</label></th>
+                        <td><input type="text" name="zoning_desc" ></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="description_improvements">Description of Improvements</label></th>
+                        <td><textarea name="description_improvements" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="neighborhood">Neighborhood</label></th>
+                        <td><input type="text" name="neighborhood" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="area_development">Area Development</label></th>
+                        <td><textarea name="area_development" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="market_analysis">Market Analysis</label></th>
+                        <td><textarea name="market_analysis" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="highest_best_use">Highest and Best Use</label></th>
+                        <td><textarea name="highest_best_use" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="legally_permissible">Legally Permissible</label></th>
+                        <td><textarea name="legally_permissible" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="physical_possibility">Physical Possibility</label></th>
+                        <td><textarea name="physical_possibility" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="financial_feasibility">Financial Feasibility</label></th>
+                        <td><textarea name="financial_feasibility" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="maximum_productivity">Maximum Productivity</label></th>
+                        <td><textarea name="maximum_productivity" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="conclusion">Conclusion</label></th>
+                        <td><textarea name="conclusion" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="valuation_process">The Valuation Process</label></th>
+                        <td><textarea name="valuation_process" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="market_data_approach">Market Data Approach</label></th>
+                        <td><textarea name="market_data_approach" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="explanation_adjustments">Explanation of Adjustments</label></th>
+                        <td><textarea name="explanation_adjustments" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="range_value_per_sqm">Range Value per sqm</label></th>
+                        <td><input type="text" name="range_value_per_sqm"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="final_value_per_sqm">Final Value per sqm</label></th>
+                        <td><input type="text" name="final_value_per_sqm"></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="recon_final_value_opinion">Reconciliation and Final Value Opinion</label></th>
+                        <td><textarea name="recon_final_value_opinion" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="market_value">Market Data Approach Value</label></th>
+                        <td><input type="text" name="market_value"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="market_value_per_sqm">Market Data Approach Value per sqm</label></th>
+                        <td><input type="text" name="market_value_per_sqm"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="cost_value">Cost Approach Value</label></th>
+                        <td><input type="text" name="cost_value"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="cost_value_per_sqm">Cost Approach Value per sqm</label></th>
+                        <td><input type="text" name="cost_value_per_sqm"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="income_value">Income Capitalization Approach Value</label></th>
+                        <td><input type="text" name="income_value"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="market_value_per_sqm">Income Capitalization Approach Value per sqm</label></th>
+                        <td><input type="text" name="income_value_per_sqm"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="final_value_indication">Final Value Indication</label></th>
+                        <td><input type="text" name="final_value_indication"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="final_value_indication_per_sqm">Final Value Indication per sqm</label></th>
+                        <td><input type="text" name="final_value_indication_per_sqm"></td>
+                    </tr>
+                    </table>
+                </div>
+            </form>
+            <div id="main-table-bottom">
+                <button type = "submit" name="save_doc">Save Document</button></td>
+                <button onclick="openPDF()">Open PDF</button></td>
+                <button onclick="downloadPDF()">Download PDF</button></td>
+
+            </div>
+            <!--<iframe id='pdfpreview' style="width:100%; height: 500px" > </iframe>-->
+        </div>
+    </div>
+</body>
+</html>
