@@ -2,6 +2,7 @@
 const mongoose =	require('mongoose')
 
 const documentSchema = new mongoose.Schema({
+	ref_id: Number,
 	filename: String,
     company_name: String,
     company_address: String,

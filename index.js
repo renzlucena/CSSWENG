@@ -324,8 +324,17 @@ app.get('/set-settings', async(req,res)=> {
 				sess.username = req.query.username
 			}
 
-			await Account.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
-			sess.bio = req.query.bio;
+			await Account.findOneAndUpdate({username: sess.username},{email: req.query.email})
+			sess.email = req.query.email;
+
+			await Account.findOneAndUpdate({username: sess.username},{fname: req.query.fname})
+			sess.fname = req.query.fname;
+
+			await Account.findOneAndUpdate({username: sess.lname},{email: req.query.lname})
+			sess.lname = req.query.lname;
+
+			await Account.findOneAndUpdate({username: sess.username},{appnum: req.query.appnum})
+			sess.appnum = req.query.appnum;
 
 			if(req.query.newPassword != "" && sess.password != req.query.newPassword)
 			{
@@ -353,14 +362,255 @@ app.get('/send-ass', async(req,res)=> {
 	if(sess.username){
 		try{
 			//edit comment to "Submitted."
+			
 			await Assignment.findOneAndUpdate(
 				{ref_id: req.query.ref_id},
 				{comment: "Submitted."})
-			//edit can_accept to true again
-			await Account.findOneAndUpdate(
-				{username: sess.username},
-				{can_accept: true})
-			res.redirect('/assignments')
+			// await Document:findOneAndUpdate(
+				// {ref_id: req.query.ref_id},
+				// {})
+			
+			var ref_id = req.body.ref_id
+			
+			/*
+		//ADD NEW DOCUMENT
+		try{
+			Assignment.create(
+			{
+				ref_id: req.body.ref_id,
+				type_of_approach: "Market Approach",
+				client_f_name: req.body.client_f_name,
+				client_l_name: req.body.client_l_name,
+				client_contact_num: req.body.client_contact_num,
+				client_email: req.body.client_email,
+				lot_brgy: req.body.lot_brgy,
+				lot_city: req.body.lot_city,
+				lot_region: req.body.lot_region,
+				zonal: req.body.zonal,
+				assigned_to: "",
+
+				//no dates because they have default values already
+				price_per_sqm: 0,
+				lot_loc: "",
+				property_type: "",
+				property_interest: "",
+				// property_images: [imageSchema], //REPORT AS MISSING FEATURE NALANG, WE CAN'T IMPLEMENT THIS AT THIS TIME...
+				lot_size: req.body.lot_size,
+				shape: "",
+				topo: "",
+				frontage: "",
+				terms_of_sale: "",
+				corner: false,
+				prime: false,
+				hospital: false,
+				school: false,
+				mall:   false,
+				public_transpo: "",
+				improvement: false,
+				zoning: "",
+				computation: {num1: 0, num2: 0},
+				//don't set comment because it has a default value that marks it as "New!"
+
+				//add empty comparative
+				comparative1 : {
+					price_per_sqm: 0,
+					ref_date: {date: null, num: 0}, //idk if this works
+					lot_loc: "",
+					property_type: {str: "", num:0},
+					property_interest: {str:"",num:0},
+					//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
+					// property_images: [imageSchema],
+					lot_size: {num1: 0, num2: 0},
+					shape: {str: "", num:0},
+					topo: {str: "", num:0},
+					frontage: {str: "", num:0},
+					terms_of_sale: {str: "", num:0},
+					corner: {bool:0,num:0},
+					prime: {bool:0,num:0},
+					hospital: {bool:0,num:0},
+					school: {bool:0,num:0},
+					mall: {bool:0,num:0},
+					public_transpo: {str:"", num:0},
+					improvement: {bool:0,num:0},
+					zoning: {str: "", num:0},
+					computation: {num1: 0, num2: 0}
+				},
+
+				//add empty comparative
+				comparative2 : {
+					price_per_sqm: 0,
+					ref_date: {date: null, num: 0},
+					lot_loc: "",
+					property_type: {str: "", num:0},
+					property_interest: {str:"",num:0},
+					// property_images: [imageSchema],
+					lot_size: {num1: 0, num2: 0},
+					shape: {str: "", num:0},
+					topo: {str: "", num:0},
+					frontage: {str: "", num:0},
+					terms_of_sale: {str: "", num:0},
+					corner: {bool:0,num:0},
+					prime: {bool:0,num:0},
+					hospital: {bool:0,num:0},
+					school: {bool:0,num:0},
+					mall: {bool:0,num:0},
+					public_transpo: {str: "", num:0},
+					improvement: {bool:0,num:0},
+					zoning: {str: "", num:0},
+					computation: {num1: 0, num2: 0}
+				}
+			})
+		}
+		catch(err)
+		{console.log(err)}
+		*/
+		
+			const ass = await Assignment.find({
+					assigned_to: sess.username,
+					comment: "Approved."})
+					
+
+			res.render('editDocument.hbs',{
+				ref_id 			: ass.ref_id
+			})
+				
+				/*
+				type_of_approach: ass.type_of_approach,
+				client_f_name 	: ass.client_f_name,
+				client_l_name 	: ass.client_l_name,
+				lot_brgy		: ass.lot_brgy,
+				lot_city		: ass.lot_city,
+				lot_region		: ass.lot_region,
+				zonal			: ass.zonal,
+				assigned_to		: ass.assigned_to,
+			})
+			
+
+			
+				//dates
+				ref_date		: ass.ref_date,
+				created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
+				completed_on	: ass.completed_on,
+				expiring_on 	: ass.expiring_on,
+
+	// SUPJECT PROPERTY
+				price_per_sqm	: ass.price_per_sqm,
+				lot_loc			: ass.lot_loc,
+				property_type	: ass.property_type,
+				property_interest: ass.property_interest,
+				// property_images: [imageSchema],
+				lot_size		: ass.lot_size,
+				shape			: ass.shape,
+				topo			: ass.topo,
+				frontage		: ass.frontage,
+				terms_of_sale	: ass.terms_of_sale,
+				corner			: ass.corner,
+				prime			: ass.prime,
+				hospital		: ass.hospital,
+				school			: ass.school,
+				mall 				: ass.mall,
+				public_transpo	: ass.public_transpo,
+				improvement		: ass.improvement,
+				zoning			: ass.zoning,
+				computation		: ass.computation,
+
+				//comment
+				comment: ass.comment,
+
+	// COMPARATIVE I
+				price_per_sqm1		: ass.comparative1.price_per_sqm,
+				// ref_date1			: ass.comparative1.ref_date.date, //TODO: Doesnt workkkk
+				lot_loc1			: ass.comparative1.lot_loc,
+				property_type1		: ass.comparative1.property_type.str,
+				property_interest1	: ass.comparative1.property_interest.str,
+				// property_images: [imageSchema],
+				lot_size1			: ass.comparative1.lot_size.num,
+				shape1				: ass.comparative1.shape.str,
+				topo1				: ass.comparative1.topo.str,
+				frontage1			: ass.comparative1.frontage.str,
+				terms_of_sale1		: ass.comparative1.terms_of_sale.str,
+				corner1				: ass.comparative1.corner.bool,
+				prime1				: ass.comparative1.prime.bool,
+				hospital1			: ass.comparative1.hospital.bool,
+				school1				: ass.comparative1.school.bool,
+				mall1         		: ass.comparative1.mall.bool,
+				public_transpo1		: ass.comparative1.public_transpo.str,
+				improvement1		: ass.comparative1.improvement.bool,
+				zoning1				: ass.comparative1.zoning.str,
+				computation1		: ass.comparative1.computation.num,
+
+	// COMPARATIVE I - percent1's
+				ref_date_percent1			: ass.comparative1.ref_date.num,
+				property_type_percent1		: ass.comparative1.property_type.num,
+				property_interest_percent1	: ass.comparative1.property_interest.num,
+				lot_size_percent1			: ass.comparative1.lot_size.num,
+				shape_percent1				: ass.comparative1.shape.num,
+				topo_percent1				: ass.comparative1.topo.num,
+				frontage_percent1			: ass.comparative1.frontage.num,
+				terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
+				corner_percent1				: ass.comparative1.corner.num,
+				prime_percent1				: ass.comparative1.prime.num,
+				hospital_percent1			: ass.comparative1.hospital.num,
+				school_percent1				: ass.comparative1.school.num,
+				mall_percent1				: ass.comparative1.mall.num,
+				public_transpo_percent1		: ass.comparative1.public_transpo.num,
+				improvement_percent1		: ass.comparative1.improvement.num,
+				zoning_percent1				: ass.comparative1.zoning.num,
+				computation_percent1		: ass.comparative1.computation.num,
+
+	//	COMPARATIVE II
+				price_per_sqm2		: ass.comparative2.price_per_sqm,
+				ref_date2			: ass.comparative2.ref_date.date, //idk if this works
+				lot_loc2			: ass.comparative2.lot_loc,
+				property_type2		: ass.comparative2.property_type.str,
+				property_interest2	: ass.comparative2.property_interest.str,
+				// property_images: [imageSchema],
+				lot_size2			: ass.comparative2.lot_size.num,
+				shape2				: ass.comparative2.shape.str,
+				topo2				: ass.comparative2.topo.str,
+				frontage2			: ass.comparative2.frontage.str,
+				terms_of_sale2		: ass.comparative2.terms_of_sale.str,
+				corner2				: ass.comparative2.corner.bool,
+				prime2				: ass.comparative2.prime.bool,
+				hospital2			: ass.comparative2.hospital.bool,
+				school2				: ass.comparative2.school.bool,
+				mall2  				: ass.comparative2.mall.bool,
+				public_transpo2		: ass.comparative2.public_transpo.str,
+				improvement2		: ass.comparative2.improvement.bool,
+				zoning2				: ass.comparative2.zoning.str,
+				computation2		: ass.comparative2.computation.num,
+
+	// COMPARATIVE II - percent2's
+				ref_date_percent2			: ass.comparative2.ref_date.num,
+				property_type_percent2		: ass.comparative2.property_type.num,
+				property_interest_percent2	: ass.comparative2.property_interest.num,
+				lot_size_percent2			: ass.comparative2.lot_size.num,
+				shape_percent2				: ass.comparative2.shape.num,
+				topo_percent2				: ass.comparative2.topo.num,
+				frontage_percent2			: ass.comparative2.frontage.num,
+				terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
+				corner_percent2				: ass.comparative2.corner.num,
+				prime_percent2				: ass.comparative2.prime.num,
+				hospital_percent2			: ass.comparative2.hospital.num,
+				school_percent2				: ass.comparative2.school.num,
+				mall_percent2         : ass.comparative2.mall.num,
+				public_transpo_percent2		: ass.comparative2.public_transpo.num,
+				improvement_percent2		: ass.comparative2.improvement.num,
+				zoning_percent2				: ass.comparative2.zoning.num,
+				computation_percent2		: ass.comparative2.computation.num,
+
+				username: sess.username,
+				password: sess.password,
+				remember: sess.remember,
+				status: sess.status,
+				email: sess.email,
+				fname: sess.fname,
+				lname: sess.lname,
+				appnum: sess.appnum,
+				can_accept: sess.can_accept
+			})
+			
+			*/
 		}
 		catch(err)
 		{
@@ -1042,7 +1292,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							can_accept: sess.can_accept
 						});
 				}
-				else{	//	in assignemnts
+				else{	//	in assignemnts (has save  details, compute, and send for process buttons)
 
 					res.render('viewAssignment_0.hbs',{
 						ref_id 			: ass.ref_id,
