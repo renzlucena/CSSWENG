@@ -8,58 +8,62 @@
 	<link rel = "stylesheet" href="/styles.css" type="text/css" >
 
     <title>Assignment No. {{this.ref_id}}</title>
-    
+
 	<script>
-		
+
 		function computeValues1()
 			{
-				var value=0;
-				
+				var value = 0;
+
 				var computationText = document.getElementById("computation1");
-				
-				//do the thing here
-				
+
+				value = {{this.price_per_sqm}};
+
 				return value;
 			}
 		function computeValues2()
 			{
 				var value=0;
-				
+
 				var computationText = document.getElementById("computation2");
-				
+
 				//do the thing here
-				
+        value = {{this.price_per_sqm}}
+        value = value + ({{this.price_per_sqm}}*(0.01*X_percent1))
+
 				return value;
 			}
 		function computeValues3()
 			{
 				var value=0;
-				
+
 				var computationText = document.getElementById("computation3");
-				
+
 				//do the thing here
-				
+        value = {{this.price_per_sqm}}
+        value = value + ({{this.price_per_sqm}}*(0.01*X_percent1))
+
 				return value;
 			}
-		
-			
+
+
 		//prevent unsaved stuff
         window.addEventListener('beforeunload', function (e) {
             // TODO complete this
             if (fname !== '' ||
                 lname !== '' ||
                 subject !== '') {
-  
+
                 // Cancel the event and
                 // show alert that the unsaved
                 // changes would be lost
                 e.preventDefault();
                 e.returnValue = '';
             }
-	
+
 	</script>
-	
-	
+
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
@@ -76,44 +80,44 @@
                     <a href="login.html">Log Out</a>
                 </div>
             </div>
-            
+
             <div class="sidebar-profile-btn">
-                
+
                 <a href="/dashboard">Profile</a>
             </div>
             <div class="sidebar-assignments-btn">
-               
+
                 <a  href="/assignments">Assignments</a>
             </div>
             <div class="sidebar-history-btn">
-               
+
                 <a  href="/history">History</a>
             </div>
             <div class="sidebar-settings-btn">
-                
+
                 <a href="/profile">Settings</a>
             </div>
-            
+
             <div class="bottom-button">
-                
+
                 <a href="/logout">Logout</a>
             </div>
         </div>
-    
+
 		<div class="openbtn" >
 			<a href="#" onclick="openNav()">☰</a>
 		</div>
-		
+
         <div class="main">
             <div class="main-header">
                 <h1>Assess Property</p>
-                <p><b><i>Items will NOT be autosaved!</b></i></p>       
+                <p><b><i>Items will NOT be autosaved!</b></i></p>
                 <p>Please be mindful before you close the page.</p>
             </div>
 
             <form class="assignments-form" action = "/assignments" method = "get">
                 <div class="main-table">
-					<table>						
+					<table>
 						<tr>
 							<th></th>
 							<th>ADMIN</th>
@@ -126,18 +130,18 @@
                             <th><label for="createdAt">Created On</label></th>
                             <td><input name="createdAt" type="text" value="{{this.createdAt}}" readonly></td>
                         </tr>
-						
+
 					    <tr>	<!-- type_of_approach & assigned appraiser -->
                             <th><label for="type_of_approach">Type of Approach</label></th>
 							<td><input name="type_of_approach" type="text" value="{{this.type_of_approach}}" readonly></td>
-							
+
                             <th><label for="assignedTo">Appraiser</th>
                             <td><input name="assignedTo" type="text" value="{{this.assignedTo}}" readonly></td>
                         </tr>
                         <tr>	<!-- client_name -->
                             <th><label for="client_name">Client Name</label></th>
                             <td><input name="client_name" type="text" value="{{this.client_l_name}}, {{this.client_f_name}}" readonly></td>
-							
+
                             <th><label for="appnum">License</label></th>
                             <td><input name="appnum" type="number" value="{{this.appnum}}" readonly></td>
                         </tr>
@@ -147,7 +151,7 @@
 							<th><label for="zonal">Zonal Value</label></th>
                             <td><input name="zonal" type="number" value="{{this.zonal}}" readonly></td>
 						</tr>
-						
+
 						<tr>	<!-- LABELS -->
 							<th></th>
 							<th>SUBJECT PROPERTY</th>
@@ -161,7 +165,7 @@
                             <td><input name="price_per_sqm" id="price_per_sqm1" type="text" value="{{this.price_per_sqm1}}"></td>
                             <td><input name="price_per_sqm" id="price_per_sqm2" type="text" value="{{this.price_per_sqm2}}"></td>
                         </tr>
-						
+
                         <tr>	<!-- ref_date -->
                             <th><label for="ref_date">Reference Date</label></th>
                             <td><input name="ref_date" id="ref_date" type="date" value="{{this.ref_date}}"></td>
@@ -209,14 +213,14 @@
 								<input class="percentage" id="property_interest_percent2" name="property_interest" type="number" value="{{this.property_interest_percent}}"> %
 							</td>
                         </tr>
-						
+
                         <tr>	<!-- property_images (DECLARE AS MISSING FEATURE NALANG ANG HIRAAAAP) -->
                             <th><label for="property_images">Property Images</label></th>
                             <td><input type="file" id="pimg" name="property_images"></td>
                             <td><input type="file" id="pimg1" name="property_images"></td>
                             <td><input type="file" id="pimg2" name="property_images"></td>
                         </tr>
-						
+
                         <tr>	<!-- propeerty area size / lot_size -->
                             <th><label for="lot_size">Property Area Size</label></th>
                             <td><input name="lot_size" type="text" value="{{this.lot_size}}" readonly></td>
@@ -227,7 +231,7 @@
 								<input class="percentage" id="lot_size_percent2" name="property_interest" type="number" value="{{this.lot_size_percent2}}"> %
 							</td>
                         </tr>
-						
+
 						<tr>	<!-- shape -->
                             <th><label for="shape">Shape</label></th>
                             <td><input name="shape" type="text" id="shape" value="{{this.shape}}"></td>
@@ -238,7 +242,7 @@
 								<input class="percentage" id="shape_percent2" name="shape" type="number" value="{{this.shape_percentt2}}"> %
 							</td>
                         </tr>
-						
+
 						<tr>	<!-- topo -->
                             <th><label for="topo">Topography</label></th>
                             <td><input name="topo" type="text" value="{{this.topo}}"></td>
@@ -249,7 +253,7 @@
 								<input class="percentage" id="topo_percent2" name="topo" type="number" value="{{this.topo_percent2}}"> %
 							</td>
                         </tr>
-						
+
 						<tr>	<!-- frontage -->
                             <th><label for="frontage">Frontage</label></th>
                             <td><input name="frontage" type="text" value="{{this.frontage}}"></td>
@@ -260,7 +264,7 @@
 								<input class="percentage" id="frontage_percent2" name="frontage" type="number" value="{{this.frontage_percent2}}"> %
 							</td>
                         </tr>
-						
+
 						<tr>	<!-- terms_of_sale -->
                             <th><label for="terms_of_sale">Terms of Sale</label></th>
                             <td><input name="terms_of_sale" type="text" value="{{this.terms_of_sale}}"></td>
@@ -271,7 +275,7 @@
 								<input class="percentage" id="terms_of_sale_percent2" name="terms_of_sale" type="number" value="{{this.terms_of_sale_percent2}}"> %
 							</td>
                         </tr>
-						
+
 						<tr>	<!-- corner -->
                             <th><label>Is a Corner Lot?</label></th>
                             <td><input name="corner" type="checkbox" value="{{this.corner}}"></td>
@@ -291,8 +295,8 @@
                             <td><input name="prime" type="checkbox" value="{{this.prime2}}">
 								<input class="percentage" id="prime_percent2" name="prime" type="number" value="{{this.prime_percent2}}"> %
 							</td>
-                        </tr>		
-						
+                        </tr>
+
 						<tr>	<!-- hospital -->
                             <th><label>Has nearby Hospital(s)?</label></th>
                             <td><input name="hospital" type="checkbox" value="{{this.hospital}}"></td>
@@ -302,7 +306,7 @@
                             <td><input name="hospital" type="checkbox" value="{{this.hospital2}}">
 								<input class="percentage" id="hospital_percent2" name="hospital" type="number" value="{{this.hospital_percent2}}"> %
 							</td>
-                        </tr>			
+                        </tr>
 						<tr>	<!-- school -->
 							<th><label>Has nearby School(s)?</label></th>
                             <td><input name="school" type="checkbox" value="{{this.school}}"></td>
@@ -316,7 +320,7 @@
 						<tr>	<!-- mall -->
                             <th><label>Has nearby Shop/Mall(s)?</label></th>
                             <td><input name="mall" type="checkbox" value="{{this.mall}}"></td>
-                            <td><input name="mall" type="checkbox" value="{{this.mall1}}">	
+                            <td><input name="mall" type="checkbox" value="{{this.mall1}}">
 								<input class="percentage" id="mall_percent2" name="mall" type="number" value="{{this.mall_percent2}}"> %
 							</td>
                             <td><input name="mall" type="checkbox" value="{{this.mall2}}">
@@ -352,14 +356,14 @@
 						<tr>	<!-- improvement -->
                             <th><label>Has Improvement(s)?</label></th>
                             <td><input name="improvement" type="checkbox" value="{{this.improvement}}"></td>
-                            <td><input name="improvement" type="checkbox" value="{{this.improvement1}}">	
+                            <td><input name="improvement" type="checkbox" value="{{this.improvement1}}">
 								<input class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
 							</td>
                             <td><input name="improvement" type="checkbox" value="{{this.improvement2}}">
 								<input class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
 							</td>
 						</tr>
-						
+
 						<tr>	<!-- zoning -->
                             <th><label for="zoning">Zoning</label></th>
                             <td><input name="zoning" type="text" value="{{this.zoning}}"></td>
@@ -376,7 +380,7 @@
 							<th>ADJUSTED VALUE & WEIGHT</th>
 							<th>ADJUSTED VALUE & WEIGHT</th>
 						</tr>
-						
+
 						<tr>
                             <th><label for="computation">Computation</label></th>
                             <td><input name="computation" id="computation1" type="text" value="return computeValues1()" readonly></td>
