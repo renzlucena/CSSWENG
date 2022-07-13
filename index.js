@@ -185,126 +185,6 @@ app.get('/history', async(req,res)=>{
 });
 
 
-app.get('/save-ass', async(req,res)=> {
-	sess = req.session;
-	if(sess.username){
-		console.log(req.query)
-		var today = new Date()
-		try{
-			//edit comment  to "Submitted."
-
-			await Assignment.findOneAndUpdate(
-				{ref_id: req.params.ref_id},
-				{
-					comment: "Submitted.",
-					lot_brgy: req.query.lot_brgy,
-					lot_city: req.query.lot_city,
-					lot_region: req.query.lot_region,
-
-					completed_on: today,
-
-					price_per_sqm: req.query.price_per_sqm[0],
-					ref_date: req.query.ref_date[0].getDate(),
-					lot_loc: req.query.lot_loc[0],
-					property_type: req.query.property_type[0],
-					property_interest: req.query.property_interest[0],
-					// property_images: [imageSchema], //REPORT AS MISSING FEATURE NALANG, WE CAN'T IMPLEMENT THIS AT THIS TIME...
-					
-					lot_size: req.query.lot_size[0],
-					shape: req.query.shape[0],
-					topo: req.query.topo[0],
-					frontage: req.query.frontage[0],
-					terms_of_sale: req.query.terms_of_sale[0],
-					corner: req.query.corner[0],
-					prime: req.query.prime[0],
-					hospital: req.query.hospital[0],
-					school: req.query.school[0],
-					mall: req.query.mall[0],
-					public_transpo: req.query.public_transpo[0],
-					improvement: req.query.improvement[0],
-					zoning: req.query.zoning[0],
-					computation: req.query.computation[0],
-					//don't set comment because it has a default value that marks it as "New!"
-
-					//add empty comparative
-					comparative1 : {
-						price_per_sqm: req.query.price_per_sqm[1],
-						ref_date: req.query.ref_date[1].getDate(),
-						lot_loc: req.query.lot_loc[1],
-						property_type: req.query.property_type[1],
-						property_interest: req.query.property_interest[1],
-						// property_images: [imageSchema],
-						lot_size: req.query.lot_size[1],
-						shape: req.query.shape[1],
-						topo: req.query.topo[1],
-						frontage: req.query.frontage[1],
-						terms_of_sale: req.query.terms_of_sale[1],
-						corner: req.query.corner[1],
-						prime: req.query.prime[1],
-						hospital: req.query.hospital[1],
-						school: req.query.school[1],
-						mall: req.query.mall[1],
-						public_transpo: req.query.public_transpo[1],
-						improvement: req.query.improvement[1],
-						zoning: req.query.zoning[1],
-						computation: req.query.computation[1]						
-					},
-
-					//add empty comparative
-					comparative2 : {
-						price_per_sqm: req.query.price_per_sqm[2],
-						ref_date: req.query.ref_date[2].getDate(),
-						lot_loc: req.query.lot_loc[2],
-						property_type: req.query.property_type[2],
-						property_interest: req.query.property_interest[2],
-						// property_images: [imageSchema],
-						lot_size: req.query.lot_size[2],
-						shape: req.query.shape[2],
-						topo: req.query.topo[2],
-						frontage: req.query.frontage[2],
-						terms_of_sale: req.query.terms_of_sale[2],
-						corner: req.query.corner[2],
-						prime: req.query.prime[2],
-						hospital: req.query.hospital[2],
-						school: req.query.school[2],
-						mall: req.query.mall[2],
-						public_transpo: req.query.public_transpo[2],
-						improvement: req.query.improvement[2],
-						zoning: req.query.zoning[2],
-						computation: req.query.computation[1]						
-					}
-						
-				})
-
-
-
-			//dont care for empty, save all edits
-			// await Assignment.findOneAndUpdate({lot_size: res.query.lot_size},{username: req.query.username})
-			// sess.username = req.query.username
-
-
-			// await Account.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
-			// sess.bio = req.query.bio;
-
-			// if(req.query.newPassword != "" && sess.password != req.query.newPassword)
-			// {
-				// await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
-				// sess.password = req.query.newPassword
-			// }
-
-			//res.redirect('/viewAssignment/'+ req.params.ref_id)
-		}
-		catch(err)
-		{
-			res.status(500).send(err)
-		}
-	}
-	else{
-		res.redirect('/login-fail.html')
-	}
-});
-
-
 
 
 app.get('/set-settings', async(req,res)=> {
@@ -2082,6 +1962,138 @@ app.get('/terms', function(req,res){
 		//if you're trying to access the profile page but you're not logged in
 	}
 })
+
+
+
+app.get('/save-ass', async(req,res)=> {
+	// sess = req.session;
+	// console.log(req.query.ref_id)
+	console.log(req.query)
+	if(sess.username){
+		var today = new Date()
+		
+		try{
+			//edit comment  to "Submitted."
+
+			await Assignment.findOneAndUpdate(
+				{ref_id: req.query.ref_id},
+				{
+					comment: "Submitted.",
+					lot_brgy: req.query.lot_brgy,
+					lot_city: req.query.lot_city,
+					lot_region: req.query.lot_region,
+
+					completed_on: today,
+					price_per_sqm: req.query.price_per_sqm[0],
+					//ref_date: req.query.ref_date[0].getDate(),
+					lot_loc: req.query.lot_loc[0],
+					property_type: req.query.property_type[0],
+					property_interest: req.query.property_interest[0],
+					// property_images: [imageSchema], //REPORT AS MISSING FEATURE NALANG, WE CAN'T IMPLEMENT THIS AT THIS TIME...
+					
+					
+					lot_size: req.query.lot_size[0],
+					shape: req.query.shape[0],
+					topo: req.query.topo[0],
+					frontage: req.query.frontage[0],
+					terms_of_sale: req.query.terms_of_sale[0],
+					corner: (req.query.corner[0] == "true"),		//returns if true/false
+					prime: req.query.prime[0],
+					hospital: req.query.hospital[0],
+					school: req.query.school[0],
+					mall: req.query.mall[0],
+					public_transpo: req.query.public_transpo[0],
+					improvement: req.query.improvement[0],
+					zoning: req.query.zoning[0],
+					// computation: req.query.computation[0],
+					
+					//don't set comment because it has a default value that marks it as "New!"
+
+					//add empty comparative
+					
+					comparative1 : {
+						price_per_sqm: req.query.price_per_sqm[1],
+						
+					
+						//ref_date: req.query.ref_date[1].getDate(),
+						lot_loc: req.query.lot_loc[1],		
+						property_type: {
+							str: req.query.property_type[1],
+							num: req.query.property_type_percent1[1]}
+							//GANTO FORMAT, check nyo nalang assignment.js sa types (str, bool, num)
+					}/*
+						property_interest: req.query.property_interest[1],
+						// property_images: [imageSchema],
+						lot_size: req.query.lot_size[1],
+						shape: req.query.shape[1],
+						topo: req.query.topo[1],
+						frontage: req.query.frontage[1],
+						terms_of_sale: req.query.terms_of_sale[1],
+						corner: req.query.corner[1],
+						prime: req.query.prime[1],
+						hospital: req.query.hospital[1],
+						school: req.query.school[1],
+						mall: req.query.mall[1],
+						public_transpo: req.query.public_transpo[1],
+						improvement: req.query.improvement[1],
+						zoning: req.query.zoning[1],
+						//computation: req.query.computation[1]						
+					},
+
+					//add empty comparative
+					comparative2 : {
+						price_per_sqm: req.query.price_per_sqm[2],
+						//ref_date: req.query.ref_date[2].getDate(),
+						lot_loc: req.query.lot_loc[2],
+						property_type: req.query.property_type[2],
+						property_interest: req.query.property_interest[2],
+						// property_images: [imageSchema],
+						lot_size: req.query.lot_size[2],
+						shape: req.query.shape[2],
+						topo: req.query.topo[2],
+						frontage: req.query.frontage[2],
+						terms_of_sale: req.query.terms_of_sale[2],
+						corner: req.query.corner[2],
+						prime: req.query.prime[2],
+						hospital: req.query.hospital[2],
+						school: req.query.school[2],
+						mall: req.query.mall[2],
+						public_transpo: req.query.public_transpo[2],
+						improvement: req.query.improvement[2],
+						zoning: req.query.zoning[2],
+						//computation: req.query.computation[1]						
+					}
+						*/
+				})
+
+
+
+			//dont care for empty, save all edits
+			// await Assignment.findOneAndUpdate({lot_size: res.query.lot_size},{username: req.query.username})
+			// sess.username = req.query.username
+
+
+			// await Account.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
+			// sess.bio = req.query.bio;
+
+			// if(req.query.newPassword != "" && sess.password != req.query.newPassword)
+			// {
+				// await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
+				// sess.password = req.query.newPassword
+			// }
+
+			res.redirect('/view/0/'+ req.query.ref_id)
+		}
+		catch(err)
+		{
+			res.status(500).send(err)
+		}
+	}
+	else{
+		res.redirect('/login-fail.html')
+	}
+});
+
 
 var server = app.listen(3000,function(){
 });
