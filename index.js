@@ -188,14 +188,94 @@ app.get('/history', async(req,res)=>{
 app.get('/save-ass', async(req,res)=> {
 	sess = req.session;
 	if(sess.username){
+		// console.log(req.query.)
+		var today = new Date()
 		try{
 			//edit comment  to "Submitted."
+			
 			await Assignment.findOneAndUpdate(
 				{ref_id: req.params.ref_id},
 				{
-
 					comment: "Submitted.",
-				
+					lot_brgy: req.query.lot_brgy,
+					lot_city: req.query.lot_city,
+					lot_region: req.query.lot_region,
+			
+					completed_on: today,
+					
+					price_per_sqm: req.query.price_per_sqm[0],						
+					ref_date: req.query.ref_date[0],
+					lot_loc: req.query.lot_loc[0],
+					property_type: req.query.property_type[0],
+					property_interest: req.query.property_interest[0],
+					// property_images: [imageSchema], //REPORT AS MISSING FEATURE NALANG, WE CAN'T IMPLEMENT THIS AT THIS TIME...
+					lot_size: req.query.lot_size[0],
+					shape: req.query.shape[0],
+					topo: req.query.topo[0],
+					frontage: req.query.frontage[0],
+					terms_of_sale: req.query.terms_of_sale[0],
+					corner: req.query.corner[0],
+					prime: req.query.prime[0],
+					hospital: req.query.hospital[0],
+					school: req.query.school[0],
+					public_transpo: req.query.public_transpo[0],
+					improvement: req.query.improvement[0],
+					zoning: req.query.zoning[0],
+					computation: req.query.computation[0],
+					//don't set comment because it has a default value that marks it as "New!"
+
+					//add empty comparative
+					comparative1 : {
+						price_per_sqm: req.query.price_per_sqm[1]
+						
+						/*
+						ref_date: {date: null, num: 0}, //idk if this works
+						lot_loc: "",
+						property_type: {str: "", num:0},
+						property_interest: {str:"",num:0},
+						//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
+						// property_images: [imageSchema],
+						lot_size: {num1: 0, num2: 0},
+						shape: {str: "", num:0},
+						topo: {str: "", num:0},
+						frontage: {str: "", num:0},
+						terms_of_sale: {str: "", num:0},
+						corner: {bool:0,num:0},
+						prime: {bool:0,num:0},
+						hospital: {bool:0,num:0},
+						school: {bool:0,num:0},
+						public_transpo: {str:"", num:0},
+						improvement: {bool:0,num:0},
+						zoning: {str: "", num:0},
+						computation: {num1: 0, num2: 0}
+						
+						*/
+					},
+
+					//add empty comparative
+					comparative2 : {
+						price_per_sqm: req.query.price_per_sqm[2],
+						/*
+						ref_date: {date: null, num: 0},
+						lot_loc: "",
+						property_type: {str: "", num:0},
+						property_interest: {str:"",num:0},
+						// property_images: [imageSchema],
+						lot_size: {num1: 0, num2: 0},
+						shape: {str: "", num:0},
+						topo: {str: "", num:0},
+						frontage: {str: "", num:0},
+						terms_of_sale: {str: "", num:0},
+						corner: {bool:0,num:0},
+						prime: {bool:0,num:0},
+						hospital: {bool:0,num:0},
+						school: {bool:0,num:0},
+						public_transpo: {str: "", num:0},
+						improvement: {bool:0,num:0},
+						zoning: {str: "", num:0},
+						computation: {num1: 0, num2: 0}
+						*/
+					}
 				})
 	
 	
@@ -214,7 +294,7 @@ app.get('/save-ass', async(req,res)=> {
 				// sess.password = req.query.newPassword
 			// }
 			
-			res.redirect('/viewAssignment/'+ req.params.ref_id)
+			//res.redirect('/viewAssignment/'+ req.params.ref_id)
 		}
 		catch(err)
 		{
