@@ -233,9 +233,9 @@ app.get('/set-settings', async(req,res)=> {
 /*app.get('/create-document', async(req,res))=>
 {
 	sess.username)
-	
-	
-	
+
+
+
 	//ADD NEW DOCUMENT
 		try{
 			Assignment.create(
@@ -336,16 +336,16 @@ app.get('/send-ass', async(req,res)=> {
 	if(sess.username){
 		try{
 			//edit comment to "Submitted."
-			
+
 			await Assignment.findOneAndUpdate(
 				{ref_id: req.query.ref_id},
 				{comment: "Submitted."})
 			// await Document:findOneAndUpdate(
 				// {ref_id: req.query.ref_id},
 				// {})
-			
+
 			var ref_id = req.body.ref_id
-			
+
 			/*
 		//ADD NEW DOCUMENT
 		try{
@@ -438,16 +438,16 @@ app.get('/send-ass', async(req,res)=> {
 		catch(err)
 		{console.log(err)}
 		*/
-		
+
 			const ass = await Assignment.find({
 					assigned_to: sess.username,
 					comment: "Approved."})
-					
+
 
 			res.render('editDocument.hbs',{
 				ref_id 			: ass.ref_id
 			})
-				
+
 				/*
 				type_of_approach: ass.type_of_approach,
 				client_f_name 	: ass.client_f_name,
@@ -458,9 +458,9 @@ app.get('/send-ass', async(req,res)=> {
 				zonal			: ass.zonal,
 				assigned_to		: ass.assigned_to,
 			})
-			
 
-			
+
+
 				//dates
 				ref_date		: ass.ref_date,
 				created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
@@ -583,7 +583,7 @@ app.get('/send-ass', async(req,res)=> {
 				appnum: sess.appnum,
 				can_accept: sess.can_accept
 			})
-			
+
 			*/
 		}
 		catch(err)
@@ -1851,7 +1851,7 @@ app.get('/assignments', async(req,res)=> {
 			else{
 				sess.can_accept=false
 			}
-			
+
 			if (sess.can_accept)
 			{
 				res.render('assignments.hbs', {
@@ -1971,7 +1971,7 @@ app.get('/save-ass', async(req,res)=> {
 	console.log(req.query)
 	if(sess.username){
 		var today = new Date()
-		
+
 		try{
 			//edit comment  to "Submitted."
 
@@ -1990,8 +1990,8 @@ app.get('/save-ass', async(req,res)=> {
 					property_type: req.query.property_type[0],
 					property_interest: req.query.property_interest[0],
 					// property_images: [imageSchema], //REPORT AS MISSING FEATURE NALANG, WE CAN'T IMPLEMENT THIS AT THIS TIME...
-					
-					
+
+
 					lot_size: req.query.lot_size[0],
 					shape: req.query.shape[0],
 					topo: req.query.topo[0],
@@ -2006,22 +2006,190 @@ app.get('/save-ass', async(req,res)=> {
 					improvement: req.query.improvement[0],
 					zoning: req.query.zoning[0],
 					// computation: req.query.computation[0],
-					
+
 					//don't set comment because it has a default value that marks it as "New!"
 
 					//add empty comparative
-					
+
 					comparative1 : {
 						price_per_sqm: req.query.price_per_sqm[1],
-						
-					
+
+
 						//ref_date: req.query.ref_date[1].getDate(),
-						lot_loc: req.query.lot_loc[1],		
+						lot_loc: req.query.lot_loc[1],
 						property_type: {
 							str: req.query.property_type[1],
-							num: req.query.property_type_percent1[1]}
+							num: req.query.property_type_percent1[1]
+						},
+
+						property_interest: {
+							str: req.query.property_interest[1],
+							num: req.query.property_interest_percent1[1]
+						},
+
+						lot_size: {
+							num1: req.query.lot_size[1],
+							num2: req.query.lot_size_percent1[1]
+						},
+
+						shape: {
+							str: req.query.shape[1],
+							num: req.query.shape_percent1[1]
+						},
+
+						topo: {
+							str: req.query.topo[1],
+							num: req.query.topo_percent1[1]
+						},
+
+						frontage: {
+							str: req.query.frontage[1],
+							num: req.query.frontage_percent1[1]
+						},
+
+						terms_of_sale: {
+							str: req.query.terms_of_sale[1],
+							num: req.query.terms_of_sale_percent1[1]
+						},
+
+						corner: {
+							bool: req.query.corner[1],
+							num: req.query.corner_percent1[1]
+						},
+
+						prime: {
+							bool: req.query.prime[1],
+							num: req.query.prime_percent1[1]
+						},
+
+						hospital: {
+							bool: req.query.hospital[1],
+							num: req.query.hospital_percent1[1]
+						},
+
+						school: {
+							bool: req.query.school[1],
+							num: req.query.school_percent1[1]
+						},
+
+						mall: {
+							bool: req.query.mall[1],
+							num: req.query.mall_percent1[1]
+						},
+
+						public_transpo: {
+							str: req.query.public_transpo[1],
+							num: req.query.public_transpo_percent1[1]
+						},
+
+						improvement: {
+							bool: req.query.improvement[1],
+							num: req.query.improvement_percent1[1]
+						},
+
+						zoning: {
+							str: req.query.zoning[1],
+							num: req.query.zoning_percent1[1]
+						},
+
+						computation: {
+							num1: req.query.computation[1],
+							num2: req.query.zoning_percent1[1]
+						}
 							//GANTO FORMAT, check nyo nalang assignment.js sa types (str, bool, num)
-					}/*
+						}
+
+
+						comparative2 : {
+							price_per_sqm: req.query.price_per_sqm[2],
+
+
+							//ref_date: req.query.ref_date[1].getDate(),
+							lot_loc: req.query.lot_loc[2],
+							property_type: {
+								str: req.query.property_type[2],
+								num: req.query.property_type_percent1[2]
+							},
+
+							property_interest: {
+								str: req.query.property_interest[2],
+								num: req.query.property_interest_percent1[2]
+							},
+
+							lot_size: {
+								num1: req.query.lot_size[2],
+								num2: req.query.lot_size_percent1[2]
+							},
+
+							shape: {
+								str: req.query.shape[2],
+								num: req.query.shape_percent1[2]
+							},
+
+							topo: {
+								str: req.query.topo[2],
+								num: req.query.topo_percent1[2]
+							},
+
+							frontage: {
+								str: req.query.frontage[2],
+								num: req.query.frontage_percent1[2]
+							},
+
+							terms_of_sale: {
+								str: req.query.terms_of_sale[2],
+								num: req.query.terms_of_sale_percent1[2]
+							},
+
+							corner: {
+								bool: req.query.corner[2],
+								num: req.query.corner_percent1[2]
+							},
+
+							prime: {
+								bool: req.query.prime[2],
+								num: req.query.prime_percent1[2]
+							},
+
+							hospital: {
+								bool: req.query.hospital[2],
+								num: req.query.hospital_percent1[2]
+							},
+
+							school: {
+								bool: req.query.school[2],
+								num: req.query.school_percent1[2]
+							},
+
+							mall: {
+								bool: req.query.mall[2],
+								num: req.query.mall_percent1[2]
+							},
+
+							public_transpo: {
+								str: req.query.public_transpo[2],
+								num: req.query.public_transpo_percent1[2]
+							},
+
+							improvement: {
+								bool: req.query.improvement[2],
+								num: req.query.improvement_percent1[2]
+							},
+
+							zoning: {
+								str: req.query.zoning[2],
+								num: req.query.zoning_percent1[2]
+							},
+
+							computation: {
+								num1: req.query.computation[2],
+								num2: req.query.zoning_percent1[2]
+							}
+
+							}
+
+					/*
+
 						property_interest: req.query.property_interest[1],
 						// property_images: [imageSchema],
 						lot_size: req.query.lot_size[1],
@@ -2037,7 +2205,7 @@ app.get('/save-ass', async(req,res)=> {
 						public_transpo: req.query.public_transpo[1],
 						improvement: req.query.improvement[1],
 						zoning: req.query.zoning[1],
-						//computation: req.query.computation[1]						
+						//computation: req.query.computation[1]
 					},
 
 					//add empty comparative
@@ -2061,7 +2229,7 @@ app.get('/save-ass', async(req,res)=> {
 						public_transpo: req.query.public_transpo[2],
 						improvement: req.query.improvement[2],
 						zoning: req.query.zoning[2],
-						//computation: req.query.computation[1]						
+						//computation: req.query.computation[1]
 					}
 						*/
 				})
