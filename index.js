@@ -445,7 +445,66 @@ app.get('/send-ass', async(req,res)=> {
 
 
 			res.render('editDocument.hbs',{
-				ref_id 			: ass.ref_id
+				document			: doc,
+				ref_id 				: doc.ref_id,
+				filename			: doc.filename,
+				company_name		: doc.company_name,
+				company_address		: doc.company_address,
+				appraisal_date		: doc.appraisal_date,
+				appraiser_num		: doc.appraiser_num,
+				appraiser_address	: doc.appraiser_address,
+				market_value		: doc.market_value,
+				parcel_id			: doc.parcel_id,
+				improvements		: doc.improvements,
+				zoning_class		: doc.zoning_class,
+				interest_appraised	: doc.interest_appraised,
+			
+				//Start of Body of Document
+				property_identification				: doc.property_identification,
+				//property_images: [imageSchema],
+				appraisal_objective_property_rights	: doc.appraisal_objective_property_rights,
+				intended_use_intended_users			: doc.intended_use_intended_users,
+				effective_date_report				: doc.effective_date_report,	
+				statement_ownership_sales_history	: doc.statement_ownership_sales_history,
+				scope_of_work						: doc.scope_of_work,
+			
+				//property description
+				title_no			: doc.title_no, 
+				utilities			: doc.utilities,
+				flood				: doc.flood,
+				easements			: doc.easements,
+				real_estate_taxes	: doc.real_estate_taxes,
+				zoning_desc			: doc.zoning_desc,
+			
+				//area & neighborhood overview
+				description_improvements	: doc.description_improvements,
+				neighborhood				: doc.neighborhood,
+				area_development			: doc.area_development,
+				market_analysis				: doc.market_analysis,
+			
+				//valuation
+				highest_best_use		: doc.highest_best_use,
+				legally_permissible		: doc.legally_permissible,
+				physical_possibility	: doc.physical_possibility,
+				financial_feasibility	: doc.financial_feasibility,
+				maximum_productivity	: doc.maximum_productivity,
+				conclusion				: doc.conclusion,
+				valuation_process		: doc.valuation_process,
+				market_data_approach	: doc.market_data_approach,
+				explanation_adjustments	: doc.explanation_adjustments,
+				range_value_per_sqm		: doc.range_value_per_sqm,
+				final_value_per_sqm		: doc.final_value_indication_per_sqm,
+			
+				//reconciliation & final value opinion
+				recon_final_value_opinion		: doc.recon_final_value_opinion,
+				market_value					: doc.market_value,
+				market_value_per_sqm			: doc.market_value_per_sqm,
+				cost_value						: doc.cost_value,
+				cost_value_per_sqm				: doc.cost_value_per_sqm,
+				income_value					: doc.income_value,
+				income_value_per_sqm			: doc.income_value_per_sqm,
+				final_value_indication			: doc.final_value_indication,
+				final_value_indication_per_sqm	: doc.final_value_indication_per_sqm,
 			})
 
 				/*
