@@ -458,30 +458,30 @@ app.get('/send-ass', async(req,res)=> {
 				improvements		: doc.improvements,
 				zoning_class		: doc.zoning_class,
 				interest_appraised	: doc.interest_appraised,
-			
+
 				//Start of Body of Document
 				property_identification				: doc.property_identification,
 				//property_images: [imageSchema],
 				appraisal_objective_property_rights	: doc.appraisal_objective_property_rights,
 				intended_use_intended_users			: doc.intended_use_intended_users,
-				effective_date_report				: doc.effective_date_report,	
+				effective_date_report				: doc.effective_date_report,
 				statement_ownership_sales_history	: doc.statement_ownership_sales_history,
 				scope_of_work						: doc.scope_of_work,
-			
+
 				//property description
-				title_no			: doc.title_no, 
+				title_no			: doc.title_no,
 				utilities			: doc.utilities,
 				flood				: doc.flood,
 				easements			: doc.easements,
 				real_estate_taxes	: doc.real_estate_taxes,
 				zoning_desc			: doc.zoning_desc,
-			
+
 				//area & neighborhood overview
 				description_improvements	: doc.description_improvements,
 				neighborhood				: doc.neighborhood,
 				area_development			: doc.area_development,
 				market_analysis				: doc.market_analysis,
-			
+
 				//valuation
 				highest_best_use		: doc.highest_best_use,
 				legally_permissible		: doc.legally_permissible,
@@ -494,7 +494,7 @@ app.get('/send-ass', async(req,res)=> {
 				explanation_adjustments	: doc.explanation_adjustments,
 				range_value_per_sqm		: doc.range_value_per_sqm,
 				final_value_per_sqm		: doc.final_value_indication_per_sqm,
-			
+
 				//reconciliation & final value opinion
 				recon_final_value_opinion		: doc.recon_final_value_opinion,
 				market_value					: doc.market_value,
@@ -1978,14 +1978,6 @@ app.get('/profile', (req,res)=> {
 		//if you're trying to access the profile page but you're not logged in
 	}
 });
-
-//TODO: idk if we need this or why do we have this?
-app.post('/submit-post', function(req,res){
-	viewAssignment.create(req.body, (error,post) =>
-	{
-        res.redirect('/')
-	})
-})
 
 app.get('/terms', function(req,res){
 	sess = req.session;
