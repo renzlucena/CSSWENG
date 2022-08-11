@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const path = require('path')
 mongoose.connect('mongodb://localhost/appraisers-db')
 
 const express = require('express')
@@ -16,7 +17,7 @@ app.use(express.json())
 app.use(express.urlencoded ({extended:true}))
 
 app.get('/', function(req,res) {
-	res.sendFile(__dirname + '\\' + 'login.html');
+	res.sendFile(path.join(__dirname, 'login.html'));
 //	res.sendFile(__dirname + '\\' + 'viewAssignment.html');
 });
 
