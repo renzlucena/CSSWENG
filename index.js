@@ -16,17 +16,12 @@ app.use(express.json())
 //so you can see stuff on the url
 app.use(express.urlencoded ({extended:true}))
 
-app.get('/', function(req,res) {
-	res.sendFile(path.join(__dirname, 'login.html'));
-//	res.sendFile(__dirname + '\\' + 'viewAssignment.html');
-});
-
 // hbs for template chuchu
 var hbs = require('hbs')
 app.set('view engine','hbs')
 
 // css stuff and other stuff
-app.use(express.static(__dirname + '/'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //moment js https://momentjs.com/docs/
 const moment = require('moment');
@@ -44,10 +39,9 @@ app.use(session({
 var sess;
 
 
-// land here
-app.get('/',(req,res)=> {
-	res.redirect('login.html');
-})
+app.get('/', function(req,res) {
+	res.render('login');
+});
 
 // destroy session at log out
 app.get('/logout',(req,res)=> {
