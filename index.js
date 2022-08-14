@@ -2390,6 +2390,86 @@ app.get('/save-ass', async(req,res)=> {
 	}
 });
 
+app.get('/save-doc', async(req,res)=> {
+	// sess = req.session;
+	// console.log(req.query.ref_id)
+	console.log(req.query)
+	if(sess.username){
+		try{
+			//edit comment  to "Submitted."
+
+			await Document.findOneAndUpdate(
+				{ref_id: req.query.ref_id},
+				{
+					filename: req.query.filename,
+					company_name: req.query.company_name,
+					company_address: req.query.company_address,
+					appraisal_date: req.query.date,
+					appraiser_num: req.query.appraiser_num,
+					appraiser_address: req.query.appraiser_address,
+					market_value: req.query.market_value,
+					parcel_id: req.query.parcel_id,
+					improvements: req.query.improvements,
+					zoning_class: req.query.zoning_class,
+					interest_appraised: req.query.interest_appraised,
+				
+					property_identification: req.query.property_identification,
+					//property_images: [imageSchema],
+					appraisal_objective_property_rights: req.query.appraisal_objective_property_rights,
+					intended_use_intended_users: req.query.intended_use_intended_users,
+					effective_date_report: req.query.effective_date_report,
+					statement_ownership_sales_history: req.query.statement_ownership_sales_history,
+					scope_of_work: req.query.scope_of_work,
+				
+					title_no: req.query.title_no, 
+					utilities: req.query.utilities,
+					flood: req.query.flood,
+					easements: req.query.easements,
+					real_estate_taxes: req.query.real_estate_taxes,
+					zoning_desc: req.query.zoning_desc,
+
+					description_improvements: req.query.description_improvements,
+					neighborhood: req.query.neighborhood,
+					area_development: req.query.area_development,
+					market_analysis: req.query.market_analysis,
+	
+					highest_best_use: req.query.highest_best_use,
+					legally_permissible: req.query.legally_permissible,
+					physical_possibility: req.query.physical_possibility,
+					financial_feasibility: req.query.financial_feasibility,
+					maximum_productivity: req.query.maximum_productivity,
+					conclusion: req.query.conclusion,
+					valuation_process: req.query.valuation_process,
+					market_data_approach: req.query.market_data_approach,
+					//comparables: ,
+					explanation_adjustments: req.query.explanation_adjustments,
+					range_value_per_sqm: req.query.range_value_per_sqm,
+					final_value_per_sqm: req.query.final_value_per_sqm,
+
+					recon_final_value_opinion: req.query.recon_final_value_opinion,
+					market_value: req.query.market_value,
+					market_value_per_sqm: req.query.market_value_per_sqm,
+					cost_value: req.query.cost_value,
+					cost_value_per_sqm: req.query.cost_value_per_sqm,
+					income_value: req.query.income_value,
+					income_value_per_sqm: req.query.income_value_per_sqm,
+					final_value_indication: req.query.final_value_indication,
+					final_value_indication_per_sqm: req.query.final_value_indication_per_sqm,
+
+				})
+
+			res.redirect('/editDocument'+ req.query.ref_id)
+		}
+		catch(err)
+		{
+			res.status(500).send(err)
+		}
+	}
+	else{
+		res.redirect('/login-fail.html')
+	}
+});
+
 
 var server = app.listen(3000,function(){
 });
