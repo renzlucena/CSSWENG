@@ -8,232 +8,7 @@
 	<link rel = "stylesheet" href="/styles.css" type="text/css" >
 
     <title>Assignment No. {{this.ref_id}}</title>
-	<script>
-		function computer()
-		{
-			var value0 = 0;
-			var value1 = 0;
-			var value2 = 0;
-
-			//COMPARATIVE 1
-			var ref_date1 = parseInt(document.getElementById("ref_date_percent1").value);
-			var property_type1 = parseInt(document.getElementById("property_type_percent1").value);
-			var property_interest1 = parseInt(document.getElementById("property_interest_percent1").value);
-			var size1 = parseInt(document.getElementById("lot_size_percent1").value);
-			var shape1 = parseInt(document.getElementById("shape_percent1").value);
-			var topo1 = parseInt(document.getElementById("topo_percent1").value);
-			var frontage1 = parseInt(document.getElementById("frontage_percent1").value);
-			var terms_of_sale1 = parseInt(document.getElementById("terms_of_sale_percent1").value);
-			var corner1 = parseInt(document.getElementById("corner_percent1").value);
-			var prime1 = parseInt(document.getElementById("prime_percent1").value);
-			var hospital1 = parseInt(document.getElementById("hospital_percent1").value);
-			var school1 = parseInt(document.getElementById("school_percent1").value);
-			var mall1 = parseInt(document.getElementById("mall_percent1").value);
-			var public_transpo1 = parseInt(document.getElementById("public_transpo_percent1").value);
-			var zoning1 = parseInt(document.getElementById("zoning_percent1").value);
-			
-			
-			
-			var ref_date2 = parseInt(document.getElementById("ref_date_percent2").value);
-			var property_type2 = parseInt(document.getElementById("property_type_percent2").value);
-			var property_interest2 = parseInt(document.getElementById("property_interest_percent2").value);
-			var size2 = parseInt(document.getElementById("lot_size_percent2").value);
-			var shape2 = parseInt(document.getElementById("shape_percent2").value);
-			var topo2 = parseInt(document.getElementById("topo_percent2").value);
-			var frontage2 = parseInt(document.getElementById("frontage_percent2").value);
-			var terms_of_sale2 = parseInt(document.getElementById("terms_of_sale_percent2").value);
-			var corner2 = parseInt(document.getElementById("corner_percent2").value);
-			var prime2 = parseInt(document.getElementById("prime_percent2").value);
-			var hospital2 = parseInt(document.getElementById("hospital_percent2").value);
-			var school2 = parseInt(document.getElementById("school_percent2").value);
-			var mall2 = parseInt(document.getElementById("mall_percent2").value);
-			var public_transpo2 = parseInt(document.getElementById("public_transpo_percent2").value);
-			var zoning2 = parseInt(document.getElementById("zoning_percent2").value);
-			
-			
-/*
-
-			//COMPARATIVE 2
-			var ref_date2 = parseInt(document.getElementById("ref_date_percent2").value);
-			var property_type2 = parseInt(document.getElementById("property_type_percent2").value);
-			var property_interest2 = parseInt(document.getElementById("property_interest_percent2").value);
-			var lot_size2 = parseInt(document.getElementById("lot_size_percent2").value);
-			var shape2 = parseInt(document.getElementById("shape_percent2").value);
-			var topo2 = parseInt(document.getElementById("topo_percent2").value);
-			var frontage2 = parseInt(document.getElementById("frontage_percent2").value);
-			var terms_of_sale2 = parseInt(document.getElementById("terms_of_sale_percent2").value);
-			var corner2 = parseInt(document.getElementById("corner_percent2").value);
-			var prime2 = parseInt(document.getElementById("prime_percent2").value);
-			var hospital2 = parseInt(document.getElementById("hospital_percent2").value);
-			var school2 = parseInt(document.getElementById("school_percent2").value);
-			var mall2 = parseInt(document.getElementById("mall_percent2").value);
-			var public_transpo2 = parseInt(document.getElementById("public_transpo_percent2").value);
-			var zoning2 = parseInt(document.getElementById("zoning_percent2").value);
-
-			var computationText = parseInt(document.getElementById("computation").value);
-			var computationText1 = parseInt(document.getElementById("computation1").value);
-			var computationText2 = parseInt(document.getElementById("computation2").value);
-*/
-			var startingValue0 = parseInt(document.getElementById("price_per_sqm").value);
-			var startingValue1 = parseInt(document.getElementById("price_per_sqm1").value);
-			var startingValue2 = parseInt(document.getElementById("price_per_sqm2").value);
-
-			//value0 = startingValue0;
-
-			value1 = startingValue1 + (startingValue1*ref_date1*0.01) +
-			(startingValue1*property_type1*0.01)+
-			(startingValue1*property_interest1*0.01)+
-			(startingValue1*size1*0.01) +
-			(startingValue1*shape1*0.01) +
-			(startingValue1*topo1*0.01) +
-			(startingValue1*frontage1*0.01) +
-			//(startingValue1*terms_of_sale1*0.01) +
-			(startingValue1*corner1*0.01) +
-			(startingValue1*prime1*0.01) +
-			(startingValue1*hospital1*0.01) +
-			(startingValue1*school1*0.01) +
-			//(startingValue1*mall1*0.01)+
-			//(startingValue1*public_transpo1*0.01) +
-			(startingValue1*zoning1*0.01);
-			
-			
-			
-			
-			
-			value2 = startingValue2 + (startingValue2*ref_date2*0.01) +
-			(startingValue2*property_type2*0.01)+
-			(startingValue2*property_interest2*0.01)+
-			(startingValue2*size2*0.01) +
-			(startingValue2*shape2*0.01) +
-			(startingValue2*topo2*0.01) +
-			(startingValue2*frontage2*0.01) +
-			//(startingValue2*terms_of_sale2*0.01) +
-			(startingValue2*corner2*0.01) +
-			(startingValue2*prime2*0.01) +
-			(startingValue2*hospital2*0.01) +
-			(startingValue2*school2*0.01) +
-			//(startingValue2*mall2*0.01)+
-			//(startingValue2*public_transpo2*0.01) +
-			(startingValue2*zoning2*0.01);
-			
-			
-			
-			
-
-			//value1= mall1
-/*
-			var startingValue2 = document.getElementById("price_per_sqm1");
-			value2 = startingValue2;
-
-			value2 = startingValue2 + (startingValue2*ref_date2*0.01) +
-				(startingValue2*property_type2*0.01) +
-				(startingValue2*property_interest2*0.01) +
-				(startingValue2*lot_size2*0.01) +
-				(startingValue2*shape2*0.01) +
-				(startingValue2*topo2*0.01) +
-				(startingValue2*frontage2*0.01) +
-				(startingValue2*terms_of_sale2*0.01) +
-				(startingValue2*corner2*0.01) +
-				(startingValue2*prime2*0.01) +
-				(startingValue2*hospital2*0.01) +
-				(startingValue2*school2*0.01) +
-				(startingValue2*mall2*0.01)
-				(startingValue2*public_transpo2*0.01) +
-				(startingValue2*zoning2*0.01);
-*/
-
-			var comp_percent1 = parseInt(document.getElementById("computation_percent1").value);
-			var comp_percent2 = parseInt(document.getElementById("computation_percent2").value);	
-			
-			var computationText = document.getElementById("computation");
-			
-			<!-- computationText.value = parseInt(startingValue0.value)+423;	//WORKS NOW -->
-			
-			
-//			computationText.value = value0;	//WORKS NOW
-			var computationText1 = document.getElementById("computation1");
-			computationText1.value = value1;
-			var computationText2 = document.getElementById("computation2");
-			computationText2.value = value2;
-
-			//computationText.value = parseInt(computationText1.value)*(comp_percent1*0.01)
-			computationText.value = (parseInt(computationText1.value)*(comp_percent1*0.01)) + (parseInt(computationText2.value)*(comp_percent2*0.01))
-
-
-			var zonal_value = parseInt(document.getElementById("zonal").value);
-
-
-
-			//not working zonal value
-			if (parseInt(computationText1.value)*(comp_percent1*0.01) + parseInt(computationText2.value)*(comp_percent2*0.01) > zonal_value)//does not work -> this.zonal)
-			{
-				computationText.value = (parseInt(computationText1.value)*(comp_percent1*0.01)) + (parseInt(computationText2.value)*(comp_percent2*0.01))
-			}
-			else {
-				computationText.value = zonal_value
-			}
-			
-			
-			<!-- computationText.value = startingValue1; -->
-			<!-- computationText1.value = startValue2; -->
-			<!-- computationText2.setAttribute("value", "Hi") -->
-
-		}
-
-	</script>
-
-	<script>
-
-
-
-
-		//prevent unsaved stuff
-        window.addEventListener('beforeunload', function (e) {
-
-
-			<!-- document.getElementById("property_type_percent1"); -->
-			<!-- document.getElementById("property_interest_percent1"); -->
-			<!-- document.getElementById("lot_size_percent1"); -->
-			<!-- document.getElementById("shape_percent1"); -->
-			<!-- document.getElementById("topo_percent1"); -->
-			<!-- document.getElementById("frontage_percent1"); -->
-			<!-- document.getElementById("terms_of_sale_percent1"); -->
-			<!-- document.getElementById("corner_percent1"); -->
-			<!-- document.getElementById("prime_percent1"); -->
-			<!-- document.getElementById("hospital_percent1"); -->
-			<!-- document.getElementById("school_percent1"); -->
-			<!-- document.getElementById("mall_percent1"); -->
-			<!-- document.getElementById("public_transpo1"); -->
-			<!-- document.getElementById("zoning_percent1"); -->
-
-
-
-            // TODO complete this
-            <!-- if (document.getElementById("property_type_percent2") !== 0 || -->
-                <!-- document.getElementById("property_interest_percent2") !== '' || -->
-				<!-- document.getElementById("lot_size_percent2") !== '' || -->
-				<!-- document.getElementById("shape_percent2") !== '' || -->
-				<!-- document.getElementById("topo_percent2") !== '' || -->
-				<!-- document.getElementById("frontage_percent2") !== '' || -->
-				<!-- document.getElementById("terms_of_sale_percent2") !== '' || -->
-				<!-- document.getElementById("corner_percent2") !== '' || -->
-				<!-- document.getElementById("prime_percent2") !== '' || -->
-				<!-- document.getElementById("hospital_percent2") !== '' || -->
-				<!-- document.getElementById("school_percent2") !== '' || -->
-				<!-- document.getElementById("mall_percent2") !== '' || -->
-				<!-- document.getElementById("public_transpo2") !== '' || -->
-				<!-- document.getElementById("zoning_percent2")  !== '') { -->
-
-                // Cancel the event and
-                // show alert that the unsaved
-                // changes would be lost
-                e.preventDefault();
-                e.returnValue = '';
-            }
-
-	</script>
-
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
@@ -245,49 +20,43 @@
             <div class="sidebar-profile">
                 <img src="/temp_pic.png" width="100" height="100">
                 <div class="sidebar-profile-text">
-                    <p class="sidebar-profile-name">{{this.username}}</p>
+                    <p class="sidebar-profile-name">Admin</p>
                     <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
                     <a href="/logout">Log Out</a>
                 </div>
             </div>
-
-            <div class="sidebar-profile-btn">
-
-                <a href="/dashboard">Profile</a>
-            </div>
+            
             <div class="sidebar-assignments-btn">
-
                 <a  href="/assignments">Assignments</a>
             </div>
+			
+			<div class="sidebar-profile-btn">
+                <a  href="/admin-add-assignment">Add New Assignment</a>
+            </div>
+			
             <div class="sidebar-history-btn">
-
                 <a  href="/history">History</a>
             </div>
-            <div class="sidebar-settings-btn">
-
-                <a href="/profile">Settings</a>
-            </div>
-
+			
             <div class="bottom-button">
-
                 <a href="/logout">Logout</a>
             </div>
+			
         </div>
-
+    
 		<div class="openbtn" >
 			<a href="#" onclick="openNav()">☰</a>
 		</div>
-
+		
         <div class="main">
-            <div class="main-header">
-                <h1>Assess Property</p>
-                <p><b><i>Items will NOT be autosaved!</b></i></p>
-                <p>Please be mindful before you close the page.</p>
+			<div class="main-header">
+                <h1>View Assignment</p>
+                <p><b><i>Admin may not edit, but can comment, return, and approve, and export the PDF of the Assignment.</b></i></p>
             </div>
 
-            <form class="assignments-form">
+            <form class="assignments-form" action = "/assignments" method = "get">
                 <div class="main-table">
-					<table>
+					<table>						
 						<tr>
 							<th></th>
 							<th>ADMIN</th>
@@ -300,18 +69,18 @@
                             <th><label for="createdAt">Created On</label></th>
                             <td><input name="createdAt" type="text" value="{{this.createdAt}}" readonly></td>
                         </tr>
-
+						
 					    <tr>	<!-- type_of_approach & assigned appraiser -->
                             <th><label for="type_of_approach">Type of Approach</label></th>
 							<td><input name="type_of_approach" type="text" value="{{this.type_of_approach}}" readonly></td>
-
+							
                             <th><label for="assignedTo">Appraiser</th>
                             <td><input name="assignedTo" type="text" value="{{this.assignedTo}}" readonly></td>
                         </tr>
                         <tr>	<!-- client_name -->
                             <th><label for="client_name">Client Name</label></th>
                             <td><input name="client_name" type="text" value="{{this.client_l_name}}, {{this.client_f_name}}" readonly></td>
-
+							
                             <th><label for="appnum">License</label></th>
                             <td><input name="appnum" type="number" value="{{this.appnum}}" readonly></td>
                         </tr>
@@ -321,21 +90,21 @@
 							<th><label for="zonal">Zonal Value</label></th>
                             <td><input name="zonal" type="number" value="{{this.zonal}}" readonly></td>
 						</tr>
-
+						
 						<tr>	<!-- LABELS -->
 							<th></th>
 							<th>SUBJECT PROPERTY</th>
 							<th>COMPARABLE I</th>
 							<th>COMPARABLE II</th>
 						</tr>
-
+						
 						<tr>	<!-- price_per_sqm -->
                             <th><label for="price_per_sqm">Price per SQM</label></th>
-                            <td><input name="price_per_sqm" id="price_per_sqm" type="number" value="{{this.price_per_sqm}}"></td>
-                            <td><input name="price_per_sqm" id="price_per_sqm1" type="number" value="{{this.price_per_sqm1}}"></td>
-                            <td><input name="price_per_sqm" id="price_per_sqm2" type="number" value="{{this.price_per_sqm2}}"></td>
+                            <td><input name="price_per_sqm" id="price_per_sqm" type="text" value="{{this.price_per_sqm}}"></td>
+                            <td><input name="price_per_sqm" id="price_per_sqm1" type="text" value="{{this.price_per_sqm1}}"></td>
+                            <td><input name="price_per_sqm" id="price_per_sqm2" type="text" value="{{this.price_per_sqm2}}"></td>
                         </tr>
-
+						
                         <tr>	<!-- ref_date -->
                             <th><label for="ref_date">Reference Date</label></th>
                             <td><input name="ref_date" id="ref_date" type="date" value="{{this.ref_date}}"></td>
@@ -356,11 +125,11 @@
 
 						<tr>	<!-- property_type -->
                             <th><label for="property_type">Property Type</label></th>
-                            <td><input name="property_type" type="text" value="{{this.property_type}}"></td>
-                            <td><input name="property_type" class="text-next-to-percentage" type="text" value="{{this.property_type1}}">
+                            <td><input name="property_type" id="property_type" type="text" value="{{this.property_type}}"></td>
+                            <td><input name="property_type" id="property_type1" class="text-next-to-percentage" type="text" value="{{this.property_type1}}">
 								<input class="percentage" id="property_type_percent1" name="property_type" type="number" value="{{this.property_type_percent1}}"> %
 							</td>
-                            <td><input name="property_type" class="text-next-to-percentage" type="text" value="{{this.property_type2}}">
+                            <td><input name="property_type" id="property_type2" class="text-next-to-percentage" type="text" value="{{this.property_type2}}">
 								<input class="percentage" id="property_type_percent2" name="property_type" type="number" value="{{this.property_type_percent2}}"> %
 							</td>
                         </tr>
@@ -374,45 +143,45 @@
 									<option value="fee_simple">Fee Simple</option>
 									<option value="lease_hold">Lease Hold</option>
 								</select>
-								<input class="percentage" id="property_interest_percent1" name="property_interest" type="number" value="{{this.property_interest_percent1}}"> %
+								<input class="percentage" id="property_interest_percent1" name="property_interest" type="number" value="{{this.property_interest_percent}}"> %
 							</td>
 							<td><select id="property_interest2" name="property_interest">
 									<option value="fee_simple">Fee Simple</option>
 									<option value="lease_hold">Lease Hold</option>
 								</select>
-								<input class="percentage" id="property_interest_percent2" name="property_interest" type="number" value="{{this.property_interest_percent2}}"> %
+								<input class="percentage" id="property_interest_percent2" name="property_interest" type="number" value="{{this.property_interest_percent}}"> %
 							</td>
                         </tr>
-
+						
                         <tr>	<!-- property_images (DECLARE AS MISSING FEATURE NALANG ANG HIRAAAAP) -->
                             <th><label for="property_images">Property Images</label></th>
                             <td><input type="file" id="pimg" name="property_images"></td>
                             <td><input type="file" id="pimg1" name="property_images"></td>
                             <td><input type="file" id="pimg2" name="property_images"></td>
                         </tr>
-
+						
                         <tr>	<!-- propeerty area size / lot_size -->
                             <th><label for="lot_size">Property Area Size</label></th>
                             <td><input name="lot_size" type="text" value="{{this.lot_size}}" readonly></td>
                             <td><input name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size1}}">
-								<input class="percentage" id="lot_size_percent1" name="property_interest" type="number" value="{{this.lot_size_percent1}}"> %
+								<input class="percentage" id="lot_size_percent1" name="lot_size" type="number" value="{{this.lot_size_percent1}}"> %
 							</td>
                             <td><input name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size2}}">
-								<input class="percentage" id="lot_size_percent2" name="property_interest" type="number" value="{{this.lot_size_percent2}}"> %
+								<input class="percentage" id="lot_size_percent2" name="lot_size" type="number" value="{{this.lot_size_percent2}}"> %
 							</td>
                         </tr>
-
+						
 						<tr>	<!-- shape -->
                             <th><label for="shape">Shape</label></th>
                             <td><input name="shape" type="text" id="shape" value="{{this.shape}}"></td>
                             <td><input name="shape" type="text" class="text-next-to-percentage" id="shape1" value="{{this.shape1}}">
-								<input class="percentage" id="shape_percent1" name="shape" type="number" value="{{this.shape_percent1}}"> %
+								<input class="percentage" id="shape_percent1" name="shape" type="number" value="{{this.shape_percentt1}}"> %
 							</td>
                             <td><input name="shape" class="text-next-to-percentage" type="text" id="shape2" value="{{this.shape2}}">
-								<input class="percentage" id="shape_percent2" name="shape" type="number" value="{{this.shape_percent2}}"> %
+								<input class="percentage" id="shape_percent2" name="shape" type="number" value="{{this.shape_percentt2}}"> %
 							</td>
                         </tr>
-
+						
 						<tr>	<!-- topo -->
                             <th><label for="topo">Topography</label></th>
                             <td><input name="topo" type="text" value="{{this.topo}}"></td>
@@ -423,7 +192,7 @@
 								<input class="percentage" id="topo_percent2" name="topo" type="number" value="{{this.topo_percent2}}"> %
 							</td>
                         </tr>
-
+						
 						<tr>	<!-- frontage -->
                             <th><label for="frontage">Frontage</label></th>
                             <td><input name="frontage" type="text" value="{{this.frontage}}"></td>
@@ -434,7 +203,7 @@
 								<input class="percentage" id="frontage_percent2" name="frontage" type="number" value="{{this.frontage_percent2}}"> %
 							</td>
                         </tr>
-
+						
 						<tr>	<!-- terms_of_sale -->
                             <th><label for="terms_of_sale">Terms of Sale</label></th>
                             <td><input name="terms_of_sale" type="text" value="{{this.terms_of_sale}}"></td>
@@ -445,7 +214,7 @@
 								<input class="percentage" id="terms_of_sale_percent2" name="terms_of_sale" type="number" value="{{this.terms_of_sale_percent2}}"> %
 							</td>
                         </tr>
-
+						
 						<tr>	<!-- corner -->
                             <th><label>Is a Corner Lot?</label></th>
                             <td><input name="corner" type="checkbox" value="{{this.corner}}"></td>
@@ -465,8 +234,8 @@
                             <td><input name="prime" type="checkbox" value="{{this.prime2}}">
 								<input class="percentage" id="prime_percent2" name="prime" type="number" value="{{this.prime_percent2}}"> %
 							</td>
-                        </tr>
-
+                        </tr>		
+						
 						<tr>	<!-- hospital -->
                             <th><label>Has nearby Hospital(s)?</label></th>
                             <td><input name="hospital" type="checkbox" value="{{this.hospital}}"></td>
@@ -476,7 +245,7 @@
                             <td><input name="hospital" type="checkbox" value="{{this.hospital2}}">
 								<input class="percentage" id="hospital_percent2" name="hospital" type="number" value="{{this.hospital_percent2}}"> %
 							</td>
-                        </tr>
+                        </tr>			
 						<tr>	<!-- school -->
 							<th><label>Has nearby School(s)?</label></th>
                             <td><input name="school" type="checkbox" value="{{this.school}}"></td>
@@ -490,7 +259,7 @@
 						<tr>	<!-- mall -->
                             <th><label>Has nearby Shop/Mall(s)?</label></th>
                             <td><input name="mall" type="checkbox" value="{{this.mall}}"></td>
-                            <td><input name="mall" type="checkbox" value="{{this.mall1}}">
+                            <td><input name="mall" type="checkbox" value="{{this.mall1}}">	
 								<input class="percentage" id="mall_percent1" name="mall" type="number" value="{{this.mall_percent1}}"> %
 							</td>
                             <td><input name="mall" type="checkbox" value="{{this.mall2}}">
@@ -512,7 +281,7 @@
 									<option value="relatively-near">Relatively Near</option>
 									<option value="far">Far</option>
 								</select>
-								<input class="percentage" id="public_transpo_percent1" name="public_transpo" type="number" value="{{this.public_transpo_percent1}}"> %
+								<input class="percentage" id="public_transpo1_percent" name="public_transpo" type="number" value="{{this.public_transpo1_percent}}"> %
 							</td>
 							<td>
 								<select id="public_transpo2" name="public_transpo">
@@ -520,27 +289,27 @@
 									<option value="relatively-near">Relatively Near</option>
 									<option value="far">Far</option>
 								</select>
-								<input class="percentage" id="public_transpo_percent2" name="public_transpo" type="number" value="{{this.public_transpo_percent2}}"> %
+								<input class="percentage" id="public_transpo_percent" name="public_transpo" type="number" value="{{this.public_transpo2_percent}}"> %
 							</td>
                         </tr>
 						<tr>	<!-- improvement -->
                             <th><label>Has Improvement(s)?</label></th>
                             <td><input name="improvement" type="checkbox" value="{{this.improvement}}"></td>
-                            <td><input name="improvement" type="checkbox" value="{{this.improvement1}}">
-								<input class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent1}}"> %
+                            <td><input name="improvement" type="checkbox" value="{{this.improvement1}}">	
+								<input class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
 							</td>
                             <td><input name="improvement" type="checkbox" value="{{this.improvement2}}">
 								<input class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
 							</td>
 						</tr>
-
+						
 						<tr>	<!-- zoning -->
                             <th><label for="zoning">Zoning</label></th>
-                            <td><input name="zoning" id="zoning" type="text" value="{{this.zoning}}"></td>
-                            <td><input name="zoning" id="zoning1" class="text-next-to-percentage" type="text" value="{{this.zoning1}}">
+                            <td><input name="zoning" type="text" value="{{this.zoning}}"></td>
+                            <td><input name="zoning" class="text-next-to-percentage" type="text" value="{{this.zoning1}}">
 								<input class="percentage" id="zoning_percent1" name="zoning" type="number" value="{{this.zoning_percent1}}"> %
 							</td>
-                            <td><input name="zoning" name="zoning2" class="text-next-to-percentage" type="text" value="{{this.zoning2}}">
+                            <td><input name="zoning" class="text-next-to-percentage" type="text" value="{{this.zoning2}}">
 								<input class="percentage" id="zoning_percent2" name="zoning" type="number" value="{{this.zoning_percent2}}"> %
 							</td>
                         </tr>
@@ -550,41 +319,20 @@
 							<th>ADJUSTED VALUE & WEIGHT</th>
 							<th>ADJUSTED VALUE & WEIGHT</th>
 						</tr>
-
-
-
-						<tr>	<!-- propeerty area size / lot_size -->
-                            <th><label for="lot_size">Property Area Size</label></th>
-                            <td><input name="lot_size" type="text" value="{{this.lot_size}}" readonly></td>
-                            <td><input name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size1}}">
-								<input class="percentage" id="lot_size_percent1" name="property_interest" type="number" value="{{this.lot_size_percent1}}"> %
-							</td>
-                            <td><input name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size2}}">
-								<input class="percentage" id="lot_size_percent2" name="property_interest" type="number" value="{{this.lot_size_percent2}}"> %
-							</td>
-                        </tr>
-
+						
 						<tr>
                             <th><label for="computation">Computation</label></th>
-                            <td><input name="computation" value="{{this.computation}}" id="computation" type="text" readonly></td>
-                            <td><input name="computation" class="text-next-to-percentage" value="{{this.computation1}}" id="computation1" type="text" readonly>
-								<input class="percentage" id="computation_percent1" value="{{this.computation_percent1}}" name="computation" type="number"> %
+                            <td><input name="computation" id="computation1" type="text" value="return computeValues1()" readonly></td>
+                            <td><input class="text-next-to-percentage" name="computation" id="computation2" type="number" value="return computeValues2()" readonly>
+								<input class="percentage" id="computation_percent2" name="computation" type="number" value="{{this.computation_percent2}}"> %
 							</td>
-                            <td><input name="computation" class="text-next-to-percentage" value="{{this.computation2}}" id="computation2" type="text" readonly>
-								<input class="percentage" id="computation_percent2"  value="{{this.computation_percent2}}" name="computation" type="number"> %
+                            <td><input class="text-next-to-percentage" name="computation" id="computation3" type="number" value="return computeValues3()" readonly>
+								<input class="percentage" id="computation_percent2" name="computation" type="number" value="{{this.computation_percent2}}"> %
 							</td>
                         </tr>
                     </table>
                 </div>
-            <div id="main-table-bottom">
-                <button method = "get" type = "submit" name="save_ass" formaction="/save-ass">Save Details</button>
-                <button type="button" onclick="computer()">COMPUTE</button>
-				<button method="get" type="submit" name="send-ass" formaction="/send-ass">Send for Processing (EDIT DOCU LAMAN PAGE MUNA)</button>
-            </div>
             </form>
-
-
-
         </div>
     </div>
 </body>

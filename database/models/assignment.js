@@ -88,7 +88,7 @@ const assignmentSchema = new mongoose.Schema({
 	public_transpo: String,
 	improvement: Boolean,
 	zoning: String,
-	computation: numnum,
+	computation: Number,
 
 	completed_on: { type: Date, required: false, default: Date.now },
 	expiring_on: { type: Date, required: false, default: Date.now },

@@ -65,30 +65,30 @@
 						</tr>
                         <tr>	<!-- ref_id & creation date -->
                             <th><label for="ref_id">Reference ID</label></th>
-                            <td><input name="ref_id" type="text" value="{{this.ref_id}}" readonly></td>
+                            <td><input name="ref_id" type="text" value="{{this.ref_id}}" ></td>
                             <th><label for="createdAt">Created On</label></th>
-                            <td><input name="createdAt" type="text" value="{{this.createdAt}}" readonly></td>
+                            <td><input name="createdAt" type="text" value="{{this.createdAt}}"  ></td>
                         </tr>
 						
 					    <tr>	<!-- type_of_approach & assigned appraiser -->
                             <th><label for="type_of_approach">Type of Approach</label></th>
-							<td><input name="type_of_approach" type="text" value="{{this.type_of_approach}}" readonly></td>
+							<td><input name="type_of_approach" type="text" value="{{this.type_of_approach}}"  ></td>
 							
                             <th><label for="assignedTo">Appraiser</th>
-                            <td><input name="assignedTo" type="text" value="{{this.assignedTo}}" readonly></td>
+                            <td><input name="assignedTo" type="text" value="{{this.assignedTo}}"  ></td>
                         </tr>
                         <tr>	<!-- client_name -->
                             <th><label for="client_name">Client Name</label></th>
-                            <td><input name="client_name" type="text" value="{{this.client_l_name}}, {{this.client_f_name}}" readonly></td>
+                            <td><input name="client_name" type="text" value="{{this.client_l_name}}, {{this.client_f_name}}"  ></td>
 							
                             <th><label for="appnum">License</label></th>
-                            <td><input name="appnum" type="number" value="{{this.appnum}}" readonly></td>
+                            <td><input name="appnum" type="number" value="{{this.appnum}}"  ></td>
                         </tr>
 						<tr>	<!-- lot_brgy,city,region - will serve as general location for interest check of agents/appraisers & zonal value-->
 							<th><label for="gen_lot_loc">Lot Location</label></th>
-							<td><input name="gen_lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
+							<td><input name="gen_lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}"  ></td>
 							<th><label for="zonal">Zonal Value</label></th>
-                            <td><input name="zonal" type="number" value="{{this.zonal}}" readonly></td>
+                            <td><input name="zonal" type="number" value="{{this.zonal}}"  ></td>
 						</tr>
 						
 						<tr>	<!-- LABELS -->
@@ -162,7 +162,7 @@
 						
                         <tr>	<!-- propeerty area size / lot_size -->
                             <th><label for="lot_size">Property Area Size</label></th>
-                            <td><input name="lot_size" type="text" value="{{this.lot_size}}" readonly></td>
+                            <td><input name="lot_size" type="text" value="{{this.lot_size}}"  ></td>
                             <td><input name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size1}}">
 								<input class="percentage" id="lot_size_percent1" name="lot_size" type="number" value="{{this.lot_size_percent1}}"> %
 							</td>
@@ -322,11 +322,11 @@
 						
 						<tr>
                             <th><label for="computation">Computation</label></th>
-                            <td><input name="computation" id="computation1" type="text" value="return computeValues1()" readonly></td>
-                            <td><input class="text-next-to-percentage" name="computation" id="computation2" type="number" value="return computeValues2()" readonly>
+                            <td><input name="computation" id="computation1" type="text" value="return computeValues1()"  ></td>
+                            <td><input class="text-next-to-percentage" name="computation" id="computation2" type="number" value="return computeValues2()"  >
 								<input class="percentage" id="computation_percent2" name="computation" type="number" value="{{this.computation_percent2}}"> %
 							</td>
-                            <td><input class="text-next-to-percentage" name="computation" id="computation3" type="number" value="return computeValues3()" readonly>
+                            <td><input class="text-next-to-percentage" name="computation" id="computation3" type="number" value="return computeValues3()"  >
 								<input class="percentage" id="computation_percent2" name="computation" type="number" value="{{this.computation_percent2}}"> %
 							</td>
                         </tr>

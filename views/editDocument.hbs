@@ -16,6 +16,11 @@
     <script src='pdfmake/build/vfs_fonts.js'></script>
 
     <script>
+	
+	
+		//try this https://www.npmjs.com/package/handlebars-pdf
+	
+	
         var docDefinition = {
         pageSize: 'LETTER',
         pageMargins: [80, 60],
@@ -344,8 +349,10 @@
             pdfMake.createPdf(docDefinition).download(this.filename + '.pdf');
         }
 
+
+		//this will just make it show sa canvas container not save
         pdfMake.createPdf(docDefinition).getDataUrl(function (outDoc) {
-        document.getElementById('pdfpreview').src = outDoc;
+        document.getElementById('pdfpreview').src = outDoc;		
         });
     </script>
 </head>
