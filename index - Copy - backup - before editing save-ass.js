@@ -2104,25 +2104,307 @@ app.get('/save-ass', async(req,res)=> {
 		var today = new Date()
 
 		try{
+			//edit comment  to "Submitted."
+			//render with new data
 			console.log(req.query)
+			if (req.query.username!= sess.username && req.query.username != "")
+			{
+				await Account.findOneAndUpdate({username: sess.username},{username: req.query.username})
+				sess.username = req.query.username
+			}
+
+			if(req.query.password != "" && req.query.retypepwd != "")	//if not blank both, means successful
+			{
+				await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
+				sess.password = req.query.password
+			}
+
+			if(req.query.email != "" && sess.email != req.query.email)
+			{
+				await Account.findOneAndUpdate({username: sess.username},{email: req.query.email})
+				sess.email = req.query.email
+			}
 			
+			await Account.findOneAndUpdate({username: sess.username},{appnum: req.query.appnum})
+			sess.appnum = req.query.appnum
 			
-			//So the thing is, just save everything on the screen, even if user put blank there, still save
-			//the error checkng will be done in <script> of that page nalang so it's easier to seee
-			await Assignment.findOneAndUpdate({ref_id: req.query.ref_id},{
-				price_per_sqm: req.query.price_per_sqm[0],
-				
-				
-				comparative1 : {
-					price_per_sqm: req.query.price_per_sqm[1]
 						
-				},
-				
-				comparative2:{
-					price_per_sqm: req.query.price_per_sqm[2]
-				
-				}
-			})
+						
+						
+			await Assignment.findOneAndUpdate(
+				{ref_id: req.query.ref_id},
+				{
+					comment: "Submitted.",
+					lot_brgy: req.query.lot_brgy,
+					lot_city: req.query.lot_city,
+					lot_region: req.query.lot_region,
+
+					completed_on: today,
+					price_per_sqm: req.query.price_per_sqm[0],
+					//ref_date: req.query.ref_date[0].getDate(),
+					lot_loc: req.query.lot_loc[0],
+					property_type: req.query.property_type[0],
+					property_interest: req.query.property_interest[0],
+					// property_images: [imageSchema], //REPORT AS MISSING FEATURE NALANG, WE CAN'T IMPLEMENT THIS AT THIS TIME...
+
+
+					lot_size: req.query.lot_size[0],
+					shape: req.query.shape[0],
+					topo: req.query.topo[0],
+					frontage: req.query.frontage[0],
+					terms_of_sale: req.query.terms_of_sale[0],
+					corner: (req.query.corner[0] == "true"),		//returns if true/false
+					prime: req.query.prime[0],
+					hospital: req.query.hospital[0],
+					school: req.query.school[0],
+					mall: req.query.mall[0],
+					public_transpo: req.query.public_transpo[0],
+					improvement: req.query.improvement[0],
+					zoning: req.query.zoning[0],
+					// computation: req.query.computation[0],
+
+					//don't set comment because it has a default value that marks it as "New!"
+
+					//add empty comparative
+
+					comparative1 : {
+						price_per_sqm: req.query.price_per_sqm[1],
+
+
+						//ref_date: req.query.ref_date[1].getDate(),
+						lot_loc: req.query.lot_loc[1],
+						property_type: {
+							str: req.query.property_type[1],
+							num: req.query.property_type_percent1[1]
+						},
+
+						property_interest: {
+							str: req.query.property_interest[1],
+							num: req.query.property_interest_percent1[1]
+						},
+
+						lot_size: {
+							num1: req.query.lot_size[1],
+							num2: req.query.lot_size_percent1[1]
+						},
+
+						shape: {
+							str: req.query.shape[1],
+							num: req.query.shape_percent1[1]
+						},
+
+						topo: {
+							str: req.query.topo[1],
+							num: req.query.topo_percent1[1]
+						},
+
+						frontage: {
+							str: req.query.frontage[1],
+							num: req.query.frontage_percent1[1]
+						},
+
+						terms_of_sale: {
+							str: req.query.terms_of_sale[1],
+							num: req.query.terms_of_sale_percent1[1]
+						},
+
+						corner: {
+							bool: req.query.corner[1],
+							num: req.query.corner_percent1[1]
+						},
+
+						prime: {
+							bool: req.query.prime[1],
+							num: req.query.prime_percent1[1]
+						},
+
+						hospital: {
+							bool: req.query.hospital[1],
+							num: req.query.hospital_percent1[1]
+						},
+
+						school: {
+							bool: req.query.school[1],
+							num: req.query.school_percent1[1]
+						},
+
+						mall: {
+							bool: req.query.mall[1],
+							num: req.query.mall_percent1[1]
+						},
+
+						public_transpo: {
+							str: req.query.public_transpo[1],
+							num: req.query.public_transpo_percent1[1]
+						},
+
+						improvement: {
+							bool: req.query.improvement[1],
+							num: req.query.improvement_percent1[1]
+						},
+
+						zoning: {
+							str: req.query.zoning[1],
+							num: req.query.zoning_percent1[1]
+						},
+
+						computation: {
+							num1: req.query.computation[1],
+							num2: req.query.zoning_percent1[1]
+						}
+							//GANTO FORMAT, check nyo nalang assignment.js sa types (str, bool, num)
+					},
+
+
+						comparative2 : {
+							price_per_sqm: req.query.price_per_sqm[2],
+
+
+							//ref_date: req.query.ref_date[1].getDate(),
+							lot_loc: req.query.lot_loc[2],
+							property_type: {
+								str: req.query.property_type[2],
+								num: req.query.property_type_percent1[2]
+							},
+
+							property_interest: {
+								str: req.query.property_interest[2],
+								num: req.query.property_interest_percent1[2]
+							},
+
+							lot_size: {
+								num1: req.query.lot_size[2],
+								num2: req.query.lot_size_percent1[2]
+							},
+
+							shape: {
+								str: req.query.shape[2],
+								num: req.query.shape_percent1[2]
+							},
+
+							topo: {
+								str: req.query.topo[2],
+								num: req.query.topo_percent1[2]
+							},
+
+							frontage: {
+								str: req.query.frontage[2],
+								num: req.query.frontage_percent1[2]
+							},
+
+							terms_of_sale: {
+								str: req.query.terms_of_sale[2],
+								num: req.query.terms_of_sale_percent1[2]
+							},
+
+							corner: {
+								bool: req.query.corner[2],
+								num: req.query.corner_percent1[2]
+							},
+
+							prime: {
+								bool: req.query.prime[2],
+								num: req.query.prime_percent1[2]
+							},
+
+							hospital: {
+								bool: req.query.hospital[2],
+								num: req.query.hospital_percent1[2]
+							},
+
+							school: {
+								bool: req.query.school[2],
+								num: req.query.school_percent1[2]
+							},
+
+							mall: {
+								bool: req.query.mall[2],
+								num: req.query.mall_percent1[2]
+							},
+
+							public_transpo: {
+								str: req.query.public_transpo[2],
+								num: req.query.public_transpo_percent1[2]
+							},
+
+							improvement: {
+								bool: req.query.improvement[2],
+								num: req.query.improvement_percent1[2]
+							},
+
+							zoning: {
+								str: req.query.zoning[2],
+								num: req.query.zoning_percent1[2]
+							},
+
+							computation: {
+								num1: req.query.computation[2],
+								num2: req.query.zoning_percent1[2]
+							}
+
+							}
+
+					/*
+
+						property_interest: req.query.property_interest[1],
+						// property_images: [imageSchema],
+						lot_size: req.query.lot_size[1],
+						shape: req.query.shape[1],
+						topo: req.query.topo[1],
+						frontage: req.query.frontage[1],
+						terms_of_sale: req.query.terms_of_sale[1],
+						corner: req.query.corner[1],
+						prime: req.query.prime[1],
+						hospital: req.query.hospital[1],
+						school: req.query.school[1],
+						mall: req.query.mall[1],
+						public_transpo: req.query.public_transpo[1],
+						improvement: req.query.improvement[1],
+						zoning: req.query.zoning[1],
+						//computation: req.query.computation[1]
+					},
+
+					//add empty comparative
+					comparative2 : {
+						price_per_sqm: req.query.price_per_sqm[2],
+						//ref_date: req.query.ref_date[2].getDate(),
+						lot_loc: req.query.lot_loc[2],
+						property_type: req.query.property_type[2],
+						property_interest: req.query.property_interest[2],
+						// property_images: [imageSchema],
+						lot_size: req.query.lot_size[2],
+						shape: req.query.shape[2],
+						topo: req.query.topo[2],
+						frontage: req.query.frontage[2],
+						terms_of_sale: req.query.terms_of_sale[2],
+						corner: req.query.corner[2],
+						prime: req.query.prime[2],
+						hospital: req.query.hospital[2],
+						school: req.query.school[2],
+						mall: req.query.mall[2],
+						public_transpo: req.query.public_transpo[2],
+						improvement: req.query.improvement[2],
+						zoning: req.query.zoning[2],
+						//computation: req.query.computation[1]
+					}
+						*/
+				})
+
+
+
+			//dont care for empty, save all edits
+			// await Assignment.findOneAndUpdate({lot_size: res.query.lot_size},{username: req.query.username})
+			// sess.username = req.query.username
+
+
+			// await Account.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
+			// sess.bio = req.query.bio;
+
+			// if(req.query.newPassword != "" && sess.password != req.query.newPassword)
+			// {
+				// await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
+				// sess.password = req.query.newPassword
+			// }
 
 			res.redirect('/view/0/'+ req.query.ref_id)
 		}
