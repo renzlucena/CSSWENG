@@ -186,7 +186,7 @@ app.get('/history', async(req,res)=>{
 
 
 
-
+/*
 app.get('/set-settings', async(req,res)=> {
 	sess = req.session;
 	if(sess.username){
@@ -229,6 +229,7 @@ app.get('/set-settings', async(req,res)=> {
 		res.redirect('/submit-login')
 	}
 });
+*/
 
 /*app.get('/create-document', async(req,res))=>
 {
@@ -789,7 +790,7 @@ function padLeadingZeros(num, size) {
 }
 // ('0' + 4).slice(-2)
 
-//TODO make this functional, as in working if you click save
+//TODO make this functional, as in working if you click create new
 app.get('/admin-add-assignment', async(req,res)=>{
 	sess = req.session
 	// try{
@@ -1851,6 +1852,7 @@ app.get('/settings', (req,res)=> {
 
 app.get('/term-accept', async(req,res)=> {
 	sess = req.session;
+	console.log("in /term-accept")
 	if(sess.username){
 		try{
 			//render with new data
@@ -1869,11 +1871,14 @@ app.get('/term-accept', async(req,res)=> {
 });
 
 
-app.put('/set-settings', async(req,res)=> {
+app.get('/set-settings', async(req,res)=> {
 	sess = req.session;
+	console.log("in /set-settings")
 	if(sess.username){
 		//update db
 		try{
+			//TODO: Check if username already being used!!
+			
 			//render with new data
 			if (req.query.username!= sess.username && req.query.username != "")
 			{
@@ -1881,47 +1886,45 @@ app.put('/set-settings', async(req,res)=> {
 				sess.username = req.query.username
 			}
 
-			await Account.findOneAndUpdate({username: sess.username},{bio: req.query.bio})
-			sess.bio = req.query.bio;
-
-			if(req.query.newPassword != "" && sess.password != req.query.newPassword)
+			if(req.query.password != "" && req.query.retypepwd != "")	//if not blank both, means successful
 			{
 				await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
-				sess.password = req.query.newPassword
+				sess.password = req.query.password
 			}
 
 			if(req.query.email != "" && sess.email != req.query.email)
 			{
-				await Account.findOneAndUpdate({email: sess.email},{email: req.query.email})
+				await Account.findOneAndUpdate({username: sess.username},{email: req.query.email})
 				sess.email = req.query.email
 			}
-
-			if(req.query.fname != "" && req.query.fname != sess.fname)
-			{
-				await Account.findOneAndUpdate({fname: sess.fname},{email: req.query.fname})
-				sess.fname = req.query.fname
-			}
-
-			if(req.query.lname != "" && req.query.lname != sess.lname)
-			{
-				await Account.findOneAndUpdate({lname: sess.lname},{lname: req.query.lname})
-				sess.lname = req.query.lname
-			}
-
-			if(req.query.appexp != "" && req.query.appexp != sess.appexp)
-			{
-				await Account.findOneAndUpdate({appexp: sess.appexp},{appexp: req.query.appexp})
-				sess.appexp = req.query.appexp
-			}
-
-			if(req.query.appnum != "" && req.query.appnum != sess.appnum)
-			{
-				await Account.findOneAndUpdate({appnum: sess.appnum},{appnum: req.query.appnum})
-				sess.appnum = req.query.appnum
-			}
-
-			res.redirect('/profile')
-
+			
+			await Account.findOneAndUpdate({username: sess.username},{appnum: req.query.appnum})
+			sess.appnum = req.query.appnum
+			
+			
+			//res.redirect('/settings')
+			res.render('settings.hbs', {
+				username: sess.username,
+				password: sess.password,
+				remember: sess.remember,
+				status: sess.status,
+				email: sess.email,
+				fname: sess.fname,
+				lname: sess.lname,
+				appnum: sess.appnum,
+				
+				// username_comment: "",
+				// password_comment: "",
+				// retype_comment: sess.password,
+				// remember_comment: sess.remember,
+				// status_comment: sess.status,
+				// email_comment: sess.email,
+				// fname_comment: sess.fname,
+				// lname_comment: sess.lname,
+				// appnum_comment: ""
+				//submit_comment: "SAVED SUCCESSFULLY."	//successfully saved
+			})
+			
 		}
 		catch(err)
 		{
@@ -1929,7 +1932,7 @@ app.put('/set-settings', async(req,res)=> {
 		}
 	}
 	else{
-		res.redirect('/submit-login')
+		res.redirect('/login-fail.html')
 	}
 });
 

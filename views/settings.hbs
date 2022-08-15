@@ -10,19 +10,63 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 	<script>
-			function openNav() {
-				if(document.getElementById("sidebar").style.width=="0%")
-				{			
-					document.getElementById("sidebar").style.width = "110%";
-					document.getElementById("bottom-button").style.width = "110%";
-				}
-				else{
-					document.getElementById("sidebar").style.width = "0%";
-					document.getElementById("bottom-button").style.width = "0%";
+		function openNav() {
+			if(document.getElementById("sidebar").style.width=="0%")
+			{			
+				document.getElementById("sidebar").style.width = "110%";
+				document.getElementById("bottom-button").style.width = "110%";
+			}
+			else{
+				document.getElementById("sidebar").style.width = "0%";
+				document.getElementById("bottom-button").style.width = "0%";
 
+			}
+		}
+		
+        function checkForm()
+        {
+            var valid = true;
+            var password = document.getElementById("password");
+            var password_comment = document.getElementById("password_comment");
+            var retypepwd = document.getElementById("retypepwd");
+            var submit_comment = document.getElementById("submit_comment");
+            
+			if (password.value == retypepwd.value)
+			{
+				password.style.backgroundColor = "white";
+				retypepwd.style.backgroundColor = "white";
+				valid=true;
+			}
+			else{
+			
+				//submit_comment.value = ""	//resets it to blank in case any error is caught
+			
+				//if field retypepwd is empty but field password is not, red retypepwd
+				if (retypepwd.value == "" && password.value != "")
+				{
+					retypepwd.style.backgroundColor = "red";
+					password.style.backgroundColor = "white";
+					valid = false;
+				}
+				//if field retypepwd is OT empty but field password is, red password field
+				else if (retypepwd.value != "" && password.value == ""){
+					password.style.backgroundColor = "red";
+					retypepwd.style.backgroundColor = "white";
+					valid = false;
+				}
+				else //if (password.value != retypepwd.value)
+				{
+					password.style.backgroundColor = "red";
+					retypepwd.style.backgroundColor = "red";
+					valid=false;
 				}
 			}
-		</script>
+			
+			// TODO/NOTE: in index, check if username already exists, if it does, change username_comment to "Username exists, cannot save."
+            return valid;
+        }
+		
+    </script>
 </head>
 <body>
     <div class="container">
@@ -67,31 +111,40 @@
 
             <div class="main-table">
                 <table>
-                    <form action="/set-settings" >
+                    <form method="get" onsubmit="return checkForm()" action="/set-settings" >
                     <tr>
                         <th><img src="temp_pic.png" id="pfp" width="125" height="125"></th>
                     </tr>
                     <tr>
                         <th><label for="pimg">Profile Image:</label></th>
                         <td><input type="file" id="pimg" name="pimg"></td>
+                        <td>{{this.image_comment}}</td>
                     </tr>
                     <tr>
-                        <th><label for="licenseno">Appraiser's License No.:</label></th>
-                        <td><input type="number" id="licenseno" name="licenseno"></td>
+                        <th><label for="username">Username:</label></th>
+                        <td><input type="text" id="username" name="username" value="{{this.username}}"></td>
+                        <td>{{this.username_comment}}</td>
+                    </tr>
+					
+					<tr>
+                        <th><label for="appnum">Appraiser's License No.:</label></th>
+                        <td><input type="number" id="appnum" name="appnum" value="{{this.appnum}}"></td>
+                        <td>{{this.appnum_comment}}</td>
                     </tr>
                     <tr>
                         <th><label for="email">Email Address:</label></th>
-                        <td><input type="email" id="email" name="email"></td>
-                        <td>*This will be used to sign in your account</td>
+                        <td><input type="email" id="email" name="email" value="{{this.email}}"></td>
+                        <td>{{this.email_comment}}</td>
                     </tr>
                     <tr>
                         <th><label for="password">Password:</label></th>
                         <td><input type="password" id="password" name="password"></td>
+                        <td>{{this.password_comment}}</td>
                     </tr>
                     <tr>
                         <th><label for="retypepwd">Retype Password:</label></th>
                         <td><input type="password" id="retypepwd" name="retypepwd"></td>
-                        <td>*If you forget your password, please coordinate with your admin</td>
+                        <td>{{this.retype_comment}}*If you forget your password, please coordinate with your admin</td>
                     </tr>
                     <tr>
                         <th><label for="theme">Apply:</label></th>
@@ -99,7 +152,8 @@
                             <!-- <option value="Light">Light</option> -->
                             <!-- <option value="Dark">Dark</option> -->
                         <!-- </select></td> -->
-                        <td><input type="submit" id="applysett" name="applysett" value="Apply Settings"></td>
+                        <td><input type="submit" id="applysett" value="Apply Settings"></td>
+                        <td>{{this.submit_comment}}</td>
                     </tr>
                     </form>
                 </table>
