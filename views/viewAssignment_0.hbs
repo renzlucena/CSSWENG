@@ -31,9 +31,9 @@
 			var mall1 = parseInt(document.getElementById("mall_percent1").value);
 			var public_transpo1 = parseInt(document.getElementById("public_transpo_percent1").value);
 			var zoning1 = parseInt(document.getElementById("zoning_percent1").value);
-			
-			
-			
+
+
+
 			var ref_date2 = parseInt(document.getElementById("ref_date_percent2").value);
 			var property_type2 = parseInt(document.getElementById("property_type_percent2").value);
 			var property_interest2 = parseInt(document.getElementById("property_interest_percent2").value);
@@ -49,8 +49,8 @@
 			var mall2 = parseInt(document.getElementById("mall_percent2").value);
 			var public_transpo2 = parseInt(document.getElementById("public_transpo_percent2").value);
 			var zoning2 = parseInt(document.getElementById("zoning_percent2").value);
-			
-			
+
+
 /*
 
 			//COMPARATIVE 2
@@ -95,11 +95,11 @@
 			//(startingValue1*mall1*0.01)+
 			//(startingValue1*public_transpo1*0.01) +
 			(startingValue1*zoning1*0.01);
-			
-			
-			
-			
-			
+
+
+
+
+
 			value2 = startingValue2 + (startingValue2*ref_date2*0.01) +
 			(startingValue2*property_type2*0.01)+
 			(startingValue2*property_interest2*0.01)+
@@ -112,13 +112,13 @@
 			(startingValue2*prime2*0.01) +
 			(startingValue2*hospital2*0.01) +
 			(startingValue2*school2*0.01) +
-			//(startingValue2*mall2*0.01)+
+			//(startingValue2*mall2.num*0.01)+
 			//(startingValue2*public_transpo2*0.01) +
 			(startingValue2*zoning2*0.01);
-			
-			
-			
-			
+
+
+
+
 
 			//value1= mall1
 /*
@@ -143,13 +143,13 @@
 */
 
 			var comp_percent1 = parseInt(document.getElementById("computation_percent1").value);
-			var comp_percent2 = parseInt(document.getElementById("computation_percent2").value);	
-			
+			var comp_percent2 = parseInt(document.getElementById("computation_percent2").value);
+
 			var computationText = document.getElementById("computation");
-			
+
 			<!-- computationText.value = parseInt(startingValue0.value)+423;	//WORKS NOW -->
-			
-			
+
+
 //			computationText.value = value0;	//WORKS NOW
 			var computationText1 = document.getElementById("computation1");
 			computationText1.value = value1;
@@ -172,8 +172,8 @@
 			else {
 				computationText.value = zonal_value
 			}
-			
-			
+
+
 			<!-- computationText.value = startingValue1; -->
 			<!-- computationText1.value = startValue2; -->
 			<!-- computationText2.setAttribute("value", "Hi") -->
@@ -430,7 +430,7 @@
                             <td><input name="frontage" class="text-next-to-percentage" type="text" value="{{this.frontage1}}">
 								<input class="percentage" id="frontage_percent1" name="frontage" type="number" value="{{this.frontage_percent1}}"> %
 							</td>
-                            <td><input name="frontage" class="text-next-to-percentage" type="text" value="{{this.topo2}}">
+                            <td><input name="frontage" class="text-next-to-percentage" type="text" value="{{this.frontage2}}">
 								<input class="percentage" id="frontage_percent2" name="frontage" type="number" value="{{this.frontage_percent2}}"> %
 							</td>
                         </tr>
