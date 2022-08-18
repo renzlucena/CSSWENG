@@ -60,14 +60,19 @@ const assignmentSchema = new mongoose.Schema({
 	type_of_approach: String,
 	client_f_name: String,
 	client_l_name: String,
+	
+	//will only be visible to admin
 	client_contact_num: String,
 	client_email: String,
+	
 	lot_brgy: String,
 	lot_city: String,
 	lot_region: String,
 	created_at: { type: Date, required: true, default: Date.now },
 	assigned_to: String,
 	zonal: Number,
+	
+	//from here onwards the agents can edit the details na
 	price_per_sqm: Number,
 	ref_date: { type: Date, required: false, default: Date.now },
 	lot_loc: String,

@@ -790,7 +790,7 @@ function padLeadingZeros(num, size) {
 }
 // ('0' + 4).slice(-2)
 
-//TODO make this functional, as in working if you click create new
+// this is just the page, the one that saves a new document is "/submit-assignment"
 app.get('/admin-add-assignment', async(req,res)=>{
 	sess = req.session
 	// try{
@@ -822,7 +822,7 @@ app.get('/admin-add-assignment', async(req,res)=>{
 			can_accept: sess.can_accept,
 
 			ref_id	:	(year.getFullYear()-2000).toString()+year.getMonth().toString()+padLeadingZeros((count+1), 3)
-
+			
 		});
 	}
 	else{
@@ -834,7 +834,8 @@ app.get('/admin-add-assignment', async(req,res)=>{
 app.get('/view/0/:ref_id', async(req,res)=>{
 	sess = req.session
 	var ref_id = req.params.ref_id
-
+	console.log("/view/0/:"+ref_id)
+	
 	if(sess.username)
 	{
 		if(sess.username == "admin")
@@ -843,6 +844,8 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				const ass = await Assignment.findOne({
 						ref_id : req.params.ref_id
 					})
+					
+					console.log(ass)
 
 					//	IF IN HISTORY (comment="Approved.")
 					if(ass.comment == "Approved.")
@@ -1080,7 +1083,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime2				: ass.comparative2.prime.bool,
 							hospital2			: ass.comparative2.hospital.bool,
 							school2				: ass.comparative2.school.bool,
-							mall_percent2				: ass.comparative2.mall.bool,
+							mall2				: ass.comparative2.mall.bool,
 							public_transpo2		: ass.comparative2.public_transpo.str,
 							improvement2		: ass.comparative2.improvement.bool,
 							zoning2				: ass.comparative2.zoning.str,
@@ -1219,7 +1222,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime2				: ass.comparative2.prime.bool,
 							hospital2			: ass.comparative2.hospital.bool,
 							school2				: ass.comparative2.school.bool,
-							mall_percent2				: ass.comparative2.mall.bool,
+							mall2				: ass.comparative2.mall.bool,
 							public_transpo2		: ass.comparative2.public_transpo.str,
 							improvement2		: ass.comparative2.improvement.bool,
 							zoning2				: ass.comparative2.zoning.str,
@@ -1266,10 +1269,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				const ass = await Assignment.findOne({
 					ref_id : req.params.ref_id
 					})
+				console.log(ass)
+				
 				//	in history
 				if(ass.comment == "Approved."){
 					res.render('history_0.hbs',{
-						ref_id 			: ass.ref_id,
+							ref_id 			: ass.ref_id,
 							type_of_approach: ass.type_of_approach,
 							client_f_name 	: ass.client_f_name,
 							client_l_name 	: ass.client_l_name,
@@ -1403,9 +1408,9 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						});
 				}
 				else{	//	in assignemnts (has save  details, compute, and send for process buttons)
-
+					
 					res.render('viewAssignment_0.hbs',{
-						ref_id 			: ass.ref_id,
+							ref_id 			: ass.ref_id,
 							type_of_approach: ass.type_of_approach,
 							client_f_name 	: ass.client_f_name,
 							client_l_name 	: ass.client_l_name,
@@ -1480,7 +1485,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime_percent1				: ass.comparative1.prime.num,
 							hospital_percent1			: ass.comparative1.hospital.num,
 							school_percent1				: ass.comparative1.school.num,
-							mall_percent1				: ass.comparative1.mall.bool,
+							mall_percent1				: ass.comparative1.mall.num,
 							public_transpo_percent1		: ass.comparative1.public_transpo.num,
 							improvement_percent1		: ass.comparative1.improvement.num,
 							zoning_percent1				: ass.comparative1.zoning.num,
@@ -1502,7 +1507,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime2				: ass.comparative2.prime.bool,
 							hospital2			: ass.comparative2.hospital.bool,
 							school2				: ass.comparative2.school.bool,
-							mall_percent2				: ass.comparative2.mall.bool,
+							mall2				: ass.comparative2.mall.bool,
 							public_transpo2		: ass.comparative2.public_transpo.str,
 							improvement2		: ass.comparative2.improvement.bool,
 							zoning2				: ass.comparative2.zoning.str,
@@ -1521,7 +1526,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							prime_percent2				: ass.comparative2.prime.num,
 							hospital_percent2			: ass.comparative2.hospital.num,
 							school_percent2				: ass.comparative2.school.num,
-							mall_percent2				: ass.comparative2.mall.bool,
+							mall_percent2				: ass.comparative2.mall.num,
 							public_transpo_percent2		: ass.comparative2.public_transpo.num,
 							improvement_percent2		: ass.comparative2.improvement.num,
 							zoning_percent2				: ass.comparative2.zoning.num,
@@ -1552,7 +1557,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 });
 
 
-//THIS IS THE "PROPERTY" VIEW
+// //THIS IS THE "PROPERTY" VIEW
 app.get('/viewAssignment/0/:ref_id', async(req,res)=>{
 	sess = req.session
 	var ref_id = req.params.ref_id
@@ -1570,9 +1575,9 @@ app.get('/viewAssignment/0/:ref_id', async(req,res)=>{
 		/*
 		if(sess.username == "admin")
 		{	//if admin, cannot edit, but can comment
-			// const ass = await Assignment.findOne({
-				// id : ref_id
-				// }).exec()
+			const ass = await Assignment.findOne({
+				id : ref_id
+				}).exec()
 
 			console.log(ass)
 
@@ -1596,9 +1601,9 @@ app.get('/viewAssignment/0/:ref_id', async(req,res)=>{
 				appExp : sess.appExp
 			});
 
-			// sess.currentAss = ref_id
+			sess.currentAss = ref_id
 		}
-		else// if (sess.username != "admin")
+		else if (sess.username != "admin")
 		{
 */
 
@@ -1625,7 +1630,7 @@ app.get('/accept-assignment/:ref_id', async(req,res)=>{
 			const ass = await Assignment.findOneAndUpdate(
 				{ref_id: req.params.ref_id},{
 					assigned_to: sess.username,
-					comment: "The Assignment has been assigned to you!"
+					comment: "The Assignment has been assigned to "+sess.username
 				})
 			const acct = await Account.findOneAndUpdate(
 				{username: sess.username},{
@@ -1644,8 +1649,8 @@ app.get('/accept-assignment/:ref_id', async(req,res)=>{
 })
 
 
-
-// SAVES NEW BLANK DOCUMENT FOR ASSIGNMENT
+// The page that asks for the fields from admin is /admin-add-assignment
+// THIS FUNCTION/PAGE SAVES NEW BLANK DOCUMENT FOR ASSIGNMENT
 app.post('/submit-assignment', function(req,res) {
 	sess = req.session
 
@@ -1662,11 +1667,11 @@ app.post('/submit-assignment', function(req,res) {
 			lot_brgy: req.body.lot_brgy,
 			lot_city: req.body.lot_city,
 			lot_region: req.body.lot_region,
-			zonal: req.body.zonal,
 			assigned_to: "",
-
-			//no dates because they have default values already
+			zonal: req.body.zonal,
 			price_per_sqm: 0,
+
+			ref_date: 0,
 			lot_loc: "",
 			property_type: "",
 			property_interest: "",
@@ -1684,13 +1689,13 @@ app.post('/submit-assignment', function(req,res) {
 			public_transpo: "",
 			improvement: false,
 			zoning: "",
-			computation: {num1: 0, num2: 0},
+			computation: 0,
 			//don't set comment because it has a default value that marks it as "New!"
 
 			//add empty comparative
 			comparative1 : {
 				price_per_sqm: 0,
-				ref_date: {date: null, num: 0}, //idk if this works
+				ref_date: {date: 0, num: 0}, //idk if this works
 				lot_loc: "",
 				property_type: {str: "", num:0},
 				property_interest: {str:"",num:0},
@@ -1715,7 +1720,7 @@ app.post('/submit-assignment', function(req,res) {
 			//add empty comparative
 			comparative2 : {
 				price_per_sqm: 0,
-				ref_date: {date: null, num: 0},
+				ref_date: {date: 0, num: 0},
 				lot_loc: "",
 				property_type: {str: "", num:0},
 				property_interest: {str:"",num:0},
@@ -2094,36 +2099,239 @@ app.get('/terms', function(req,res){
 	}
 })
 
-
-
 app.get('/save-ass', async(req,res)=> {
 	// sess = req.session;
 	// console.log(req.query.ref_id)
-	console.log(req.query)
+	console.log("in /save-ass")
+	
 	if(sess.username){
 		var today = new Date()
 
 		try{
-			console.log(req.query)
 			
+			console.log(req.query)
+			//console.log(req.params)
+			// console.log(parseInt(req.query.price_per_sqm[0]))
 			
 			//So the thing is, just save everything on the screen, even if user put blank there, still save
 			//the error checkng will be done in <script> of that page nalang so it's easier to seee
 			await Assignment.findOneAndUpdate({ref_id: req.query.ref_id},{
 				price_per_sqm: req.query.price_per_sqm[0],
-				
-				
+				ref_date: req.query.ref_date[0],
+				lot_loc: req.query.lot_loc[0],
+				property_type: req.query.property_type[0],
+				property_interest: req.query.property_interest[0],
+				//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
+				//property_images: [imageSchema],
+				lot_size: req.query.lot_size[0],
+				shape: req.query.shape[0],
+				topo: req.query.topo[0],
+				frontage: req.query.frontage[0],
+				terms_of_sale: req.query.terms_of_sale[0],
+				corner: req.query.corner[0],
+				prime: req.query.prime[0],
+				hospital: req.query.hospital[0],
+				school: req.query.school[0],
+				mall: req.query.mall[0], //problem if left "mall" lol i cant be bothered anymore lmaoooo
+				public_transpo: req.query.public_transpo[0],
+				improvement: req.query.improvement[0],
+				zoning: req.query.zoning[0],
+				computation: req.query.computation[0],
 				comparative1 : {
-					price_per_sqm: req.query.price_per_sqm[1]
+					price_per_sqm: req.query.price_per_sqm[1],
+					ref_date: {
+						date: req.query.ref_date[1],
+						num: req.query.ref_date[2]
+						},
+					property_type: {
+						str: req.query.property_type[1],
+						num: req.query.property_type[2]
+						},
+					property_interest: {
+						str: req.query.property_interest[1],
+						num: req.query.property_interest[2]
+						},
+					lot_size: {
+						num1: req.query.lot_size[1],
+						num2: req.query.lot_size[2]
+						},
+					shape: {
+						str: req.query.shape[1],
+						num: req.query.shape[2]
+						},
+					topo: {
+						str: req.query.topo[1],
+						num: req.query.topo[2]
+						},
+					frontage: {
+						str: req.query.frontage[1],
+						num: req.query.frontage[2]
+						},
+					terms_of_sale: {
+						str: req.query.terms_of_sale[1],
+						num: req.query.terms_of_sale[2]
+						},
+					
+					
+					
+					//hiding bools for now bc idk how to make them save :v
+					// I saw this baka makahelp sa mag fifix:
+					//		https://stackoverflow.com/questions/39962676/updating-mongodb-with-checkbox-information
+					
+					/*
+					corner: {
+						bool: req.query.corner[1],
+						num: req.query.corner[2]
+						},
+					prime: {
+						bool: req.query.prime[1],
+						num: req.query.prime[2]
+						},
+					hospital: {
+						bool: req.query.hospital[1],
+						num: req.query.hospital[2]
+						},
+					school: {
+						bool: req.query.school[1],
+						num: req.query.school[2]
+						},
+					mall: {
+						bool: req.query.mall[1],
+						num: req.query.mall[2]
+						},
+					*/
+					public_transpo: {
+						str: req.query.public_transpo[1],
+						num: req.query.public_transpo[2]
+						},
 						
+					//also bool
+					/*improvement: {
+						bool: req.query.improvement[1],
+						num: req.query.improvement[2]
+						},
+					*/
+					
+					//remove when boolis fixed, these are just placeholders
+					corner: {
+						bool: true,
+						num: 0
+						},
+					prime: {
+						bool: true,
+						num: 0
+						},
+					hospital: {
+						bool: true,
+						num: 0
+						},
+					school: {
+						bool: true,
+						num: 0
+						},
+					mall: {
+						bool: true,
+						num: 0
+						},
+					improvement: {
+						bool: true,
+						num: 0
+						},
+						
+						
+					zoning: {
+						str: req.query.zoning[1],
+						num: req.query.zoning[2]
+						},
+					computation: {
+						num1: req.query.computation[1],
+						num2: req.query.computation[2]
+					}
 				},
 				
 				comparative2:{
-					price_per_sqm: req.query.price_per_sqm[2]
-				
+					price_per_sqm: req.query.price_per_sqm[2],
+					ref_date: {
+						date: req.query.ref_date[3],
+						num: req.query.ref_date[4]
+						},
+					property_type: {
+						str: req.query.property_type[3],
+						num: req.query.property_type[4]
+						},
+					property_interest: {
+						str: req.query.property_interest[3],
+						num: req.query.property_interest[4]
+						},
+					lot_size: {
+						num1: req.query.lot_size[3],
+						num2: req.query.lot_size[4]
+						},
+					shape: {
+						str: req.query.shape[3],
+						num: req.query.shape[4]
+					},				
+					topo: {
+						str: req.query.topo[1],
+						num: req.query.topo[2]
+						},
+					frontage: {
+						str: req.query.frontage[1],
+						num: req.query.frontage[2]
+						},
+					terms_of_sale: {
+						str: req.query.terms_of_sale[1],
+						num: req.query.terms_of_sale[2]
+						},
+					//placeholders
+					public_transpo: {
+						str: req.query.public_transpo[1],
+						num: req.query.public_transpo[2]
+						},
+					
+					
+					
+					
+					//remove when boolis fixed, these are just placeholders
+					corner: {
+						bool: true,
+						num: 0
+						},
+					prime: {
+						bool: true,
+						num: 0
+						},
+					hospital: {
+						bool: true,
+						num: 0
+						},
+					school: {
+						bool: true,
+						num: 0
+						},
+					mall: {
+						bool: true,
+						num: 0
+						},
+					improvement: {
+						bool: true,
+						num: 0
+						},
+						
+						
+						
+					zoning: {
+						str: req.query.zoning[1],
+						num: req.query.zoning[2]
+						},
+					computation: {
+						num1: req.query.computation[1],
+						num2: req.query.computation[2]
+					}
 				}
 			})
-
+			
+			//res.redirect('/assignments')
 			res.redirect('/view/0/'+ req.query.ref_id)
 		}
 		catch(err)
