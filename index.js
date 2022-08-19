@@ -2444,10 +2444,11 @@ app.get('/save-doc', async(req,res)=> {
 
 		try{
 			
-			console.log(req.query)
+			
 			//console.log(req.params)
 			// console.log(parseInt(req.query.price_per_sqm[0]))
-			
+			const doc = await Document.find({ref_id: req.query})
+			console.log(doc)
 			//So the thing is, just save everything on the screen, even if user put blank there, still save
 			//the error checkng will be done in <script> of that page nalang so it's easier to seee
 			await Document.findOneAndUpdate({ref_id: req.query.ref_id},{
