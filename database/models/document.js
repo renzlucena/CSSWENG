@@ -6,7 +6,7 @@ const documentSchema = new mongoose.Schema({
 	filename: String,
     company_name: String,
     company_address: String,
-    appraisal_date: {type: Date, required: true},
+    appraisal_date: {type: Date, required: true, default: Date.now},
     appraiser_num: Number,
     appraiser_address: String,
     market_value: String,
@@ -50,7 +50,7 @@ const documentSchema = new mongoose.Schema({
     //comparables: ,
     explanation_adjustments: String,
     range_value_per_sqm: String,
-    final_value_per_sqm: Number,
+    final_value_per_sqm: String,
 
     //reconciliation & final value opinion
     recon_final_value_opinion: String,
@@ -64,9 +64,10 @@ const documentSchema = new mongoose.Schema({
     final_value_indication_per_sqm: String,
 
     //comparatives
-    subject: comparativeSchema,
+    /*subject: comparativeSchema,
     comp1: comparativeSchema,
-    comp2: comparativeSchema,
+    comp2: comparativeSchema,*/
+    comment: {type:String, default:"New!"}
 })
 
 const Document = mongoose.model('Document', documentSchema);

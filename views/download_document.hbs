@@ -5,7 +5,7 @@
     <link rel = "stylesheet" href="agent_edit_doc.css" type="text/css">
     <link rel = "stylesheet" href="/pager0.css" type="text/css" >
 	<link rel = "stylesheet" href="/styles.css" type="text/css" >
-    <title>Edit Document</title>
+    <title>Download Document</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
 	
 		//try this https://www.npmjs.com/package/handlebars-pdf
 	
-	
+        
         var docDefinition = {
         pageSize: 'LETTER',
         pageMargins: [80, 60],
@@ -342,18 +342,18 @@
         }   
         };
         function openPDF(){
-            pdfMake.createPdf(docDefinition).open(this.filename + '.pdf');
+            pdfMake.createPdf(docDefinition).open(/*this.filename + '.pdf'*/);
         }
 
         function downloadPDF(){
-            pdfMake.createPdf(docDefinition).download(this.filename + '.pdf');
+            pdfMake.createPdf(docDefinition).download(/*this.filename + '.pdf'*/);
         }
 
 
 		//this will just make it show sa canvas container not save
         pdfMake.createPdf(docDefinition).getDataUrl(function (outDoc) {
         document.getElementById('pdfpreview').src = outDoc;		
-        });
+        });*/
     </script>
 </head>
 <body>
@@ -597,9 +597,9 @@
                 </div>
             </form>
             <div id="main-table-bottom">
-                <button method = "get" type = "submit" name="save_doc" formaction="/save-doc">Save Document</button>
-                <!--<button onclick="openPDF()">Open PDF</button></td>
-                <button onclick="downloadPDF()">Download PDF</button></td>-->
+                <!--<button method = "get" type = "submit" name="save_doc" formaction="/save-doc">Save Document</button>-->
+                <button onclick="openPDF()">Open PDF</button></td>
+                <button onclick="downloadPDF()">Download PDF</button></td>
 
             </div>
         </div>
