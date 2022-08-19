@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<head>
+    <link rel = "stylesheet" href="agent_add_view.css">
+    <title>Create Assignment</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+	<script>
+		function openNav() {
+			if(document.getElementById("sidebar").style.width=="0%")
+			{
+				document.getElementById("sidebar").style.width = "110%";
+				document.getElementById("bottom-button").style.width = "110%";
+			}
+			else{
+				document.getElementById("sidebar").style.width = "0%";
+				document.getElementById("bottom-button").style.width = "0%";
+			}
+		}
+
+		function checkForm()
+        {
+            var valid = true;
+
+            var agent_username = document.getElementById("agent_username");
+            var agent_password = document.getElementById("agent_password");
+            var agent_email = document.getElementById("agent_email");
+            var agent_fname = document.getElementById("agent_fname");
+            var agent_lname = document.getElementById("agent_lname");
+            var agent_appnum = document.getElementById("agent_appnum");
+
+            //if either field is empty, do not proceed.
+            if (agent_username.value == "")
+            {
+                agent_username.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                agent_username.style.backgroundColor = "white";
+            }
+            if (agent_password.value == "")
+            {
+                agent_password.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                agent_password.style.backgroundColor = "white";
+            }
+            return valid;
+
+            if (agent_email.value == "")
+            {
+                agent_email.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                agent_email.style.backgroundColor = "white";
+            }
+            return valid;
+
+            if (agent_fname.value == "")
+            {
+                agent_fname.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                agent_fname.style.backgroundColor = "white";
+            }
+            return valid;
+
+            if (agent_lname.value == "")
+            {
+                agent_lname.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                agent_lname.style.backgroundColor = "white";
+            }
+            return valid;
+
+			if (agent_appnum.value == "")
+            {
+                agent_appnum.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                agent_appnum.style.backgroundColor = "white";
+            }
+            return valid;
+        }
+	</script>
+
+</head>
+<body>
+    <div class="container">
+        <div id="sidebar">
+            <div class="sidebar-profile">
+                <div class="sidebar-profile-text">
+                    <p class="sidebar-profile-name">Admin</p>
+                    <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
+                    <a href="/logout">Log Out</a>
+                </div>
+            </div>
+
+
+            <div class="sidebar-assignments-btn">
+                <a  href="/assignments">Assignments</a>
+            </div>
+
+			<div class="sidebar-profile-btn">
+                <a  href="/admin-add-assignment">Add New Assignment</a>
+            </div>
+
+            <div class="sidebar-history-btn">
+                <a  href="/history">History</a>
+            </div>
+            <div class="bottom-button">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+
+		<div class="openbtn" >
+			<a href="#" onclick="openNav()">☰</a>
+		</div>
+
+        <div class="main">
+            <div class="main-header">
+                <h1>Create Agent</p>
+                <p><b><i>Create New Agent</b></i></p>
+            </div>
+            <form class="assignments-form" action = "/assignments" method = "post">
+                <div class="main-table">
+                    <table>
+                        <tr>
+                            <th><label for="agent_username">New Agent Username</label></th>
+                            <td><input name="agent_username" id="agent_username" type="text" value="{{this.agent_username}}" readonly></td>
+                        </tr>
+                        <tr>
+                            <th><label for="agent_password">New Agent Password</label></th>
+                            <td><input name="agent_password" id="agent_password" type="text"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="agent_email">New Agent Email</label></th>
+                            <td><input name="agent_email" id="agent_email" type="text"></td>
+                        </tr>
+						<tr>
+                            <th><label for="agent_fname">New Agent First Name</label></th>
+                            <td><input name="agent_fname" id="agent_fname" type="text"></td>
+                        </tr>
+						<tr>
+                            <th><label for="agent_lname">New Agent Last Name</label></th>
+                            <td><input name="agent_lname" id="agent_lname" type="text"></td>
+                        </tr>
+            <tr>
+                            <th><label for="agent_appnum">New Agent App Number</label></th>
+                            <td><input name="agent_appnum" id="agent_appNum" type="text"></td>
+                        </tr>
+					
+                    </table>
+                </div>
+
+				<div id="main-table-bottom">
+					<button type = "submit" formaction="/new-agent" name="new_age" onsubmit="return checkForm()">Add Agent</button>
+				</div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

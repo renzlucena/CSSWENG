@@ -440,7 +440,7 @@ app.get('/send-ass', async(req,res)=> {
 		catch(err)
 		{console.log(err)}
 		*/
-		
+
 		/*
 
 			const ass = await Assignment.find({
@@ -511,8 +511,8 @@ app.get('/send-ass', async(req,res)=> {
 				final_value_indication			: doc.final_value_indication,
 				final_value_indication_per_sqm	: doc.final_value_indication_per_sqm,
 			})
-			
-			
+
+
 			/*
 			res.render('editDocument.hbs',{
 				document			: doc,
@@ -739,7 +739,7 @@ app.get('/admin-approve', async(req,res)=>{
 			// const ass = await Assignment.findOneAndUpdate({res: req.params.ref_id},{comment: "test"})
 			// req.params.ref_id
 			//console.log(req.params.ref_id)
-			
+
 			await Assignment.findOneAndUpdate(
 				// {ref_id: req.query.ref_id},
 				{ref_id: req.query.ref_id},
@@ -823,7 +823,7 @@ app.get('/admin-add-assignment', async(req,res)=>{
 			can_accept: sess.can_accept,
 
 			ref_id	:	(year.getFullYear()-2000).toString()+year.getMonth().toString()+padLeadingZeros((count+1), 3)
-			
+
 		});
 	}
 	else{
@@ -836,7 +836,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 	sess = req.session
 	var ref_id = req.params.ref_id
 	console.log("/view/0/:"+ref_id)
-	
+
 	if(sess.username)
 	{
 		if(sess.username == "admin")
@@ -845,7 +845,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				const ass = await Assignment.findOne({
 						ref_id : req.params.ref_id
 					})
-					
+
 					console.log(ass)
 
 					//	IF IN HISTORY (comment="Approved.")
@@ -1271,7 +1271,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					ref_id : req.params.ref_id
 					})
 				console.log(ass)
-				
+
 				//	in history
 				if(ass.comment == "Approved."){
 					res.render('history_0.hbs',{
@@ -1409,7 +1409,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						});
 				}
 				else{	//	in assignemnts (has save  details, compute, and send for process buttons)
-					
+
 					res.render('viewAssignment_0.hbs',{
 							ref_id 			: ass.ref_id,
 							type_of_approach: ass.type_of_approach,
@@ -1749,6 +1749,32 @@ app.post('/submit-assignment', function(req,res) {
 	res.redirect('/assignments')
 });
 
+//This function is to make a new agent. Not sure if entirely working.
+
+app.post('/new-agent', function(req,res) {
+	sess = req.session
+
+	var username = req.body.username
+	try{
+		Account.create(
+		{
+			username: req.body.username,
+			password: req.body.password,
+			email: req.body.email,
+			remember: false,
+			status: true,
+			fname: req.body.fname,
+			lname: req.body.lname,
+			appnum: req.body.appnum,
+			can_accept: true
+		})
+	}
+	catch(err)
+	{console.log(err)}
+
+	res.redirect('/account')
+});
+
 
 app.get('/dashboard', async(req,res)=> {
 	sess = req.session;
@@ -1884,7 +1910,7 @@ app.get('/set-settings', async(req,res)=> {
 		//update db
 		try{
 			//TODO: Check if username already being used!!
-			
+
 			//render with new data
 			if (req.query.username!= sess.username && req.query.username != "")
 			{
@@ -1903,11 +1929,11 @@ app.get('/set-settings', async(req,res)=> {
 				await Account.findOneAndUpdate({username: sess.username},{email: req.query.email})
 				sess.email = req.query.email
 			}
-			
+
 			await Account.findOneAndUpdate({username: sess.username},{appnum: req.query.appnum})
 			sess.appnum = req.query.appnum
-			
-			
+
+
 			//res.redirect('/settings')
 			res.render('settings.hbs', {
 				username: sess.username,
@@ -1918,7 +1944,7 @@ app.get('/set-settings', async(req,res)=> {
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
-				
+
 				// username_comment: "",
 				// password_comment: "",
 				// retype_comment: sess.password,
@@ -1930,7 +1956,7 @@ app.get('/set-settings', async(req,res)=> {
 				// appnum_comment: ""
 				//submit_comment: "SAVED SUCCESSFULLY."	//successfully saved
 			})
-			
+
 		}
 		catch(err)
 		{
@@ -2104,16 +2130,16 @@ app.get('/save-ass', async(req,res)=> {
 	// sess = req.session;
 	// console.log(req.query.ref_id)
 	console.log("in /save-ass")
-	
+
 	if(sess.username){
 		var today = new Date()
 
 		try{
-			
+
 			console.log(req.query)
 			//console.log(req.params)
 			// console.log(parseInt(req.query.price_per_sqm[0]))
-			
+
 			//So the thing is, just save everything on the screen, even if user put blank there, still save
 			//the error checkng will be done in <script> of that page nalang so it's easier to seee
 			await Assignment.findOneAndUpdate({ref_id: req.query.ref_id},{
@@ -2172,13 +2198,13 @@ app.get('/save-ass', async(req,res)=> {
 						str: req.query.terms_of_sale[1],
 						num: req.query.terms_of_sale[2]
 						},
-					
-					
-					
+
+
+
 					//hiding bools for now bc idk how to make them save :v
 					// I saw this baka makahelp sa mag fifix:
 					//		https://stackoverflow.com/questions/39962676/updating-mongodb-with-checkbox-information
-					
+
 					/*
 					corner: {
 						bool: req.query.corner[1],
@@ -2205,14 +2231,14 @@ app.get('/save-ass', async(req,res)=> {
 						str: req.query.public_transpo[1],
 						num: req.query.public_transpo[2]
 						},
-						
+
 					//also bool
 					/*improvement: {
 						bool: req.query.improvement[1],
 						num: req.query.improvement[2]
 						},
 					*/
-					
+
 					//remove when boolis fixed, these are just placeholders
 					corner: {
 						bool: true,
@@ -2238,8 +2264,8 @@ app.get('/save-ass', async(req,res)=> {
 						bool: true,
 						num: 0
 						},
-						
-						
+
+
 					zoning: {
 						str: req.query.zoning[1],
 						num: req.query.zoning[2]
@@ -2249,7 +2275,7 @@ app.get('/save-ass', async(req,res)=> {
 						num2: req.query.computation[2]
 					}
 				},
-				
+
 				comparative2:{
 					price_per_sqm: req.query.price_per_sqm[2],
 					ref_date: {
@@ -2271,7 +2297,7 @@ app.get('/save-ass', async(req,res)=> {
 					shape: {
 						str: req.query.shape[3],
 						num: req.query.shape[4]
-					},				
+					},
 					topo: {
 						str: req.query.topo[1],
 						num: req.query.topo[2]
@@ -2289,10 +2315,10 @@ app.get('/save-ass', async(req,res)=> {
 						str: req.query.public_transpo[1],
 						num: req.query.public_transpo[2]
 						},
-					
-					
-					
-					
+
+
+
+
 					//remove when boolis fixed, these are just placeholders
 					corner: {
 						bool: true,
@@ -2318,9 +2344,9 @@ app.get('/save-ass', async(req,res)=> {
 						bool: true,
 						num: 0
 						},
-						
-						
-						
+
+
+
 					zoning: {
 						str: req.query.zoning[1],
 						num: req.query.zoning[2]
@@ -2331,7 +2357,7 @@ app.get('/save-ass', async(req,res)=> {
 					}
 				}
 			})
-			
+
 			//res.redirect('/assignments')
 			res.redirect('/view/0/'+ req.query.ref_id)
 		}
@@ -2373,7 +2399,7 @@ app.get('/edit-doc', async(req,res)=> {
 		    scope_of_work: "",
 
     		//property description
-		    title_no: "", 
+		    title_no: "",
 		    utilities: "",
 		    flood: "",
 		    easements: "",
@@ -2438,13 +2464,13 @@ app.get('/save-doc', async(req,res)=> {
 	// sess = req.session;
 	// console.log(req.query.ref_id)
 	console.log("in /save-doc")
-	
+
 	if(sess.username){
 		var today = new Date()
 
 		try{
-			
-			
+
+
 			//console.log(req.params)
 			// console.log(parseInt(req.query.price_per_sqm[0]))
 			const doc = await Document.find({ref_id: req.query})
@@ -2463,15 +2489,15 @@ app.get('/save-doc', async(req,res)=> {
 				improvements: req.query.improvements,
 				zoning_class: req.query.zoning_class,
 				interest_appraised: req.query.interest_appraised,
-				
+
 				property_identification: req.query.property_identification,
 				appraisal_objective_property_rights: req.query.appraisal_objective_property_rights,
 				intended_use_intended_users: req.query.intended_use_intended_users,
 				effective_date_report: req.query.effective_date_report,
 				statement_ownership_sales_history: req.query.statement_ownership_sales_history,
 				scope_of_work: req.query.scope_of_work,
-				
-				title_no: req.query.title_no, 
+
+				title_no: req.query.title_no,
 				utilities: req.query.utilities,
 				flood: req.query.flood,
 				easements: req.query.easements,
@@ -2506,7 +2532,7 @@ app.get('/save-doc', async(req,res)=> {
 				final_value_indication: req.query.final_value_indication,
 				final_value_indication_per_sqm: req.query.final_value_indication_per_sqm,
 			})
-			
+
 			//res.redirect('/assignments')
 			res.redirect('/edit-doc')
 		}
@@ -2553,7 +2579,7 @@ app.get('/download-doc', async(req,res)=> {
 					improvements: req.query.improvements,
 					zoning_class: req.query.zoning_class,
 					interest_appraised: req.query.interest_appraised,
-				
+
 					property_identification: req.query.property_identification,
 					//property_images: [imageSchema],
 					appraisal_objective_property_rights: req.query.appraisal_objective_property_rights,
@@ -2561,8 +2587,8 @@ app.get('/download-doc', async(req,res)=> {
 					effective_date_report: req.query.effective_date_report,
 					statement_ownership_sales_history: req.query.statement_ownership_sales_history,
 					scope_of_work: req.query.scope_of_work,
-				
-					title_no: req.query.title_no, 
+
+					title_no: req.query.title_no,
 					utilities: req.query.utilities,
 					flood: req.query.flood,
 					easements: req.query.easements,
@@ -2573,7 +2599,7 @@ app.get('/download-doc', async(req,res)=> {
 					neighborhood: req.query.neighborhood,
 					area_development: req.query.area_development,
 					market_analysis: req.query.market_analysis,
-	
+
 					highest_best_use: req.query.highest_best_use,
 					legally_permissible: req.query.legally_permissible,
 					physical_possibility: req.query.physical_possibility,
