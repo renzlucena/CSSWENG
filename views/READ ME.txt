@@ -1,0 +1,18 @@
+I feel like you guys are confused by the naming so here's a tldr so you dont need to open index.js anymr
+
+viewAssignment_0 - page from Agent POV where the assignment they are viewing are still not submitted/approved
+viewAssignment_1 - Agent POV where the ass they are viewing is already submitted (can't edit, no other buttons)
+viewAssignment_approved - Agent POV where the ass they are viewing is already approved (can't edit, has button to edit the doc)
+
+viewAssignment_0_admin - Admin POV where the ass they are viewing is just submitted for review (they can comment on it/send back/approve so that they can go to print it)
+viewAssignment_1_admin - Admin POV where the ass they are viewing is already approved (therefore they can't comment on it/send back)
+viewAssignment_2_admin - Admin only can access. for new assignments, only show admin panel info
+viewAssignment_3_admin - Admin POV, almost same look as viewAssignment_1 for Agent except the sidebar is different
+
+assignments - Agent POV, page to show when the agent is allowed to accept any assignment listed
+assignments_cant_accept - Agent POV, page to show when the agent is NOT allowed to accept any assignments (bc they have an ongoing ass)
+
+history		- History page in Agent POV
+history_admin	- History page in Admin POV
+history_0	- ???
+history_0_admin

@@ -68,50 +68,56 @@
                 <p>If you have any questions how to use, please do not hesitate to contact the group through Erin.</p>       
             </div>  
             
-			<form method="post" action="/assignments">
-            <div class="main-table">            
-                <table>
-					<tr>
-						<th><p>REF NO.</p></th>
-						<th><p>ASSIGNED TO</p></th>                    
-						<th><p>LOCATION</p></th>
-						<th><p>ACTION</p></th>
-                    </tr>
-                    <tr>
-						<th colspan='5'>Unassigned Assignments</th>
-					</tr>
-					{{#each assignment_new}}
-					<tr>
-						<td><p>{{this.ref_id}}</p></td>
-						<td><p>{{this.assigned_to}}</p></td>
-						<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
-						<td></td>
-					</tr>
-					{{/each}}
-				  
-					<tr>
-						<th colspan='5'>Assigned Assignments</th>
-						<th></th>
-						<th></th>
-						<th></th>
-					</tr>
-					{{#each assignment_ass}}
+			
+			<form method="get" action="/assignments">
+				<div class="main-table">
+					<table>
+						<tr>
+							<th><p>REF NO.</p></th>
+							<th><p>ASSIGNED TO</p></th>                    
+							<th><p>LOCATION</p></th>
+							<th><p>ACTION</p></th>
+						</tr>
+						
+						<tr>
+							<th colspan='4'>Unassigned Assignments</th>
+						</tr>
+						{{#each assignment_new}}
 						<tr>
 							<td><p>{{this.ref_id}}</p></td>
 							<td><p>{{this.assigned_to}}</p></td>
 							<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
 							<td>
 								<div class="main-assignments-status-btns">
-									<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">View Assignment</button>
+									<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit Assignment</button>
 								</div>
 							</td>
 						</tr>
+						{{/each}}
+						
 						<tr>
-							<th>Admin's Comment:</th>
-							<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
+						<th colspan='5'>Assigned Assignments</th>
+						<th></th>
+						<th></th>
+						<th></th>
 						</tr>
-					{{/each}}
-					
+						
+						{{#each assignment_ass}}
+							<tr>
+								<td><p>{{this.ref_id}}</p></td>
+								<td><p>{{this.assigned_to}}</p></td>
+								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>
+									<div class="main-assignments-status-btns">
+										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">View Assignment</button>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>Admin's Comment:</th>
+								<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
+							</tr>
+						{{/each}}					
                 </table>
             </div>
 			</form>

@@ -89,7 +89,7 @@ app.get('/login', async(req,res)=> {
 				sess.status   = acct.status,
                 sess.fname	  = acct.fname,
                 sess.lname    = acct.lname,
-                sess.appNum   = acct.appNum,
+                sess.appnum   = acct.appnum,
                 sess.appexp   = acct.appexp
 
 				if(req.query.username == "admin")
@@ -99,21 +99,6 @@ app.get('/login', async(req,res)=> {
 				else
 				{
 					res.redirect('/dashboard');
-
-					// RENDER DASHBOARD
-					// res.render('dashboard.hbs', {
-						// username: acct.username,
-						// remember: acct.remember,
-						// status: sess.status,
-						// password: acct.password,
-						// acct_id : acct.acct_id,
-						// email   : acct.email,
-						// fname   : acct.fname,
-						// lName   : acct.lName,
-						// appNum  : acct.appNum,
-						// appexp : acct.appexp
-						// //this is like in java: this.data = data
-					// })
 				}
 			}
 			else
@@ -331,31 +316,35 @@ app.get('/set-settings', async(req,res)=> {
 }
 		*/
 
+
+
 // SEND ASSIGNMENT TO ADMIN FOR FEEDBACK
 // "Send for Processing" - comment will be changed to "Submitted." and admin can see the detailsof the assignment
-app.get('/send-ass/:ref_id', async(req,res)=> {
+app.get('/send-ass', async(req,res)=> {
 	sess = req.session;
 	console.log("in /send-ass " + req.query.ref_id)
+	console.log(req.query + "Logged In: "+sess.username)
+	
 	if(sess.username){
 		try{
 			//edit comment to "Submitted."
 			await Assignment.findOneAndUpdate(
 				{ref_id: req.query.ref_id},
-				{comment: "Submitted."}).exec()
-				
-			// await Document:findOneAndUpdate(
-				// {ref_id: req.query.ref_id},
-				// {})
+				{comment: "Submitted."})
+					
+				// await Document:findOneAndUpdate(
+					// {ref_id: req.query.ref_id},
+					// {})
 
-			// var ref_id = req.body.ref_id
-		}
+				// var ref_id = req.body.ref_id
+			}
 		catch(err)
 		{
-			res.status(500).send(err)
+			// res.status(500).send(err) //FOUND THE PROBLEM , just dont write this line nalang
 			console.log(err)
 		}
-		//dont forget to redirect/render a page
-		
+		//dont forget to redirect/render a page in all branches
+		res.redirect('/assignments')
 	}	
 	else{
 		res.redirect('/login-fail.html')
@@ -366,6 +355,8 @@ app.get('/send-ass/:ref_id', async(req,res)=> {
 //TODO!	//change the comment to "Approved.", if approved, can be printed
 app.get('/admin-approve', async(req,res)=>{
 	sess = req.session;
+	console.log("in //admin-approve " + req.query.ref_id)
+
 	if(sess.username)
 	{
 		try{
@@ -522,147 +513,317 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						ref_id : req.params.ref_id
 					})
 
-					console.log(ass)
+				// console.log(ass)
+				if(ass.comment == "Approved.")
+				{	res.render('viewAssignment_1_admin.hbs',{
+						ref_id 			: ass.ref_id,
+						type_of_approach: ass.type_of_approach,
+						client_f_name 	: ass.client_f_name,
+						client_l_name 	: ass.client_l_name,
+						lot_brgy		: ass.lot_brgy,
+						lot_city		: ass.lot_city,
+						lot_region		: ass.lot_region,
+						zonal			: ass.zonal,
+						assigned_to		: ass.assigned_to,
 
-					//	IF IN HISTORY (comment="Approved.")
-					if(ass.comment == "Approved.")
-					{	res.render('history_0_admin.hbs',{
-							ref_id 			: ass.ref_id,
-							type_of_approach: ass.type_of_approach,
-							client_f_name 	: ass.client_f_name,
-							client_l_name 	: ass.client_l_name,
-							lot_brgy		: ass.lot_brgy,
-							lot_city		: ass.lot_city,
-							lot_region		: ass.lot_region,
-							zonal			: ass.zonal,
-							assigned_to		: ass.assigned_to,
+						//dates
+						ref_date		: ass.ref_date,
+						created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
+						completed_on	: ass.completed_on,
+						expiring_on 	: ass.expiring_on,
 
-							//dates
-							ref_date		: ass.ref_date,
-							created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
-							completed_on	: ass.completed_on,
-							expiring_on 	: ass.expiring_on,
+						price_per_sqm	: ass.price_per_sqm,
+						lot_loc			: ass.lot_loc,
+						property_type	: ass.property_type,
+						property_interest: ass.property_interest,
+						// property_images: [imageSchema],
+						lot_size		: ass.lot_size,
+						shape			: ass.shape,
+						topo			: ass.topo,
+						frontage		: ass.frontage,
+						terms_of_sale	: ass.terms_of_sale,
+						corner			: ass.corner,
+						prime			: ass.prime,
+						hospital		: ass.hospital,
+						school			: ass.school,
+						mall			: ass.mall,
 
-							price_per_sqm	: ass.price_per_sqm,
-							lot_loc			: ass.lot_loc,
-							property_type	: ass.property_type,
-							property_interest: ass.property_interest,
-							// property_images: [imageSchema],
-							lot_size		: ass.lot_size,
-							shape			: ass.shape,
-							topo			: ass.topo,
-							frontage		: ass.frontage,
-							terms_of_sale	: ass.terms_of_sale,
-							corner			: ass.corner,
-							prime			: ass.prime,
-							hospital		: ass.hospital,
-							school			: ass.school,
-							mall			: ass.mall,
+						public_transpo	: ass.public_transpo,
+						improvement		: ass.improvement,
+						zoning			: ass.zoning,
+						computation		: ass.computation,
 
-							public_transpo	: ass.public_transpo,
-							improvement		: ass.improvement,
-							zoning			: ass.zoning,
-							computation		: ass.computation,
+						//comment
+						comment: ass.comment,
 
-							//comment
-							comment: ass.comment,
+					// COMPARATIVE I
+						price_per_sqm1		: ass.comparative1.price_per_sqm,
+						ref_date1			: ass.comparative1.ref_date.date, //idk if this works
+						lot_loc1			: ass.comparative1.lot_loc,
+						property_type1		: ass.comparative1.property_type.str,
+						property_interest1	: ass.comparative1.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size1			: ass.comparative1.lot_size.num1,
+						shape1				: ass.comparative1.shape.str,
+						topo1				: ass.comparative1.topo.str,
+						frontage1			: ass.comparative1.frontage.str,
+						terms_of_sale1		: ass.comparative1.terms_of_sale.str,
+						corner1				: ass.comparative1.corner.bool,
+						prime1				: ass.comparative1.prime.bool,
+						hospital1			: ass.comparative1.hospital.bool,
+						school1				: ass.comparative1.school.bool,
+						mall1				: ass.comparative1.mall.bool,
+						public_transpo1		: ass.comparative1.public_transpo.str,
+						improvement1		: ass.comparative1.improvement.bool,
+						zoning1				: ass.comparative1.zoning.str,
+						computation1		: ass.comparative1.computation.num1,
 
-						// COMPARATIVE I
-							price_per_sqm1		: ass.comparative1.price_per_sqm,
-							ref_date1			: ass.comparative1.ref_date.date, //idk if this works
-							lot_loc1			: ass.comparative1.lot_loc,
-							property_type1		: ass.comparative1.property_type.str,
-							property_interest1	: ass.comparative1.property_interest.str,
-							// property_images: [imageSchema],
-							lot_size1			: ass.comparative1.lot_size.num1,
-							shape1				: ass.comparative1.shape.str,
-							topo1				: ass.comparative1.topo.str,
-							frontage1			: ass.comparative1.frontage.str,
-							terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-							corner1				: ass.comparative1.corner.bool,
-							prime1				: ass.comparative1.prime.bool,
-							hospital1			: ass.comparative1.hospital.bool,
-							school1				: ass.comparative1.school.bool,
-							mall1				: ass.comparative1.mall.bool,
-							public_transpo1		: ass.comparative1.public_transpo.str,
-							improvement1		: ass.comparative1.improvement.bool,
-							zoning1				: ass.comparative1.zoning.str,
-							computation1		: ass.comparative1.computation.num1,
+			// COMPARATIVE I - percent1's
+						ref_date_percent1			: ass.comparative1.ref_date.num,
+						property_type_percent1		: ass.comparative1.property_type.num,
+						property_interest_percent1	: ass.comparative1.property_interest.num,
+						lot_size_percent1			: ass.comparative1.lot_size.num2,
+						shape_percent1				: ass.comparative1.shape.num,
+						topo_percent1				: ass.comparative1.topo.num,
+						frontage_percent1			: ass.comparative1.frontage.num,
+						terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
+						corner_percent1				: ass.comparative1.corner.num,
+						prime_percent1				: ass.comparative1.prime.num,
+						hospital_percent1			: ass.comparative1.hospital.num,
+						school_percent1				: ass.comparative1.school.num,
+						mall_percent1				: ass.comparative1.mall.num,
+						public_transpo_percent1		: ass.comparative1.public_transpo.num,
+						improvement_percent1		: ass.comparative1.improvement.num,
+						zoning_percent1				: ass.comparative1.zoning.num,
+						computation_percent1		: ass.comparative1.computation.num2,
 
-				// COMPARATIVE I - percent1's
-							ref_date_percent1			: ass.comparative1.ref_date.num,
-							property_type_percent1		: ass.comparative1.property_type.num,
-							property_interest_percent1	: ass.comparative1.property_interest.num,
-							lot_size_percent1			: ass.comparative1.lot_size.num2,
-							shape_percent1				: ass.comparative1.shape.num,
-							topo_percent1				: ass.comparative1.topo.num,
-							frontage_percent1			: ass.comparative1.frontage.num,
-							terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
-							corner_percent1				: ass.comparative1.corner.num,
-							prime_percent1				: ass.comparative1.prime.num,
-							hospital_percent1			: ass.comparative1.hospital.num,
-							school_percent1				: ass.comparative1.school.num,
-							mall_percent1				: ass.comparative1.mall.num,
-							public_transpo_percent1		: ass.comparative1.public_transpo.num,
-							improvement_percent1		: ass.comparative1.improvement.num,
-							zoning_percent1				: ass.comparative1.zoning.num,
-							computation_percent1		: ass.comparative1.computation.num2,
+			//	COMPARATIVE II
+						price_per_sqm2		: ass.comparative2.price_per_sqm,
+						ref_date2			: ass.comparative2.ref_date.date, //idk if this works
+						lot_loc2			: ass.comparative2.lot_loc,
+						property_type2		: ass.comparative2.property_type.str,
+						property_interest2	: ass.comparative2.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size2			: ass.comparative2.lot_size.num1,
+						shape2				: ass.comparative2.shape.str,
+						topo2				: ass.comparative2.topo.str,
+						frontage2			: ass.comparative2.frontage.str,
+						terms_of_sale2		: ass.comparative2.terms_of_sale.str,
+						corner2				: ass.comparative2.corner.bool,
+						prime2				: ass.comparative2.prime.bool,
+						hospital2			: ass.comparative2.hospital.bool,
+						school2				: ass.comparative2.school.bool,
+						mall2				: ass.comparative2.mall.bool,
+						public_transpo2		: ass.comparative2.public_transpo.str,
+						improvement2		: ass.comparative2.improvement.bool,
+						zoning2				: ass.comparative2.zoning.str,
+						computation2		: ass.comparative2.computation.num1,
 
-				//	COMPARATIVE II
-							price_per_sqm2		: ass.comparative2.price_per_sqm,
-							ref_date2			: ass.comparative2.ref_date.date, //idk if this works
-							lot_loc2			: ass.comparative2.lot_loc,
-							property_type2		: ass.comparative2.property_type.str,
-							property_interest2	: ass.comparative2.property_interest.str,
-							// property_images: [imageSchema],
-							lot_size2			: ass.comparative2.lot_size.num1,
-							shape2				: ass.comparative2.shape.str,
-							topo2				: ass.comparative2.topo.str,
-							frontage2			: ass.comparative2.frontage.str,
-							terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-							corner2				: ass.comparative2.corner.bool,
-							prime2				: ass.comparative2.prime.bool,
-							hospital2			: ass.comparative2.hospital.bool,
-							school2				: ass.comparative2.school.bool,
-							mall2				: ass.comparative2.mall.bool,
-							public_transpo2		: ass.comparative2.public_transpo.str,
-							improvement2		: ass.comparative2.improvement.bool,
-							zoning2				: ass.comparative2.zoning.str,
-							computation2		: ass.comparative2.computation.num1,
+			// COMPARATIVE II - percent2's
+						ref_date_percent2			: ass.comparative2.ref_date.num,
+						property_type_percent2		: ass.comparative2.property_type.num,
+						property_interest_percent2	: ass.comparative2.property_interest.num,
+						lot_size_percent2			: ass.comparative2.lot_size.num2,
+						shape_percent2				: ass.comparative2.shape.num,
+						topo_percent2				: ass.comparative2.topo.num,
+						frontage_percent2			: ass.comparative2.frontage.num,
+						terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
+						corner_percent2				: ass.comparative2.corner.num,
+						prime_percent2				: ass.comparative2.prime.num,
+						hospital_percent2			: ass.comparative2.hospital.num,
+						school_percent2				: ass.comparative2.school.num,
+						mall_percent2				: ass.comparative2.mall.num,
+						public_transpo_percent2		: ass.comparative2.public_transpo.num,
+						improvement_percent2		: ass.comparative2.improvement.num,
+						zoning_percent2				: ass.comparative2.zoning.num,
+						computation_percent2		: ass.comparative2.computation.num2,
 
-				// COMPARATIVE II - percent2's
-							ref_date_percent2			: ass.comparative2.ref_date.num,
-							property_type_percent2		: ass.comparative2.property_type.num,
-							property_interest_percent2	: ass.comparative2.property_interest.num,
-							lot_size_percent2			: ass.comparative2.lot_size.num2,
-							shape_percent2				: ass.comparative2.shape.num,
-							topo_percent2				: ass.comparative2.topo.num,
-							frontage_percent2			: ass.comparative2.frontage.num,
-							terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
-							corner_percent2				: ass.comparative2.corner.num,
-							prime_percent2				: ass.comparative2.prime.num,
-							hospital_percent2			: ass.comparative2.hospital.num,
-							school_percent2				: ass.comparative2.school.num,
-							mall_percent2				: ass.comparative2.mall.num,
-							public_transpo_percent2		: ass.comparative2.public_transpo.num,
-							improvement_percent2		: ass.comparative2.improvement.num,
-							zoning_percent2				: ass.comparative2.zoning.num,
-							computation_percent2		: ass.comparative2.computation.num2,
+						username: sess.username,
+						password: sess.password,
+						remember: sess.remember,
+						status: sess.status,
+						email: sess.email,
+						fname: sess.fname,
+						lname: sess.lname,
+						appnum: sess.appnum,
+						can_accept: sess.can_accept
+					});
+			}
+				//	IF REVIEWING SUBMITTED ASSIGNMENTS (comment="Submitted.")
+			else if (ass.comment == "Submitted."){
+				res.render('viewAssignment_0_admin.hbs',{
+					ref_id 			: ass.ref_id,
+					type_of_approach: ass.type_of_approach,
+					client_f_name 	: ass.client_f_name,
+					client_l_name 	: ass.client_l_name,
+					lot_brgy		: ass.lot_brgy,
+					lot_city		: ass.lot_city,
+					lot_region		: ass.lot_region,
+					zonal			: ass.zonal,
+					assigned_to		: ass.assigned_to,
 
-							username: sess.username,
-							password: sess.password,
-							remember: sess.remember,
-							status: sess.status,
-							email: sess.email,
-							fname: sess.fname,
-							lname: sess.lname,
-							appnum: sess.appnum,
-							can_accept: sess.can_accept
-						});
-				}
-					//	IF REVIEWING SUBMITTED ASSIGNMENTS (comment="Submitted.")
-				else if (ass.comment == "Submitted."){
-					res.render('viewAssignment_0_admin.hbs',{
+					//dates
+					ref_date		: ass.ref_date,
+					created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
+					completed_on	: ass.completed_on,
+					expiring_on 	: ass.expiring_on,
+
+		// SUPJECT PROPERTY
+					price_per_sqm	: ass.price_per_sqm,
+					lot_loc			: ass.lot_loc,
+					property_type	: ass.property_type,
+					property_interest: ass.property_interest,
+					// property_images: [imageSchema],
+					lot_size		: ass.lot_size,
+					shape			: ass.shape,
+					topo			: ass.topo,
+					frontage		: ass.frontage,
+					terms_of_sale	: ass.terms_of_sale,
+					corner			: ass.corner,
+					prime			: ass.prime,
+					hospital		: ass.hospital,
+					school			: ass.school,
+					mall				: ass.mall,
+					public_transpo	: ass.public_transpo,
+					improvement		: ass.improvement,
+					zoning			: ass.zoning,
+					computation		: ass.computation,
+
+					//comment
+					comment: ass.comment,
+
+		// COMPARATIVE I
+						price_per_sqm1		: ass.comparative1.price_per_sqm,
+						ref_date1			: ass.comparative1.ref_date.date, //idk if this works
+						lot_loc1			: ass.comparative1.lot_loc,
+						property_type1		: ass.comparative1.property_type.str,
+						property_interest1	: ass.comparative1.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size1			: ass.comparative1.lot_size.num1,
+						shape1				: ass.comparative1.shape.str,
+						topo1				: ass.comparative1.topo.str,
+						frontage1			: ass.comparative1.frontage.str,
+						terms_of_sale1		: ass.comparative1.terms_of_sale.str,
+						corner1				: ass.comparative1.corner.bool,
+						prime1				: ass.comparative1.prime.bool,
+						hospital1			: ass.comparative1.hospital.bool,
+						school1				: ass.comparative1.school.bool,
+						mall1				: ass.comparative1.mall.bool,
+						public_transpo1		: ass.comparative1.public_transpo.str,
+						improvement1		: ass.comparative1.improvement.bool,
+						zoning1				: ass.comparative1.zoning.str,
+						computation1		: ass.comparative1.computation.num1,
+
+			// COMPARATIVE I - percent1's
+						ref_date_percent1			: ass.comparative1.ref_date.num,
+						property_type_percent1		: ass.comparative1.property_type.num,
+						property_interest_percent1	: ass.comparative1.property_interest.num,
+						lot_size_percent1			: ass.comparative1.lot_size.num2,
+						shape_percent1				: ass.comparative1.shape.num,
+						topo_percent1				: ass.comparative1.topo.num,
+						frontage_percent1			: ass.comparative1.frontage.num,
+						terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
+						corner_percent1				: ass.comparative1.corner.num,
+						prime_percent1				: ass.comparative1.prime.num,
+						hospital_percent1			: ass.comparative1.hospital.num,
+						school_percent1				: ass.comparative1.school.num,
+						mall_percent1				: ass.comparative1.mall.num,
+						public_transpo_percent1		: ass.comparative1.public_transpo.num,
+						improvement_percent1		: ass.comparative1.improvement.num,
+						zoning_percent1				: ass.comparative1.zoning.num,
+						computation_percent1		: ass.comparative1.computation.num2,
+
+			//	COMPARATIVE II
+						price_per_sqm2		: ass.comparative2.price_per_sqm,
+						ref_date2			: ass.comparative2.ref_date.date, //idk if this works
+						lot_loc2			: ass.comparative2.lot_loc,
+						property_type2		: ass.comparative2.property_type.str,
+						property_interest2	: ass.comparative2.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size2			: ass.comparative2.lot_size.num1,
+						shape2				: ass.comparative2.shape.str,
+						topo2				: ass.comparative2.topo.str,
+						frontage2			: ass.comparative2.frontage.str,
+						terms_of_sale2		: ass.comparative2.terms_of_sale.str,
+						corner2				: ass.comparative2.corner.bool,
+						prime2				: ass.comparative2.prime.bool,
+						hospital2			: ass.comparative2.hospital.bool,
+						school2				: ass.comparative2.school.bool,
+						mall2				: ass.comparative2.mall.bool,
+						public_transpo2		: ass.comparative2.public_transpo.str,
+						improvement2		: ass.comparative2.improvement.bool,
+						zoning2				: ass.comparative2.zoning.str,
+						computation2		: ass.comparative2.computation.num1,
+
+			// COMPARATIVE II - percent2's
+						ref_date_percent2			: ass.comparative2.ref_date.num,
+						property_type_percent2		: ass.comparative2.property_type.num,
+						property_interest_percent2	: ass.comparative2.property_interest.num,
+						lot_size_percent2			: ass.comparative2.lot_size.num2,
+						shape_percent2				: ass.comparative2.shape.num,
+						topo_percent2				: ass.comparative2.topo.num,
+						frontage_percent2			: ass.comparative2.frontage.num,
+						terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
+						corner_percent2				: ass.comparative2.corner.num,
+						prime_percent2				: ass.comparative2.prime.num,
+						hospital_percent2			: ass.comparative2.hospital.num,
+						school_percent2				: ass.comparative2.school.num,
+						mall_percent2				: ass.comparative2.mall.num,
+						public_transpo_percent2		: ass.comparative2.public_transpo.num,
+						improvement_percent2		: ass.comparative2.improvement.num,
+						zoning_percent2				: ass.comparative2.zoning.num,
+						computation_percent2		: ass.comparative2.computation.num2,
+
+					username: sess.username,
+					password: sess.password,
+					remember: sess.remember,
+					status: sess.status,
+					email: sess.email,
+					fname: sess.fname,
+					lname: sess.lname,
+					appnum: sess.appnum,
+					can_accept: sess.can_accept
+				});
+			}
+			//	IF REVIEWING NEW/UNASSIGNED ASSIGNMENTS
+			// notes: ui is only shoing the admin panel
+			else if (ass.comment == "New!"){
+				
+				//set the admin to be assigned to the ass, making it invisible to the other agents
+				const ass2 = await Assignment.findOneAndUpdate(
+					{
+						ref_id: ass.ref_id},{
+						assigned_to: sess.username
+					})
+				
+				res.render('viewAssignment_2_admin.hbs', {
+				
+					assigned_to: sess.username,
+					type_of_approach: ass.type_of_approach,
+					client_f_name: ass.client_f_name,
+					client_l_name: ass.client_l_name,
+					client_contact_num: ass.client_contact_num,
+					client_email: ass.client_email,
+					lot_brgy: ass.lot_brgy,
+					lot_city: ass.lot_city,
+					lot_region: ass.lot_region,
+					zonal: ass.zonal,
+
+					username: sess.username,
+					password: sess.password,
+					remember: sess.remember,
+					status: sess.status,
+					email: sess.email,
+					fname: sess.fname,
+					lname: sess.lname,
+					appnum: sess.appnum,
+					can_accept: sess.can_accept
+				});
+			}
+			//means that the person assigned to it is still doing it.
+			// admin can see their progress so far, but can't interfere
+			else{
+				res.render('viewAssignment_3_admin.hbs', {
 						ref_id 			: ass.ref_id,
 						type_of_approach: ass.type_of_approach,
 						client_f_name 	: ass.client_f_name,
@@ -694,7 +855,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						prime			: ass.prime,
 						hospital		: ass.hospital,
 						school			: ass.school,
-						mall				: ass.mall,
+						mall 				: ass.mall,
 						public_transpo	: ass.public_transpo,
 						improvement		: ass.improvement,
 						zoning			: ass.zoning,
@@ -704,225 +865,86 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						comment: ass.comment,
 
 			// COMPARATIVE I
-							price_per_sqm1		: ass.comparative1.price_per_sqm,
-							ref_date1			: ass.comparative1.ref_date.date, //idk if this works
-							lot_loc1			: ass.comparative1.lot_loc,
-							property_type1		: ass.comparative1.property_type.str,
-							property_interest1	: ass.comparative1.property_interest.str,
-							// property_images: [imageSchema],
-							lot_size1			: ass.comparative1.lot_size.num1,
-							shape1				: ass.comparative1.shape.str,
-							topo1				: ass.comparative1.topo.str,
-							frontage1			: ass.comparative1.frontage.str,
-							terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-							corner1				: ass.comparative1.corner.bool,
-							prime1				: ass.comparative1.prime.bool,
-							hospital1			: ass.comparative1.hospital.bool,
-							school1				: ass.comparative1.school.bool,
-							mall1				: ass.comparative1.mall.bool,
-							public_transpo1		: ass.comparative1.public_transpo.str,
-							improvement1		: ass.comparative1.improvement.bool,
-							zoning1				: ass.comparative1.zoning.str,
-							computation1		: ass.comparative1.computation.num1,
-
-				// COMPARATIVE I - percent1's
-							ref_date_percent1			: ass.comparative1.ref_date.num,
-							property_type_percent1		: ass.comparative1.property_type.num,
-							property_interest_percent1	: ass.comparative1.property_interest.num,
-							lot_size_percent1			: ass.comparative1.lot_size.num2,
-							shape_percent1				: ass.comparative1.shape.num,
-							topo_percent1				: ass.comparative1.topo.num,
-							frontage_percent1			: ass.comparative1.frontage.num,
-							terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
-							corner_percent1				: ass.comparative1.corner.num,
-							prime_percent1				: ass.comparative1.prime.num,
-							hospital_percent1			: ass.comparative1.hospital.num,
-							school_percent1				: ass.comparative1.school.num,
-							mall_percent1				: ass.comparative1.mall.num,
-							public_transpo_percent1		: ass.comparative1.public_transpo.num,
-							improvement_percent1		: ass.comparative1.improvement.num,
-							zoning_percent1				: ass.comparative1.zoning.num,
-							computation_percent1		: ass.comparative1.computation.num2,
-
-				//	COMPARATIVE II
-							price_per_sqm2		: ass.comparative2.price_per_sqm,
-							ref_date2			: ass.comparative2.ref_date.date, //idk if this works
-							lot_loc2			: ass.comparative2.lot_loc,
-							property_type2		: ass.comparative2.property_type.str,
-							property_interest2	: ass.comparative2.property_interest.str,
-							// property_images: [imageSchema],
-							lot_size2			: ass.comparative2.lot_size.num1,
-							shape2				: ass.comparative2.shape.str,
-							topo2				: ass.comparative2.topo.str,
-							frontage2			: ass.comparative2.frontage.str,
-							terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-							corner2				: ass.comparative2.corner.bool,
-							prime2				: ass.comparative2.prime.bool,
-							hospital2			: ass.comparative2.hospital.bool,
-							school2				: ass.comparative2.school.bool,
-							mall2				: ass.comparative2.mall.bool,
-							public_transpo2		: ass.comparative2.public_transpo.str,
-							improvement2		: ass.comparative2.improvement.bool,
-							zoning2				: ass.comparative2.zoning.str,
-							computation2		: ass.comparative2.computation.num1,
-
-				// COMPARATIVE II - percent2's
-							ref_date_percent2			: ass.comparative2.ref_date.num,
-							property_type_percent2		: ass.comparative2.property_type.num,
-							property_interest_percent2	: ass.comparative2.property_interest.num,
-							lot_size_percent2			: ass.comparative2.lot_size.num2,
-							shape_percent2				: ass.comparative2.shape.num,
-							topo_percent2				: ass.comparative2.topo.num,
-							frontage_percent2			: ass.comparative2.frontage.num,
-							terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
-							corner_percent2				: ass.comparative2.corner.num,
-							prime_percent2				: ass.comparative2.prime.num,
-							hospital_percent2			: ass.comparative2.hospital.num,
-							school_percent2				: ass.comparative2.school.num,
-							mall_percent2				: ass.comparative2.mall.num,
-							public_transpo_percent2		: ass.comparative2.public_transpo.num,
-							improvement_percent2		: ass.comparative2.improvement.num,
-							zoning_percent2				: ass.comparative2.zoning.num,
-							computation_percent2		: ass.comparative2.computation.num2,
-
-						username: sess.username,
-						password: sess.password,
-						remember: sess.remember,
-						status: sess.status,
-						email: sess.email,
-						fname: sess.fname,
-						lname: sess.lname,
-						appnum: sess.appnum,
-						can_accept: sess.can_accept
-					});
-				}
-				else{//	IF REVIEWING NEW/UNASSIGNED ASSIGNMENTS (comment="New!")
-				//Notes: Same layout as viewAssignment_0_admin.hbs, difference is no buttons at the bottom only.
-					//console.log(ass.comparative1)
-					//console.log(ass.comparative1.property_interest_percent)
-
-					res.render('viewAssignment_1_admin.hbs', {
-						ref_id 			: ass.ref_id,
-						type_of_approach: ass.type_of_approach,
-						client_f_name 	: ass.client_f_name,
-						client_l_name 	: ass.client_l_name,
-						lot_brgy		: ass.lot_brgy,
-						lot_city		: ass.lot_city,
-						lot_region		: ass.lot_region,
-						zonal			: ass.zonal,
-						assigned_to		: ass.assigned_to,
-
-						//dates
-						//ref_date		: ass.ref_date,
-						created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
-						completed_on	: ass.completed_on,
-						expiring_on 	: ass.expiring_on,
-
-			// SUPJECT PROPERTY
-						price_per_sqm	: ass.price_per_sqm,
-						lot_loc			: ass.lot_loc,
-						property_type	: ass.property_type,
-						property_interest: ass.property_interest,
+						price_per_sqm1		: ass.comparative1.price_per_sqm,
+						ref_date1			: ass.comparative1.ref_date.date, //idk if this works
+						lot_loc1			: ass.comparative1.lot_loc,
+						property_type1		: ass.comparative1.property_type.str,
+						property_interest1	: ass.comparative1.property_interest.str,
 						// property_images: [imageSchema],
-						lot_size		: ass.lot_size,
-						shape			: ass.shape,
-						topo			: ass.topo,
-						frontage		: ass.frontage,
-						terms_of_sale	: ass.terms_of_sale,
-						corner			: ass.corner,
-						prime			: ass.prime,
-						hospital		: ass.hospital,
-						school			: ass.school,
-						mall				: ass.mall,
-						public_transpo	: ass.public_transpo,
-						improvement		: ass.improvement,
-						zoning			: ass.zoning,
-						computation		: ass.computation,
+						lot_size1			: ass.comparative1.lot_size.num1,
+						shape1				: ass.comparative1.shape.str,
+						topo1				: ass.comparative1.topo.str,
+						frontage1			: ass.comparative1.frontage.str,
+						terms_of_sale1		: ass.comparative1.terms_of_sale.str,
+						corner1				: ass.comparative1.corner.bool,
+						prime1				: ass.comparative1.prime.bool,
+						hospital1			: ass.comparative1.hospital.bool,
+						school1				: ass.comparative1.school.bool,
+						mall1				: ass.comparative1.mall.bool,
+						public_transpo1		: ass.comparative1.public_transpo.str,
+						improvement1		: ass.comparative1.improvement.bool,
+						zoning1				: ass.comparative1.zoning.str,
+						computation1		: ass.comparative1.computation.num1,
 
-						//comment
-						comment: ass.comment,
+			// COMPARATIVE I - percent1's
+						ref_date_percent1			: ass.comparative1.ref_date.num,
+						property_type_percent1		: ass.comparative1.property_type.num,
+						property_interest_percent1	: ass.comparative1.property_interest.num,
+						lot_size_percent1			: ass.comparative1.lot_size.num2,
+						shape_percent1				: ass.comparative1.shape.num,
+						topo_percent1				: ass.comparative1.topo.num,
+						frontage_percent1			: ass.comparative1.frontage.num,
+						terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
+						corner_percent1				: ass.comparative1.corner.num,
+						prime_percent1				: ass.comparative1.prime.num,
+						hospital_percent1			: ass.comparative1.hospital.num,
+						school_percent1				: ass.comparative1.school.num,
+						mall_percent1				: ass.comparative1.mall.num,
+						public_transpo_percent1		: ass.comparative1.public_transpo.num,
+						improvement_percent1		: ass.comparative1.improvement.num,
+						zoning_percent1				: ass.comparative1.zoning.num,
+						computation_percent1		: ass.comparative1.computation.num2,
 
-			// COMPARATIVE I
-							price_per_sqm1		: ass.comparative1.price_per_sqm,
-							ref_date1			: ass.comparative1.ref_date.date, //idk if this works
-							lot_loc1			: ass.comparative1.lot_loc,
-							property_type1		: ass.comparative1.property_type.str,
-							property_interest1	: ass.comparative1.property_interest.str,
-							// property_images: [imageSchema],
-							lot_size1			: ass.comparative1.lot_size.num1,
-							shape1				: ass.comparative1.shape.str,
-							topo1				: ass.comparative1.topo.str,
-							frontage1			: ass.comparative1.frontage.str,
-							terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-							corner1				: ass.comparative1.corner.bool,
-							prime1				: ass.comparative1.prime.bool,
-							hospital1			: ass.comparative1.hospital.bool,
-							school1				: ass.comparative1.school.bool,
-							mall1				: ass.comparative1.mall.bool,
-							public_transpo1		: ass.comparative1.public_transpo.str,
-							improvement1		: ass.comparative1.improvement.bool,
-							zoning1				: ass.comparative1.zoning.str,
-							computation1		: ass.comparative1.computation.num1,
+			//	COMPARATIVE II
+						price_per_sqm2		: ass.comparative2.price_per_sqm,
+						ref_date2			: ass.comparative2.ref_date.date, //idk if this works
+						lot_loc2			: ass.comparative2.lot_loc,
+						property_type2		: ass.comparative2.property_type.str,
+						property_interest2	: ass.comparative2.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size2			: ass.comparative2.lot_size.num1,
+						shape2				: ass.comparative2.shape.str,
+						topo2				: ass.comparative2.topo.str,
+						frontage2			: ass.comparative2.frontage.str,
+						terms_of_sale2		: ass.comparative2.terms_of_sale.str,
+						corner2				: ass.comparative2.corner.bool,
+						prime2				: ass.comparative2.prime.bool,
+						hospital2			: ass.comparative2.hospital.bool,
+						school2				: ass.comparative2.school.bool,
+						mall2				: ass.comparative2.mall.bool,
+						public_transpo2		: ass.comparative2.public_transpo.str,
+						improvement2		: ass.comparative2.improvement.bool,
+						zoning2				: ass.comparative2.zoning.str,
+						computation2		: ass.comparative2.computation.num1,
 
-				// COMPARATIVE I - percent1's
-							ref_date_percent1			: ass.comparative1.ref_date.num,
-							property_type_percent1		: ass.comparative1.property_type.num,
-							property_interest_percent1	: ass.comparative1.property_interest.num,
-							lot_size_percent1			: ass.comparative1.lot_size.num2,
-							shape_percent1				: ass.comparative1.shape.num,
-							topo_percent1				: ass.comparative1.topo.num,
-							frontage_percent1			: ass.comparative1.frontage.num,
-							terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
-							corner_percent1				: ass.comparative1.corner.num,
-							prime_percent1				: ass.comparative1.prime.num,
-							hospital_percent1			: ass.comparative1.hospital.num,
-							school_percent1				: ass.comparative1.school.num,
-							mall_percent1				: ass.comparative1.mall.num,
-							public_transpo_percent1		: ass.comparative1.public_transpo.num,
-							improvement_percent1		: ass.comparative1.improvement.num,
-							zoning_percent1				: ass.comparative1.zoning.num,
-							computation_percent1		: ass.comparative1.computation.num2,
-
-				//	COMPARATIVE II
-							price_per_sqm2		: ass.comparative2.price_per_sqm,
-							ref_date2			: ass.comparative2.ref_date.date, //idk if this works
-							lot_loc2			: ass.comparative2.lot_loc,
-							property_type2		: ass.comparative2.property_type.str,
-							property_interest2	: ass.comparative2.property_interest.str,
-							// property_images: [imageSchema],
-							lot_size2			: ass.comparative2.lot_size.num1,
-							shape2				: ass.comparative2.shape.str,
-							topo2				: ass.comparative2.topo.str,
-							frontage2			: ass.comparative2.frontage.str,
-							terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-							corner2				: ass.comparative2.corner.bool,
-							prime2				: ass.comparative2.prime.bool,
-							hospital2			: ass.comparative2.hospital.bool,
-							school2				: ass.comparative2.school.bool,
-							mall2				: ass.comparative2.mall.bool,
-							public_transpo2		: ass.comparative2.public_transpo.str,
-							improvement2		: ass.comparative2.improvement.bool,
-							zoning2				: ass.comparative2.zoning.str,
-							computation2		: ass.comparative2.computation.num1,
-
-				// COMPARATIVE II - percent2's
-							ref_date_percent2			: ass.comparative2.ref_date.num,
-							property_type_percent2		: ass.comparative2.property_type.num,
-							property_interest_percent2	: ass.comparative2.property_interest.num,
-							lot_size_percent2			: ass.comparative2.lot_size.num2,
-							shape_percent2				: ass.comparative2.shape.num,
-							topo_percent2				: ass.comparative2.topo.num,
-							frontage_percent2			: ass.comparative2.frontage.num,
-							terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
-							corner_percent2				: ass.comparative2.corner.num,
-							prime_percent2				: ass.comparative2.prime.num,
-							hospital_percent2			: ass.comparative2.hospital.num,
-							school_percent2				: ass.comparative2.school.num,
-							mall_percent2				: ass.comparative2.mall.num,
-							public_transpo_percent2		: ass.comparative2.public_transpo.num,
-							improvement_percent2		: ass.comparative2.improvement.num,
-							zoning_percent2				: ass.comparative2.zoning.num,
-							computation_percent2		: ass.comparative2.computation.num2,
+			// COMPARATIVE II - percent2's
+						ref_date_percent2			: ass.comparative2.ref_date.num,
+						property_type_percent2		: ass.comparative2.property_type.num,
+						property_interest_percent2	: ass.comparative2.property_interest.num,
+						lot_size_percent2			: ass.comparative2.lot_size.num2,
+						shape_percent2				: ass.comparative2.shape.num,
+						topo_percent2				: ass.comparative2.topo.num,
+						frontage_percent2			: ass.comparative2.frontage.num,
+						terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
+						corner_percent2				: ass.comparative2.corner.num,
+						prime_percent2				: ass.comparative2.prime.num,
+						hospital_percent2			: ass.comparative2.hospital.num,
+						school_percent2				: ass.comparative2.school.num,
+						mall_percent2				: ass.comparative2.mall.num,
+						public_transpo_percent2		: ass.comparative2.public_transpo.num,
+						improvement_percent2		: ass.comparative2.improvement.num,
+						zoning_percent2				: ass.comparative2.zoning.num,
+						computation_percent2		: ass.comparative2.computation.num2,
 
 						username: sess.username,
 						password: sess.password,
@@ -934,6 +956,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						appnum: sess.appnum,
 						can_accept: sess.can_accept
 					});
+					
 				}
 			}
 			catch(err)
@@ -948,9 +971,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					})
 				console.log(ass)
 
-				//	in history
 				if(ass.comment == "Approved."){
-					res.render('history_0.hbs',{
+					// res.render('history_0.hbs',{	//<--- previously. i changed the name so that the content can be easily guessed
+					// The agents won't be able to edit the page, but they can "edit" the document so that they can have it printed
+					// they only are able to edit the document only until they click the "Lock Document and Save PDF"
+					// they can save the document anytime
+					res.render('viewAssignment_approved.hbs',{
 							ref_id 			: ass.ref_id,
 							type_of_approach: ass.type_of_approach,
 							client_f_name 	: ass.client_f_name,
@@ -1084,8 +1110,147 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							can_accept: sess.can_accept
 						});
 				}
-				else{	//	in assignemnts (has save  details, compute, and send for process buttons)
+				else if(ass.comment == "Submitted."){
+					// Show the whole page uli pero without buttons this time
+					// The agent will have to wait for a while to get the admin's feedback/comment.
+					//they also won't be able to take on a new assignment unless the current assignment they submitted is approved
+					res.render('viewAssignment_1.hbs',{
+							ref_id 			: ass.ref_id,
+							type_of_approach: ass.type_of_approach,
+							client_f_name 	: ass.client_f_name,
+							client_l_name 	: ass.client_l_name,
+							lot_brgy		: ass.lot_brgy,
+							lot_city		: ass.lot_city,
+							lot_region		: ass.lot_region,
+							zonal			: ass.zonal,
+							assigned_to		: ass.assigned_to,
 
+							//dates
+							ref_date		: ass.ref_date,
+							created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
+							completed_on	: ass.completed_on,
+							expiring_on 	: ass.expiring_on,
+
+				// SUPJECT PROPERTY
+							price_per_sqm	: ass.price_per_sqm,
+							lot_loc			: ass.lot_loc,
+							property_type	: ass.property_type,
+							property_interest: ass.property_interest,
+							// property_images: [imageSchema],
+							lot_size		: ass.lot_size,
+							shape			: ass.shape,
+							topo			: ass.topo,
+							frontage		: ass.frontage,
+							terms_of_sale	: ass.terms_of_sale,
+							corner			: ass.corner,
+							prime			: ass.prime,
+							hospital		: ass.hospital,
+							school			: ass.school,
+							mall 				: ass.mall,
+							public_transpo	: ass.public_transpo,
+							improvement		: ass.improvement,
+							zoning			: ass.zoning,
+							computation		: ass.computation,
+
+							//comment
+							comment: ass.comment,
+
+				// COMPARATIVE I
+							price_per_sqm1		: ass.comparative1.price_per_sqm,
+							ref_date1			: ass.comparative1.ref_date.date, //idk if this works
+							lot_loc1			: ass.comparative1.lot_loc,
+							property_type1		: ass.comparative1.property_type.str,
+							property_interest1	: ass.comparative1.property_interest.str,
+							// property_images: [imageSchema],
+							lot_size1			: ass.comparative1.lot_size.num1,
+							shape1				: ass.comparative1.shape.str,
+							topo1				: ass.comparative1.topo.str,
+							frontage1			: ass.comparative1.frontage.str,
+							terms_of_sale1		: ass.comparative1.terms_of_sale.str,
+							corner1				: ass.comparative1.corner.bool,
+							prime1				: ass.comparative1.prime.bool,
+							hospital1			: ass.comparative1.hospital.bool,
+							school1				: ass.comparative1.school.bool,
+							mall1				: ass.comparative1.mall.bool,
+							public_transpo1		: ass.comparative1.public_transpo.str,
+							improvement1		: ass.comparative1.improvement.bool,
+							zoning1				: ass.comparative1.zoning.str,
+							computation1		: ass.comparative1.computation.num1,
+
+				// COMPARATIVE I - percent1's
+							ref_date_percent1			: ass.comparative1.ref_date.num,
+							property_type_percent1		: ass.comparative1.property_type.num,
+							property_interest_percent1	: ass.comparative1.property_interest.num,
+							lot_size_percent1			: ass.comparative1.lot_size.num2,
+							shape_percent1				: ass.comparative1.shape.num,
+							topo_percent1				: ass.comparative1.topo.num,
+							frontage_percent1			: ass.comparative1.frontage.num,
+							terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
+							corner_percent1				: ass.comparative1.corner.num,
+							prime_percent1				: ass.comparative1.prime.num,
+							hospital_percent1			: ass.comparative1.hospital.num,
+							school_percent1				: ass.comparative1.school.num,
+							mall_percent1				: ass.comparative1.mall.num,
+							public_transpo_percent1		: ass.comparative1.public_transpo.num,
+							improvement_percent1		: ass.comparative1.improvement.num,
+							zoning_percent1				: ass.comparative1.zoning.num,
+							computation_percent1		: ass.comparative1.computation.num2,
+
+				//	COMPARATIVE II
+							price_per_sqm2		: ass.comparative2.price_per_sqm,
+							ref_date2			: ass.comparative2.ref_date.date, //idk if this works
+							lot_loc2			: ass.comparative2.lot_loc,
+							property_type2		: ass.comparative2.property_type.str,
+							property_interest2	: ass.comparative2.property_interest.str,
+							// property_images: [imageSchema],
+							lot_size2			: ass.comparative2.lot_size.num1,
+							shape2				: ass.comparative2.shape.str,
+							topo2				: ass.comparative2.topo.str,
+							frontage2			: ass.comparative2.frontage.str,
+							terms_of_sale2		: ass.comparative2.terms_of_sale.str,
+							corner2				: ass.comparative2.corner.bool,
+							prime2				: ass.comparative2.prime.bool,
+							hospital2			: ass.comparative2.hospital.bool,
+							school2				: ass.comparative2.school.bool,
+							mall2				: ass.comparative2.mall.bool,
+							public_transpo2		: ass.comparative2.public_transpo.str,
+							improvement2		: ass.comparative2.improvement.bool,
+							zoning2				: ass.comparative2.zoning.str,
+							computation2		: ass.comparative2.computation.num1,
+
+				// COMPARATIVE II - percent2's
+							ref_date_percent2			: ass.comparative2.ref_date.num,
+							property_type_percent2		: ass.comparative2.property_type.num,
+							property_interest_percent2	: ass.comparative2.property_interest.num,
+							lot_size_percent2			: ass.comparative2.lot_size.num2,
+							shape_percent2				: ass.comparative2.shape.num,
+							topo_percent2				: ass.comparative2.topo.num,
+							frontage_percent2			: ass.comparative2.frontage.num,
+							terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
+							corner_percent2				: ass.comparative2.corner.num,
+							prime_percent2				: ass.comparative2.prime.num,
+							hospital_percent2			: ass.comparative2.hospital.num,
+							school_percent2				: ass.comparative2.school.num,
+							mall_percent2				: ass.comparative2.mall.num,
+							public_transpo_percent2		: ass.comparative2.public_transpo.num,
+							improvement_percent2		: ass.comparative2.improvement.num,
+							zoning_percent2				: ass.comparative2.zoning.num,
+							computation_percent2		: ass.comparative2.computation.num2,
+
+							username: sess.username,
+							password: sess.password,
+							remember: sess.remember,
+							status: sess.status,
+							email: sess.email,
+							fname: sess.fname,
+							lname: sess.lname,
+							appnum: sess.appnum,
+							can_accept: sess.can_accept
+						});
+				}
+				else{
+					// 0comment is not "Submitted." nor "Approved."
+					// Show the page with same input chuchu, except this page has buttons to compute, send to admin for review/processing, and save details
 					res.render('viewAssignment_0.hbs',{
 							ref_id 			: ass.ref_id,
 							type_of_approach: ass.type_of_approach,
@@ -1300,9 +1465,6 @@ app.get('/accept-assignment/:ref_id', async(req,res)=>{
 	if(sess.username)
 	{
 		try{
-			// await Assignment.findOneAndUpdate({res: sess.username},{comment: true})
-			// const ass = await Assignment.findOneAndUpdate({res: req.params.ref_id},{comment: "test"})
-			// req.params.ref_id
 
 			const ass = await Assignment.findOneAndUpdate(
 				{ref_id: req.params.ref_id},{
@@ -1420,7 +1582,9 @@ app.post('/submit-assignment', function(req,res) {
 		})
 	}
 	catch(err)
-	{console.log(err)}
+	{
+		console.log(err)
+	}
 
 	res.redirect('/assignments')
 });
@@ -1675,15 +1839,20 @@ app.get('/assignments', async(req,res)=> {
 				})
 		}
 		else{
-			//IF AGENT, SHOW NEW ASSIGNMENTS FIRST, THEN ASSIGNED ASSIGNMENTS
-			//ALSO CHECK IF can_accept BEFORE YOU PROCEED
+			
 			const ass_new = await Assignment.find({
 				assigned_to: "",
-				comment: "New!"})	// comment "New!" means really new assignment
-			// console.log(ass_new)
+				comment: "New!"})
+			
+			const ass_sub = await Assignment.find({
+				assigned_to: sess.username,
+				comment: "Submitted."})
+
 			const ass = await Assignment.find({
 				assigned_to: sess.username,//ASSIgned to you
-				comment: {$ne: "Approved."}})//that is not equal to Approved. (or it will go to history)
+				comment: {$ne: "Approved."},
+				comment: {$ne: "Submitted."}})//that is not equal to Approved. (or it will go to history)
+												//also not equal to "Submitted."bc it will have a different button
 
 			const howmany = await Assignment.countDocuments({
 				assigned_to: sess.username,
@@ -1705,6 +1874,7 @@ app.get('/assignments', async(req,res)=> {
 					how_many_ongoing : howmany,
 					assignment_new:ass_new,
 					assignment_ass:ass,
+					assignment_sub:ass_sub,
 
 					username: sess.username,
 					password: sess.password,
@@ -1723,7 +1893,8 @@ app.get('/assignments', async(req,res)=> {
 					how_many_ongoing : howmany,
 					assignment_new:ass_new,
 					assignment_ass:ass,
-
+					assignment_sub:ass_sub,
+					
 					username: sess.username,
 					password: sess.password,
 					remember: sess.remember,
@@ -1808,238 +1979,278 @@ app.get('/save-ass', async(req,res)=> {
 	console.log("in /save-ass - " +req.query.ref_id)
 
 	if(sess.username){
-		var today = new Date()
-
-		try{
-
-			// console.log(req.query)
-			//console.log(req.params)
-			// console.log(parseInt(req.query.price_per_sqm[0]))
-
-			//So the thing is, just save everything on the screen, even if user put blank there, still save
-			//the error checkng will be done in <script> of that page nalang so it's easier to seee
-			await Assignment.findOneAndUpdate({ref_id: req.query.ref_id},{
-				price_per_sqm: req.query.price_per_sqm[0],
-				ref_date: req.query.ref_date[0],
-				lot_loc: req.query.lot_loc[0],
-				property_type: req.query.property_type[0],
-				property_interest: req.query.property_interest[0],
-				//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
-				//property_images: [imageSchema],
-				lot_size: req.query.lot_size[0],
-				shape: req.query.shape[0],
-				topo: req.query.topo[0],
-				frontage: req.query.frontage[0],
-				terms_of_sale: req.query.terms_of_sale[0],
-				corner: req.query.corner[0],
-				prime: req.query.prime[0],
-				hospital: req.query.hospital[0],
-				school: req.query.school[0],
-				mall: req.query.mall[0], //problem if left "mall" lol i cant be bothered anymore lmaoooo
-				public_transpo: req.query.public_transpo[0],
-				improvement: req.query.improvement[0],
-				zoning: req.query.zoning[0],
-				computation: req.query.computation[0],
-				comparative1 : {
-					price_per_sqm: req.query.price_per_sqm[1],
-					ref_date: {
-						date: req.query.ref_date[1],
-						num: req.query.ref_date[2]
-						},
-					property_type: {
-						str: req.query.property_type[1],
-						num: req.query.property_type[2]
-						},
-					property_interest: {
-						str: req.query.property_interest[1],
-						num: req.query.property_interest[2]
-						},
-					lot_size: {
-						num1: req.query.lot_size[1],
-						num2: req.query.lot_size[2]
-						},
-					shape: {
-						str: req.query.shape[1],
-						num: req.query.shape[2]
-						},
-					topo: {
-						str: req.query.topo[1],
-						num: req.query.topo[2]
-						},
-					frontage: {
-						str: req.query.frontage[1],
-						num: req.query.frontage[2]
-						},
-					terms_of_sale: {
-						str: req.query.terms_of_sale[1],
-						num: req.query.terms_of_sale[2]
-						},
-
-
-
-					//hiding bools for now bc idk how to make them save :v
-					// I saw this baka makahelp sa mag fifix:
-					//		https://stackoverflow.com/questions/39962676/updating-mongodb-with-checkbox-information
-
-					/*
-					corner: {
-						bool: req.query.corner[1],
-						num: req.query.corner[2]
-						},
-					prime: {
-						bool: req.query.prime[1],
-						num: req.query.prime[2]
-						},
-					hospital: {
-						bool: req.query.hospital[1],
-						num: req.query.hospital[2]
-						},
-					school: {
-						bool: req.query.school[1],
-						num: req.query.school[2]
-						},
-					mall: {
-						bool: req.query.mall[1],
-						num: req.query.mall[2]
-						},
-					*/
-					public_transpo: {
-						str: req.query.public_transpo[1],
-						num: req.query.public_transpo[2]
-						},
-
-					//also bool
-					/*improvement: {
-						bool: req.query.improvement[1],
-						num: req.query.improvement[2]
-						},
-					*/
-
-					//remove when boolis fixed, these are just placeholders
-					corner: {
-						bool: true,
-						num: 0
-						},
-					prime: {
-						bool: true,
-						num: 0
-						},
-					hospital: {
-						bool: true,
-						num: 0
-						},
-					school: {
-						bool: true,
-						num: 0
-						},
-					mall: {
-						bool: true,
-						num: 0
-						},
-					improvement: {
-						bool: true,
-						num: 0
-						},
-
-
-					zoning: {
-						str: req.query.zoning[1],
-						num: req.query.zoning[2]
-						},
-					computation: {
-						num1: req.query.computation[1],
-						num2: req.query.computation[2]
-					}
-				},
-
-				comparative2:{
-					price_per_sqm: req.query.price_per_sqm[2],
-					ref_date: {
-						date: req.query.ref_date[3],
-						num: req.query.ref_date[4]
-						},
-					property_type: {
-						str: req.query.property_type[3],
-						num: req.query.property_type[4]
-						},
-					property_interest: {
-						str: req.query.property_interest[3],
-						num: req.query.property_interest[4]
-						},
-					lot_size: {
-						num1: req.query.lot_size[3],
-						num2: req.query.lot_size[4]
-						},
-					shape: {
-						str: req.query.shape[3],
-						num: req.query.shape[4]
-					},
-					topo: {
-						str: req.query.topo[1],
-						num: req.query.topo[2]
-						},
-					frontage: {
-						str: req.query.frontage[1],
-						num: req.query.frontage[2]
-						},
-					terms_of_sale: {
-						str: req.query.terms_of_sale[1],
-						num: req.query.terms_of_sale[2]
-						},
-					//placeholders
-					public_transpo: {
-						str: req.query.public_transpo[1],
-						num: req.query.public_transpo[2]
-						},
-
-
-
-
-					//remove when boolis fixed, these are just placeholders
-					corner: {
-						bool: true,
-						num: 0
-						},
-					prime: {
-						bool: true,
-						num: 0
-						},
-					hospital: {
-						bool: true,
-						num: 0
-						},
-					school: {
-						bool: true,
-						num: 0
-						},
-					mall: {
-						bool: true,
-						num: 0
-						},
-					improvement: {
-						bool: true,
-						num: 0
-						},
-
-
-
-					zoning: {
-						str: req.query.zoning[1],
-						num: req.query.zoning[2]
-						},
-					computation: {
-						num1: req.query.computation[1],
-						num2: req.query.computation[2]
-					}
-				}
-			})
-
-			//res.redirect('/assignments')
-			res.redirect('/view/0/'+ req.query.ref_id)
-		}
-		catch(err)
+		if(sess.username == "admin")
 		{
-			res.status(500).send(err)
+			try{
+
+				// console.log(req.query)
+				//console.log(req.params)
+				// console.log(parseInt(req.query.price_per_sqm[0]))
+
+				//So the thing is, just save everything on the screen, even if user put blank there, still save
+				//the error checkng will be done in <script> of that page nalang so it's easier to seee
+				await Assignment.findOneAndUpdate({ref_id: req.query.ref_id},{
+
+					assigned_to: "",	//reset so that it will still show up in agents' /assignments
+					type_of_approach: req.query.type_of_approach,
+					
+					client_f_name: req.query.client_f_name,
+					client_l_name: req.query.client_l_name,
+					
+					//will only be visible to admin
+					client_contact_num: req.query.client_contact_num,
+					client_email: req.query.client_email,
+					
+					lot_brgy: req.query.lot_brgy,
+					lot_city: req.query.lot_city,
+					lot_region: req.query.lot_region,
+					
+					zonal: req.query.zonal
+				})
+
+				//res.redirect('/assignments')
+				res.redirect('/view/0/'+ req.query.ref_id)
+			}
+			catch(err)
+			{
+				res.status(500).send(err)
+			}
+		}
+		else{
+			var today = new Date()
+
+			try{
+
+				// console.log(req.query)
+				//console.log(req.params)
+				// console.log(parseInt(req.query.price_per_sqm[0]))
+
+				//So the thing is, just save everything on the screen, even if user put blank there, still save
+				//the error checkng will be done in <script> of that page nalang so it's easier to seee
+				await Assignment.findOneAndUpdate({ref_id: req.query.ref_id},{
+					price_per_sqm: req.query.price_per_sqm[0],
+					ref_date: req.query.ref_date[0],
+					lot_loc: req.query.lot_loc[0],
+					property_type: req.query.property_type[0],
+					property_interest: req.query.property_interest[0],
+					//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
+					//property_images: [imageSchema],
+					lot_size: req.query.lot_size[0],
+					shape: req.query.shape[0],
+					topo: req.query.topo[0],
+					frontage: req.query.frontage[0],
+					terms_of_sale: req.query.terms_of_sale[0],
+					corner: req.query.corner[0],
+					prime: req.query.prime[0],
+					hospital: req.query.hospital[0],
+					school: req.query.school[0],
+					mall: req.query.mall[0], //problem if left "mall" lol i cant be bothered anymore lmaoooo
+					public_transpo: req.query.public_transpo[0],
+					improvement: req.query.improvement[0],
+					zoning: req.query.zoning[0],
+					computation: req.query.computation[0],
+					comparative1 : {
+						price_per_sqm: req.query.price_per_sqm[1],
+						ref_date: {
+							date: req.query.ref_date[1],
+							num: req.query.ref_date[2]
+							},
+						property_type: {
+							str: req.query.property_type[1],
+							num: req.query.property_type[2]
+							},
+						property_interest: {
+							str: req.query.property_interest[1],
+							num: req.query.property_interest[2]
+							},
+						lot_size: {
+							num1: req.query.lot_size[1],
+							num2: req.query.lot_size[2]
+							},
+						shape: {
+							str: req.query.shape[1],
+							num: req.query.shape[2]
+							},
+						topo: {
+							str: req.query.topo[1],
+							num: req.query.topo[2]
+							},
+						frontage: {
+							str: req.query.frontage[1],
+							num: req.query.frontage[2]
+							},
+						terms_of_sale: {
+							str: req.query.terms_of_sale[1],
+							num: req.query.terms_of_sale[2]
+							},
+
+
+
+						//hiding bools for now bc idk how to make them save :v
+						// I saw this baka makahelp sa mag fifix:
+						//		https://stackoverflow.com/questions/39962676/updating-mongodb-with-checkbox-information
+
+						/*
+						corner: {
+							bool: req.query.corner[1],
+							num: req.query.corner[2]
+							},
+						prime: {
+							bool: req.query.prime[1],
+							num: req.query.prime[2]
+							},
+						hospital: {
+							bool: req.query.hospital[1],
+							num: req.query.hospital[2]
+							},
+						school: {
+							bool: req.query.school[1],
+							num: req.query.school[2]
+							},
+						mall: {
+							bool: req.query.mall[1],
+							num: req.query.mall[2]
+							},
+						*/
+						public_transpo: {
+							str: req.query.public_transpo[1],
+							num: req.query.public_transpo[2]
+							},
+
+						//also bool
+						/*improvement: {
+							bool: req.query.improvement[1],
+							num: req.query.improvement[2]
+							},
+						*/
+
+						//remove when boolis fixed, these are just placeholders
+						corner: {
+							bool: true,
+							num: 0
+							},
+						prime: {
+							bool: true,
+							num: 0
+							},
+						hospital: {
+							bool: true,
+							num: 0
+							},
+						school: {
+							bool: true,
+							num: 0
+							},
+						mall: {
+							bool: true,
+							num: 0
+							},
+						improvement: {
+							bool: true,
+							num: 0
+							},
+
+
+						zoning: {
+							str: req.query.zoning[1],
+							num: req.query.zoning[2]
+							},
+						computation: {
+							num1: req.query.computation[1],
+							num2: req.query.computation[2]
+						}
+					},
+
+					comparative2:{
+						price_per_sqm: req.query.price_per_sqm[2],
+						ref_date: {
+							date: req.query.ref_date[3],
+							num: req.query.ref_date[4]
+							},
+						property_type: {
+							str: req.query.property_type[3],
+							num: req.query.property_type[4]
+							},
+						property_interest: {
+							str: req.query.property_interest[3],
+							num: req.query.property_interest[4]
+							},
+						lot_size: {
+							num1: req.query.lot_size[3],
+							num2: req.query.lot_size[4]
+							},
+						shape: {
+							str: req.query.shape[3],
+							num: req.query.shape[4]
+						},
+						topo: {
+							str: req.query.topo[1],
+							num: req.query.topo[2]
+							},
+						frontage: {
+							str: req.query.frontage[1],
+							num: req.query.frontage[2]
+							},
+						terms_of_sale: {
+							str: req.query.terms_of_sale[1],
+							num: req.query.terms_of_sale[2]
+							},
+						//placeholders
+						public_transpo: {
+							str: req.query.public_transpo[1],
+							num: req.query.public_transpo[2]
+							},
+
+
+
+
+						//remove when boolis fixed, these are just placeholders
+						corner: {
+							bool: true,
+							num: 0
+							},
+						prime: {
+							bool: true,
+							num: 0
+							},
+						hospital: {
+							bool: true,
+							num: 0
+							},
+						school: {
+							bool: true,
+							num: 0
+							},
+						mall: {
+							bool: true,
+							num: 0
+							},
+						improvement: {
+							bool: true,
+							num: 0
+							},
+
+
+
+						zoning: {
+							str: req.query.zoning[1],
+							num: req.query.zoning[2]
+							},
+						computation: {
+							num1: req.query.computation[1],
+							num2: req.query.computation[2]
+						}
+					}
+				})
+
+				//res.redirect('/assignments')
+				res.redirect('/view/0/'+ req.query.ref_id)
+			}
+			catch(err)
+			{
+				console.log(err)
+				//res.status(500).send(err)
+			}
 		}
 	}
 	else{

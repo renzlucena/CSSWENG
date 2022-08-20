@@ -74,43 +74,61 @@
 							<th>CITY, REGION</th>
 							<th>ACTION</th>
 						</tr>
+						
 						<tr>
 							<th colspan='4'>New Assignments</th>
 						</tr>
 			
-					{{#each assignment_new}}
+						{{#each assignment_new}}
+							<tr>
+								<td><p>{{this.ref_id}}</p></td>
+								<td><p>{{this.created_at}}</p></td>
+								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>
+									<div class="main-assignments-status-btns">
+											<button type="submit" name="accept" formaction="/accept-assignment/{{ref_id}}">Accept</button>
+									</div>
+								</td>
+							</tr>
+						{{/each}}
+						
 						<tr>
-							<td><p>{{this.ref_id}}</p></td>
-							<td><p>{{this.created_at}}</p></td>
-							<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
-							<td>
-								<div class="main-assignments-status-btns">
-										<button type="submit" name="accept" formaction="/accept-assignment/{{ref_id}}">Accept</button>
-								</div>
-							</td>
+							<th colspan='4'>Assigned Assignments</th>
 						</tr>
-					{{/each}}
+						
+						{{#each assignment_sub}}
+							<tr>
+								<td><p>{{this.ref_id}}</p></td>
+								<td><p>{{this.created_at}}</p></td>
+								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>
+									<div class="main-assignments-status-btns">
+										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">View Assignment</button>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan='3'><p class="left-align">Sent to Admin for Review and Processing.</p></td>
+							</tr>
+						{{/each}}				
 					
-					<tr>
-						<th colspan='5'>Assigned Assignments</th>
-					</tr>
-				
-					{{#each assignment_ass}}
-						<tr>
-							<td><p>{{this.ref_id}}</p></td>
-							<td><p>{{this.created_at}}</p></td>
-							<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
-							<td>
-								<div class="main-assignments-status-btns">
-									<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit Assignment</button>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th>Admin's Comment:</th>
-							<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
-						</tr>
-					{{/each}}
+						{{#each assignment_ass}}
+							<tr>
+								<td><p>{{this.ref_id}}</p></td>
+								<td><p>{{this.created_at}}</p></td>
+								<td><p>{{this.expire_at}}</p></td>
+								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>
+									<div class="main-assignments-status-btns">
+										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit Assignment</button>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>Admin's Comment:</th>
+								<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
+							</tr>
+						{{/each}}					
 					
 					</table>
 				</div>
