@@ -47,6 +47,16 @@
 			// workaround - get the bool val of each and put them inside an array to be put in the url as part of req.param nalang
 			// tapos get the backend to check the params
 			var checked_items = document.getElementsByName("corner")
+
+    //  const boolArray = new Array(corner[1], prime[1], hospital[1], school[1], mall[1], improvement[1]);
+    //  for (let i = 0; i < boolArray.length; i++) {
+    //    if (boolArray[i].checked){
+    //      boolArray[i] = true;
+    //    }
+    //    else {
+    //      boolArray[i] = false;
+    //    }
+    //  }
 			// WORKING PATRT - checked_items[0].checked = true if naka check
 
 
@@ -258,7 +268,7 @@
                 <p>Please be mindful before you close the page.</p>
             </div>
 
-            <form class="assignments-form" method = "get">
+            <form class="assignments-form">
                 <div class="main-table">
 					<table>
 						<tr>
@@ -563,8 +573,8 @@
             <div id="main-table-bottom">
                 <button method = "get" type = "submit" name="save_ass" formaction="/save-ass">Save Details</button>
                 <button type="button" onclick="computer()">COMPUTE</button>
-				<button method="get" type="submit" name="send-ass" formaction="/send-ass/{{this.ref_id}}">Send for Processing</button>
-				<button type="submit" formaction="/edit-doc/{{this.ref_id}}">Edit Document</button>
+				<button method="get" type="submit" name="send-ass" formaction="/send-ass">Send for Processing</button>
+				<button type="submit" formaction="/edit-doc">Edit Document</button>
             </div>
             </form>
 
