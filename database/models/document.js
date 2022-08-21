@@ -6,8 +6,8 @@ const documentSchema = new mongoose.Schema({
 	filename: String,
     company_name: String,
     company_address: String,
-    appraisal_date: {type: Date, required: true, default: Date.now},
-    appraiser_num: Number,
+    appraisal_date: {type: Date, required: true, default: Date.now}, //remove
+    appraiser_num: Number, //remove
     appraiser_address: String,
     market_value: String,
     parcel_id: String,
@@ -34,7 +34,7 @@ const documentSchema = new mongoose.Schema({
 
     //area & neighborhood overview
     description_improvements: String,
-    neighborhood: String,
+    neighborhood: String, //remove
     area_development: String,
     market_analysis: String,
 
@@ -54,8 +54,8 @@ const documentSchema = new mongoose.Schema({
 
     //reconciliation & final value opinion
     recon_final_value_opinion: String,
-    market_value: String,
-    market_value_per_sqm: String,
+    market_value: String, //remove
+    market_value_per_sqm: String, //remove
     cost_value: String,
     cost_value_per_sqm: String,
     income_value: String,
