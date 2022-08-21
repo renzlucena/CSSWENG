@@ -419,17 +419,8 @@ function padLeadingZeros(num, size) {
 // this is just the page, the one that saves a new document is "/submit-assignment"
 app.get('/admin-add-assignment', async(req,res)=>{
 	sess = req.session
-	// try{
 	var year = new Date();
-
-	// console.log(year.getFullYear().toString())
-
-	//const count = await Assignment.countDocuments().exec()
-
-	// res.render('addAssignment.hbs',{
-
-		// ref_id	:	year.getDate.toString	//test
-	// });
+	console.log("in /admin-add-assignment")
 
 
 	if(sess.username=="admin")
@@ -462,6 +453,8 @@ app.get('/admin-add-assignment', async(req,res)=>{
 app.get('/admin-add-agent', async(req,res)=>{
 	sess = req.session
 	// try{
+	console.log("in /admin-add-agent")
+
 	var year = new Date();
 
 	// console.log(year.getFullYear().toString())
@@ -489,7 +482,7 @@ app.get('/admin-add-agent', async(req,res)=>{
 			appnum: sess.appnum,
 			can_accept: sess.can_accept,
 
-			ref_id	:	(year.getFullYear()-2000).toString()+year.getMonth().toString()+padLeadingZeros((count+1), 3)
+			//ref_id	:	(year.getFullYear()-2000).toString()+year.getMonth().toString()+padLeadingZeros((count+1), 3)
 
 		});
 	}
@@ -499,21 +492,22 @@ app.get('/admin-add-agent', async(req,res)=>{
 
 });
 
+
 app.get('/view/0/:ref_id', async(req,res)=>{
 	sess = req.session
-	console.log(req.params.ref_id)	//huhhh agent_history.css
-	// console.log("/view/0/:"+req.body.ref_id)	//null
-	console.log("/view/0/:"+req.params.ref_id)	//????? temp_pic.png wot
+	var ref_id = req.params.ref_id
+	console.log("/view/0/:"+ref_id)
+	
 	if(sess.username)
 	{
 		if(sess.username == "admin")
 		{			// IF ADMIN IS LOGGED IN
 			try{
 				const ass = await Assignment.findOne({
-						ref_id : req.params.ref_id
-					})
-
-				// console.log(ass)
+					ref_id : req.params.ref_id
+				})
+				
+				//console.log(ass)
 				if(ass.comment == "Approved.")
 				{	res.render('viewAssignment_1_admin.hbs',{
 						ref_id 			: ass.ref_id,
@@ -965,16 +959,17 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 			}
 		}
 		else		// IF AGENT IS LOGGED IN
-		{
 			try{
-			const ass = await Assignment.findOne({
-				ref_id : req.params.ref_id
-				})
-			console.log(ass)
+				const ass = await Assignment.findOne({
+					ref_id : req.params.ref_id
+					})
+				console.log(ass)
 
-				//ERROR HERE CANNOT BE REACHED
-				// This is viewing the assignment that's supposed to be in history already
 				if(ass.comment == "Approved."){
+					// res.render('history_0.hbs',{	//<--- previously. i changed the name so that the content can be easily guessed
+					// The agents won't be able to edit the page, but they can "edit" the document so that they can have it printed
+					// they only are able to edit the document only until they click the "Lock Document and Save PDF"
+					// they can save the document anytime
 					res.render('viewAssignment_approved.hbs',{
 							ref_id 			: ass.ref_id,
 							type_of_approach: ass.type_of_approach,
@@ -1109,8 +1104,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							can_accept: sess.can_accept
 						});
 				}
-				
-				
 				else if(ass.comment == "Submitted."){
 					// Show the whole page uli pero without buttons this time
 					// The agent will have to wait for a while to get the admin's feedback/comment.
@@ -1386,12 +1379,12 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							can_accept: sess.can_accept
 						});
 				}
+
 			}
 			catch(err)
 			{
 				console.log(err)
 			}
-		}
 	}
 	else
 	{
@@ -1590,17 +1583,28 @@ app.post('/submit-assignment', function(req,res) {
 	res.redirect('/assignments')
 });
 
-//This function is to make a new agent. Not sure if entirely working.
-//formatme
+//This function is to make a new agent
+//TODO: Check if there is an empty field first before you can go to /new-agent to save (from addAgent.hbs)
+//TODO: Check first the req.body.email if it already exists in the db, then don't proceed + make the email red bg (addAgent.hbs)
+
 app.post('/new-agent', function(req,res) {
 	sess = req.session
-
+	// console.log(req.body)
+	console.log("in /new-agent ")
+	console.log(req.query) //empty
+	console.log(req.body)	//here
+	var today = new Date();
+	//var ran = (Math.random()*(9999-1000)+1000)
 	var username = req.body.username
 	try{
 		Account.create(
 		{
-			username: req.body.username,
-			password: req.body.password,
+			// console.log(year.getFullYear().toString())
+			//body gets from name
+			//query gets value
+			//if i understood correctly
+			username: req.body.email,
+			password: today.getFullYear().toString()+today.getMonth().toString()+req.body.fname[0]+req.body.lname[0],
 			email: req.body.email,
 			remember: false,
 			status: true,
@@ -1621,7 +1625,7 @@ app.get('/dashboard', async(req,res)=> {
 	sess = req.session;
 	if(sess.username){ //username exists
 		if(sess.username=="admin")
-		{			
+		{
 			res.render('dashboard.hbs', {
 				username: sess.username,
 				password: sess.password,
@@ -1641,7 +1645,9 @@ app.get('/dashboard', async(req,res)=> {
 				//eto yung you have blank new comments saka mag eexpire na dates
 				const assNum = await Assignment.find({
 					assigned_to: sess.username,
-					comment: {$nin: ["Approved.", "Submitted.", ""]},
+					comment: {$ne: "Approved."},
+					comment: {$ne: "Submitted."},
+					comment: {$ne: ""},
 					}).count()
 					//so if the comment is not approved, and submitted, and not blank also, it's from the admin
 
@@ -1733,8 +1739,7 @@ app.get('/term-accept', async(req,res)=> {
 		}
 		catch(err)
 		{
-			console.log(err)
-			// res.status(500).send(err)
+			res.status(500).send(err)
 		}
 	}
 	else{
@@ -1800,8 +1805,7 @@ app.get('/set-settings', async(req,res)=> {
 		}
 		catch(err)
 		{
-			console.log(err)
-			//res.status(500).send(err)
+			res.status(500).send(err)
 		}
 	}
 	else{
@@ -1816,22 +1820,30 @@ app.get('/assignments', async(req,res)=> {
 	if(sess.username){
 		if(sess.username=="admin")
 		{ // IF ADMIN, UNASSIGNED ASSIGNMENTS and (ASSIGNED & UNFINISHED)
-			
-			//refresh if in admin and went to other pages without saving details
-			await Assignment.findOneAndUpdate({assigned_to: sess.username},{
-					assigned_to: "",	//reset so that it will still show up in agents' /assignments
-			})
-			
 			const ass_new = await Assignment.find({
-				assigned_to: ["", "admin"],
+				assigned_to: "",
 				comment: "New!"})	// comment "New!" means really new assignment
-			
+			// console.log(ass_new)
 			const ass = await Assignment.find({
-				assigned_to: {$nin: ["", "admin"]},//ASSIGNED TO SOMEONE
+				assigned_to: {$ne: ""},//ASSIGNED TO SOMEONE
 				comment: {$ne: "Approved."}})//that is not equal to Approved. (or it will go to history)
+
+				//ass_new.created_at =	(ass_new.created_at.getFullYear()-2000).toString()+", "+year.getMonth().toString()+" "+year.getDay().toString()
+				//ass.created_at =	(year.getFullYear()-2000).toString()+", "+year.getMonth().toString()+" "+year.getDay().toString()
+				console.log(ass_new)
+
+
 
 				res.render('assignments_admin.hbs', {
 					assignment_new:ass_new,
+					// assignment_new.ref_id 	: ass_new.ref_id,
+					// assignment_new.lot_brgy		: ass_new.lot_brgy,
+					// assignment_new.lot_city		: ass_new.lot_city,
+					// assignment_new.lot_region		: ass_new.lot_region,
+					// assignment_new.assigned_to		: ass_new.assigned_to,
+					// assignment_new.created_at		: (ass_new.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
+					// assignment_new.completed_on	: ass_new.completed_on,
+
 					assignment_ass:ass,
 
 					username: sess.username,
@@ -1857,10 +1869,10 @@ app.get('/assignments', async(req,res)=> {
 
 			const ass = await Assignment.find({
 				assigned_to: sess.username,//ASSIgned to you
-				comment: {$nin : ["Approved.","Submitted"]}
-				})//that is not equal to Approved. (or it will go to history)
+				comment: {$ne: "Approved."},
+				comment: {$ne: "Submitted."}})//that is not equal to Approved. (or it will go to history)
 												//also not equal to "Submitted."bc it will have a different button
-												
+
 			const howmany = await Assignment.countDocuments({
 				assigned_to: sess.username,
 				comment: {$ne: "Approved."}})
@@ -2020,8 +2032,7 @@ app.get('/save-ass', async(req,res)=> {
 			}
 			catch(err)
 			{
-				console.log(err)
-				// res.status(500).send(err)
+				res.status(500).send(err)
 			}
 		}
 		else{
@@ -2542,8 +2553,7 @@ app.get('/save-doc/:ref_id', async(req,res)=> {
 		}
 		catch(err)
 		{
-			console.log(err)
-			// res.status(500).send(err)
+			res.status(500).send(err)
 		}
 	}
 	else{
@@ -2567,64 +2577,74 @@ app.get('/download-doc/:ref_id', async(req,res)=> {
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
-
-				filename: doc.filename,
-				company_name: doc.company_name,
-				company_address: doc.company_address,
-				appraiser_address: doc.appraiser_address,
-				market_value: doc.market_value,
-				parcel_id: doc.parcel_id,
-				improvements: doc.improvements,
-				zoning_class: doc.zoning_class,
-				interest_appraised: doc.interest_appraised,
-
-				property_identification: doc.property_identification,
-				appraisal_objective_property_rights: doc.appraisal_objective_property_rights,
-				intended_use_intended_users: doc.intended_use_intended_users,
-				effective_date_report: doc.effective_date_report,
-				statement_ownership_sales_history: doc.statement_ownership_sales_history,
-				scope_of_work: doc.scope_of_work,
-
-				title_no: doc.title_no,
-				utilities: doc.utilities,
-				flood: doc.flood,
-				easements: doc.easements,
-				real_estate_taxes: doc.real_estate_taxes,
-				zoning_desc: doc.zoning_desc,
-
-				description_improvements: doc.description_improvements,
-				area_development: doc.area_development,
-				market_analysis: doc.market_analysis,
-
-				highest_best_use: doc.highest_best_use,
-				legally_permissible: doc.legally_permissible,
-				physical_possibility: doc.physical_possibility,
-				financial_feasibility: doc.financial_feasibility,
-				maximum_productivity: doc.maximum_productivity,
-				conclusion: doc.conclusion,
-				valuation_process: doc.valuation_process,
-				market_data_approach: doc.market_data_approach,
-
-				explanation_adjustments: doc.explanation_adjustments,
-				range_value_per_sqm: doc.range_value_per_sqm,
-				final_value_per_sqm: doc.final_value_per_sqm,
-
-				recon_final_value_opinion: doc.recon_final_value_opinion,
-				cost_value: doc.cost_value,
-				cost_value_per_sqm: doc.cost_value_per_sqm,
-				income_value: doc.income_value,
-				income_value_per_sqm: doc.income_value_per_sqm,
-				final_value_indication: doc.final_value_indication,
-				final_value_indication_per_sqm: doc.final_value_indication_per_sqm,
+				can_accept: sess.can_accept
 			});
 			//edit comment  to "Submitted."
 
-			
+			await Document.findOneAndUpdate(
+				{ref_id: req.query.ref_id},
+				{
+					filename: req.query.filename,
+					company_name: req.query.company_name,
+					company_address: req.query.company_address,
+					appraisal_date: req.query.date,
+					appraiser_num: req.query.appraiser_num,
+					appraiser_address: req.query.appraiser_address,
+					market_value: req.query.market_value,
+					parcel_id: req.query.parcel_id,
+					improvements: req.query.improvements,
+					zoning_class: req.query.zoning_class,
+					interest_appraised: req.query.interest_appraised,
+
+					property_identification: req.query.property_identification,
+					//property_images: [imageSchema],
+					appraisal_objective_property_rights: req.query.appraisal_objective_property_rights,
+					intended_use_intended_users: req.query.intended_use_intended_users,
+					effective_date_report: req.query.effective_date_report,
+					statement_ownership_sales_history: req.query.statement_ownership_sales_history,
+					scope_of_work: req.query.scope_of_work,
+
+					title_no: req.query.title_no,
+					utilities: req.query.utilities,
+					flood: req.query.flood,
+					easements: req.query.easements,
+					real_estate_taxes: req.query.real_estate_taxes,
+					zoning_desc: req.query.zoning_desc,
+
+					description_improvements: req.query.description_improvements,
+					neighborhood: req.query.neighborhood,
+					area_development: req.query.area_development,
+					market_analysis: req.query.market_analysis,
+
+					highest_best_use: req.query.highest_best_use,
+					legally_permissible: req.query.legally_permissible,
+					physical_possibility: req.query.physical_possibility,
+					financial_feasibility: req.query.financial_feasibility,
+					maximum_productivity: req.query.maximum_productivity,
+					conclusion: req.query.conclusion,
+					valuation_process: req.query.valuation_process,
+					market_data_approach: req.query.market_data_approach,
+					//comparables: ,
+					explanation_adjustments: req.query.explanation_adjustments,
+					range_value_per_sqm: req.query.range_value_per_sqm,
+					final_value_per_sqm: req.query.final_value_per_sqm,
+
+					recon_final_value_opinion: req.query.recon_final_value_opinion,
+					market_value: req.query.market_value,
+					market_value_per_sqm: req.query.market_value_per_sqm,
+					cost_value: req.query.cost_value,
+					cost_value_per_sqm: req.query.cost_value_per_sqm,
+					income_value: req.query.income_value,
+					income_value_per_sqm: req.query.income_value_per_sqm,
+					final_value_indication: req.query.final_value_indication,
+					final_value_indication_per_sqm: req.query.final_value_indication_per_sqm,
+				})
+
+			//res.redirect('/download-doc/'+ req.query.ref_id)
 		}
 		catch(err)
 		{
-			console.log(err)
-//			res.status(500).send(err)
+			res.status(500).send(err)
 		}
 	}
 	else{

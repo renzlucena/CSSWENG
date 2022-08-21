@@ -11,8 +11,3 @@ viewAssignment_3_admin - Admin POV, almost same look as viewAssignment_1 for Age
 
 assignments - Agent POV, page to show when the agent is allowed to accept any assignment listed
 assignments_cant_accept - Agent POV, page to show when the agent is NOT allowed to accept any assignments (bc they have an ongoing ass)
-
-history		- History page in Agent POV
-history_admin	- History page in Admin POV
-history_0	- ???
-history_0_admin

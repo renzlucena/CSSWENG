@@ -3,7 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <html>
 <head>
-    <link rel = "stylesheet" href="add_view.css">
+    <!-- <link rel = "stylesheet" href="add_view.css"> -->
+	<link rel = "stylesheet" href="agent_add_view.css">
     <title>Create Assignment</title>
 
 
@@ -28,7 +29,6 @@
             var valid = true;
 
             var username = document.getElementById("username");
-            var password = document.getElementById("password");
             var email = document.getElementById("email");
             var fname = document.getElementById("fname");
             var lname = document.getElementById("lname");
@@ -136,29 +136,22 @@
             <form class="assignments-form" action = "/assignments" method = "post">
                 <div class="main-table">
                     <table>
+                        
                         <tr>
-                            <th><label for="username">New Agent Username</label></th>
-                            <td><input name="username" id="username" type="text" value="{{this.username}}" readonly></td>
-                        </tr>
-                        <tr>
-                            <th><label for="password">New Agent Password</label></th>
-                            <td><input name="password" id="password" type="text"></td>
-                        </tr>
-                        <tr>
-                            <th><label for="email">New Agent Email</label></th>
+                            <th><label for="email">Email</label></th>
                             <td><input name="email" id="email" type="text"></td>
                         </tr>
 						<tr>
-                            <th><label for="fname">New Agent First Name</label></th>
+                            <th><label for="fname">First Name</label></th>
                             <td><input name="fname" id="fname" type="text"></td>
                         </tr>
 						<tr>
-                            <th><label for="lname">New Agent Last Name</label></th>
+                            <th><label for="lname">Last Name</label></th>
                             <td><input name="lname" id="lname" type="text"></td>
                         </tr>
-            <tr>
-                            <th><label for="appnum">New Agent App Number</label></th>
-                            <td><input name="appnum" id="appNum" type="text"></td>
+						<tr>
+                            <th><label for="appnum">License Number</label></th>
+                            <td><input name="appnum" id="appnum" type="number"></td>
                         </tr>
 
                     </table>
