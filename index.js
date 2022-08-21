@@ -2258,88 +2258,83 @@ app.get('/save-ass', async(req,res)=> {
 	}
 });
 
-app.get('/edit-doc', async(req,res)=> {
-	sess = req.session
-
-	var ref_id = req.body.ref_id
-	try{
-		Document.create(
-		{
-			ref_id: req.body.ref_id,
-			filename: "",
-			company_name: "",
-    		company_address: "",
-    		appraiser_num: 0,
-    		appraiser_address: "",
-		    market_value: "",
-		    parcel_id: "",
-		    improvements: "",
-		    zoning_class: "",
-		    interest_appraised: "",
-
-		    //Start of Body of Document
-		    property_identification: "",
-		    appraisal_objective_property_rights: "",
-		    intended_use_intended_users: "",
-		    effective_date_report: "",
-		    statement_ownership_sales_history: "",
-		    scope_of_work: "",
-
-    		//property description
-		    title_no: "",
-		    utilities: "",
-		    flood: "",
-		    easements: "",
-		    real_estate_taxes: "",
-		    zoning_desc: "",
-
-    		//area & neighborhood overview
-    		description_improvements: "",
-    		neighborhood: "",
-    		area_development: "",
-    		market_analysis: "",
-
-    		//valuation
-    		highest_best_use: "",
-    		legally_permissible: "",
-    		physical_possibility: "",
-    		financial_feasibility: "",
-    		maximum_productivity: "",
-    		conclusion: "",
-    		valuation_process: "",
-    		market_data_approach: "",
-		    explanation_adjustments: "",
-    		range_value_per_sqm: "",
-    		final_value_per_sqm: "",
-
-    		//reconciliation & final value opinion
-    		recon_final_value_opinion: "",
-    		market_value: "",
-    		market_value_per_sqm: "",
-    		cost_value: "",
-    		cost_value_per_sqm: "",
-    		income_value: "",
-    		income_value_per_sqm: "",
-    		final_value_indication: "",
-    		final_value_indication_per_sqm: "",
-		})
-	}
-	catch(err)
-	{console.log(err)}
-
-	if(sess.username)
+app.post('/create-doc/:ref_id',async(req,res)=> {
+	sess =  req.session
+	
+	console.log("/create-doc/"+req.query.ref_id)
+	
+	if (sess.username)
 	{
-		res.render('edit_document.hbs', {
-			username: sess.username,
-			password: sess.password,
-			remember: sess.remember,
-			status: sess.status,
-			email: sess.email,
-			fname: sess.fname,
-			lname: sess.lname,
-			appnum: sess.appnum,
-			can_accept: sess.can_accept
-		});
+		
+		const ass = await Document.findOne({ref_id: req.query.ref_id})
+		console.log(ass + " is ass")
+		
+		if (ass==null) { //it doesnt exist yet, create one
+			try{
+				Document.create({
+					ref_id: req.query.ref_id,
+					filename: "",
+					company_name: "",
+					company_address: "",
+					appraiser_num: 0,
+					appraiser_address: "",
+					market_value: "",
+					parcel_id: "",
+					improvements: "",
+					zoning_class: "",
+					interest_appraised: "",
+
+					//Start of Body of Document
+					property_identification: "",
+					appraisal_objective_property_rights: "",
+					intended_use_intended_users: "",
+					effective_date_report: "",
+					statement_ownership_sales_history: "",
+					scope_of_work: "",
+
+					//property description
+					title_no: "", 
+					utilities: "",
+					flood: "",
+					easements: "",
+					real_estate_taxes: "",
+					zoning_desc: "",
+
+					//area & neighborhood overview
+					description_improvements: "",
+					neighborhood: "",
+					area_development: "",
+					market_analysis: "",
+
+					//valuation
+					highest_best_use: "",
+					legally_permissible: "",
+					physical_possibility: "",
+					financial_feasibility: "",
+					maximum_productivity: "",
+					conclusion: "",
+					valuation_process: "",
+					market_data_approach: "",
+					explanation_adjustments: "",
+					range_value_per_sqm: "",
+					final_value_per_sqm: "",
+
+					//reconciliation & final value opinion
+					recon_final_value_opinion: "",
+					market_value: "",
+					market_value_per_sqm: "",
+					cost_value: "",
+					cost_value_per_sqm: "",
+					income_value: "",
+					income_value_per_sqm: "",
+					final_value_indication: "",
+					final_value_indication_per_sqm: ""
+				})
+			} catch(err){
+				console.log(err)
+			}
+		}
+		res.redirect('/edit-doc/'+req.query.ref_id);
 	}
 	else
 	{
@@ -2347,20 +2342,134 @@ app.get('/edit-doc', async(req,res)=> {
 	}
 })
 
-app.get('/save-doc', async(req,res)=> {
+app.get('/edit-doc/:ref_id', async(req,res)=> {
+	sess = req.session
+	
+	console.log(req.params + " i s the ref_id")
+	console.log("/edit-doc/"+req.params.ref_id)
+	//check if document already exists
+	
+	if(sess.username)
+	{
+		// const docu = await Document.findOne({ref_id: req.params.ref_id}).exec();
+		// console.log(docu+" is the docu")
+		
+		
+		const docu = await Document.findOne({ref_id: req.params.ref_id});
+		console.log(docu+" is the docu")
+		try{
+		
+		
+			res.render('edit_document.hbs', {
+				ref_id : req.params.ref_id,
+				
+				/*
+				filename: docu.filename,
+				company_name: docu.filename,
+				company_address: docu.company_address,
+				appraiser_num: docu.appraiser_num,
+				appraiser_address: docu.appraiser_address,
+				market_value: docu.market_value,
+				market_data_value: docu.market_data_value,
+				parcel_id: docu.parcel_id,
+				improvements: docu.improvements,
+				zoning_class: docu.zoning_class,
+				interest_appraised: docu.interest_appraised,
+
+				// //Start of Body of Document
+				// property_identification: "",
+				// appraisal_objective_property_rights: "",
+				// intended_use_intended_users: "",
+				// effective_date_report: "",
+				// statement_ownership_sales_history: "",
+					// scope_of_work: "",
+
+					// //property description
+					// title_no: "", 
+					// utilities: "",
+					// flood: "",
+					// easements: "",
+					// real_estate_taxes: "",
+					// zoning_desc: "",
+
+					// //area & neighborhood overview
+					// description_improvements: "",
+					// neighborhood: "",
+					// area_development: "",
+					// market_analysis: "",
+
+					// //valuation
+					// highest_best_use: "",
+					// legally_permissible: "",
+					// physical_possibility: "",
+					// financial_feasibility: "",
+					// maximum_productivity: "",
+					// conclusion: "",
+					// valuation_process: "",
+					// market_data_approach: "",
+					// explanation_adjustments: "",
+					// range_value_per_sqm: "",
+					// final_value_per_sqm: "",
+
+					// //reconciliation & final value opinion
+					// recon_final_value_opinion: "",
+					// market_value: "",
+					// market_value_per_sqm: "",
+					// cost_value: "",
+					// cost_value_per_sqm: "",
+					// income_value: "",
+					// income_value_per_sqm: "",
+					// final_value_indication: "",
+					// final_value_indication_per_sqm: "",
+				
+				*/
+					
+				
+				username: sess.username,
+				password: sess.password,
+				remember: sess.remember,
+				status: sess.status,
+				email: sess.email,
+				fname: sess.fname,
+				lname: sess.lname,
+				appnum: sess.appnum,
+				can_accept: sess.can_accept
+			});
+		} catch(err){
+			console.log(err)
+		}
+		
+	}
+	else
+	{
+		res.redirect('/login-fail.html')
+	}
+})
+
+app.get('/save-doc/:ref_id', async(req,res)=> {
 	// sess = req.session;
 	// console.log(req.query.ref_id)
-	console.log("in /save-doc")
+	sess = req.session
+	console.log("in /save-doc-"+req.params.ref_id)
 
 	if(sess.username){
 		var today = new Date()
 
+		console.log(req.query)	//working
+
+		// const ass = await Assignment.findOneAndUpdate(
+			// {ref_id: req.params.ref_id},{
+				// assigned_to: sess.username,
+				// comment: "The Assignment has been assigned to "+sess.username
+			// })
+
+		const docu = await Document.findOne({ref_id: req.params.ref_id}).exec()
+		console.log(docu)
+
 		try{
-
-
 			//console.log(req.params)
 			// console.log(parseInt(req.query.price_per_sqm[0]))
-			const doc = await Document.find({ref_id: req.query})
+			/*const doc = await Document.find({ref_id: req.query})
 			console.log(doc)
 			//So the thing is, just save everything on the screen, even if user put blank there, still save
 			//the error checkng will be done in <script> of that page nalang so it's easier to seee
@@ -2418,10 +2527,10 @@ app.get('/save-doc', async(req,res)=> {
 				income_value_per_sqm: req.query.income_value_per_sqm,
 				final_value_indication: req.query.final_value_indication,
 				final_value_indication_per_sqm: req.query.final_value_indication_per_sqm,
-			})
+			})*/
 
 			//res.redirect('/assignments')
-			res.redirect('/edit-doc')
+			res.redirect('/edit-doc/'+ req.query.ref_id)
 		}
 		catch(err)
 		{
@@ -2433,17 +2542,18 @@ app.get('/save-doc', async(req,res)=> {
 	}
 });
 
-app.get('/download-doc', async(req,res)=> {
+app.get('/download-doc/:ref_id', async(req,res)=> {
 	// sess = req.session;
 	// console.log(req.query.ref_id)
 	console.log(req.query)
 	if(sess.username){
 		try{
+			const doc = await Document.findOne({
+				ref_id : req.params.ref_id
+			})
+			
+			console.log(doc)
 			res.render('download_document.hbs', {
-				username: sess.username,
-				password: sess.password,
-				remember: sess.remember,
-				status: sess.status,
 				email: sess.email,
 				fname: sess.fname,
 				lname: sess.lname,
@@ -2511,7 +2621,7 @@ app.get('/download-doc', async(req,res)=> {
 					final_value_indication_per_sqm: req.query.final_value_indication_per_sqm,
 				})
 
-			res.redirect('/editDocument'+ req.query.ref_id)
+			//res.redirect('/download-doc/'+ req.query.ref_id)
 		}
 		catch(err)
 		{

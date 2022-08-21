@@ -65,7 +65,7 @@ const assignmentSchema = new mongoose.Schema({
 	client_contact_num: String,
 	client_email: String,
 	
-	lot_brgy: String,
+	lot_brgy: String, //change to street or lot address
 	lot_city: String,
 	lot_region: String,
 	created_at: { type: Date, required: true, default: Date.now },
