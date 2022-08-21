@@ -234,6 +234,9 @@
                   <a  href="/assignments">Assignments</a>
               </div>
               <div class="sidebar-history-btn">
+                        <a  href="/admin-add-agent">Add New Agent</a>
+              </div>
+              <div class="sidebar-history-btn">
 
                   <a  href="/history">History</a>
               </div>
@@ -261,7 +264,7 @@
 
               <form class="assignments-form">
                   <div class="main-table">
-            
+
 					<table>
 						<tr>
 							<th></th>
@@ -285,23 +288,23 @@
                             <td><input name="client_name" type="text" value="{{this.client_l_name}}"></td>
 
                         </tr>
-						
+
 					    <tr>	<!-- Contact Info -->
 							<th><label for="client_email">Client Esaamail</label></th>
 							<td><input name="client_email" id="client_email" type="text"></td>
-							
+
                             <th><label for="client_contact_num">Client Contact Number</label></th>
                             <td><input name="client_contact_num" id="client_contact_num" type="text"></td>
                         </tr>
-                        
+
 						<tr>	<!-- lot_brgy,city,region - will serve as general location for interest check of agents/appraisers & zonal value-->
 							<th><label for="gen_lot_loc">Lot Baranggay</label></th>
 							<td><input name="gen_lot_loc" type="text" value="{{this.lot_brgy}}"></td>
-							
+
 							<th><label for="gen_lot_loc">Lot City</label></th>
 							<td><input name="gen_lot_loc" type="text" value="{{this.lot_city}}"></td>
 						</tr>
-						
+
 						<tr>
                             <th><label for="lot_region">Lot Region</label></th>
 							<td><select id="lot_region" name="lot_region" value="{{this.lot_region}}">
@@ -323,7 +326,7 @@
 								<option value="RXIII">Region XIII (Caraga)</option>
 								<option value="MIMAROPA">MIMAROPA</option>
 							</select></td>
-							
+
 							<th><label for="zonal">Zonal Value</label></th>
                             <td><input name="zonal" type="number" value="{{this.zonal}}"></td>
                         </tr>
