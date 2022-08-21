@@ -64,7 +64,7 @@
                 text: this.completed_on + '\n\nRe: Summary Appraisal Report \n' + this.property_type + this.lot_size + 'sqm \n' + this.loc_brgy + this.loc_city
             }
             ]},*/  
-            {text: '\n\n\nDear Mr./Ms. ' + this.client_f_name + ',\n\n'},
+            /*{text: '\n\n\nDear Mr./Ms. ' + this.client_f_name + ',\n\n'},*/
             {text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is ' + this.appraisal_date },
             {text: '\n\nSubmitted here with is my report containing facts and data gathered.\n\n'}, 
             /*{text: 'The method of appraising is detailed in the attached narrative report as of ' + this.appraisal_date + '. It is my opinion that the Market Value with Fee Simple Interest in the subject property, subject to the attached limiting conditions, is”'},
@@ -403,13 +403,6 @@
                         <td><input type="text" id="company_address" name="company_address" readonly>  </td><!--value={{this.company_address}}-->
                     </tr>
                     <tr>
-                        <th><label for="appraisal_date">Appraisal Date</label></th>
-                        <td><input type="date" id="appraisal_date" name="appraisal_date" readonly></td><!--value={{this.appraisal_date}}-->
-                    </tr>
-                    <tr>
-                        <th><label for="appraiser_num">Appraiser Number</label></th>
-                        <td><input type="number" id="appraiser_num" name="appraiser_num" readonly></td><!--value={{this.appraiser_num}}-->
-                    </tr>
                     <tr>
                         <th><label for="appraiser_address">Appraiser Address</label></th>
                         <td><input type="text" id="appraiser_address" name="appraiser_address" readonly></td><!--value={{this.appraiser_address}}-->
@@ -489,11 +482,6 @@
                         <th><label for="description_improvements">Description of Improvements</label></th>
                         <td><textarea id="description_improvements" name="description_improvements" style="width:80%;" rows="10" readonly></textarea></td><!--value={{this.description_improvements}}-->
                     </tr>
-
-                    <tr>
-                        <th><label for="neighborhood">Neighborhood</label></th>
-                        <td><input type="text" id="neighborhood" name="neighborhood" readonly></td><!--value={{this.neighborhood}}-->
-                    </tr>
                     <tr>
                         <th><label for="area_development">Area Development</label></th>
                         <td><textarea id="area_development" name="area_development" style="width:80%;" rows="10" readonly></textarea></td><!--value={{this.area_development}}-->
@@ -552,14 +540,6 @@
                     <tr>
                         <th><label for="recon_final_value_opinion">Reconciliation and Final Value Opinion</label></th>
                         <td><textarea id="recon_final_value_opinion" name="recon_final_value_opinion" style="width:80%;" rows="10" readonly></textarea></td><!--value={{this.recon_final_value_opinion}}-->
-                    </tr>
-                    <tr>
-                        <th><label for="market_value">Market Data Approach Value</label></th>
-                        <td><input type="text" id="market_value" name="market_value" readonly></td><!--value={{this.market_value}}-->
-                    </tr>
-                    <tr>
-                        <th><label for="market_value_per_sqm">Market Data Approach Value per sqm</label></th>
-                        <td><input type="text" id="market_value_per_sqm" name="market_value_per_sqm" readonly></td><!--value={{this.market_value_per_sqm}}-->
                     </tr>
                     <tr>
                         <th><label for="cost_value">Cost Approach Value</label></th>

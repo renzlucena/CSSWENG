@@ -2071,8 +2071,7 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 	{
 		// const docu = await Document.findOne({ref_id: req.params.ref_id}).exec();
 		// console.log(docu+" is the docu")
-		
-		
+
 		const docu = await Document.findOne({ref_id: req.params.ref_id});
 		console.log(docu+" is the docu")
 		try{

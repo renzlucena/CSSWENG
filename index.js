@@ -2558,70 +2558,59 @@ app.get('/download-doc/:ref_id', async(req,res)=> {
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
-				can_accept: sess.can_accept
+
+				filename: doc.filename,
+				company_name: doc.company_name,
+				company_address: doc.company_address,
+				appraiser_address: doc.appraiser_address,
+				market_value: doc.market_value,
+				parcel_id: doc.parcel_id,
+				improvements: doc.improvements,
+				zoning_class: doc.zoning_class,
+				interest_appraised: doc.interest_appraised,
+
+				property_identification: doc.property_identification,
+				appraisal_objective_property_rights: doc.appraisal_objective_property_rights,
+				intended_use_intended_users: doc.intended_use_intended_users,
+				effective_date_report: doc.effective_date_report,
+				statement_ownership_sales_history: doc.statement_ownership_sales_history,
+				scope_of_work: doc.scope_of_work,
+
+				title_no: doc.title_no,
+				utilities: doc.utilities,
+				flood: doc.flood,
+				easements: doc.easements,
+				real_estate_taxes: doc.real_estate_taxes,
+				zoning_desc: doc.zoning_desc,
+
+				description_improvements: doc.description_improvements,
+				area_development: doc.area_development,
+				market_analysis: doc.market_analysis,
+
+				highest_best_use: doc.highest_best_use,
+				legally_permissible: doc.legally_permissible,
+				physical_possibility: doc.physical_possibility,
+				financial_feasibility: doc.financial_feasibility,
+				maximum_productivity: doc.maximum_productivity,
+				conclusion: doc.conclusion,
+				valuation_process: doc.valuation_process,
+				market_data_approach: doc.market_data_approach,
+
+				explanation_adjustments: doc.explanation_adjustments,
+				range_value_per_sqm: doc.range_value_per_sqm,
+				final_value_per_sqm: doc.final_value_per_sqm,
+
+				recon_final_value_opinion: doc.recon_final_value_opinion,
+				cost_value: doc.cost_value,
+				cost_value_per_sqm: doc.cost_value_per_sqm,
+				income_value: doc.income_value,
+				income_value_per_sqm: doc.income_value_per_sqm,
+				final_value_indication: doc.final_value_indication,
+				final_value_indication_per_sqm: doc.final_value_indication_per_sqm,
 			});
 			//edit comment  to "Submitted."
 
-			await Document.findOneAndUpdate(
-				{ref_id: req.query.ref_id},
-				{
-					filename: req.query.filename,
-					company_name: req.query.company_name,
-					company_address: req.query.company_address,
-					appraisal_date: req.query.date,
-					appraiser_num: req.query.appraiser_num,
-					appraiser_address: req.query.appraiser_address,
-					market_value: req.query.market_value,
-					parcel_id: req.query.parcel_id,
-					improvements: req.query.improvements,
-					zoning_class: req.query.zoning_class,
-					interest_appraised: req.query.interest_appraised,
-
-					property_identification: req.query.property_identification,
-					//property_images: [imageSchema],
-					appraisal_objective_property_rights: req.query.appraisal_objective_property_rights,
-					intended_use_intended_users: req.query.intended_use_intended_users,
-					effective_date_report: req.query.effective_date_report,
-					statement_ownership_sales_history: req.query.statement_ownership_sales_history,
-					scope_of_work: req.query.scope_of_work,
-
-					title_no: req.query.title_no,
-					utilities: req.query.utilities,
-					flood: req.query.flood,
-					easements: req.query.easements,
-					real_estate_taxes: req.query.real_estate_taxes,
-					zoning_desc: req.query.zoning_desc,
-
-					description_improvements: req.query.description_improvements,
-					neighborhood: req.query.neighborhood,
-					area_development: req.query.area_development,
-					market_analysis: req.query.market_analysis,
-
-					highest_best_use: req.query.highest_best_use,
-					legally_permissible: req.query.legally_permissible,
-					physical_possibility: req.query.physical_possibility,
-					financial_feasibility: req.query.financial_feasibility,
-					maximum_productivity: req.query.maximum_productivity,
-					conclusion: req.query.conclusion,
-					valuation_process: req.query.valuation_process,
-					market_data_approach: req.query.market_data_approach,
-					//comparables: ,
-					explanation_adjustments: req.query.explanation_adjustments,
-					range_value_per_sqm: req.query.range_value_per_sqm,
-					final_value_per_sqm: req.query.final_value_per_sqm,
-
-					recon_final_value_opinion: req.query.recon_final_value_opinion,
-					market_value: req.query.market_value,
-					market_value_per_sqm: req.query.market_value_per_sqm,
-					cost_value: req.query.cost_value,
-					cost_value_per_sqm: req.query.cost_value_per_sqm,
-					income_value: req.query.income_value,
-					income_value_per_sqm: req.query.income_value_per_sqm,
-					final_value_indication: req.query.final_value_indication,
-					final_value_indication_per_sqm: req.query.final_value_indication_per_sqm,
-				})
-
-			//res.redirect('/download-doc/'+ req.query.ref_id)
+			
 		}
 		catch(err)
 		{
