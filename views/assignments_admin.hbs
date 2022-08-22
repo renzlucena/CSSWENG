@@ -115,6 +115,22 @@
 								<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
 							</tr>
 						{{/each}}
+						{{#each assignment_sub2}}
+							<tr>
+								<td><p>{{this.ref_id}}</p></td>
+								<td><p>{{this.assigned_to}}</p></td>
+								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>
+									<div class="main-assignments-status-btns">
+										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Review</button>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>Comment:</th>
+								<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
+							</tr>
+						{{/each}}
 						
 						<tr>
 							<th colspan='4'>Other Assignments</th>

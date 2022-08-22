@@ -39,23 +39,33 @@
 			//for (var i=0; i=6; i++)
 			//{
 			//}
-			
-			
+
+
 			<!-- var corner_bool = document.getElementById("corner"); -->
 
 			// todo: https://www.geeksforgeeks.org/how-to-add-a-parameter-to-the-url-in-javascript/
 			// workaround - get the bool val of each and put them inside an array to be put in the url as part of req.param nalang
 			// tapos get the backend to check the params
 			var checked_items = document.getElementsByName("corner")
+
+    //  const boolArray = new Array(corner[1], prime[1], hospital[1], school[1], mall[1], improvement[1]);
+    //  for (let i = 0; i < boolArray.length; i++) {
+    //    if (boolArray[i].checked){
+    //      boolArray[i] = true;
+    //    }
+    //    else {
+    //      boolArray[i] = false;
+    //    }
+    //  }
 			// WORKING PATRT - checked_items[0].checked = true if naka check
-			
-			
+
+
 							//[corner_bool[0].checked,
 								//	corner1.checked,
 								//	corner1.checked,
 								//	corner1.checked ]
 
-									
+
 			//var bools_percent = document.getElementById("bools_percent") // dont forget to parse to int when using
 
 			var ref_date2 = parseInt(document.getElementById("ref_date_percent2").value);
@@ -253,19 +263,17 @@
 
         <div class="main">
             <div class="main-header">
-                <h1>Assess Property</p>
-                <p><b><i>Items will NOT be autosaved!</b></i></p>
-                <p>Please be mindful before you close the page.</p>
+                <h1>Assignment #{{ref_id}}</p>
+                <p><b><i>This Assignment has been locked.</b></i></p>
+                <p>You may get the printed document from the admin.</p>
             </div>
 
             <form class="assignments-form">
                 <div class="main-table">
+
 					<table>
 						<tr>
-							<th></th>
-							<th>ADMIN</th>
-							<th>PANEL</th>
-							<th></th>
+							<th colspan="4">ADMIN PANEL</th>
 						</tr>
                         <tr>	<!-- ref_id & creation date -->
                             <th><label for="ref_id">Reference ID</label></th>
@@ -339,30 +347,21 @@
                         </tr>
 						<tr>	<!-- property_interest -->
                             <th><label for="property_interest" >Property Interest</label></th>
-							<td><select id="property_interest" name="property_interest">
-									<option value="fee_simple">Fee Simple</option>
-									<option value="lease_hold">Lease Hold</option>
-							</select></td>
-							<td><select id="property_interest1" name="property_interest">
-									<option value="fee_simple">Fee Simple</option>
-									<option value="lease_hold">Lease Hold</option>
-								</select>
-								<input class="percentage" id="property_interest_percent1" name="property_interest" type="number" value="{{this.property_interest_percent1}}"> %
+							<td><inputname="property_interest" type="text" value="{{this.property_interest}}"></td>
+                            <td><inputname="property_interest" class="text-next-to-percentage" type="text" value="{{this.property_interest1}}">
+								<inputclass="percentage" id="property_interest_percent1" name="property_interest" type="number" value="{{this.property_interest_percent1}}"> %
 							</td>
-							<td><select id="property_interest2" name="property_interest">
-									<option value="fee_simple">Fee Simple</option>
-									<option value="lease_hold">Lease Hold</option>
-								</select>
-								<input class="percentage" id="property_interest_percent2" name="property_interest" type="number" value="{{this.property_interest_percent2}}"> %
+                            <td><inputname="property_interest" class="text-next-to-percentage" type="text" value="{{this.property_interest2}}">
+								<inputclass="percentage" id="property_interest_percent2" name="property_interest" type="number" value="{{this.property_interest_percent2}}"> %
 							</td>
                         </tr>
 
-                        <tr>	<!-- property_images (DECLARE AS MISSING FEATURE NALANG ANG HIRAAAAP) -->
-                            <th><label for="property_images">Property Images</label></th>
-                            <td><input type="file" id="pimg" name="property_images"></td>
-                            <td><input type="file" id="pimg1" name="property_images"></td>
-                            <td><input type="file" id="pimg2" name="property_images"></td>
-                        </tr>
+                        <!-- <tr>	<!-- property_images (DECLARE AS MISSING FEATURE NALANG ANG HIRAAAAP) -->
+                            <!-- <th><label for="property_images">Property Images</label></th> -->
+                            <!-- <td><input type="file" id="pimg" name="property_images"></td> -->
+                            <!-- <td><input type="file" id="pimg1" name="property_images"></td> -->
+                            <!-- <td><input type="file" id="pimg2" name="property_images"></td> -->
+                        <!-- </tr> -->
 
                         <tr>	<!-- propeerty area size / lot_size -->
                             <th><label for="lot_size">Property Area Size</label></th>
@@ -463,7 +462,7 @@
 						<tr>	<!-- school -->
 							<th><label>Has nearby Shop/Mall(s)?</label></th>
                             <td><input name="mall" type="checkbox" value="{{this.mall}}"></td>
-                            <td><input name="mall" type="checkbox" value="{{this.mall1}}">						
+                            <td><input name="mall" type="checkbox" value="{{this.mall1}}">
 																												<!-- ERROR nagpproblem pag mall_percent1 cast error daw :< -->
 								<input class="percentage" id="mall_percent1" name="mall" type="number" value="{{this.mall_percent1}}"> %
 							</td>
@@ -483,29 +482,14 @@
 						<!-- </tr> -->
 						<tr>	<!-- public transpo -->
                             <th><label for="public_transpo" >Access to Main Public Transport</label></th>
-							<td>
-								<select id="public_transpo" name="public_transpo">
-									<option value="near">Near</option>
-									<option value="relatively-near">Relatively Near</option>
-									<option value="far">Far</option>
-								</select>
-							</td>
-							<td>
-								<select id="public_transpo1" name="public_transpo">
-									<option value="near">Near</option>
-									<option value="relatively-near">Relatively Near</option>
-									<option value="far">Far</option>
-								</select>
+							<td><input name="public_transpo" type="text" value="{{this.public_transpo}}"></td>
+                            <td><input name="public_transpo" class="text-next-to-percentage" type="text" value="{{this.public_transpo1}}">
 								<input class="percentage" id="public_transpo_percent1" name="public_transpo" type="number" value="{{this.public_transpo_percent1}}"> %
 							</td>
-							<td>
-								<select id="public_transpo2" name="public_transpo">
-									<option value="near">Near</option>
-									<option value="relatively-near">Relatively Near</option>
-									<option value="far">Far</option>
-								</select>
+                            <td><input name="public_transpo" class="text-next-to-percentage" type="text" value="{{this.public_transpo2}}">
 								<input class="percentage" id="public_transpo_percent2" name="public_transpo" type="number" value="{{this.public_transpo_percent2}}"> %
 							</td>
+
                         </tr>
 						<tr>	<!-- improvement -->
                             <th><label>Has Improvement(s)?</label></th>
@@ -539,7 +523,7 @@
 
 						<tr>	<!-- propeerty area size / lot_size but  without names because clones-->
                             <th><label for="lot_size">Property Area Size</label></th>
-                            <td><input type="text" value="{{this.lot_size}}" readonly></td>
+                            <td><input type="text" value="{{this.lot_size}}"></td>
                             <td><input class="text-next-to-percentage" type="text" value="{{this.lot_size1}}">
 								<input class="percentage" id="lot_size_percent1" type="number" value="{{this.lot_size_percent1}}"> %
 							</td>
@@ -550,26 +534,208 @@
 
 						<tr>
                             <th><label for="computation">Computation</label></th>
-                            <td><input name="computation" value="{{this.computation}}" id="computation" type="text" readonly></td>
-                            <td><input name="computation" class="text-next-to-percentage" value="{{this.computation1}}" id="computation1" type="text" readonly>
+                            <td><input name="computation" value="{{this.computation}}" id="computation" type="text"></td>
+                            <td><input name="computation" class="text-next-to-percentage" value="{{this.computation1}}" id="computation1" type="text">
 								<input class="percentage" id="computation_percent1" value="{{this.computation_percent1}}" name="computation" type="number"> %
 							</td>
-                            <td><input name="computation" class="text-next-to-percentage" value="{{this.computation2}}" id="computation2" type="text" readonly>
+                            <td><input name="computation" class="text-next-to-percentage" value="{{this.computation2}}" id="computation2" type="text">
 								<input class="percentage" id="computation_percent2"  value="{{this.computation_percent2}}" name="computation" type="number"> %
 							</td>
                         </tr>
                     </table>
                 </div>
-            <div id="main-table-bottom">
-                <button method = "get" type = "submit" name="save_ass" formaction="/save-ass">Save Details</button>
-                <button type="button" onclick="computer()">COMPUTE</button>
-				<button method="get" type="submit" name="send-ass" formaction="/send-ass">Send for Processing</button>
-				<button type="submit" formaction="/test-doc/{{ref_id}}" method="get" >Edit Document</button>
-            </div>
+				  
+				  
+				<div class="main-header">
+					<h1>Document Details For Assignment #{{ref_id}}</p>
+					<h1>TODO: render this page with the document info</p>
+				</div>
+				
+                <div class="main-table">
+                    <table>
+                    <tr>
+                        <th><label for="filename">Filename</label></th>
+                        <td><input type="text" id="filename" name="filename" value="{{this.filename}}" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="company_name">Company Name</label></th>
+                        <td><input type="text" id="company_name" name="company_name" value="{{this.company_name}}" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="company_address">Company Address</label></th>
+                        <td><input type="text" id="company_address" name="company_address" value="{{this.company_address}}" >  </td>
+                    </tr>
+                    <tr>
+                        <th><label for="appraiser_address">Appraiser Address</label></th>
+                        <td><input type="text" id="appraiser_address" name="appraiser_address" value="{{this.appraiser_address}}" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="market_value">Market Value</label></th>
+                        <td><input type="text" id="market_value" name="market_value" value="{{this.market_value}}" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="parcel_id">Parcel ID</label></th>
+                        <td><input type="text" id="parcel_id" name="parcel_id" value="{{this.parcel_id}}" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="improvements">Improvements</label></th>
+                        <td><input type="text" id="improvements" name="improvements" value="{{this.improvements}}" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="zoning_class">Zoning Class</label></th>
+                        <td><input type="text" id="zoning_class" name="zoning_class" value="{{this.zoning_class}}" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="interest_appraised">Interest Appraised</label></th>
+                        <td><input type="text" id="interest_appraised" name="interest_appraised" value="{{this.interest_appraised}}" ></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="property_identification">Property Identification</label></th>
+                        <td><textarea id="property_identification" name="property_identification" value="{{this.property_identification}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="appraisal_objective_property_rights">Appraisal Objective and Property Rights</label></th>
+                        <td><textarea id="appraisal_objective_property_rights" name="appraisal_objective_property_rights" value="{{this.appraisal_objective_property_rights}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="intended_use_intended_users">Inteded Use and Intended Users</label></th>
+                        <td><textarea id="intended_use_intended_users" name="intended_use_intended_users" value="{{this.intended_use_intended_users}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="effective_date_report">Effective Date of Report</label></th>
+                        <td><textarea id="effective_date_report" name="effective_date_report" value="{{this.effective_date_report}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="statement_ownership_sales_history">Statement of Ownership and Sales History</label></th>
+                        <td><textarea id="statement_ownership_sales_history" name="statement_ownership_sales_history" value="{{this.statement_ownership_sales_history}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="scope_of_work">Scope of Work</label></th>
+                        <td><textarea id="scope_of_work" name="scope_of_work" value="{{this.scope_of_work}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="title_no">Title No.</label></th>
+                        <td><input type="text" id="title_no" name="title_no" value="{{this.title_no}}" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="utilities">Utilities</label></th>
+                        <td><input type="text" id="utilities" name="utilities" value="{{this.utilities}}" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="flood">Flood</label></th>
+                        <td><input type="text" id="flood" name="flood" value="{{this.flood}}" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="easements">Easements</label></th>
+                        <td><input type="text" id="easements" name="easements" value="{{this.easements}}" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="real_estate_taxes">Real Estate Tax</label></th>
+                        <td><input type="text" id="real_estate_taxes" name="real_estate_taxes" value="{{this.real_estate_taxes}}" ></td>
+                    </tr>
+                    <tr>
+                        <th><label for="zoning_desc">Zoning Description</label></th>
+                        <td><input type="text" id="zoning_desc" name="zoning_desc" value="{{this.zoning_desc}}" ></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="description_improvements">Description of Improvements</label></th>
+                        <td><textarea id="description_improvements" name="description_improvements" value="{{this.description_improvements}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="area_development">Area Development</label></th>
+                        <td><textarea id="area_development" name="area_development" value="{{this.area_development}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="market_analysis">Market Analysis</label></th>
+                        <td><textarea id="market_analysis" name="market_analysis" value="{{this.market_analysis}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="highest_best_use">Highest and Best Use</label></th>
+                        <td><textarea id="highest_best_use" name="highest_best_use" value="{{this.highest_best_use}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="legally_permissible">Legally Permissible</label></th>
+                        <td><textarea id="legally_permissible" name="legally_permissible" value="{{this.legally_permissible}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="physical_possibility">Physical Possibility</label></th>
+                        <td><textarea id="physical_possibility" name="physical_possibility" value="{{this.physical_possibility}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="financial_feasibility">Financial Feasibility</label></th>
+                        <td><textarea id="financial_feasibility" name="financial_feasibility" value="{{this.financial_feasibility}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="maximum_productivity">Maximum Productivity</label></th>
+                        <td><textarea id="maximum_productivity" name="maximum_productivity" value="{{this.maximum_productivity}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="conclusion">Conclusion</label></th>
+                        <td><textarea id="conclusion" name="conclusion" value="{{this.conclusion}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="valuation_process">The Valuation Process</label></th>
+                        <td><textarea id="valuation_process" name="valuation_process" value="{{this.valuation_process}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="market_data_approach">Market Data Approach</label></th>
+                        <td><textarea id="market_data_approach" name="market_data_approach" value="{{this.market_data_approach}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="explanation_adjustments">Explanation of Adjustments</label></th>
+                        <td><textarea id="explanation_adjustments" name="explanation_adjustments" value="{{this.explanation_adjustments}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="range_value_per_sqm">Range Value per sqm</label></th>
+                        <td><input type="text" id="range_value_per_sqm" name="range_value_per_sqm" value="{{this.range_value_per_sqm}}"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="final_value_per_sqm">Final Value per sqm</label></th>
+                        <td><input type="text" id="final_value_per_sqm" name="final_value_per_sqm" value="{{this.final_value_per_sqm}}"></td>
+                    </tr>
+
+                    <tr>
+                        <th><label for="recon_final_value_opinion">Reconciliation and Final Value Opinion</label></th>
+                        <td><textarea id="recon_final_value_opinion" name="recon_final_value_opinion" value="{{this.recon_final_value_opinion}}" style="width:80%;" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="cost_value">Cost Approach Value</label></th>
+                        <td><input type="text" id="cost_value" name="cost_value" value={{this.cost_value}}></td>
+                    </tr>
+                    <tr>
+                        <th><label for="cost_value_per_sqm">Cost Approach Value per sqm</label></th>
+                        <td><input type="text" id="cost_value_per_sqm" name="cost_value_per_sqm" value="{{this.cost_value_per_sqm}}"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="income_value">Income Capitalization Approach Value</label></th>
+                        <td><input type="text" id="income_value" name="income_value" value="{{this.income_value}}"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="market_value_per_sqm">Income Capitalization Approach Value per sqm</label></th>
+                        <td><input type="text" id="income_value_per_sqm" name="income_value_per_sqm" value="{{this.income_value_per_sqm}}"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="final_value_indication">Final Value Indication</label></th>
+                        <td><input type="text" id="final_value_indication" name="final_value_indication" value="{{this.final_value_indication}}"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="final_value_indication_per_sqm">Final Value Indication per sqm</label></th>
+                        <td><input type="text" id="final_value_indication_per_sqm" name="final_value_indication_per_sqm" value="{{this.final_value_indication_per_sqm}}"></td>
+                    </tr>
+                    </table>
+                </div>
+				<div id="main-table-bottom">
+					<button method = "get" type = "submit" name="save_ass" formaction="/save-doc/{{ref_id}}">Save Details</button>
+					<button method="get" type="submit" name="send-ass" formaction="/send-ass">Send for Processing</button>
+					<br><br><br>
+				</div>
             </form>
-
-
-
+			
         </div>
     </div>
 </body>

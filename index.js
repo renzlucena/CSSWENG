@@ -170,154 +170,6 @@ app.get('/history', async(req,res)=>{
 	}
 });
 
-
-
-/*
-app.get('/set-settings', async(req,res)=> {
-	sess = req.session;
-	if(sess.username){
-		//update db
-		try{
-			//render with new data
-			if (req.query.username!= sess.username && req.query.username != "")
-			{
-				await Account.findOneAndUpdate({username: sess.username},{username: req.query.username})
-				sess.username = req.query.username
-			}
-
-			await Account.findOneAndUpdate({username: sess.username},{email: req.query.email})
-			sess.email = req.query.email;
-
-			await Account.findOneAndUpdate({username: sess.username},{fname: req.query.fname})
-			sess.fname = req.query.fname;
-
-			await Account.findOneAndUpdate({username: sess.lname},{email: req.query.lname})
-			sess.lname = req.query.lname;
-
-			await Account.findOneAndUpdate({username: sess.username},{appnum: req.query.appnum})
-			sess.appnum = req.query.appnum;
-
-			if(req.query.newPassword != "" && sess.password != req.query.newPassword)
-			{
-				await Account.findOneAndUpdate({username: sess.username},{password: req.query.password})
-				sess.password = req.query.newPassword
-			}
-
-			res.redirect('/profile')
-
-		}
-		catch(err)
-		{
-			res.status(500).send(err)
-		}
-	}
-	else{
-		res.redirect('/submit-login')
-	}
-});
-*/
-
-/*app.get('/create-document', async(req,res))=>
-{
-	sess.username)
-
-
-
-	//ADD NEW DOCUMENT
-		try{
-			Assignment.create(
-			{
-				ref_id: req.body.ref_id,
-				type_of_approach: "Market Approach",
-				client_f_name: req.body.client_f_name,
-				client_l_name: req.body.client_l_name,
-				client_contact_num: req.body.client_contact_num,
-				client_email: req.body.client_email,
-				lot_brgy: req.body.lot_brgy,
-				lot_city: req.body.lot_city,
-				lot_region: req.body.lot_region,
-				zonal: req.body.zonal,
-				assigned_to: "",
-
-				//no dates because they have default values already
-				price_per_sqm: 0,
-				lot_loc: "",
-				property_type: "",
-				property_interest: "",
-				// property_images: [imageSchema], //REPORT AS MISSING FEATURE NALANG, WE CAN'T IMPLEMENT THIS AT THIS TIME...
-				lot_size: req.body.lot_size,
-				shape: "",
-				topo: "",
-				frontage: "",
-				terms_of_sale: "",
-				corner: false,
-				prime: false,
-				hospital: false,
-				school: false,
-				mall:   false,
-				public_transpo: "",
-				improvement: false,
-				zoning: "",
-				computation: {num1: 0, num2: 0},
-				//don't set comment because it has a default value that marks it as "New!"
-
-				//add empty comparative
-				comparative1 : {
-					price_per_sqm: 0,
-					ref_date: {date: null, num: 0}, //idk if this works
-					lot_loc: "",
-					property_type: {str: "", num:0},
-					property_interest: {str:"",num:0},
-					//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
-					// property_images: [imageSchema],
-					lot_size: {num1: 0, num2: 0},
-					shape: {str: "", num:0},
-					topo: {str: "", num:0},
-					frontage: {str: "", num:0},
-					terms_of_sale: {str: "", num:0},
-					corner: {bool:0,num:0},
-					prime: {bool:0,num:0},
-					hospital: {bool:0,num:0},
-					school: {bool:0,num:0},
-					mall: {bool:0,num:0},
-					public_transpo: {str:"", num:0},
-					improvement: {bool:0,num:0},
-					zoning: {str: "", num:0},
-					computation: {num1: 0, num2: 0}
-				},
-
-				//add empty comparative
-				comparative2 : {
-					price_per_sqm: 0,
-					ref_date: {date: null, num: 0},
-					lot_loc: "",
-					property_type: {str: "", num:0},
-					property_interest: {str:"",num:0},
-					// property_images: [imageSchema],
-					lot_size: {num1: 0, num2: 0},
-					shape: {str: "", num:0},
-					topo: {str: "", num:0},
-					frontage: {str: "", num:0},
-					terms_of_sale: {str: "", num:0},
-					corner: {bool:0,num:0},
-					prime: {bool:0,num:0},
-					hospital: {bool:0,num:0},
-					school: {bool:0,num:0},
-					mall: {bool:0,num:0},
-					public_transpo: {str: "", num:0},
-					improvement: {bool:0,num:0},
-					zoning: {str: "", num:0},
-					computation: {num1: 0, num2: 0}
-				}
-			})
-		}
-		catch(err)
-		{console.log(err)}
-}
-		*/
-
-
-
 // SEND ASSIGNMENT TO ADMIN FOR FEEDBACK
 // "Send for Processing" - comment will be changed to "Submitted." and admin can see the detailsof the assignment
 app.get('/send-ass', async(req,res)=> {
@@ -325,19 +177,27 @@ app.get('/send-ass', async(req,res)=> {
 	console.log("in /send-ass " + req.query.ref_id)
 //	console.log(req.query + "Logged In: "+sess.username)
 	
+	
+	//TODO: Perform saving first before sending to admin
 	if(sess.username){
 		try{
-			//edit comment to "Submitted."
-			await Assignment.findOneAndUpdate(
-				{ref_id: req.query.ref_id},
-				{comment: "Submitted."})
+			const ass = await Assignment.findOne({
+				ref_id : req.query.ref_id
+			})
 					
-				// await Document:findOneAndUpdate(
-					// {ref_id: req.query.ref_id},
-					// {})
-
-				// var ref_id = req.body.ref_id
+			// change comment to "Submitted for Document Review." bc step 2
+			if (ass.comment=="For Printing.")
+			{
+				await Assignment.findOneAndUpdate(
+					{ref_id: req.query.ref_id},
+					{comment: "Submitted for Document Review."})
+			} //change to Submitted bc it's step 1
+			else{
+				await Assignment.findOneAndUpdate(
+					{ref_id: req.query.ref_id},
+					{comment: "Submitted."})
 			}
+		}
 		catch(err)
 		{
 			// res.status(500).send(err) //FOUND THE PROBLEM , just dont write this line nalang
@@ -376,6 +236,75 @@ app.get('/admin-approve', async(req,res)=>{
 					// {ref_id: req.query.ref_id},
 					{ref_id: req.query.ref_id},
 					{comment: "For Printing."}) //agent can now proceed to write the document
+				//also create a new document
+				
+				//TODO check if document already exists
+				//const ass = await Document.findOne({ref_id: req.params.ref_id})
+				
+				//if (ass==null) { //it doesnt exist yet, create one
+				Document.create({
+					ref_id : req.query.ref_id,
+					
+					filename: "",
+					company_name: "",
+					company_address: "",
+					appraiser_num: 0,
+					appraiser_address: "",
+					market_value: "",
+					parcel_id: "",
+					improvements: "",
+					zoning_class: "",
+					interest_appraised: "",
+
+					//Start of Body of Document
+					property_identification: "",
+					appraisal_objective_property_rights: "",
+					intended_use_intended_users: "",
+					effective_date_report: "",
+					statement_ownership_sales_history: "",
+					scope_of_work: "",
+
+					//property description
+					title_no: "", 
+					utilities: "",
+					flood: "",
+					easements: "",
+					real_estate_taxes: "",
+					zoning_desc: "",
+
+					//area & neighborhood overview
+					description_improvements: "",
+					neighborhood: "",
+					area_development: "",
+					market_analysis: "",
+
+					//valuation
+					highest_best_use: "",
+					legally_permissible: "",
+					physical_possibility: "",
+					financial_feasibility: "",
+					maximum_productivity: "",
+					conclusion: "",
+					valuation_process: "",
+					market_data_approach: "",
+					explanation_adjustments: "",
+					range_value_per_sqm: "",
+					final_value_per_sqm: "",
+
+					//reconciliation & final value opinion
+					recon_final_value_opinion: "",
+					market_value: "",
+					market_value_per_sqm: "",
+					cost_value: "",
+					cost_value_per_sqm: "",
+					income_value: "",
+					income_value_per_sqm: "",
+					final_value_indication: "",
+					final_value_indication_per_sqm: ""
+				})
+				//}		
+			
+				res.redirect('/assignments')
 			}
 			else	//means it's "For Printing."
 			{
@@ -383,12 +312,10 @@ app.get('/admin-approve', async(req,res)=>{
 					// {ref_id: req.query.ref_id},
 					{ref_id: req.query.ref_id},
 					{comment: "Approved."})		//puts it to history
+					
+				res.redirect('/history')
+				
 			}
-			
-			console.log(req)
-			// console.log(params)
-
-			res.redirect('/history')
 		}
 		catch(err){
 			console.log(err)
@@ -402,42 +329,40 @@ app.get('/admin-approve', async(req,res)=>{
 //this submits the comment and updates the assignment
 app.get('/admin-comment', async(req,res)=>{
 	sess = req.session;
+	
 	if(sess.username)
 	{
-		//Admin returns the Submitted ASSIGNMENT (Step1)
-		if(sess.username=="admin" && req.query.comment == "Submitted.")
-		{
-			console.log("/admin-comment - Submitted ASSIGNMENT")
-			try{
+		try{
+			const ass = await Assignment.findOne({
+					ref_id : req.query.ref_id
+			})
+			console.log(ass.comment)
+
+			//Admin returns the Submitted ASSIGNMENT (Step1)
+			if(ass.comment == "Submitted.")
+			{
+				console.log("/admin-comment - Submitted ASSIGNMENT")
 				const ass = await Assignment.findOneAndUpdate(
 					{ref_id: req.query.ref_id},
 					{comment: req.query.comment
 					})
-
+				res.redirect('/assignments')
 			}
-			catch(err){
-				console.log(err)
-			}
-			res.redirect('/assignments')
-		}
-		//Admin returns the Submitted DOCUMENT  (Step2)
-		else if(sess.username=="admin" && req.query.comment == "Submitted for Document Review.")
-		{
-			
-			console.log("/admin-comment - Submitted DOCUMENT")
-			try{
-				
+			//Admin returns the Submitted DOCUMENT  (Step2)
+			else if(ass.comment == "Submitted for Document Review.")
+			{
+				console.log("/admin-comment - Submitted DOCUMENT")
 				const ass = await Assignment.findOneAndUpdate(
 					{ref_id: req.query.ref_id},
 					{comment: "For Printing."
 					})
-
+				
+				res.redirect('/assignments')
 			}
+		}
 			catch(err){
 				console.log(err)
 			}
-			res.redirect('/assignments')
-		}
 			
 	}
 	else{
@@ -544,6 +469,9 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 		{			// IF ADMIN IS LOGGED IN
 			try{
 				const ass = await Assignment.findOne({
+						ref_id : req.params.ref_id
+					})		
+				const assignment = await Assignment.find({
 						ref_id : req.params.ref_id
 					})
 
@@ -729,7 +657,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					computation		: ass.computation,
 
 					//comment
-					comment: ass.comment,
+					comment: "",
 
 		// COMPARATIVE I
 						price_per_sqm1		: ass.comparative1.price_per_sqm,
@@ -827,8 +755,70 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 			
 			else if (ass.comment == "For Printing."){
 				console.log("viewAssignment_4_admin.hbs")
-
+				const docu = await Document.findOne({
+					ref_id : req.params.ref_id
+				})
+				
 				res.render('viewAssignment_4_admin.hbs',{
+					filename: docu.filename,
+					company_name: docu.filename,
+					company_address: docu.company_address,
+					appraiser_num: docu.appraiser_num,
+					appraiser_address: docu.appraiser_address,
+					market_value: docu.market_value,
+					market_data_value: docu.market_data_value,
+					parcel_id: docu.parcel_id,
+					improvements: docu.improvements,
+					zoning_class: docu.zoning_class,
+					interest_appraised: docu.interest_appraised,
+
+					//Start of Body of Document
+					property_identification: "",
+					appraisal_objective_property_rights: "",
+					intended_use_intended_users: "",
+					effective_date_report: "",
+					statement_ownership_sales_history: "",
+					scope_of_work: "",
+
+					//property description
+					title_no: "", 
+					utilities: "",
+					flood: "",
+					easements: "",
+					real_estate_taxes: "",
+					zoning_desc: "",
+
+					//area & neighborhood overview
+					description_improvements: "",
+					neighborhood: "",
+					area_development: "",
+					market_analysis: "",
+
+					//valuation
+					highest_best_use: "",
+					legally_permissible: "",
+					physical_possibility: "",
+					financial_feasibility: "",
+					maximum_productivity: "",
+					conclusion: "",
+					valuation_process: "",
+					market_data_approach: "",
+					explanation_adjustments: "",
+					range_value_per_sqm: "",
+					final_value_per_sqm: "",
+
+					//reconciliation & final value opinion
+					recon_final_value_opinion: "",
+					market_value: "",
+					market_value_per_sqm: "",
+					cost_value: "",
+					cost_value_per_sqm: "",
+					income_value: "",
+					income_value_per_sqm: "",
+					final_value_indication: "",
+					final_value_indication_per_sqm: "",
+
+
 					ref_id 			: ass.ref_id,
 					type_of_approach: ass.type_of_approach,
 					client_f_name 	: ass.client_f_name,
@@ -951,6 +941,32 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						zoning_percent2				: ass.comparative2.zoning.num,
 						computation_percent2		: ass.comparative2.computation.num2,
 
+					username: sess.username,
+					password: sess.password,
+					remember: sess.remember,
+					status: sess.status,
+					email: sess.email,
+					fname: sess.fname,
+					lname: sess.lname,
+					appnum: sess.appnum,
+					can_accept: sess.can_accept
+				});
+			}
+			
+			else if (ass.comment == "Submitted for Document Review."){
+				
+				//find wag findOne
+				const docu = await Document.find({
+					ref_id : req.params.ref_id
+				})
+				
+				console.log("viewAssignment_5_admin.hbs")
+				console.log(docu)
+				
+				res.render('viewAssignment_5_admin.hbs',{	//TODO: MAKE EVERYTHING LIKE THIS
+					doc_details: docu,	//short ver lol
+					assignment_ass: assignment,	//short ver lol
+					
 					username: sess.username,
 					password: sess.password,
 					remember: sess.remember,
@@ -1152,8 +1168,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				ref_id : req.params.ref_id
 				})
 
-				//ERROR HERE CANNOT BE REACHED, TESTING TODO
-				// This is viewing the assignment that's supposed to be in history already
 				if(ass.comment == "Submitted for Document Review."){
 					console.log("viewAssignment_2.hbs")
 
@@ -1558,6 +1572,209 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						improvement_percent2		: ass.comparative2.improvement.num,
 						zoning_percent2				: ass.comparative2.zoning.num,
 						computation_percent2		: ass.comparative2.computation.num2,
+
+						username: sess.username,
+						password: sess.password,
+						remember: sess.remember,
+						status: sess.status,
+						email: sess.email,
+						fname: sess.fname,
+						lname: sess.lname,
+						appnum: sess.appnum,
+						can_accept: sess.can_accept
+					});
+				}
+				
+				//Can edit
+				else if (ass.comment == "For Printing."){
+					console.log("viewAssignment_4.hbs")
+					const docu = await Document.findOne({
+						ref_id : req.params.ref_id
+					})
+					
+					console.log("viewAssignment_4.hbs")
+					
+					res.render('viewAssignment_4.hbs',{
+						filename: docu.filename,
+						company_name: docu.filename,
+						company_address: docu.company_address,
+						appraiser_num: docu.appraiser_num,
+						appraiser_address: docu.appraiser_address,
+						market_value: docu.market_value,
+						market_data_value: docu.market_data_value,
+						parcel_id: docu.parcel_id,
+						improvements: docu.improvements,
+						zoning_class: docu.zoning_class,
+						interest_appraised: docu.interest_appraised,
+
+						//Start of Body of Document
+						property_identification: "",
+						appraisal_objective_property_rights: "",
+						intended_use_intended_users: "",
+						effective_date_report: "",
+						statement_ownership_sales_history: "",
+						scope_of_work: "",
+
+						//property description
+						title_no: "", 
+						utilities: "",
+						flood: "",
+						easements: "",
+						real_estate_taxes: "",
+						zoning_desc: "",
+
+						//area & neighborhood overview
+						description_improvements: "",
+						neighborhood: "",
+						area_development: "",
+						market_analysis: "",
+
+						//valuation
+						highest_best_use: "",
+						legally_permissible: "",
+						physical_possibility: "",
+						financial_feasibility: "",
+						maximum_productivity: "",
+						conclusion: "",
+						valuation_process: "",
+						market_data_approach: "",
+						explanation_adjustments: "",
+						range_value_per_sqm: "",
+						final_value_per_sqm: "",
+
+						//reconciliation & final value opinion
+						recon_final_value_opinion: "",
+						market_value: "",
+						market_value_per_sqm: "",
+						cost_value: "",
+						cost_value_per_sqm: "",
+						income_value: "",
+						income_value_per_sqm: "",
+						final_value_indication: "",
+						final_value_indication_per_sqm: "",
+
+
+						ref_id 			: ass.ref_id,
+						type_of_approach: ass.type_of_approach,
+						client_f_name 	: ass.client_f_name,
+						client_l_name 	: ass.client_l_name,
+						lot_brgy		: ass.lot_brgy,
+						lot_city		: ass.lot_city,
+						lot_region		: ass.lot_region,
+						zonal			: ass.zonal,
+						assigned_to		: ass.assigned_to,
+
+						//dates
+						ref_date		: ass.ref_date,
+						created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
+						completed_on	: ass.completed_on,
+						expiring_on 	: ass.expiring_on,
+
+			// SUPJECT PROPERTY
+						price_per_sqm	: ass.price_per_sqm,
+						lot_loc			: ass.lot_loc,
+						property_type	: ass.property_type,
+						property_interest: ass.property_interest,
+						// property_images: [imageSchema],
+						lot_size		: ass.lot_size,
+						shape			: ass.shape,
+						topo			: ass.topo,
+						frontage		: ass.frontage,
+						terms_of_sale	: ass.terms_of_sale,
+						corner			: ass.corner,
+						prime			: ass.prime,
+						hospital		: ass.hospital,
+						school			: ass.school,
+						mall				: ass.mall,
+						public_transpo	: ass.public_transpo,
+						improvement		: ass.improvement,
+						zoning			: ass.zoning,
+						computation		: ass.computation,
+
+						//comment
+						comment: ass.comment,
+
+			// COMPARATIVE I
+							price_per_sqm1		: ass.comparative1.price_per_sqm,
+							ref_date1			: ass.comparative1.ref_date.date, //idk if this works
+							lot_loc1			: ass.comparative1.lot_loc,
+							property_type1		: ass.comparative1.property_type.str,
+							property_interest1	: ass.comparative1.property_interest.str,
+							// property_images: [imageSchema],
+							lot_size1			: ass.comparative1.lot_size.num1,
+							shape1				: ass.comparative1.shape.str,
+							topo1				: ass.comparative1.topo.str,
+							frontage1			: ass.comparative1.frontage.str,
+							terms_of_sale1		: ass.comparative1.terms_of_sale.str,
+							corner1				: ass.comparative1.corner.bool,
+							prime1				: ass.comparative1.prime.bool,
+							hospital1			: ass.comparative1.hospital.bool,
+							school1				: ass.comparative1.school.bool,
+							mall1				: ass.comparative1.mall.bool,
+							public_transpo1		: ass.comparative1.public_transpo.str,
+							improvement1		: ass.comparative1.improvement.bool,
+							zoning1				: ass.comparative1.zoning.str,
+							computation1		: ass.comparative1.computation.num1,
+
+				// COMPARATIVE I - percent1's
+							ref_date_percent1			: ass.comparative1.ref_date.num,
+							property_type_percent1		: ass.comparative1.property_type.num,
+							property_interest_percent1	: ass.comparative1.property_interest.num,
+							lot_size_percent1			: ass.comparative1.lot_size.num2,
+							shape_percent1				: ass.comparative1.shape.num,
+							topo_percent1				: ass.comparative1.topo.num,
+							frontage_percent1			: ass.comparative1.frontage.num,
+							terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
+							corner_percent1				: ass.comparative1.corner.num,
+							prime_percent1				: ass.comparative1.prime.num,
+							hospital_percent1			: ass.comparative1.hospital.num,
+							school_percent1				: ass.comparative1.school.num,
+							mall_percent1				: ass.comparative1.mall.num,
+							public_transpo_percent1		: ass.comparative1.public_transpo.num,
+							improvement_percent1		: ass.comparative1.improvement.num,
+							zoning_percent1				: ass.comparative1.zoning.num,
+							computation_percent1		: ass.comparative1.computation.num2,
+
+				//	COMPARATIVE II
+							price_per_sqm2		: ass.comparative2.price_per_sqm,
+							ref_date2			: ass.comparative2.ref_date.date, //idk if this works
+							lot_loc2			: ass.comparative2.lot_loc,
+							property_type2		: ass.comparative2.property_type.str,
+							property_interest2	: ass.comparative2.property_interest.str,
+							// property_images: [imageSchema],
+							lot_size2			: ass.comparative2.lot_size.num1,
+							shape2				: ass.comparative2.shape.str,
+							topo2				: ass.comparative2.topo.str,
+							frontage2			: ass.comparative2.frontage.str,
+							terms_of_sale2		: ass.comparative2.terms_of_sale.str,
+							corner2				: ass.comparative2.corner.bool,
+							prime2				: ass.comparative2.prime.bool,
+							hospital2			: ass.comparative2.hospital.bool,
+							school2				: ass.comparative2.school.bool,
+							mall2				: ass.comparative2.mall.bool,
+							public_transpo2		: ass.comparative2.public_transpo.str,
+							improvement2		: ass.comparative2.improvement.bool,
+							zoning2				: ass.comparative2.zoning.str,
+							computation2		: ass.comparative2.computation.num1,
+
+				// COMPARATIVE II - percent2's
+							ref_date_percent2			: ass.comparative2.ref_date.num,
+							property_type_percent2		: ass.comparative2.property_type.num,
+							property_interest_percent2	: ass.comparative2.property_interest.num,
+							lot_size_percent2			: ass.comparative2.lot_size.num2,
+							shape_percent2				: ass.comparative2.shape.num,
+							topo_percent2				: ass.comparative2.topo.num,
+							frontage_percent2			: ass.comparative2.frontage.num,
+							terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
+							corner_percent2				: ass.comparative2.corner.num,
+							prime_percent2				: ass.comparative2.prime.num,
+							hospital_percent2			: ass.comparative2.hospital.num,
+							school_percent2				: ass.comparative2.school.num,
+							mall_percent2				: ass.comparative2.mall.num,
+							public_transpo_percent2		: ass.comparative2.public_transpo.num,
+							improvement_percent2		: ass.comparative2.improvement.num,
+							zoning_percent2				: ass.comparative2.zoning.num,
+							computation_percent2		: ass.comparative2.computation.num2,
 
 						username: sess.username,
 						password: sess.password,
@@ -2152,17 +2369,22 @@ app.get('/assignments', async(req,res)=> {
 			
 			const ass = await Assignment.find({
 				assigned_to: {$nin: ["", "admin"]},//ASSIGNED TO SOMEONE
-				comment: {$nin: ["Approved.","Submitted.","For Printing."]}})
+				comment: {$nin: ["Approved.","Submitted.","Submitted for Document Review."]}})
 			
 			const ass_sub = await Assignment.find({
 				assigned_to: {$nin: ["", "admin"]},
-				comment: ["Submitted.", "For Printing."]
+				comment: "Submitted."
+				})
+			const ass_sub2 = await Assignment.find({
+				assigned_to: {$nin: ["", "admin"]},
+				comment: "Submitted for Document Review."
 				})
 			
 			res.render('assignments_admin.hbs', {
 				assignment_new:ass_new,
 				assignment_ass:ass,
 				assignment_sub:ass_sub,
+				assignment_sub2:ass_sub2,
 
 				username: sess.username,
 				password: sess.password,
@@ -2185,17 +2407,17 @@ app.get('/assignments', async(req,res)=> {
 			
 			const ass_sub = await Assignment.find({
 				assigned_to: sess.username,
-				comment: ["Submitted.", "For Printing."]
+				comment: "Submitted."
+				})
+				
+			const ass_sub2 = await Assignment.find({
+				assigned_to: sess.username,
+				comment: "For Printing."
 				})
 				
 			const ass_returned= await Assignment.find({
 				assigned_to: sess.username,
-				comment: {$nin: ["Submitted.", "For Printing.","Submitted for Document Review.", "Approved."]}
-				})
-			
-			const ass_print = await Assignment.find({
-				assigned_to: sess.username,
-				comment: "Submitted for Document Review."
+				comment: {$nin: ["Submitted.","Submitted for Document Review.", "Approved."]}
 				})
 
 			const ass = await Assignment.find({
@@ -2246,7 +2468,7 @@ app.get('/assignments', async(req,res)=> {
 					assignment_new:ass_new,
 					assignment_ass:ass,
 					assignment_sub:ass_sub,
-					assignment_print:ass_print,
+					assignment_sub2:ass_sub2,
 					assignment_returned:ass_returned,
 					
 					username: sess.username,
@@ -2613,94 +2835,7 @@ app.get('/save-ass', async(req,res)=> {
 	}
 });
 
-app.post('/create-doc/:ref_id',async(req,res)=> {
-	sess =  req.session
-	
-	console.log("/create-doc - "+req.params.ref_id)
-	
-	/*
-	if (sess.username)
-	{
-		// try
-		const ass = await Document.findOne({ref_id: req.params.ref_id})
-		console.log(ass)
-		
-		if (ass==null) { //it doesnt exist yet, create one
-			try{
-				Document.create({
-					
-					ref_id: req.params.ref_id,
-					filename: "",
-					company_name: "",
-					company_address: "",
-					appraiser_num: 0,
-					appraiser_address: "",
-					market_value: "",
-					parcel_id: "",
-					improvements: "",
-					zoning_class: "",
-					interest_appraised: "",
-
-					//Start of Body of Document
-					property_identification: "",
-					appraisal_objective_property_rights: "",
-					intended_use_intended_users: "",
-					effective_date_report: "",
-					statement_ownership_sales_history: "",
-					scope_of_work: "",
-
-					//property description
-					title_no: "", 
-					utilities: "",
-					flood: "",
-					easements: "",
-					real_estate_taxes: "",
-					zoning_desc: "",
-
-					//area & neighborhood overview
-					description_improvements: "",
-					neighborhood: "",
-					area_development: "",
-					market_analysis: "",
-
-					//valuation
-					highest_best_use: "",
-					legally_permissible: "",
-					physical_possibility: "",
-					financial_feasibility: "",
-					maximum_productivity: "",
-					conclusion: "",
-					valuation_process: "",
-					market_data_approach: "",
-					explanation_adjustments: "",
-					range_value_per_sqm: "",
-					final_value_per_sqm: "",
-
-					//reconciliation & final value opinion
-					recon_final_value_opinion: "",
-					market_value: "",
-					market_value_per_sqm: "",
-					cost_value: "",
-					cost_value_per_sqm: "",
-					income_value: "",
-					income_value_per_sqm: "",
-					final_value_indication: "",
-					final_value_indication_per_sqm: ""
-				})
-			} catch(err){
-				console.log(err)
-			}
-		}
-		res.redirect('/edit-doc/'+req.query.ref_id);
-	}
-	else
-	{
-		res.redirect('/login-fail.html')
-	}
-	*/
-})
-
-//creates a new doc and goes to the page where you can input the docunent texts
+// goes to the page where you can input the docunent texts
 app.get('/edit-doc/:ref_id', async(req,res)=> {
 	sess = req.session
 	
@@ -2711,21 +2846,11 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 	{
 		const docu = await Document.findOne({ref_id: req.params.ref_id}).exec();
 		console.log(docu)
-		
-	/*
 
-		const docu = await Document.findOne({ref_id: req.params.ref_id});
-		console.log(docu+" is the docu")
-		
-		
-		
-		try{
-		
-		
+		if (docu) //it exists
+		{	
 			res.render('edit_document.hbs', {
 				ref_id : req.params.ref_id,
-				
-				/*
 				filename: docu.filename,
 				company_name: docu.filename,
 				company_address: docu.company_address,
@@ -2739,53 +2864,53 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 				interest_appraised: docu.interest_appraised,
 
 				// //Start of Body of Document
-				// property_identification: "",
-				// appraisal_objective_property_rights: "",
-				// intended_use_intended_users: "",
-				// effective_date_report: "",
-				// statement_ownership_sales_history: "",
-					// scope_of_work: "",
+				property_identification: "",
+				appraisal_objective_property_rights: "",
+				intended_use_intended_users: "",
+				effective_date_report: "",
+				statement_ownership_sales_history: "",
+				scope_of_work: "",
 
-					// //property description
-					// title_no: "", 
-					// utilities: "",
-					// flood: "",
-					// easements: "",
-					// real_estate_taxes: "",
-					// zoning_desc: "",
+				// //property description
+				// title_no: "", 
+				// utilities: "",
+				// flood: "",
+				// easements: "",
+				// real_estate_taxes: "",
+				// zoning_desc: "",
 
-					// //area & neighborhood overview
-					// description_improvements: "",
-					// neighborhood: "",
-					// area_development: "",
-					// market_analysis: "",
+				// //area & neighborhood overview
+				// description_improvements: "",
+				// neighborhood: "",
+				// area_development: "",
+				// market_analysis: "",
 
-					// //valuation
-					// highest_best_use: "",
-					// legally_permissible: "",
-					// physical_possibility: "",
-					// financial_feasibility: "",
-					// maximum_productivity: "",
-					// conclusion: "",
-					// valuation_process: "",
-					// market_data_approach: "",
-					// explanation_adjustments: "",
-					// range_value_per_sqm: "",
-					// final_value_per_sqm: "",
+				// //valuation
+				// highest_best_use: "",
+				// legally_permissible: "",
+				// physical_possibility: "",
+				// financial_feasibility: "",
+				// maximum_productivity: "",
+				// conclusion: "",
+				// valuation_process: "",
+				// market_data_approach: "",
+				// explanation_adjustments: "",
+				// range_value_per_sqm: "",
+				// final_value_per_sqm: "",
 
-					// //reconciliation & final value opinion
-					// recon_final_value_opinion: "",
-					// market_value: "",
-					// market_value_per_sqm: "",
-					// cost_value: "",
-					// cost_value_per_sqm: "",
-					// income_value: "",
-					// income_value_per_sqm: "",
-					// final_value_indication: "",
-					// final_value_indication_per_sqm: "",
+				// //reconciliation & final value opinion
+				// recon_final_value_opinion: "",
+				// market_value: "",
+				// market_value_per_sqm: "",
+				// cost_value: "",
+				// cost_value_per_sqm: "",
+				// income_value: "",
+				// income_value_per_sqm: "",
+				// final_value_indication: "",
+				// final_value_indication_per_sqm: "",
+			
+
 				
-
-					
 				
 				username: sess.username,
 				password: sess.password,
@@ -2797,10 +2922,7 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 				appnum: sess.appnum,
 				can_accept: sess.can_accept
 			});
-		} catch(err){
-			console.log(err)
 		}
-		*/
 	}
 	else
 	{
