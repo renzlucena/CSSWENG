@@ -128,6 +128,23 @@
 								<td colspan='4'><p class="center-align">For Printing. Please edit the document and get the print from admin.</p></td>
 							</tr>
 						{{/each}}
+						
+						{{#each assignment_returned}}
+							<td><p>{{this.ref_id}}</p></td> 
+							<td><p>{{this.created_at}}</p></td> 
+							<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td> 
+							<td> 
+							<div class="main-assignments-status-btns"> 
+								<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit Assignment</button> 
+								</div> 
+								<td> 
+							</tr> 
+							
+							<tr>
+								<th>Comment:</th>
+								<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
+							</tr>
+						{{/each}}
 					
 					</table>
 				</div>

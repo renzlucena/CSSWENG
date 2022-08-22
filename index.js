@@ -323,7 +323,7 @@ app.get('/set-settings', async(req,res)=> {
 app.get('/send-ass', async(req,res)=> {
 	sess = req.session;
 	console.log("in /send-ass " + req.query.ref_id)
-	console.log(req.query + "Logged In: "+sess.username)
+//	console.log(req.query + "Logged In: "+sess.username)
 	
 	if(sess.username){
 		try{
@@ -370,18 +370,19 @@ app.get('/admin-approve', async(req,res)=>{
 			})
 					
 			
-			if (ass.query.comment="Submitted for Document Review.")
+			if (ass.comment=="Submitted.")
 			{
 				await Assignment.findOneAndUpdate(
 					// {ref_id: req.query.ref_id},
 					{ref_id: req.query.ref_id},
-					{comment: "Approved."})		//locks the document from editing and puts it to history
-			}	
-			else{
+					{comment: "For Printing."}) //agent can now proceed to write the document
+			}
+			else	//means it's "For Printing."
+			{
 				await Assignment.findOneAndUpdate(
 					// {ref_id: req.query.ref_id},
 					{ref_id: req.query.ref_id},
-					{comment: "For Printing."}) //unlocks the document from editing if it was previously locked
+					{comment: "Approved."})		//puts it to history
 			}
 			
 			console.log(req)
@@ -403,22 +404,41 @@ app.get('/admin-comment', async(req,res)=>{
 	sess = req.session;
 	if(sess.username)
 	{
-		try{
-			// await Assignment.findOneAndUpdate({res: sess.username},{comment: true})
-			// const ass = await Assignment.findOneAndUpdate({res: req.params.ref_id},{comment: "test"})
-			// req.params.ref_id
+		//Admin returns the Submitted ASSIGNMENT (Step1)
+		if(sess.username=="admin" && req.query.comment == "Submitted.")
+		{
+			console.log("/admin-comment - Submitted ASSIGNMENT")
+			try{
+				const ass = await Assignment.findOneAndUpdate(
+					{ref_id: req.query.ref_id},
+					{comment: req.query.comment
+					})
 
-			const ass = await Assignment.findOneAndUpdate(
-				{ref_id: req.query.ref_id},
-				// {comment: "Returned: " + req.query.comment
-				{comment: req.query.comment
-				})
+			}
+			catch(err){
+				console.log(err)
+			}
+			res.redirect('/assignments')
+		}
+		//Admin returns the Submitted DOCUMENT  (Step2)
+		else if(sess.username=="admin" && req.query.comment == "Submitted for Document Review.")
+		{
+			
+			console.log("/admin-comment - Submitted DOCUMENT")
+			try{
+				
+				const ass = await Assignment.findOneAndUpdate(
+					{ref_id: req.query.ref_id},
+					{comment: "For Printing."
+					})
 
-			res.redirect('/history')
+			}
+			catch(err){
+				console.log(err)
+			}
+			res.redirect('/assignments')
 		}
-		catch(err){
-			console.log(err)
-		}
+			
 	}
 	else{
 		res.redirect('/login-fail.html')
@@ -516,7 +536,6 @@ app.get('/admin-add-agent', async(req,res)=>{
 
 app.get('/view/0/:ref_id', async(req,res)=>{
 	sess = req.session
-	console.log(req.params.ref_id)	//huhhh agent_history.css
 	// console.log("/view/0/:"+req.body.ref_id)	//null
 	console.log("/view/0/:"+req.params.ref_id)	//????? temp_pic.png wot
 	if(sess.username)
@@ -530,7 +549,9 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 				// console.log(ass)
 				if(ass.comment == "Approved.")
-				{	res.render('viewAssignment_1_admin.hbs',{
+				{
+					console.log("viewAssignment_1_admin.hbs")
+					res.render('viewAssignment_1_admin.hbs',{
 						ref_id 			: ass.ref_id,
 						type_of_approach: ass.type_of_approach,
 						client_f_name 	: ass.client_f_name,
@@ -664,8 +685,11 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						can_accept: sess.can_accept
 					});
 			}
+			
 				//	IF REVIEWING SUBMITTED ASSIGNMENTS (comment="Submitted.")
 			else if (ass.comment == "Submitted."){
+				console.log("viewAssignment_0_admin.hbs")
+
 				res.render('viewAssignment_0_admin.hbs',{
 					ref_id 			: ass.ref_id,
 					type_of_approach: ass.type_of_approach,
@@ -801,7 +825,9 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				});
 			}
 			
-			else if (ass.comment == "Submitted for Document Review."){
+			else if (ass.comment == "For Printing."){
+				console.log("viewAssignment_4_admin.hbs")
+
 				res.render('viewAssignment_4_admin.hbs',{
 					ref_id 			: ass.ref_id,
 					type_of_approach: ass.type_of_approach,
@@ -939,7 +965,8 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 			//	IF REVIEWING NEW/UNASSIGNED ASSIGNMENTS
 			// notes: ui is only shoing the admin panel
 			else if (ass.comment == "New!"){
-				
+				console.log("viewAssignment_2_admin.hbs")
+
 				//set the admin to be assigned to the ass, making it invisible to the other agents
 				const ass2 = await Assignment.findOneAndUpdate(
 					{
@@ -975,6 +1002,8 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 			//means that the person assigned to it is still doing it.
 			// admin can see their progress so far, but can't interfere
 			else{
+				console.log("viewAssignment_3_admin.hbs")
+
 				res.render('viewAssignment_3_admin.hbs', {
 						ref_id 			: ass.ref_id,
 						type_of_approach: ass.type_of_approach,
@@ -1126,6 +1155,8 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				//ERROR HERE CANNOT BE REACHED, TESTING TODO
 				// This is viewing the assignment that's supposed to be in history already
 				if(ass.comment == "Submitted for Document Review."){
+					console.log("viewAssignment_2.hbs")
+
 					res.render('viewAssignment_2.hbs',{
 							ref_id 			: ass.ref_id,
 							type_of_approach: ass.type_of_approach,
@@ -1262,6 +1293,8 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				}
 				
 				else if(ass.comment == "Submitted."){
+					console.log("viewAssignment_1.hbs")
+
 					// Show the whole page uli pero without buttons this time
 					// The agent will have to wait for a while to get the admin's feedback/comment.
 					//they also won't be able to take on a new assignment unless the current assignment they submitted is approved
@@ -1402,144 +1435,146 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				
 				//saved the doc for printing, so moved to approve na
 				else if(ass.comment == "Approved."){
-						console.log("in /view/0/"+req.params.ref_id+" - viewAssignment_3.hbs")
-						res.render('viewAssignment_3.hbs',{
-							ref_id 			: ass.ref_id,
-							type_of_approach: ass.type_of_approach,
-							client_f_name 	: ass.client_f_name,
-							client_l_name 	: ass.client_l_name,
-							lot_brgy		: ass.lot_brgy,
-							lot_city		: ass.lot_city,
-							lot_region		: ass.lot_region,
-							zonal			: ass.zonal,
-							assigned_to		: ass.assigned_to,
+					console.log("viewAssignment_3.hbs")
+					res.render('viewAssignment_3.hbs',{
+						ref_id 			: ass.ref_id,
+						type_of_approach: ass.type_of_approach,
+						client_f_name 	: ass.client_f_name,
+						client_l_name 	: ass.client_l_name,
+						lot_brgy		: ass.lot_brgy,
+						lot_city		: ass.lot_city,
+						lot_region		: ass.lot_region,
+						zonal			: ass.zonal,
+						assigned_to		: ass.assigned_to,
 
-							//dates
-							ref_date		: ass.ref_date,
-							created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
-							completed_on	: ass.completed_on,
-							expiring_on 	: ass.expiring_on,
+						//dates
+						ref_date		: ass.ref_date,
+						created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
+						completed_on	: ass.completed_on,
+						expiring_on 	: ass.expiring_on,
 
-				// SUPJECT PROPERTY
-							price_per_sqm	: ass.price_per_sqm,
-							lot_loc			: ass.lot_loc,
-							property_type	: ass.property_type,
-							property_interest: ass.property_interest,
-							// property_images: [imageSchema],
-							lot_size		: ass.lot_size,
-							shape			: ass.shape,
-							topo			: ass.topo,
-							frontage		: ass.frontage,
-							terms_of_sale	: ass.terms_of_sale,
-							corner			: ass.corner,
-							prime			: ass.prime,
-							hospital		: ass.hospital,
-							school			: ass.school,
-							mall 				: ass.mall,
-							public_transpo	: ass.public_transpo,
-							improvement		: ass.improvement,
-							zoning			: ass.zoning,
-							computation		: ass.computation,
+			// SUPJECT PROPERTY
+						price_per_sqm	: ass.price_per_sqm,
+						lot_loc			: ass.lot_loc,
+						property_type	: ass.property_type,
+						property_interest: ass.property_interest,
+						// property_images: [imageSchema],
+						lot_size		: ass.lot_size,
+						shape			: ass.shape,
+						topo			: ass.topo,
+						frontage		: ass.frontage,
+						terms_of_sale	: ass.terms_of_sale,
+						corner			: ass.corner,
+						prime			: ass.prime,
+						hospital		: ass.hospital,
+						school			: ass.school,
+						mall 				: ass.mall,
+						public_transpo	: ass.public_transpo,
+						improvement		: ass.improvement,
+						zoning			: ass.zoning,
+						computation		: ass.computation,
 
-							//comment
-							comment: ass.comment,
+						//comment
+						comment: ass.comment,
 
-				// COMPARATIVE I
-							price_per_sqm1		: ass.comparative1.price_per_sqm,
-							ref_date1			: ass.comparative1.ref_date.date, //idk if this works
-							lot_loc1			: ass.comparative1.lot_loc,
-							property_type1		: ass.comparative1.property_type.str,
-							property_interest1	: ass.comparative1.property_interest.str,
-							// property_images: [imageSchema],
-							lot_size1			: ass.comparative1.lot_size.num1,
-							shape1				: ass.comparative1.shape.str,
-							topo1				: ass.comparative1.topo.str,
-							frontage1			: ass.comparative1.frontage.str,
-							terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-							corner1				: ass.comparative1.corner.bool,
-							prime1				: ass.comparative1.prime.bool,
-							hospital1			: ass.comparative1.hospital.bool,
-							school1				: ass.comparative1.school.bool,
-							mall1				: ass.comparative1.mall.bool,
-							public_transpo1		: ass.comparative1.public_transpo.str,
-							improvement1		: ass.comparative1.improvement.bool,
-							zoning1				: ass.comparative1.zoning.str,
-							computation1		: ass.comparative1.computation.num1,
+			// COMPARATIVE I
+						price_per_sqm1		: ass.comparative1.price_per_sqm,
+						ref_date1			: ass.comparative1.ref_date.date, //idk if this works
+						lot_loc1			: ass.comparative1.lot_loc,
+						property_type1		: ass.comparative1.property_type.str,
+						property_interest1	: ass.comparative1.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size1			: ass.comparative1.lot_size.num1,
+						shape1				: ass.comparative1.shape.str,
+						topo1				: ass.comparative1.topo.str,
+						frontage1			: ass.comparative1.frontage.str,
+						terms_of_sale1		: ass.comparative1.terms_of_sale.str,
+						corner1				: ass.comparative1.corner.bool,
+						prime1				: ass.comparative1.prime.bool,
+						hospital1			: ass.comparative1.hospital.bool,
+						school1				: ass.comparative1.school.bool,
+						mall1				: ass.comparative1.mall.bool,
+						public_transpo1		: ass.comparative1.public_transpo.str,
+						improvement1		: ass.comparative1.improvement.bool,
+						zoning1				: ass.comparative1.zoning.str,
+						computation1		: ass.comparative1.computation.num1,
 
-				// COMPARATIVE I - percent1's
-							ref_date_percent1			: ass.comparative1.ref_date.num,
-							property_type_percent1		: ass.comparative1.property_type.num,
-							property_interest_percent1	: ass.comparative1.property_interest.num,
-							lot_size_percent1			: ass.comparative1.lot_size.num2,
-							shape_percent1				: ass.comparative1.shape.num,
-							topo_percent1				: ass.comparative1.topo.num,
-							frontage_percent1			: ass.comparative1.frontage.num,
-							terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
-							corner_percent1				: ass.comparative1.corner.num,
-							prime_percent1				: ass.comparative1.prime.num,
-							hospital_percent1			: ass.comparative1.hospital.num,
-							school_percent1				: ass.comparative1.school.num,
-							mall_percent1				: ass.comparative1.mall.num,
-							public_transpo_percent1		: ass.comparative1.public_transpo.num,
-							improvement_percent1		: ass.comparative1.improvement.num,
-							zoning_percent1				: ass.comparative1.zoning.num,
-							computation_percent1		: ass.comparative1.computation.num2,
+			// COMPARATIVE I - percent1's
+						ref_date_percent1			: ass.comparative1.ref_date.num,
+						property_type_percent1		: ass.comparative1.property_type.num,
+						property_interest_percent1	: ass.comparative1.property_interest.num,
+						lot_size_percent1			: ass.comparative1.lot_size.num2,
+						shape_percent1				: ass.comparative1.shape.num,
+						topo_percent1				: ass.comparative1.topo.num,
+						frontage_percent1			: ass.comparative1.frontage.num,
+						terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
+						corner_percent1				: ass.comparative1.corner.num,
+						prime_percent1				: ass.comparative1.prime.num,
+						hospital_percent1			: ass.comparative1.hospital.num,
+						school_percent1				: ass.comparative1.school.num,
+						mall_percent1				: ass.comparative1.mall.num,
+						public_transpo_percent1		: ass.comparative1.public_transpo.num,
+						improvement_percent1		: ass.comparative1.improvement.num,
+						zoning_percent1				: ass.comparative1.zoning.num,
+						computation_percent1		: ass.comparative1.computation.num2,
 
-				//	COMPARATIVE II
-							price_per_sqm2		: ass.comparative2.price_per_sqm,
-							ref_date2			: ass.comparative2.ref_date.date, //idk if this works
-							lot_loc2			: ass.comparative2.lot_loc,
-							property_type2		: ass.comparative2.property_type.str,
-							property_interest2	: ass.comparative2.property_interest.str,
-							// property_images: [imageSchema],
-							lot_size2			: ass.comparative2.lot_size.num1,
-							shape2				: ass.comparative2.shape.str,
-							topo2				: ass.comparative2.topo.str,
-							frontage2			: ass.comparative2.frontage.str,
-							terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-							corner2				: ass.comparative2.corner.bool,
-							prime2				: ass.comparative2.prime.bool,
-							hospital2			: ass.comparative2.hospital.bool,
-							school2				: ass.comparative2.school.bool,
-							mall2				: ass.comparative2.mall.bool,
-							public_transpo2		: ass.comparative2.public_transpo.str,
-							improvement2		: ass.comparative2.improvement.bool,
-							zoning2				: ass.comparative2.zoning.str,
-							computation2		: ass.comparative2.computation.num1,
+			//	COMPARATIVE II
+						price_per_sqm2		: ass.comparative2.price_per_sqm,
+						ref_date2			: ass.comparative2.ref_date.date, //idk if this works
+						lot_loc2			: ass.comparative2.lot_loc,
+						property_type2		: ass.comparative2.property_type.str,
+						property_interest2	: ass.comparative2.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size2			: ass.comparative2.lot_size.num1,
+						shape2				: ass.comparative2.shape.str,
+						topo2				: ass.comparative2.topo.str,
+						frontage2			: ass.comparative2.frontage.str,
+						terms_of_sale2		: ass.comparative2.terms_of_sale.str,
+						corner2				: ass.comparative2.corner.bool,
+						prime2				: ass.comparative2.prime.bool,
+						hospital2			: ass.comparative2.hospital.bool,
+						school2				: ass.comparative2.school.bool,
+						mall2				: ass.comparative2.mall.bool,
+						public_transpo2		: ass.comparative2.public_transpo.str,
+						improvement2		: ass.comparative2.improvement.bool,
+						zoning2				: ass.comparative2.zoning.str,
+						computation2		: ass.comparative2.computation.num1,
 
-				// COMPARATIVE II - percent2's
-							ref_date_percent2			: ass.comparative2.ref_date.num,
-							property_type_percent2		: ass.comparative2.property_type.num,
-							property_interest_percent2	: ass.comparative2.property_interest.num,
-							lot_size_percent2			: ass.comparative2.lot_size.num2,
-							shape_percent2				: ass.comparative2.shape.num,
-							topo_percent2				: ass.comparative2.topo.num,
-							frontage_percent2			: ass.comparative2.frontage.num,
-							terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
-							corner_percent2				: ass.comparative2.corner.num,
-							prime_percent2				: ass.comparative2.prime.num,
-							hospital_percent2			: ass.comparative2.hospital.num,
-							school_percent2				: ass.comparative2.school.num,
-							mall_percent2				: ass.comparative2.mall.num,
-							public_transpo_percent2		: ass.comparative2.public_transpo.num,
-							improvement_percent2		: ass.comparative2.improvement.num,
-							zoning_percent2				: ass.comparative2.zoning.num,
-							computation_percent2		: ass.comparative2.computation.num2,
+			// COMPARATIVE II - percent2's
+						ref_date_percent2			: ass.comparative2.ref_date.num,
+						property_type_percent2		: ass.comparative2.property_type.num,
+						property_interest_percent2	: ass.comparative2.property_interest.num,
+						lot_size_percent2			: ass.comparative2.lot_size.num2,
+						shape_percent2				: ass.comparative2.shape.num,
+						topo_percent2				: ass.comparative2.topo.num,
+						frontage_percent2			: ass.comparative2.frontage.num,
+						terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
+						corner_percent2				: ass.comparative2.corner.num,
+						prime_percent2				: ass.comparative2.prime.num,
+						hospital_percent2			: ass.comparative2.hospital.num,
+						school_percent2				: ass.comparative2.school.num,
+						mall_percent2				: ass.comparative2.mall.num,
+						public_transpo_percent2		: ass.comparative2.public_transpo.num,
+						improvement_percent2		: ass.comparative2.improvement.num,
+						zoning_percent2				: ass.comparative2.zoning.num,
+						computation_percent2		: ass.comparative2.computation.num2,
 
-							username: sess.username,
-							password: sess.password,
-							remember: sess.remember,
-							status: sess.status,
-							email: sess.email,
-							fname: sess.fname,
-							lname: sess.lname,
-							appnum: sess.appnum,
-							can_accept: sess.can_accept
-						});
+						username: sess.username,
+						password: sess.password,
+						remember: sess.remember,
+						status: sess.status,
+						email: sess.email,
+						fname: sess.fname,
+						lname: sess.lname,
+						appnum: sess.appnum,
+						can_accept: sess.can_accept
+					});
 				}
 				else{
 					// 0comment is not "Submitted." nor "Approved."
 					// Show the page with same input chuchu, except this page has buttons to compute, send to admin for review/processing, and save details
+					console.log("viewAssignment_0.hbs")
+
 					res.render('viewAssignment_0.hbs',{
 							ref_id 			: ass.ref_id,
 							type_of_approach: ass.type_of_approach,
@@ -2105,6 +2140,7 @@ app.get('/assignments', async(req,res)=> {
 		if(sess.username=="admin")
 		{ // IF ADMIN, UNASSIGNED ASSIGNMENTS and (ASSIGNED & UNFINISHED)
 			
+			console.log("in /assignments (ADMIN)")
 			//refresh if in admin and went to other pages without saving details
 			await Assignment.findOneAndUpdate({assigned_to: sess.username},{
 					assigned_to: "",	//reset so that it will still show up in agents' /assignments
@@ -2112,29 +2148,36 @@ app.get('/assignments', async(req,res)=> {
 			
 			const ass_new = await Assignment.find({
 				assigned_to: ["", "admin"],
-				comment: "New!"})	// comment "New!" means really new assignment
+				comment: "New!"})
 			
 			const ass = await Assignment.find({
 				assigned_to: {$nin: ["", "admin"]},//ASSIGNED TO SOMEONE
-				comment: {$ne: "Approved."}})//that is not equal to Approved. (or it will go to history)
-				
-				res.render('assignments_admin.hbs', {
-					assignment_new:ass_new,
-					assignment_ass:ass,
-
-					username: sess.username,
-					password: sess.password,
-					remember: sess.remember,
-					status: sess.status,
-					email: sess.email,
-					fname: sess.fname,
-					lname: sess.lname,
-					appnum: sess.appnum,
-					can_accept: sess.can_accept
+				comment: {$nin: ["Approved.","Submitted.","For Printing."]}})
+			
+			const ass_sub = await Assignment.find({
+				assigned_to: {$nin: ["", "admin"]},
+				comment: ["Submitted.", "For Printing."]
 				})
+			
+			res.render('assignments_admin.hbs', {
+				assignment_new:ass_new,
+				assignment_ass:ass,
+				assignment_sub:ass_sub,
+
+				username: sess.username,
+				password: sess.password,
+				remember: sess.remember,
+				status: sess.status,
+				email: sess.email,
+				fname: sess.fname,
+				lname: sess.lname,
+				appnum: sess.appnum,
+				can_accept: sess.can_accept
+			})
 		}
 		else{
 			
+			console.log("in /assignments (AGENT)")
 			const ass_new = await Assignment.find({
 				assigned_to: "",
 				comment: "New!"
@@ -2145,6 +2188,11 @@ app.get('/assignments', async(req,res)=> {
 				comment: ["Submitted.", "For Printing."]
 				})
 				
+			const ass_returned= await Assignment.find({
+				assigned_to: sess.username,
+				comment: {$nin: ["Submitted.", "For Printing.","Submitted for Document Review.", "Approved."]}
+				})
+			
 			const ass_print = await Assignment.find({
 				assigned_to: sess.username,
 				comment: "Submitted for Document Review."
@@ -2176,7 +2224,7 @@ app.get('/assignments', async(req,res)=> {
 				res.render('assignments.hbs', {
 					how_many_ongoing : howmany,
 					assignment_new:ass_new,
-					assignment_ass:ass,		//sends back the submitted ones with comment
+					// assignment_ass:ass,
 					//assignment_sub:ass_sub,
 
 					username: sess.username,
@@ -2199,6 +2247,7 @@ app.get('/assignments', async(req,res)=> {
 					assignment_ass:ass,
 					assignment_sub:ass_sub,
 					assignment_print:ass_print,
+					assignment_returned:ass_returned,
 					
 					username: sess.username,
 					password: sess.password,

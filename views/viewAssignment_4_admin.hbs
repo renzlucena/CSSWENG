@@ -258,7 +258,7 @@
           <div class="main">
               <div class="main-header">
                   <h1>Assignment #{{ref_id}}</p>
-                  <p><b><i>Spectating the assignment as the assigned Agent works it.</b></i></p>
+                  <p><b><i>Approve the Assignment for Printing or Send Back for Revision.</b></i></p>
               </div>
 
               <form class="assignments-form">
@@ -540,16 +540,15 @@
                         </tr>
                     </table>
                   </div>
-              <div id="main-table-bottom">
-                </div>
-					TODO Erin dito mo lagay yung sa doc mo</br>
-					Document Details - editDocument page except it's all readonly	TODO<br>
-					Inside that page, there should be a button to "Lock Document"(changes For Printing. comment to Approved.) OR "Unlock Document(changes Approved. comment back to "For Printing.")
-					<br>
-					<button>Document Details</button>
-					<br><br><br>
+				  
+				
+				<div id="main-table-bottom">
+				  <div class="comment">
+						<button type = "submit" name="admin-comment" formaction="/admin-comment">Return Document for Revision</button>
+						<button type="submit" name="send_ass" formaction="/admin-approve">Approve For Printinh</button>
+					
 				</div>
-              </form>
+				</form>
           </div>
       </div>
   </body>

@@ -96,10 +96,28 @@
 						{{/each}}
 
 						<tr>
-						<th colspan='5'>Assigned Assignments</th>
-						<th></th>
-						<th></th>
-						<th></th>
+							<th colspan='4'>Submitted For Review</th>
+						</tr>
+						
+						{{#each assignment_sub}}
+							<tr>
+								<td><p>{{this.ref_id}}</p></td>
+								<td><p>{{this.assigned_to}}</p></td>
+								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>
+									<div class="main-assignments-status-btns">
+										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Review</button>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>Comment:</th>
+								<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
+							</tr>
+						{{/each}}
+						
+						<tr>
+							<th colspan='4'>Other Assignments</th>
 						</tr>
 
 						{{#each assignment_ass}}
@@ -109,15 +127,12 @@
 								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
 								<td>
 									<div class="main-assignments-status-btns">
-										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">View Assignment</button>
+										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Details</button>
 									</div>
 								</td>
 							</tr>
-							<tr>
-								<th>Admin's Comment:</th>
-								<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
-							</tr>
 						{{/each}}
+						
                 </table>
             </div>
 			</form>
