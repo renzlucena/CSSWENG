@@ -263,8 +263,8 @@
             </div>
 
             <form class="assignments-form">
+				{{#each assignment_ass}}
                 <div class="main-table">
-
 					<table>
 						<tr>
 							<th></th>
@@ -541,8 +541,9 @@
                         </tr>
                     </table>
                 </div>
-				  
-				  
+				<div class="main-header">
+					<h1>Document Details for Printing</p>
+				</div>
 				<div class="main-table">
 					<table>
 					<tr>
@@ -722,14 +723,20 @@
 					</table>
 				</div>
 				
+				{{/each}}
 				
-            <div id="main-table-bottom">
-				</div>
-					<button>Download PDF</button>
-					<br><br><br>
+				
+				<div id="main-table-bottom">
+					</div>
+						<!-- dito mo na lagay yung code mo sa download pdf/save as pdf  erin -->
+						<button>Download PDF</button>
+						
+						<!-- will make it so that the comment will be "For Printing." again and agent can edit the doc -->
+						<button>Unlock Document</button>
+						<br><br><br>
+					</div>
 				</div>
             </form>
-        </div>
       </div>
   </body>
   </html>
