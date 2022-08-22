@@ -70,6 +70,7 @@ app.get('/login', async(req,res)=> {
         // console.log(req.query.password) //+ " ==? " + account.password)
         // console.log(req.query.username) //+ " ==? " + account.username)
 		console.log(acct)
+		console.log(req.query)
 
 		if (acct==null){
             console.log("Account does not exist.")
@@ -142,7 +143,6 @@ app.get('/history', async(req,res)=>{
 				appnum: sess.appnum,
 				can_accept: sess.can_accept
 			});
-			console.log(ass)
 		}
 		else// if (sess.username != "admin")
 		{
@@ -355,7 +355,7 @@ app.get('/send-ass', async(req,res)=> {
 //TODO!	//change the comment to "Approved.", if approved, can be printed
 app.get('/admin-approve', async(req,res)=>{
 	sess = req.session;
-	console.log("in //admin-approve " + req.query.ref_id)
+	console.log("in /admin-approve " + req.query.ref_id)
 
 	if(sess.username)
 	{
@@ -365,10 +365,25 @@ app.get('/admin-approve', async(req,res)=>{
 			// req.params.ref_id
 			//console.log(req.params.ref_id)
 
-			await Assignment.findOneAndUpdate(
-				// {ref_id: req.query.ref_id},
-				{ref_id: req.query.ref_id},
-				{comment: "Approved."})
+			const ass = await Assignment.findOne({
+				ref_id : req.query.ref_id
+			})
+					
+			
+			if (ass.query.comment="Submitted for Document Review.")
+			{
+				await Assignment.findOneAndUpdate(
+					// {ref_id: req.query.ref_id},
+					{ref_id: req.query.ref_id},
+					{comment: "Approved."})		//locks the document from editing and puts it to history
+			}	
+			else{
+				await Assignment.findOneAndUpdate(
+					// {ref_id: req.query.ref_id},
+					{ref_id: req.query.ref_id},
+					{comment: "For Printing."}) //unlocks the document from editing if it was previously locked
+			}
+			
 			console.log(req)
 			// console.log(params)
 
@@ -785,6 +800,142 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					can_accept: sess.can_accept
 				});
 			}
+			
+			else if (ass.comment == "Submitted for Document Review."){
+				res.render('viewAssignment_4_admin.hbs',{
+					ref_id 			: ass.ref_id,
+					type_of_approach: ass.type_of_approach,
+					client_f_name 	: ass.client_f_name,
+					client_l_name 	: ass.client_l_name,
+					lot_brgy		: ass.lot_brgy,
+					lot_city		: ass.lot_city,
+					lot_region		: ass.lot_region,
+					zonal			: ass.zonal,
+					assigned_to		: ass.assigned_to,
+
+					//dates
+					ref_date		: ass.ref_date,
+					created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
+					completed_on	: ass.completed_on,
+					expiring_on 	: ass.expiring_on,
+
+		// SUPJECT PROPERTY
+					price_per_sqm	: ass.price_per_sqm,
+					lot_loc			: ass.lot_loc,
+					property_type	: ass.property_type,
+					property_interest: ass.property_interest,
+					// property_images: [imageSchema],
+					lot_size		: ass.lot_size,
+					shape			: ass.shape,
+					topo			: ass.topo,
+					frontage		: ass.frontage,
+					terms_of_sale	: ass.terms_of_sale,
+					corner			: ass.corner,
+					prime			: ass.prime,
+					hospital		: ass.hospital,
+					school			: ass.school,
+					mall				: ass.mall,
+					public_transpo	: ass.public_transpo,
+					improvement		: ass.improvement,
+					zoning			: ass.zoning,
+					computation		: ass.computation,
+
+					//comment
+					comment: ass.comment,
+
+		// COMPARATIVE I
+						price_per_sqm1		: ass.comparative1.price_per_sqm,
+						ref_date1			: ass.comparative1.ref_date.date, //idk if this works
+						lot_loc1			: ass.comparative1.lot_loc,
+						property_type1		: ass.comparative1.property_type.str,
+						property_interest1	: ass.comparative1.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size1			: ass.comparative1.lot_size.num1,
+						shape1				: ass.comparative1.shape.str,
+						topo1				: ass.comparative1.topo.str,
+						frontage1			: ass.comparative1.frontage.str,
+						terms_of_sale1		: ass.comparative1.terms_of_sale.str,
+						corner1				: ass.comparative1.corner.bool,
+						prime1				: ass.comparative1.prime.bool,
+						hospital1			: ass.comparative1.hospital.bool,
+						school1				: ass.comparative1.school.bool,
+						mall1				: ass.comparative1.mall.bool,
+						public_transpo1		: ass.comparative1.public_transpo.str,
+						improvement1		: ass.comparative1.improvement.bool,
+						zoning1				: ass.comparative1.zoning.str,
+						computation1		: ass.comparative1.computation.num1,
+
+			// COMPARATIVE I - percent1's
+						ref_date_percent1			: ass.comparative1.ref_date.num,
+						property_type_percent1		: ass.comparative1.property_type.num,
+						property_interest_percent1	: ass.comparative1.property_interest.num,
+						lot_size_percent1			: ass.comparative1.lot_size.num2,
+						shape_percent1				: ass.comparative1.shape.num,
+						topo_percent1				: ass.comparative1.topo.num,
+						frontage_percent1			: ass.comparative1.frontage.num,
+						terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
+						corner_percent1				: ass.comparative1.corner.num,
+						prime_percent1				: ass.comparative1.prime.num,
+						hospital_percent1			: ass.comparative1.hospital.num,
+						school_percent1				: ass.comparative1.school.num,
+						mall_percent1				: ass.comparative1.mall.num,
+						public_transpo_percent1		: ass.comparative1.public_transpo.num,
+						improvement_percent1		: ass.comparative1.improvement.num,
+						zoning_percent1				: ass.comparative1.zoning.num,
+						computation_percent1		: ass.comparative1.computation.num2,
+
+			//	COMPARATIVE II
+						price_per_sqm2		: ass.comparative2.price_per_sqm,
+						ref_date2			: ass.comparative2.ref_date.date, //idk if this works
+						lot_loc2			: ass.comparative2.lot_loc,
+						property_type2		: ass.comparative2.property_type.str,
+						property_interest2	: ass.comparative2.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size2			: ass.comparative2.lot_size.num1,
+						shape2				: ass.comparative2.shape.str,
+						topo2				: ass.comparative2.topo.str,
+						frontage2			: ass.comparative2.frontage.str,
+						terms_of_sale2		: ass.comparative2.terms_of_sale.str,
+						corner2				: ass.comparative2.corner.bool,
+						prime2				: ass.comparative2.prime.bool,
+						hospital2			: ass.comparative2.hospital.bool,
+						school2				: ass.comparative2.school.bool,
+						mall2				: ass.comparative2.mall.bool,
+						public_transpo2		: ass.comparative2.public_transpo.str,
+						improvement2		: ass.comparative2.improvement.bool,
+						zoning2				: ass.comparative2.zoning.str,
+						computation2		: ass.comparative2.computation.num1,
+
+			// COMPARATIVE II - percent2's
+						ref_date_percent2			: ass.comparative2.ref_date.num,
+						property_type_percent2		: ass.comparative2.property_type.num,
+						property_interest_percent2	: ass.comparative2.property_interest.num,
+						lot_size_percent2			: ass.comparative2.lot_size.num2,
+						shape_percent2				: ass.comparative2.shape.num,
+						topo_percent2				: ass.comparative2.topo.num,
+						frontage_percent2			: ass.comparative2.frontage.num,
+						terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
+						corner_percent2				: ass.comparative2.corner.num,
+						prime_percent2				: ass.comparative2.prime.num,
+						hospital_percent2			: ass.comparative2.hospital.num,
+						school_percent2				: ass.comparative2.school.num,
+						mall_percent2				: ass.comparative2.mall.num,
+						public_transpo_percent2		: ass.comparative2.public_transpo.num,
+						improvement_percent2		: ass.comparative2.improvement.num,
+						zoning_percent2				: ass.comparative2.zoning.num,
+						computation_percent2		: ass.comparative2.computation.num2,
+
+					username: sess.username,
+					password: sess.password,
+					remember: sess.remember,
+					status: sess.status,
+					email: sess.email,
+					fname: sess.fname,
+					lname: sess.lname,
+					appnum: sess.appnum,
+					can_accept: sess.can_accept
+				});
+			}
 			//	IF REVIEWING NEW/UNASSIGNED ASSIGNMENTS
 			// notes: ui is only shoing the admin panel
 			else if (ass.comment == "New!"){
@@ -798,6 +949,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				
 				res.render('viewAssignment_2_admin.hbs', {
 				
+					ref_id: ass.ref_id,
 					assigned_to: sess.username,
 					type_of_approach: ass.type_of_approach,
 					client_f_name: ass.client_f_name,
@@ -970,12 +1122,11 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 			const ass = await Assignment.findOne({
 				ref_id : req.params.ref_id
 				})
-			console.log(ass)
 
-				//ERROR HERE CANNOT BE REACHED
+				//ERROR HERE CANNOT BE REACHED, TESTING TODO
 				// This is viewing the assignment that's supposed to be in history already
-				if(ass.comment == "Approved."){
-					res.render('viewAssignment_approved.hbs',{
+				if(ass.comment == "Submitted for Document Review."){
+					res.render('viewAssignment_2.hbs',{
 							ref_id 			: ass.ref_id,
 							type_of_approach: ass.type_of_approach,
 							client_f_name 	: ass.client_f_name,
@@ -1110,12 +1261,149 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						});
 				}
 				
-				
 				else if(ass.comment == "Submitted."){
 					// Show the whole page uli pero without buttons this time
 					// The agent will have to wait for a while to get the admin's feedback/comment.
 					//they also won't be able to take on a new assignment unless the current assignment they submitted is approved
 					res.render('viewAssignment_1.hbs',{
+							ref_id 			: ass.ref_id,
+							type_of_approach: ass.type_of_approach,
+							client_f_name 	: ass.client_f_name,
+							client_l_name 	: ass.client_l_name,
+							lot_brgy		: ass.lot_brgy,
+							lot_city		: ass.lot_city,
+							lot_region		: ass.lot_region,
+							zonal			: ass.zonal,
+							assigned_to		: ass.assigned_to,
+
+							//dates
+							ref_date		: ass.ref_date,
+							created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
+							completed_on	: ass.completed_on,
+							expiring_on 	: ass.expiring_on,
+
+				// SUPJECT PROPERTY
+							price_per_sqm	: ass.price_per_sqm,
+							lot_loc			: ass.lot_loc,
+							property_type	: ass.property_type,
+							property_interest: ass.property_interest,
+							// property_images: [imageSchema],
+							lot_size		: ass.lot_size,
+							shape			: ass.shape,
+							topo			: ass.topo,
+							frontage		: ass.frontage,
+							terms_of_sale	: ass.terms_of_sale,
+							corner			: ass.corner,
+							prime			: ass.prime,
+							hospital		: ass.hospital,
+							school			: ass.school,
+							mall 				: ass.mall,
+							public_transpo	: ass.public_transpo,
+							improvement		: ass.improvement,
+							zoning			: ass.zoning,
+							computation		: ass.computation,
+
+							//comment
+							comment: ass.comment,
+
+				// COMPARATIVE I
+							price_per_sqm1		: ass.comparative1.price_per_sqm,
+							ref_date1			: ass.comparative1.ref_date.date, //idk if this works
+							lot_loc1			: ass.comparative1.lot_loc,
+							property_type1		: ass.comparative1.property_type.str,
+							property_interest1	: ass.comparative1.property_interest.str,
+							// property_images: [imageSchema],
+							lot_size1			: ass.comparative1.lot_size.num1,
+							shape1				: ass.comparative1.shape.str,
+							topo1				: ass.comparative1.topo.str,
+							frontage1			: ass.comparative1.frontage.str,
+							terms_of_sale1		: ass.comparative1.terms_of_sale.str,
+							corner1				: ass.comparative1.corner.bool,
+							prime1				: ass.comparative1.prime.bool,
+							hospital1			: ass.comparative1.hospital.bool,
+							school1				: ass.comparative1.school.bool,
+							mall1				: ass.comparative1.mall.bool,
+							public_transpo1		: ass.comparative1.public_transpo.str,
+							improvement1		: ass.comparative1.improvement.bool,
+							zoning1				: ass.comparative1.zoning.str,
+							computation1		: ass.comparative1.computation.num1,
+
+				// COMPARATIVE I - percent1's
+							ref_date_percent1			: ass.comparative1.ref_date.num,
+							property_type_percent1		: ass.comparative1.property_type.num,
+							property_interest_percent1	: ass.comparative1.property_interest.num,
+							lot_size_percent1			: ass.comparative1.lot_size.num2,
+							shape_percent1				: ass.comparative1.shape.num,
+							topo_percent1				: ass.comparative1.topo.num,
+							frontage_percent1			: ass.comparative1.frontage.num,
+							terms_of_sale_percent1		: ass.comparative1.terms_of_sale.num,
+							corner_percent1				: ass.comparative1.corner.num,
+							prime_percent1				: ass.comparative1.prime.num,
+							hospital_percent1			: ass.comparative1.hospital.num,
+							school_percent1				: ass.comparative1.school.num,
+							mall_percent1				: ass.comparative1.mall.num,
+							public_transpo_percent1		: ass.comparative1.public_transpo.num,
+							improvement_percent1		: ass.comparative1.improvement.num,
+							zoning_percent1				: ass.comparative1.zoning.num,
+							computation_percent1		: ass.comparative1.computation.num2,
+
+				//	COMPARATIVE II
+							price_per_sqm2		: ass.comparative2.price_per_sqm,
+							ref_date2			: ass.comparative2.ref_date.date, //idk if this works
+							lot_loc2			: ass.comparative2.lot_loc,
+							property_type2		: ass.comparative2.property_type.str,
+							property_interest2	: ass.comparative2.property_interest.str,
+							// property_images: [imageSchema],
+							lot_size2			: ass.comparative2.lot_size.num1,
+							shape2				: ass.comparative2.shape.str,
+							topo2				: ass.comparative2.topo.str,
+							frontage2			: ass.comparative2.frontage.str,
+							terms_of_sale2		: ass.comparative2.terms_of_sale.str,
+							corner2				: ass.comparative2.corner.bool,
+							prime2				: ass.comparative2.prime.bool,
+							hospital2			: ass.comparative2.hospital.bool,
+							school2				: ass.comparative2.school.bool,
+							mall2				: ass.comparative2.mall.bool,
+							public_transpo2		: ass.comparative2.public_transpo.str,
+							improvement2		: ass.comparative2.improvement.bool,
+							zoning2				: ass.comparative2.zoning.str,
+							computation2		: ass.comparative2.computation.num1,
+
+				// COMPARATIVE II - percent2's
+							ref_date_percent2			: ass.comparative2.ref_date.num,
+							property_type_percent2		: ass.comparative2.property_type.num,
+							property_interest_percent2	: ass.comparative2.property_interest.num,
+							lot_size_percent2			: ass.comparative2.lot_size.num2,
+							shape_percent2				: ass.comparative2.shape.num,
+							topo_percent2				: ass.comparative2.topo.num,
+							frontage_percent2			: ass.comparative2.frontage.num,
+							terms_of_sale_percent2		: ass.comparative2.terms_of_sale.num,
+							corner_percent2				: ass.comparative2.corner.num,
+							prime_percent2				: ass.comparative2.prime.num,
+							hospital_percent2			: ass.comparative2.hospital.num,
+							school_percent2				: ass.comparative2.school.num,
+							mall_percent2				: ass.comparative2.mall.num,
+							public_transpo_percent2		: ass.comparative2.public_transpo.num,
+							improvement_percent2		: ass.comparative2.improvement.num,
+							zoning_percent2				: ass.comparative2.zoning.num,
+							computation_percent2		: ass.comparative2.computation.num2,
+
+							username: sess.username,
+							password: sess.password,
+							remember: sess.remember,
+							status: sess.status,
+							email: sess.email,
+							fname: sess.fname,
+							lname: sess.lname,
+							appnum: sess.appnum,
+							can_accept: sess.can_accept
+						});
+				}
+				
+				//saved the doc for printing, so moved to approve na
+				else if(ass.comment == "Approved."){
+						console.log("in /view/0/"+req.params.ref_id+" - viewAssignment_3.hbs")
+						res.render('viewAssignment_3.hbs',{
 							ref_id 			: ass.ref_id,
 							type_of_approach: ass.type_of_approach,
 							client_f_name 	: ass.client_f_name,
@@ -1829,7 +2117,7 @@ app.get('/assignments', async(req,res)=> {
 			const ass = await Assignment.find({
 				assigned_to: {$nin: ["", "admin"]},//ASSIGNED TO SOMEONE
 				comment: {$ne: "Approved."}})//that is not equal to Approved. (or it will go to history)
-
+				
 				res.render('assignments_admin.hbs', {
 					assignment_new:ass_new,
 					assignment_ass:ass,
@@ -1849,15 +2137,23 @@ app.get('/assignments', async(req,res)=> {
 			
 			const ass_new = await Assignment.find({
 				assigned_to: "",
-				comment: "New!"})
+				comment: "New!"
+				})
 			
 			const ass_sub = await Assignment.find({
 				assigned_to: sess.username,
-				comment: "Submitted."})
+				comment: ["Submitted.", "For Printing."]
+				})
+				
+			const ass_print = await Assignment.find({
+				assigned_to: sess.username,
+				comment: "Submitted for Document Review."
+				})
 
 			const ass = await Assignment.find({
 				assigned_to: sess.username,//ASSIgned to you
-				comment: {$nin : ["Approved.","Submitted"]}
+				comment: {$ne :"Approved."}
+				// comment: {$nin : ["Approved.","Submitted"]}
 				})//that is not equal to Approved. (or it will go to history)
 												//also not equal to "Submitted."bc it will have a different button
 												
@@ -1865,7 +2161,6 @@ app.get('/assignments', async(req,res)=> {
 				assigned_to: sess.username,
 				comment: {$ne: "Approved."}})
 
-			console.log(sess)
 
 			if (howmany==0)
 			{
@@ -1877,11 +2172,12 @@ app.get('/assignments', async(req,res)=> {
 
 			if (sess.can_accept)
 			{
+				console.log("/in assignments (assignments.hbs)")
 				res.render('assignments.hbs', {
 					how_many_ongoing : howmany,
 					assignment_new:ass_new,
-					assignment_ass:ass,
-					assignment_sub:ass_sub,
+					assignment_ass:ass,		//sends back the submitted ones with comment
+					//assignment_sub:ass_sub,
 
 					username: sess.username,
 					password: sess.password,
@@ -1896,11 +2192,13 @@ app.get('/assignments', async(req,res)=> {
 				})
 			}
 			else{
+				console.log("/in assignments (assignments_cant_accept.hbs)")
 				res.render('assignments_cant_accept.hbs', {
 					how_many_ongoing : howmany,
 					assignment_new:ass_new,
 					assignment_ass:ass,
 					assignment_sub:ass_sub,
+					assignment_print:ass_print,
 					
 					username: sess.username,
 					password: sess.password,
@@ -1982,7 +2280,7 @@ app.get('/terms', function(req,res){
 
 app.get('/save-ass', async(req,res)=> {
 	// sess = req.session;
-	// console.log(req.query.ref_id)
+	console.log(req.query)
 	console.log("in /save-ass - " +req.query.ref_id)
 
 	if(sess.username){
@@ -2015,8 +2313,8 @@ app.get('/save-ass', async(req,res)=> {
 					zonal: req.query.zonal
 				})
 
-				//res.redirect('/assignments')
-				res.redirect('/view/0/'+ req.query.ref_id)
+				res.redirect('/assignments') //if admin, just redirct to assignmets
+				//res.redirect('/view/0/'+ req.query.ref_id)
 			}
 			catch(err)
 			{
@@ -2026,7 +2324,7 @@ app.get('/save-ass', async(req,res)=> {
 		}
 		else{
 			var today = new Date()
-
+			//agent no need for params because the ref_id is shown
 			try{
 
 				// console.log(req.query)
@@ -2269,18 +2567,20 @@ app.get('/save-ass', async(req,res)=> {
 app.post('/create-doc/:ref_id',async(req,res)=> {
 	sess =  req.session
 	
-	console.log("/create-doc/"+req.query.ref_id)
+	console.log("/create-doc - "+req.params.ref_id)
 	
+	/*
 	if (sess.username)
 	{
-		
-		const ass = await Document.findOne({ref_id: req.query.ref_id})
-		console.log(ass + " is ass")
+		// try
+		const ass = await Document.findOne({ref_id: req.params.ref_id})
+		console.log(ass)
 		
 		if (ass==null) { //it doesnt exist yet, create one
 			try{
 				Document.create({
-					ref_id: req.query.ref_id,
+					
+					ref_id: req.params.ref_id,
 					filename: "",
 					company_name: "",
 					company_address: "",
@@ -2348,23 +2648,28 @@ app.post('/create-doc/:ref_id',async(req,res)=> {
 	{
 		res.redirect('/login-fail.html')
 	}
+	*/
 })
 
+//creates a new doc and goes to the page where you can input the docunent texts
 app.get('/edit-doc/:ref_id', async(req,res)=> {
 	sess = req.session
 	
-	console.log(req.params + " i s the ref_id")
-	console.log("/edit-doc/"+req.params.ref_id)
+	console.log("in /edit-doc/"+req.params.ref_id)
 	//check if document already exists
 	
 	if(sess.username)
 	{
-		// const docu = await Document.findOne({ref_id: req.params.ref_id}).exec();
-		// console.log(docu+" is the docu")
+		const docu = await Document.findOne({ref_id: req.params.ref_id}).exec();
+		console.log(docu)
 		
-		
+	/*
+
 		const docu = await Document.findOne({ref_id: req.params.ref_id});
 		console.log(docu+" is the docu")
+		
+		
+		
 		try{
 		
 		
@@ -2430,7 +2735,7 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 					// final_value_indication: "",
 					// final_value_indication_per_sqm: "",
 				
-				*/
+
 					
 				
 				username: sess.username,
@@ -2446,7 +2751,7 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 		} catch(err){
 			console.log(err)
 		}
-		
+		*/
 	}
 	else
 	{

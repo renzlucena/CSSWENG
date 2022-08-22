@@ -274,7 +274,7 @@
 						</tr>
                         <tr>	<!-- ref_id & creation date -->
                             <th><label for="ref_id">Reference ID</label></th>
-                            <td><input name="ref_id" type="text" value="{{this.ref_id}}" readonly></td>
+                            <td><input name="ref_id" type="number" value="{{this.ref_id}}" readonly></td>
 								<!-- type_of_approach & assigned appraiser -->
                             <th><label for="type_of_approach">Type of Approach</label></th>
 							<td><input name="type_of_approach" type="text" value="{{this.type_of_approach}}" readonly></td>
@@ -291,10 +291,10 @@
 
 					    <tr>	<!-- Contact Info -->
 							<th><label for="client_email">Client Esaamail</label></th>
-							<td><input name="client_email" id="client_email" type="text"></td>
+							<td><input name="client_email" id="client_email" type="text" value="{{this.client_email}}"></td>
 
                             <th><label for="client_contact_num">Client Contact Number</label></th>
-                            <td><input name="client_contact_num" id="client_contact_num" type="text"></td>
+                            <td><input name="client_contact_num" id="client_contact_num" type="text" value="{{this.client_contact_num}}"></td>
                         </tr>
 
 						<tr>	<!-- lot_brgy,city,region - will serve as general location for interest check of agents/appraisers & zonal value-->
