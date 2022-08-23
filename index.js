@@ -248,7 +248,7 @@ app.get('/admin-approve', async(req,res)=>{
 					filename: "",
 					company_name: "",
 					company_address: "",
-					appraiser_num: 0,
+					//appraiser_num: 0,
 					appraiser_address: "",
 					market_value: "",
 					parcel_id: "",
@@ -274,7 +274,7 @@ app.get('/admin-approve', async(req,res)=>{
 
 					//area & neighborhood overview
 					description_improvements: "",
-					neighborhood: "",
+					//neighborhood: "",
 					area_development: "",
 					market_analysis: "",
 
@@ -293,8 +293,8 @@ app.get('/admin-approve', async(req,res)=>{
 
 					//reconciliation & final value opinion
 					recon_final_value_opinion: "",
-					market_value: "",
-					market_value_per_sqm: "",
+					//market_value: "",
+					//market_value_per_sqm: "",
 					cost_value: "",
 					cost_value_per_sqm: "",
 					income_value: "",
@@ -478,15 +478,15 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				const docu = await Document.find({
 					ref_id : req.params.ref_id
 				})
-				
 
 				// console.log(ass)
 				if(ass.comment == "Approved.")
 				{
 					console.log("viewAssignment_1_admin.hbs")
+					console.log(docu)
 					res.render('viewAssignment_1_admin.hbs',{
-						doc_details: docu,	//short ver lol
 						assignment_ass: assignment,	//short ver lol
+						doc_details: docu,	//short ver lol
 						// ref_id 			: ass.ref_id,
 						// type_of_approach: ass.type_of_approach,
 						// client_f_name 	: ass.client_f_name,
@@ -2852,12 +2852,12 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 
 		if (docu) //it exists
 		{	
-			res.render('edit_document.hbs', {
+			res.render('viewAssignment_4.hbs', {
 				ref_id : req.params.ref_id,
 				filename: docu.filename,
 				company_name: docu.filename,
 				company_address: docu.company_address,
-				appraiser_num: docu.appraiser_num,
+				//appraiser_num: docu.appraiser_num,
 				appraiser_address: docu.appraiser_address,
 				market_value: docu.market_value,
 				market_data_value: docu.market_data_value,
@@ -2867,53 +2867,50 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 				interest_appraised: docu.interest_appraised,
 
 				// //Start of Body of Document
-				property_identification: "",
-				appraisal_objective_property_rights: "",
-				intended_use_intended_users: "",
-				effective_date_report: "",
-				statement_ownership_sales_history: "",
-				scope_of_work: "",
+				property_identification: docu.property_identification,
+				appraisal_objective_property_rights: docu.appraisal_objective_property_rights,
+				intended_use_intended_users: docu.intended_use_intended_users,
+				effective_date_report: docu.effective_date_report,
+				statement_ownership_sales_history: docu.statement_ownership_sales_history,
+				scope_of_work: docu.scope_of_work,
 
 				// //property description
-				// title_no: "", 
-				// utilities: "",
-				// flood: "",
-				// easements: "",
-				// real_estate_taxes: "",
-				// zoning_desc: "",
+				title_no: docu.title_no, 
+				utilities: docu.utilities,
+				flood: docu.flood,
+				easements: docu.easements,
+				real_estate_taxes: docu.real_estate_taxes,
+				zoning_desc: docu.zoning_desc,
 
 				// //area & neighborhood overview
-				// description_improvements: "",
-				// neighborhood: "",
-				// area_development: "",
-				// market_analysis: "",
+				description_improvements: docu.description_improvements,
+				//neighborhood: "",
+				area_development: docu.area_development,
+				market_analysis: docu.market_analysis,
 
 				// //valuation
-				// highest_best_use: "",
-				// legally_permissible: "",
-				// physical_possibility: "",
-				// financial_feasibility: "",
-				// maximum_productivity: "",
-				// conclusion: "",
-				// valuation_process: "",
-				// market_data_approach: "",
-				// explanation_adjustments: "",
-				// range_value_per_sqm: "",
-				// final_value_per_sqm: "",
+				highest_best_use: docu.highest_best_use,
+				legally_permissible: docu.legally_permissible,
+				physical_possibility: docu.physical_possibility,
+				financial_feasibility: docu.financial_feasibility,
+				maximum_productivity: docu.maximum_productivity,
+				conclusion: docu.conclusion,
+				valuation_process: docu.valuation_process,
+				market_data_approach: docu.market_data_approach,
+				explanation_adjustments: docu.explanation_adjustments,
+				range_value_per_sqm: docu.range_value_per_sqm,
+				final_value_per_sqm: docu.final_value_per_sqm,
 
 				// //reconciliation & final value opinion
-				// recon_final_value_opinion: "",
-				// market_value: "",
-				// market_value_per_sqm: "",
-				// cost_value: "",
-				// cost_value_per_sqm: "",
-				// income_value: "",
-				// income_value_per_sqm: "",
-				// final_value_indication: "",
-				// final_value_indication_per_sqm: "",
-			
-
-				
+				recon_final_value_opinion: docu.recon_final_value_opinion,
+				//market_value: "",
+				//market_value_per_sqm: "",
+				cost_value: docu.cost_value,
+				cost_value_per_sqm: docu.cost_value_per_sqm,
+				income_value: docu.income_value,
+				income_value_per_sqm: docu.income_value_per_sqm,
+				final_value_indication: docu.final_value_indication,
+				final_value_indication_per_sqm: docu.final_value_indication_per_sqm,
 				
 				username: sess.username,
 				password: sess.password,
@@ -2956,16 +2953,16 @@ app.get('/save-doc/:ref_id', async(req,res)=> {
 		try{
 			//console.log(req.params)
 			// console.log(parseInt(req.query.price_per_sqm[0]))
-			/*const doc = await Document.find({ref_id: req.query})
-			console.log(doc)
+			//const doc = await Document.find({ref_id: req.query})
+			//console.log(doc)
 			//So the thing is, just save everything on the screen, even if user put blank there, still save
 			//the error checkng will be done in <script> of that page nalang so it's easier to seee
 			await Document.findOneAndUpdate({ref_id: req.query.ref_id},{
 				filename: req.query.filename,
 				company_name: req.query.company_name,
 				company_address: req.query.company_address,
-				appraisal_date: req.query.date,
-				appraiser_num: req.query.appraiser_num,
+				//appraisal_date: req.query.date,
+				//appraiser_num: req.query.appraiser_num,
 				appraiser_address: req.query.appraiser_address,
 				market_value: req.query.market_value,
 				parcel_id: req.query.parcel_id,
@@ -2988,7 +2985,7 @@ app.get('/save-doc/:ref_id', async(req,res)=> {
 				zoning_desc: req.query.zoning_desc,
 
 				description_improvements: req.query.description_improvements,
-				neighborhood: req.query.neighborhood,
+				//neighborhood: req.query.neighborhood,
 				area_development: req.query.area_development,
 				market_analysis: req.query.market_analysis,
 
@@ -3006,15 +3003,15 @@ app.get('/save-doc/:ref_id', async(req,res)=> {
 				final_value_per_sqm: req.query.final_value_per_sqm,
 
 				recon_final_value_opinion: req.query.recon_final_value_opinion,
-				market_value: req.query.market_value,
-				market_value_per_sqm: req.query.market_value_per_sqm,
+				//market_value: req.query.market_value,
+				//market_value_per_sqm: req.query.market_value_per_sqm,
 				cost_value: req.query.cost_value,
 				cost_value_per_sqm: req.query.cost_value_per_sqm,
 				income_value: req.query.income_value,
 				income_value_per_sqm: req.query.income_value_per_sqm,
 				final_value_indication: req.query.final_value_indication,
 				final_value_indication_per_sqm: req.query.final_value_indication_per_sqm,
-			})*/
+			})
 
 			//res.redirect('/assignments')
 			res.redirect('/edit-doc/'+ req.query.ref_id)
@@ -3031,73 +3028,93 @@ app.get('/save-doc/:ref_id', async(req,res)=> {
 });
 
 app.get('/download-doc/:ref_id', async(req,res)=> {
-	// sess = req.session;
-	// console.log(req.query.ref_id)
-	console.log(req.query)
+	sess = req.session;
+	console.log("in /download-doc-"+req.params.ref_id)
+	//console.log(req.query.ref_id)
+	
 	if(sess.username){
+		console.log(req.query)
 		try{
-			const doc = await Document.findOne({
+			const docu = await Document.findOne({
 				ref_id : req.params.ref_id
 			})
-			
-			console.log(doc)
-			res.render('download_document.hbs', {
+			console.log(docu)
+
+			if (docu) //it exists
+			{	
+			res.render('viewAssignment_1_admin.hbs', {
+				ref_id : req.params.ref_id,
+				filename: docu.filename,
+				company_name: docu.filename,
+				company_address: docu.company_address,
+				//appraiser_num: docu.appraiser_num,
+				appraiser_address: docu.appraiser_address,
+				market_value: docu.market_value,
+				market_data_value: docu.market_data_value,
+				parcel_id: docu.parcel_id,
+				improvements: docu.improvements,
+				zoning_class: docu.zoning_class,
+				interest_appraised: docu.interest_appraised,
+
+				// //Start of Body of Document
+				property_identification: docu.property_identification,
+				appraisal_objective_property_rights: docu.appraisal_objective_property_rights,
+				intended_use_intended_users: docu.intended_use_intended_users,
+				effective_date_report: docu.effective_date_report,
+				statement_ownership_sales_history: docu.statement_ownership_sales_history,
+				scope_of_work: docu.scope_of_work,
+
+				// //property description
+				title_no: docu.title_no, 
+				utilities: docu.utilities,
+				flood: docu.flood,
+				easements: docu.easements,
+				real_estate_taxes: docu.real_estate_taxes,
+				zoning_desc: docu.zoning_desc,
+
+				// //area & neighborhood overview
+				description_improvements: docu.description_improvements,
+				//neighborhood: "",
+				area_development: docu.area_development,
+				market_analysis: docu.market_analysis,
+
+				// //valuation
+				highest_best_use: docu.highest_best_use,
+				legally_permissible: docu.legally_permissible,
+				physical_possibility: docu.physical_possibility,
+				financial_feasibility: docu.financial_feasibility,
+				maximum_productivity: docu.maximum_productivity,
+				conclusion: docu.conclusion,
+				valuation_process: docu.valuation_process,
+				market_data_approach: docu.market_data_approach,
+				explanation_adjustments: docu.explanation_adjustments,
+				range_value_per_sqm: docu.range_value_per_sqm,
+				final_value_per_sqm: docu.final_value_per_sqm,
+
+				// //reconciliation & final value opinion
+				recon_final_value_opinion: docu.recon_final_value_opinion,
+				//market_value: "",
+				//market_value_per_sqm: "",
+				cost_value: docu.cost_value,
+				cost_value_per_sqm: docu.cost_value_per_sqm,
+				income_value: docu.income_value,
+				income_value_per_sqm: docu.income_value_per_sqm,
+				final_value_indication: docu.final_value_indication,
+				final_value_indication_per_sqm: docu.final_value_indication_per_sqm,
+				
+				username: sess.username,
+				password: sess.password,
+				remember: sess.remember,
+				status: sess.status,
 				email: sess.email,
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
+				can_accept: sess.can_accept
+				});
+			}
 
-				filename: doc.filename,
-				company_name: doc.company_name,
-				company_address: doc.company_address,
-				appraiser_address: doc.appraiser_address,
-				market_value: doc.market_value,
-				parcel_id: doc.parcel_id,
-				improvements: doc.improvements,
-				zoning_class: doc.zoning_class,
-				interest_appraised: doc.interest_appraised,
-
-				property_identification: doc.property_identification,
-				appraisal_objective_property_rights: doc.appraisal_objective_property_rights,
-				intended_use_intended_users: doc.intended_use_intended_users,
-				effective_date_report: doc.effective_date_report,
-				statement_ownership_sales_history: doc.statement_ownership_sales_history,
-				scope_of_work: doc.scope_of_work,
-
-				title_no: doc.title_no,
-				utilities: doc.utilities,
-				flood: doc.flood,
-				easements: doc.easements,
-				real_estate_taxes: doc.real_estate_taxes,
-				zoning_desc: doc.zoning_desc,
-
-				description_improvements: doc.description_improvements,
-				area_development: doc.area_development,
-				market_analysis: doc.market_analysis,
-
-				highest_best_use: doc.highest_best_use,
-				legally_permissible: doc.legally_permissible,
-				physical_possibility: doc.physical_possibility,
-				financial_feasibility: doc.financial_feasibility,
-				maximum_productivity: doc.maximum_productivity,
-				conclusion: doc.conclusion,
-				valuation_process: doc.valuation_process,
-				market_data_approach: doc.market_data_approach,
-
-				explanation_adjustments: doc.explanation_adjustments,
-				range_value_per_sqm: doc.range_value_per_sqm,
-				final_value_per_sqm: doc.final_value_per_sqm,
-
-				recon_final_value_opinion: doc.recon_final_value_opinion,
-				cost_value: doc.cost_value,
-				cost_value_per_sqm: doc.cost_value_per_sqm,
-				income_value: doc.income_value,
-				income_value_per_sqm: doc.income_value_per_sqm,
-				final_value_indication: doc.final_value_indication,
-				final_value_indication_per_sqm: doc.final_value_indication_per_sqm,
-			});
 			//edit comment  to "Submitted."
-
 			
 		}
 		catch(err)
