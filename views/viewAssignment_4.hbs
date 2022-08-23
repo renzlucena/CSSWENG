@@ -269,6 +269,7 @@
             </div>
 
             <form class="assignments-form">
+                {{#each assignment_ass}}
                 <div class="main-table">
 
 					<table>
@@ -544,8 +545,9 @@
                         </tr>
                     </table>
                 </div>
-				  
-				  
+				{{/each}}  
+				 
+				{{#each doc_details}}
 				<div class="main-header">
 					<h1>Document Details For Assignment #{{ref_id}}</p>
 					<h1>TODO: render this page with the document info</p>
@@ -734,6 +736,7 @@
 					<button method="get" type="submit" name="send-ass" formaction="/send-ass">Send for Processing</button>
 					<br><br><br>
 				</div>
+                {{/each}}  
             </form>
 			
         </div>

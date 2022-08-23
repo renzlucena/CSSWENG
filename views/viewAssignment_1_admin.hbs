@@ -218,9 +218,9 @@
 
     <script> 
         var docDefinition = {
-        /*pageSize: 'LETTER',
+        pageSize: 'LETTER',
         pageMargins: [80, 60],
-        header: function(currpage){
+        /*header: function(currpage){
             if (currpage != 1){
             return [{
                 columns: [
@@ -248,8 +248,8 @@
             }
             ]},
             /*{text: this.lot_loc + '\n\n\n\n\n', style: 'titletext'},
-            {text: 'As Of: \n' + this.appraisal_date + '\n\n\n\n\n', style: 'h1'},
-            {text: 'Prepared for \n' + this.company_name + '\n' + this.company_address + '\n\n\n\n\n', style: 'h1'},*/
+            {text: 'As Of: \n' + this.appraisal_date + '\n\n\n\n\n', style: 'h1'},*/
+            {text: 'Prepared for \n' + this.company_name + '\n' + this.company_address + '\n\n\n\n\n', style: 'h1'},
             {text: 'Prepared By\n', style: 'h1'},
             /*{text: this.assigned_to +  'REA Lic. No. ' + this.appraiser_num + '\n' + appraiser_address, style: 'titletext', 
             pageBreak: 'after'},*/
@@ -333,9 +333,9 @@
                 lineWidth: 1
             }
             ]},
-            /*{text: this.assigned_to + '- REA #' + this.appraiser_num, alignment: 'right', pageBreak: 'after'},
+            //{text: this.assigned_to + '- REA #' + this.appraiser_num, alignment: 'right', pageBreak: 'after'},
 
-            {text: 'Assignment Description\n', style: 'h2'},
+            /*{text: 'Assignment Description\n', style: 'h2'},
             {text: 'A. Property Identification\n\n', style: 'h3'},
             {text: '\t\t\t' + this.property_identification, preserveLeadingSpaces: true},
             //{image: '', }
@@ -349,9 +349,9 @@
             {text: '\t\t\t' + this.statement_ownership_sales_history, preserveLeadingSpaces: true, pageBreak: 'after'},
 
             {text: 'B. Scope of Work\n\n', style: 'h3'},
-            {text: '\t\t\t' + this.scope_of_work + '\n\n', preserveLeadingSpaces: true},
+            {text: '\t\t\t' + this.scope_of_work + '\n\n', preserveLeadingSpaces: true},*/
 
-            {text: 'Property Description\n\n', style: 'h2'},
+            /*{text: 'Property Description\n\n', style: 'h2'},
             {text: 'A. Description of Lot.\n\n', style:'h3'},
             {table: {
                 heights: 40,
@@ -876,6 +876,9 @@
                         </tr>
                     </table>
                 </div>
+                {{/each}}  
+				 
+				{{#each doc_details}}
 				<div class="main-header">
 					<h1>Document Details for Printing</p>
 				</div>

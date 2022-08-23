@@ -312,7 +312,10 @@ app.get('/admin-approve', async(req,res)=>{
 					// {ref_id: req.query.ref_id},
 					{ref_id: req.query.ref_id},
 					{comment: "Approved."})		//puts it to history
-					
+				await Document.findOneAndUpdate(
+					{ref_id: req.query.ref_id},
+					{comment: "Approved"})	
+
 				res.redirect('/history')
 				
 			}
@@ -770,7 +773,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					filename: docu.filename,
 					company_name: docu.filename,
 					company_address: docu.company_address,
-					appraiser_num: docu.appraiser_num,
+					//appraiser_num: docu.appraiser_num,
 					appraiser_address: docu.appraiser_address,
 					market_value: docu.market_value,
 					market_data_value: docu.market_data_value,
@@ -780,8 +783,8 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					interest_appraised: docu.interest_appraised,
 
 					//Start of Body of Document
-					property_identification: "",
-					appraisal_objective_property_rights: "",
+					property_identification: docu.property_identification,
+					appraisal_objective_property_rights: docu,
 					intended_use_intended_users: "",
 					effective_date_report: "",
 					statement_ownership_sales_history: "",
@@ -797,7 +800,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 					//area & neighborhood overview
 					description_improvements: "",
-					neighborhood: "",
+					//neighborhood: "",
 					area_development: "",
 					market_analysis: "",
 
@@ -816,8 +819,8 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 					//reconciliation & final value opinion
 					recon_final_value_opinion: "",
-					market_value: "",
-					market_value_per_sqm: "",
+					//market_value: "",
+					//market_value_per_sqm: "",
 					cost_value: "",
 					cost_value_per_sqm: "",
 					income_value: "",
@@ -1598,7 +1601,8 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					console.log("viewAssignment_4.hbs")
 					
 					res.render('viewAssignment_4.hbs',{
-						filename: docu.filename,
+						doc_details: docu,
+						/*filename: docu.filename,
 						company_name: docu.filename,
 						company_address: docu.company_address,
 						appraiser_num: docu.appraiser_num,
@@ -1654,7 +1658,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						income_value: "",
 						income_value_per_sqm: "",
 						final_value_indication: "",
-						final_value_indication_per_sqm: "",
+						final_value_indication_per_sqm: "",*/
 
 
 						ref_id 			: ass.ref_id,
