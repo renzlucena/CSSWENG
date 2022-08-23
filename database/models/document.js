@@ -4,16 +4,16 @@ const mongoose =	require('mongoose')
 const documentSchema = new mongoose.Schema({
 	ref_id: Number,
 	filename: String,
-    company_name: String,
-    company_address: String,
+    //client_name: String, //client name
+    //company_address: String, //get from assignment
     //appraisal_date: {type: Date, required: true, default: Date.now}, remove
     //appraiser_num: Number, remove
-    appraiser_address: String,
-    market_value: String,
-    parcel_id: String,
+    //appraiser_address: String, //should be on the agent
+    //market_value: String, //final computation
+    //parcel_id: String, //assignment
     improvements: String,
-    zoning_class: String,
-    interest_appraised: String,
+    zoning_classification: String, 
+    //interest_appraised: String, //assignment
 
     //Start of Body of Document
     property_identification: String,
@@ -25,12 +25,12 @@ const documentSchema = new mongoose.Schema({
     scope_of_work: String,
 
     //property description
-    title_no: String, 
+    //title_no: String, //use instead of parcel_id
     utilities: String,
     flood: String,
     easements: String,
     real_estate_taxes: String,
-    zoning_desc: String,
+    //zoning_desc: String, //same as zoning classification
 
     //area & neighborhood overview
     description_improvements: String,
@@ -38,30 +38,26 @@ const documentSchema = new mongoose.Schema({
     area_development: String,
     market_analysis: String,
 
-    //valuation
-    highest_best_use: String,
-    legally_permissible: String,
-    physical_possibility: String,
-    financial_feasibility: String,
-    maximum_productivity: String,
-    conclusion: String,
-    valuation_process: String,
-    market_data_approach: String,
-    //comparables: ,
+    //valuation remove from edit copy it from the report
+    //highest_best_use: String,
+    //legal_permissibility: String,
+    //physical_possibility: String,
+    //financial_feasibility: String,
+    //maximum_productivity: String,
+    //conclusion: String,
+    //valuation_process: String,
+    //market_data_approach: String,
+
     explanation_adjustments: String,
-    range_value_per_sqm: String,
-    final_value_per_sqm: String,
+    //range_value_per_sqm: String, //from lowest to highest comparable
+    //final_value_per_sqm: String, //get from assignment computation
 
     //reconciliation & final value opinion
     recon_final_value_opinion: String,
     //market_value: String, remove
     //market_value_per_sqm: String, remove
-    cost_value: String,
-    cost_value_per_sqm: String,
-    income_value: String,
-    income_value_per_sqm: String,
-    final_value_indication: String,
-    final_value_indication_per_sqm: String,
+    //final_value_indication: String, //remove, in peso value round up to nearest hundred value
+    //final_value_indication_per_sqm: String, //remove , round up to nearest hundred value
 
     //comparatives
     /*subject: comparativeSchema,

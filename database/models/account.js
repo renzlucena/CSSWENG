@@ -10,6 +10,7 @@ const accountSchema = new mongoose.Schema({
 	fname: String,
 	lname: String,
 	appnum: Number,
+	address: String,
 	can_accept: {type:Boolean,default:true}
 })
 

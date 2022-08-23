@@ -217,6 +217,8 @@
     <script src='pdfmake/build/vfs_fonts.js'></script>
 
     <script> 
+        var company_name = document.getElementById("company_name").value;
+        var company_address = document.getElementById("company_address").value;
         var docDefinition = {
         pageSize: 'LETTER',
         pageMargins: [80, 60],
@@ -249,7 +251,7 @@
             ]},
             /*{text: this.lot_loc + '\n\n\n\n\n', style: 'titletext'},
             {text: 'As Of: \n' + this.appraisal_date + '\n\n\n\n\n', style: 'h1'},*/
-            {text: 'Prepared for \n' + this.company_name + '\n' + this.company_address + '\n\n\n\n\n', style: 'h1'},
+            {text: 'Prepared for \n' + company_name + '\n' + company_address + '\n\n\n\n\n', style: 'h1'},
             {text: 'Prepared By\n', style: 'h1'},
             /*{text: this.assigned_to +  'REA Lic. No. ' + this.appraiser_num + '\n' + appraiser_address, style: 'titletext', 
             pageBreak: 'after'},*/
@@ -537,12 +539,8 @@
             }
         }   
         };
-        function openPDF(){
-            pdfMake.createPdf(docDefinition).open(/*this.filename + '.pdf'*/);
-        }
-
         function downloadPDF(){
-            pdfMake.createPdf(docDefinition).download(/*this.filename + '.pdf'*/);
+            pdfMake.createPdf(docDefinition).download(this.filename + '.pdf');
         }
 
     </script>

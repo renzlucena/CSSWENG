@@ -51,24 +51,25 @@ const comparativeSchema = new mongoose.Schema({
 	public_transpo: strnum,
 	improvement: boolnum,
 	zoning: strnum,
-	computation: numnum
+	computation: numnum //range value per sqm is from lowest to highest comparable
 
 },{ _id : false });
 
 const assignmentSchema = new mongoose.Schema({
 	ref_id: Number,
 	type_of_approach: String,
-	client_f_name: String,
+	client_f_name: String, 
 	client_l_name: String,
 	
 	//will only be visible to admin
 	client_contact_num: String,
 	client_email: String,
+	title_no: String,
 	
-	lot_brgy: String, //change to street or lot address
+	lot_brgy: String, //change to street or lot address; client address
 	lot_city: String,
 	lot_region: String,
-	created_at: { type: Date, required: true, default: Date.now },
+	created_at: { type: Date, required: true, default: Date.now }, //appraisal date
 	assigned_to: String,
 	zonal: Number,
 	
@@ -77,7 +78,7 @@ const assignmentSchema = new mongoose.Schema({
 	ref_date: { type: Date, required: false, default: Date.now },
 	lot_loc: String,
 	property_type: String,
-	property_interest: String,
+	property_interest: String, //interest appraised?
 	//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
 	property_images: [imageSchema],
 	lot_size: Number,
@@ -93,7 +94,7 @@ const assignmentSchema = new mongoose.Schema({
 	public_transpo: String,
 	improvement: Boolean,
 	zoning: String,
-	computation: Number,
+	computation: Number, //market value, divide by sqm to get final val per sqm, final val indication & final val indication per sqm
 
 	completed_on: { type: Date, required: false, default: Date.now },
 	expiring_on: { type: Date, required: false, default: Date.now },
