@@ -5,12 +5,13 @@ const accountSchema = new mongoose.Schema({
 	username: String,
 	password: String,
 	remember: {type:Boolean, default:false},
-	status: Boolean,	//false- inactive     true-active
+	acc_id: Number,
 	email: String,
+	status: Boolean,	//false- inactive     true-active
 	fname: String,
 	lname: String,
 	appnum: Number,
-	address: String,
+	appaddress: String,
 	can_accept: {type:Boolean,default:true}
 })
 

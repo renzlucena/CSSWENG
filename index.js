@@ -85,13 +85,13 @@ app.get('/login', async(req,res)=> {
 				sess = req.session,
 				sess.username = req.query.username,
 				sess.password = req.query.password,
-				sess.acct_id  = acct.acct_id,
+				sess.acc_id  = acct.acc_id,
 				sess.email	  = acct.email,
 				sess.status   = acct.status,
                 sess.fname	  = acct.fname,
                 sess.lname    = acct.lname,
                 sess.appnum   = acct.appnum,
-                sess.appexp   = acct.appexp
+                sess.appaddress   = acct.appaddress
 
 				if(req.query.username == "admin")
 				{
@@ -135,12 +135,14 @@ app.get('/history', async(req,res)=>{
 
 				username: sess.username,
 				password: sess.password,
+				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
+				appaddress: sess.appaddress,
 				can_accept: sess.can_accept
 			});
 		}
@@ -154,12 +156,14 @@ app.get('/history', async(req,res)=>{
 				assignment : ass,
 				username: sess.username,
 				password: sess.password,
+				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
+				appaddress: sess.appaddress,
 				can_accept: sess.can_accept
 			});
 		}
@@ -246,16 +250,8 @@ app.get('/admin-approve', async(req,res)=>{
 					ref_id : req.query.ref_id,
 					
 					filename: "",
-					company_name: "",
-					company_address: "",
-					//appraiser_num: 0,
-					appraiser_address: "",
-					market_value: "",
-					parcel_id: "",
 					improvements: "",
-					zoning_class: "",
-					interest_appraised: "",
-
+					zoning_classification: "",
 					//Start of Body of Document
 					property_identification: "",
 					appraisal_objective_property_rights: "",
@@ -263,46 +259,21 @@ app.get('/admin-approve', async(req,res)=>{
 					effective_date_report: "",
 					statement_ownership_sales_history: "",
 					scope_of_work: "",
-
 					//property description
-					title_no: "", 
 					utilities: "",
 					flood: "",
 					easements: "",
 					real_estate_taxes: "",
-					zoning_desc: "",
-
 					//area & neighborhood overview
 					description_improvements: "",
-					//neighborhood: "",
 					area_development: "",
 					market_analysis: "",
-
 					//valuation
-					highest_best_use: "",
-					legally_permissible: "",
-					physical_possibility: "",
-					financial_feasibility: "",
-					maximum_productivity: "",
 					conclusion: "",
-					valuation_process: "",
-					market_data_approach: "",
 					explanation_adjustments: "",
-					range_value_per_sqm: "",
-					final_value_per_sqm: "",
-
 					//reconciliation & final value opinion
 					recon_final_value_opinion: "",
-					//market_value: "",
-					//market_value_per_sqm: "",
-					cost_value: "",
-					cost_value_per_sqm: "",
-					income_value: "",
-					income_value_per_sqm: "",
-					final_value_indication: "",
-					final_value_indication_per_sqm: ""
 				})
-				//}		
 			
 				res.redirect('/assignments')
 			}
@@ -394,7 +365,6 @@ app.get('/admin-add-assignment', async(req,res)=>{
 		// ref_id	:	year.getDate.toString	//test
 	// });
 
-
 	if(sess.username=="admin")
 	{
 		const count = await Assignment.countDocuments().exec()
@@ -402,12 +372,14 @@ app.get('/admin-add-assignment', async(req,res)=>{
 		res.render('addAssignment.hbs',{
 			username: sess.username,
 			password: sess.password,
+			acc_id: sess.acc_id,
 			remember: sess.remember,
 			status: sess.status,
 			email: sess.email,
 			fname: sess.fname,
 			lname: sess.lname,
 			appnum: sess.appnum,
+			appaddress: sess.appaddress,
 			can_accept: sess.can_accept,
 
 			ref_id	:	(year.getFullYear()-2000).toString()+year.getMonth().toString()+padLeadingZeros((count+1), 3)
@@ -444,12 +416,14 @@ app.get('/admin-add-agent', async(req,res)=>{
 		res.render('addAgent.hbs',{
 			username: sess.username,
 			password: sess.password,
+			acc_id: sess.acc_id,
 			remember: sess.remember,
 			status: sess.status,
 			email: sess.email,
 			fname: sess.fname,
 			lname: sess.lname,
 			appnum: sess.appnum,
+			appaddress: sess.appaddress,
 			can_accept: sess.can_accept,
 
 			ref_id	:	(year.getFullYear()-2000).toString()+year.getMonth().toString()+padLeadingZeros((count+1), 3)
@@ -614,12 +588,14 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 						username: sess.username,
 						password: sess.password,
+						acc_id: sess.acc_id,
 						remember: sess.remember,
 						status: sess.status,
 						email: sess.email,
 						fname: sess.fname,
 						lname: sess.lname,
 						appnum: sess.appnum,
+						appaddress: sess.appaddress,
 						can_accept: sess.can_accept
 					});
 			}
@@ -637,6 +613,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					lot_city		: ass.lot_city,
 					lot_region		: ass.lot_region,
 					zonal			: ass.zonal,
+					title_no		: ass.title_no,
 					assigned_to		: ass.assigned_to,
 
 					//dates
@@ -660,7 +637,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					prime			: ass.prime,
 					hospital		: ass.hospital,
 					school			: ass.school,
-					mall				: ass.mall,
+					mall			: ass.mall,
 					public_transpo	: ass.public_transpo,
 					improvement		: ass.improvement,
 					zoning			: ass.zoning,
@@ -751,15 +728,17 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						zoning_percent2				: ass.comparative2.zoning.num,
 						computation_percent2		: ass.comparative2.computation.num2,
 
-					username: sess.username,
-					password: sess.password,
-					remember: sess.remember,
-					status: sess.status,
-					email: sess.email,
-					fname: sess.fname,
-					lname: sess.lname,
-					appnum: sess.appnum,
-					can_accept: sess.can_accept
+						username: sess.username,
+						password: sess.password,
+						acc_id: sess.acc_id,
+						remember: sess.remember,
+						status: sess.status,
+						email: sess.email,
+						fname: sess.fname,
+						lname: sess.lname,
+						appnum: sess.appnum,
+						appaddress: sess.appaddress,
+						can_accept: sess.can_accept
 				});
 			}
 			
@@ -771,17 +750,8 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				
 				res.render('viewAssignment_4_admin.hbs',{
 					filename: docu.filename,
-					company_name: docu.filename,
-					company_address: docu.company_address,
-					//appraiser_num: docu.appraiser_num,
-					appraiser_address: docu.appraiser_address,
-					market_value: docu.market_value,
-					market_data_value: docu.market_data_value,
-					parcel_id: docu.parcel_id,
 					improvements: docu.improvements,
-					zoning_class: docu.zoning_class,
-					interest_appraised: docu.interest_appraised,
-
+					zoning_classification: docu.zoning_classification,
 					//Start of Body of Document
 					property_identification: docu.property_identification,
 					appraisal_objective_property_rights: docu,
@@ -789,45 +759,20 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					effective_date_report: "",
 					statement_ownership_sales_history: "",
 					scope_of_work: "",
-
 					//property description
-					title_no: "", 
 					utilities: "",
 					flood: "",
 					easements: "",
 					real_estate_taxes: "",
-					zoning_desc: "",
-
 					//area & neighborhood overview
 					description_improvements: "",
-					//neighborhood: "",
 					area_development: "",
 					market_analysis: "",
-
 					//valuation
-					highest_best_use: "",
-					legally_permissible: "",
-					physical_possibility: "",
-					financial_feasibility: "",
-					maximum_productivity: "",
 					conclusion: "",
-					valuation_process: "",
-					market_data_approach: "",
 					explanation_adjustments: "",
-					range_value_per_sqm: "",
-					final_value_per_sqm: "",
-
 					//reconciliation & final value opinion
 					recon_final_value_opinion: "",
-					//market_value: "",
-					//market_value_per_sqm: "",
-					cost_value: "",
-					cost_value_per_sqm: "",
-					income_value: "",
-					income_value_per_sqm: "",
-					final_value_indication: "",
-					final_value_indication_per_sqm: "",
-
 
 					ref_id 			: ass.ref_id,
 					type_of_approach: ass.type_of_approach,
@@ -837,6 +782,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					lot_city		: ass.lot_city,
 					lot_region		: ass.lot_region,
 					zonal			: ass.zonal,
+					title_no		: ass.title_no,
 					assigned_to		: ass.assigned_to,
 
 					//dates
@@ -951,15 +897,17 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						zoning_percent2				: ass.comparative2.zoning.num,
 						computation_percent2		: ass.comparative2.computation.num2,
 
-					username: sess.username,
-					password: sess.password,
-					remember: sess.remember,
-					status: sess.status,
-					email: sess.email,
-					fname: sess.fname,
-					lname: sess.lname,
-					appnum: sess.appnum,
-					can_accept: sess.can_accept
+						username: sess.username,
+						password: sess.password,
+						acc_id: sess.acc_id,
+						remember: sess.remember,
+						status: sess.status,
+						email: sess.email,
+						fname: sess.fname,
+						lname: sess.lname,
+						appnum: sess.appnum,
+						appaddress: sess.appaddress,
+						can_accept: sess.can_accept
 				});
 			}
 			
@@ -975,12 +923,14 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					
 					username: sess.username,
 					password: sess.password,
+					acc_id: sess.acc_id,
 					remember: sess.remember,
 					status: sess.status,
 					email: sess.email,
 					fname: sess.fname,
 					lname: sess.lname,
 					appnum: sess.appnum,
+					appaddress: sess.appaddress,
 					can_accept: sess.can_accept
 				});
 			}
@@ -1009,15 +959,18 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					lot_city: ass.lot_city,
 					lot_region: ass.lot_region,
 					zonal: ass.zonal,
+					title_no		: ass.title_no,
 
 					username: sess.username,
 					password: sess.password,
+					acc_id: sess.acc_id,
 					remember: sess.remember,
 					status: sess.status,
 					email: sess.email,
 					fname: sess.fname,
 					lname: sess.lname,
 					appnum: sess.appnum,
+					appaddress: sess.appaddress,
 					can_accept: sess.can_accept
 				});
 			}
@@ -1035,6 +988,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						lot_city		: ass.lot_city,
 						lot_region		: ass.lot_region,
 						zonal			: ass.zonal,
+						title_no		: ass.title_no,
 						assigned_to		: ass.assigned_to,
 
 						//dates
@@ -1151,12 +1105,14 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 						username: sess.username,
 						password: sess.password,
+						acc_id: sess.acc_id,
 						remember: sess.remember,
 						status: sess.status,
 						email: sess.email,
 						fname: sess.fname,
 						lname: sess.lname,
 						appnum: sess.appnum,
+						appaddress: sess.appaddress,
 						can_accept: sess.can_accept
 					});
 					
@@ -1186,6 +1142,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							lot_city		: ass.lot_city,
 							lot_region		: ass.lot_region,
 							zonal			: ass.zonal,
+							title_no		: ass.title_no,
 							assigned_to		: ass.assigned_to,
 
 							//dates
@@ -1302,12 +1259,14 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 							username: sess.username,
 							password: sess.password,
+							acc_id: sess.acc_id,
 							remember: sess.remember,
 							status: sess.status,
 							email: sess.email,
 							fname: sess.fname,
 							lname: sess.lname,
 							appnum: sess.appnum,
+							appaddress: sess.appaddress,
 							can_accept: sess.can_accept
 						});
 				}
@@ -1327,6 +1286,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							lot_city		: ass.lot_city,
 							lot_region		: ass.lot_region,
 							zonal			: ass.zonal,
+							title_no		: ass.title_no,
 							assigned_to		: ass.assigned_to,
 
 							//dates
@@ -1443,12 +1403,14 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 							username: sess.username,
 							password: sess.password,
+							acc_id: sess.acc_id,
 							remember: sess.remember,
 							status: sess.status,
 							email: sess.email,
 							fname: sess.fname,
 							lname: sess.lname,
 							appnum: sess.appnum,
+							appaddress: sess.appaddress,
 							can_accept: sess.can_accept
 						});
 				}
@@ -1465,6 +1427,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						lot_city		: ass.lot_city,
 						lot_region		: ass.lot_region,
 						zonal			: ass.zonal,
+						title_no		: ass.title_no,
 						assigned_to		: ass.assigned_to,
 
 						//dates
@@ -1581,12 +1544,14 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 						username: sess.username,
 						password: sess.password,
+						acc_id: sess.acc_id,
 						remember: sess.remember,
 						status: sess.status,
 						email: sess.email,
 						fname: sess.fname,
 						lname: sess.lname,
 						appnum: sess.appnum,
+						appaddress: sess.appaddress,
 						can_accept: sess.can_accept
 					});
 				}
@@ -1669,6 +1634,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						lot_city		: ass.lot_city,
 						lot_region		: ass.lot_region,
 						zonal			: ass.zonal,
+						title_no		: ass.title_no,
 						assigned_to		: ass.assigned_to,
 
 						//dates
@@ -1783,15 +1749,17 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							zoning_percent2				: ass.comparative2.zoning.num,
 							computation_percent2		: ass.comparative2.computation.num2,
 
-						username: sess.username,
-						password: sess.password,
-						remember: sess.remember,
-						status: sess.status,
-						email: sess.email,
-						fname: sess.fname,
-						lname: sess.lname,
-						appnum: sess.appnum,
-						can_accept: sess.can_accept
+							username: sess.username,
+							password: sess.password,
+							acc_id: sess.acc_id,
+							remember: sess.remember,
+							status: sess.status,
+							email: sess.email,
+							fname: sess.fname,
+							lname: sess.lname,
+							appnum: sess.appnum,
+							appaddress: sess.appaddress,
+							can_accept: sess.can_accept
 					});
 				}
 				else{
@@ -1808,6 +1776,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							lot_city		: ass.lot_city,
 							lot_region		: ass.lot_region,
 							zonal			: ass.zonal,
+							title_no		: ass.title_no,
 							assigned_to		: ass.assigned_to,
 
 							//dates
@@ -1924,12 +1893,14 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 							username: sess.username,
 							password: sess.password,
+							acc_id: sess.acc_id,
 							remember: sess.remember,
 							status: sess.status,
 							email: sess.email,
 							fname: sess.fname,
 							lname: sess.lname,
 							appnum: sess.appnum,
+							appaddress: sess.appaddress,
 							can_accept: sess.can_accept
 						});
 				}
@@ -1983,7 +1954,7 @@ app.get('/viewAssignment/0/:ref_id', async(req,res)=>{
 				status: sess.status,
 				remember: sess.remember,
 				password: sess.password,
-				acct_id : sess.acct_id,
+				acc_id : sess.acc_id,
 				email   : sess.email,
 				fname   : sess.fname,
 				lName   : sess.lName,
@@ -2056,6 +2027,7 @@ app.post('/submit-assignment', function(req,res) {
 			lot_region: req.body.lot_region,
 			assigned_to: "",
 			zonal: req.body.zonal,
+			title_no: req.body.title_no,
 			price_per_sqm: 0,
 
 			ref_date: 0,
@@ -2150,10 +2122,12 @@ app.post('/new-agent', function(req,res) {
 			password: req.body.password,
 			email: req.body.email,
 			remember: false,
+			acc_id: req.body.acc_id,
 			status: true,
 			fname: req.body.fname,
 			lname: req.body.lname,
 			appnum: req.body.appnum,
+			appaddress: req.body.appaddress,
 			can_accept: true
 		})
 	}
@@ -2172,12 +2146,14 @@ app.get('/dashboard', async(req,res)=> {
 			res.render('dashboard.hbs', {
 				username: sess.username,
 				password: sess.password,
+				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
+				appaddress: sess.appaddress,
 				can_accept: sess.can_accept
 			}
 		)}
@@ -2200,12 +2176,14 @@ app.get('/dashboard', async(req,res)=> {
 				res.render('dashboard.hbs', {
 					username: sess.username,
 					password: sess.password,
+					acc_id: sess.acc_id,
 					remember: sess.remember,
 					status: sess.status,
 					email: sess.email,
 					fname: sess.fname,
 					lname: sess.lname,
 					appnum: sess.appnum,
+					appaddress: sess.appaddress,
 					can_accept: sess.can_accept,
 
 					newnotif: assNum
@@ -2216,12 +2194,14 @@ app.get('/dashboard', async(req,res)=> {
 				res.render('dashboard_unactivated.hbs', {
 					username: sess.username,
 					password: sess.password,
+					acc_id: sess.acc_id,
 					remember: sess.remember,
 					status: sess.status,
 					email: sess.email,
 					fname: sess.fname,
 					lname: sess.lname,
 					appnum: sess.appnum,
+					appaddress: sess.appaddress,
 					can_accept: sess.can_accept
 				})
 			}
@@ -2250,14 +2230,16 @@ app.get('/settings', (req,res)=> {
 	sess = req.session;
 	if(sess.username){
 		res.render('settings.hbs', {
-            username: sess.username,
+			username: sess.username,
 			password: sess.password,
+			acc_id: sess.acc_id,
 			remember: sess.remember,
 			status: sess.status,
 			email: sess.email,
 			fname: sess.fname,
 			lname: sess.lname,
 			appnum: sess.appnum,
+			appaddress: sess.appaddress,
 			can_accept: sess.can_accept
         })
 	}
@@ -2325,12 +2307,15 @@ app.get('/set-settings', async(req,res)=> {
 			res.render('settings.hbs', {
 				username: sess.username,
 				password: sess.password,
+				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
+				appaddress: sess.appaddress,
+				can_accept: sess.can_accept
 
 				// username_comment: "",
 				// password_comment: "",
@@ -2395,12 +2380,14 @@ app.get('/assignments', async(req,res)=> {
 
 				username: sess.username,
 				password: sess.password,
+				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
+				appaddress: sess.appaddress,
 				can_accept: sess.can_accept
 			})
 		}
@@ -2455,15 +2442,16 @@ app.get('/assignments', async(req,res)=> {
 					assignment_new:ass_new,
 					// assignment_ass:ass,
 					//assignment_sub:ass_sub,
-
 					username: sess.username,
 					password: sess.password,
+					acc_id: sess.acc_id,
 					remember: sess.remember,
 					status: sess.status,
 					email: sess.email,
 					fname: sess.fname,
 					lname: sess.lname,
 					appnum: sess.appnum,
+					appaddress: sess.appaddress,
 					can_accept: sess.can_accept
 
 				})
@@ -2480,12 +2468,14 @@ app.get('/assignments', async(req,res)=> {
 					
 					username: sess.username,
 					password: sess.password,
+					acc_id: sess.acc_id,
 					remember: sess.remember,
 					status: sess.status,
 					email: sess.email,
 					fname: sess.fname,
 					lname: sess.lname,
 					appnum: sess.appnum,
+					appaddress: sess.appaddress,
 					can_accept: sess.can_accept
 
 				})
@@ -2502,14 +2492,16 @@ app.get('/profile', (req,res)=> {
 	sess = req.session;
 	if(sess.username){
 		res.render('profile.hbs', {
-            username: sess.username,
+			username: sess.username,
 			password: sess.password,
+			acc_id: sess.acc_id,
 			remember: sess.remember,
 			status: sess.status,
 			email: sess.email,
 			fname: sess.fname,
 			lname: sess.lname,
 			appnum: sess.appnum,
+			appaddress: sess.appaddress,
 			can_accept: sess.can_accept
         })
 	}
@@ -2527,12 +2519,14 @@ app.get('/terms', function(req,res){
 			res.render('terms_active.hbs', {
 				username: sess.username,
 				password: sess.password,
+				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
+				appaddress: sess.appaddress,
 				can_accept: sess.can_accept
 				})
 		}
@@ -2540,12 +2534,14 @@ app.get('/terms', function(req,res){
 			res.render('terms.hbs', {
 				username: sess.username,
 				password: sess.password,
+				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
+				appaddress: sess.appaddress,
 				can_accept: sess.can_accept
 			})
 		}
@@ -2588,7 +2584,8 @@ app.get('/save-ass', async(req,res)=> {
 					lot_city: req.query.lot_city,
 					lot_region: req.query.lot_region,
 					
-					zonal: req.query.zonal
+					zonal: req.query.zonal,
+					title_no: req.query.title_no
 				})
 
 				res.redirect('/assignments') //if admin, just redirct to assignmets
@@ -2859,17 +2856,8 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 			res.render('viewAssignment_4.hbs', {
 				ref_id : req.params.ref_id,
 				filename: docu.filename,
-				company_name: docu.filename,
-				company_address: docu.company_address,
-				//appraiser_num: docu.appraiser_num,
-				appraiser_address: docu.appraiser_address,
-				market_value: docu.market_value,
-				market_data_value: docu.market_data_value,
-				parcel_id: docu.parcel_id,
 				improvements: docu.improvements,
-				zoning_class: docu.zoning_class,
-				interest_appraised: docu.interest_appraised,
-
+				zoning_classification: docu.zoning_classification,
 				// //Start of Body of Document
 				property_identification: docu.property_identification,
 				appraisal_objective_property_rights: docu.appraisal_objective_property_rights,
@@ -2877,53 +2865,31 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 				effective_date_report: docu.effective_date_report,
 				statement_ownership_sales_history: docu.statement_ownership_sales_history,
 				scope_of_work: docu.scope_of_work,
-
 				// //property description
-				title_no: docu.title_no, 
 				utilities: docu.utilities,
 				flood: docu.flood,
 				easements: docu.easements,
 				real_estate_taxes: docu.real_estate_taxes,
-				zoning_desc: docu.zoning_desc,
-
 				// //area & neighborhood overview
 				description_improvements: docu.description_improvements,
-				//neighborhood: "",
 				area_development: docu.area_development,
 				market_analysis: docu.market_analysis,
-
 				// //valuation
-				highest_best_use: docu.highest_best_use,
-				legally_permissible: docu.legally_permissible,
-				physical_possibility: docu.physical_possibility,
-				financial_feasibility: docu.financial_feasibility,
-				maximum_productivity: docu.maximum_productivity,
 				conclusion: docu.conclusion,
-				valuation_process: docu.valuation_process,
-				market_data_approach: docu.market_data_approach,
 				explanation_adjustments: docu.explanation_adjustments,
-				range_value_per_sqm: docu.range_value_per_sqm,
-				final_value_per_sqm: docu.final_value_per_sqm,
-
 				// //reconciliation & final value opinion
 				recon_final_value_opinion: docu.recon_final_value_opinion,
-				//market_value: "",
-				//market_value_per_sqm: "",
-				cost_value: docu.cost_value,
-				cost_value_per_sqm: docu.cost_value_per_sqm,
-				income_value: docu.income_value,
-				income_value_per_sqm: docu.income_value_per_sqm,
-				final_value_indication: docu.final_value_indication,
-				final_value_indication_per_sqm: docu.final_value_indication_per_sqm,
 				
 				username: sess.username,
 				password: sess.password,
+				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
+				appaddress: sess.appaddress,
 				can_accept: sess.can_accept
 			});
 		}
@@ -2963,16 +2929,8 @@ app.get('/save-doc/:ref_id', async(req,res)=> {
 			//the error checkng will be done in <script> of that page nalang so it's easier to seee
 			await Document.findOneAndUpdate({ref_id: req.query.ref_id},{
 				filename: req.query.filename,
-				company_name: req.query.company_name,
-				company_address: req.query.company_address,
-				//appraisal_date: req.query.date,
-				//appraiser_num: req.query.appraiser_num,
-				appraiser_address: req.query.appraiser_address,
-				market_value: req.query.market_value,
-				parcel_id: req.query.parcel_id,
 				improvements: req.query.improvements,
-				zoning_class: req.query.zoning_class,
-				interest_appraised: req.query.interest_appraised,
+				zoning_classification: req.query.zoning_classification,
 
 				property_identification: req.query.property_identification,
 				appraisal_objective_property_rights: req.query.appraisal_objective_property_rights,
@@ -2981,40 +2939,19 @@ app.get('/save-doc/:ref_id', async(req,res)=> {
 				statement_ownership_sales_history: req.query.statement_ownership_sales_history,
 				scope_of_work: req.query.scope_of_work,
 
-				title_no: req.query.title_no,
 				utilities: req.query.utilities,
 				flood: req.query.flood,
 				easements: req.query.easements,
 				real_estate_taxes: req.query.real_estate_taxes,
-				zoning_desc: req.query.zoning_desc,
 
 				description_improvements: req.query.description_improvements,
-				//neighborhood: req.query.neighborhood,
 				area_development: req.query.area_development,
 				market_analysis: req.query.market_analysis,
 
-				highest_best_use: req.query.highest_best_use,
-				legally_permissible: req.query.legally_permissible,
-				physical_possibility: req.query.physical_possibility,
-				financial_feasibility: req.query.financial_feasibility,
-				maximum_productivity: req.query.maximum_productivity,
 				conclusion: req.query.conclusion,
-				valuation_process: req.query.valuation_process,
-				market_data_approach: req.query.market_data_approach,
-
 				explanation_adjustments: req.query.explanation_adjustments,
-				range_value_per_sqm: req.query.range_value_per_sqm,
-				final_value_per_sqm: req.query.final_value_per_sqm,
 
-				recon_final_value_opinion: req.query.recon_final_value_opinion,
-				//market_value: req.query.market_value,
-				//market_value_per_sqm: req.query.market_value_per_sqm,
-				cost_value: req.query.cost_value,
-				cost_value_per_sqm: req.query.cost_value_per_sqm,
-				income_value: req.query.income_value,
-				income_value_per_sqm: req.query.income_value_per_sqm,
-				final_value_indication: req.query.final_value_indication,
-				final_value_indication_per_sqm: req.query.final_value_indication_per_sqm,
+				recon_final_value_opinion: req.query.recon_final_value_opinion
 			})
 
 			//res.redirect('/assignments')
@@ -3049,17 +2986,8 @@ app.get('/download-doc/:ref_id', async(req,res)=> {
 			res.render('viewAssignment_1_admin.hbs', {
 				ref_id : req.params.ref_id,
 				filename: docu.filename,
-				company_name: docu.filename,
-				company_address: docu.company_address,
-				//appraiser_num: docu.appraiser_num,
-				appraiser_address: docu.appraiser_address,
-				market_value: docu.market_value,
-				market_data_value: docu.market_data_value,
-				parcel_id: docu.parcel_id,
 				improvements: docu.improvements,
-				zoning_class: docu.zoning_class,
-				interest_appraised: docu.interest_appraised,
-
+				zoning_classification: docu.zoning_classification,
 				// //Start of Body of Document
 				property_identification: docu.property_identification,
 				appraisal_objective_property_rights: docu.appraisal_objective_property_rights,
@@ -3069,51 +2997,33 @@ app.get('/download-doc/:ref_id', async(req,res)=> {
 				scope_of_work: docu.scope_of_work,
 
 				// //property description
-				title_no: docu.title_no, 
 				utilities: docu.utilities,
 				flood: docu.flood,
 				easements: docu.easements,
 				real_estate_taxes: docu.real_estate_taxes,
-				zoning_desc: docu.zoning_desc,
 
 				// //area & neighborhood overview
 				description_improvements: docu.description_improvements,
-				//neighborhood: "",
 				area_development: docu.area_development,
 				market_analysis: docu.market_analysis,
 
 				// //valuation
-				highest_best_use: docu.highest_best_use,
-				legally_permissible: docu.legally_permissible,
-				physical_possibility: docu.physical_possibility,
-				financial_feasibility: docu.financial_feasibility,
-				maximum_productivity: docu.maximum_productivity,
 				conclusion: docu.conclusion,
-				valuation_process: docu.valuation_process,
-				market_data_approach: docu.market_data_approach,
 				explanation_adjustments: docu.explanation_adjustments,
-				range_value_per_sqm: docu.range_value_per_sqm,
-				final_value_per_sqm: docu.final_value_per_sqm,
 
 				// //reconciliation & final value opinion
 				recon_final_value_opinion: docu.recon_final_value_opinion,
-				//market_value: "",
-				//market_value_per_sqm: "",
-				cost_value: docu.cost_value,
-				cost_value_per_sqm: docu.cost_value_per_sqm,
-				income_value: docu.income_value,
-				income_value_per_sqm: docu.income_value_per_sqm,
-				final_value_indication: docu.final_value_indication,
-				final_value_indication_per_sqm: docu.final_value_indication_per_sqm,
 				
 				username: sess.username,
 				password: sess.password,
+				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
 				fname: sess.fname,
 				lname: sess.lname,
 				appnum: sess.appnum,
+				appaddress: sess.appaddress,
 				can_accept: sess.can_accept
 				});
 			}

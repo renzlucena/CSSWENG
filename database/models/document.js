@@ -44,7 +44,7 @@ const documentSchema = new mongoose.Schema({
     //physical_possibility: String,
     //financial_feasibility: String,
     //maximum_productivity: String,
-    //conclusion: String,
+    conclusion: String,
     //valuation_process: String,
     //market_data_approach: String,
 
