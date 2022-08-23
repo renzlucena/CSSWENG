@@ -33,6 +33,7 @@
             var fname = document.getElementById("fname");
             var lname = document.getElementById("lname");
             var appnum = document.getElementById("appnum");
+            var appaddress = document.getElementById("appaddress");
 
             //if either field is empty, do not proceed.
             if (username.value == "")
@@ -90,6 +91,15 @@
             }
             else{
                 appnum.style.backgroundColor = "white";
+            }
+
+            if (appaddress.value == "")
+            {
+                appaddress.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                appaddress.style.backgroundColor = "white";
             }
             return valid;
         }
@@ -152,6 +162,10 @@
 						<tr>
                             <th><label for="appnum">License Number</label></th>
                             <td><input name="appnum" id="appnum" type="number"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="appaddress">Appraiser Address</label></th>
+                            <td><input name="appaddress" id="appaddress" type="text"></td>
                         </tr>
 
                     </table>

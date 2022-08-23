@@ -33,6 +33,7 @@
             var loc_city = document.getElementById("loc_city");
             var loc_region = document.getElementById("loc_region");
             var loc_brgy = document.getElementById("loc_brgy");
+            var title_no = document.getElementById("title_no");
 			
             //if either field is empty, do not proceed.
             if (ref_id.value == "")
@@ -90,6 +91,15 @@
             }
             else{
                 loc_brgy.style.backgroundColor = "white";
+            }
+
+            if (title_no.value == "")
+            {
+                title_no.style.backgroundColor = "red";
+                valid = false;
+            }
+            else{
+                title_no.style.backgroundColor = "white";
             }
             return valid;
         }
@@ -203,6 +213,12 @@
 						<tr>
                             <th><label for="zonal">Zonal Value</label></th>
                             <td><input name="zonal" id="zonal" type="number">
+							</td>
+                        </tr>
+
+                        <tr>
+                            <th><label for="title_no">Title No</label></th>
+                            <td><input name="title_no" id="title_no" type="text">
 							</td>
                         </tr>
                     </table>    

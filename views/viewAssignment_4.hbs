@@ -303,7 +303,10 @@
 							<th><label for="zonal">Zonal Value</label></th>
                             <td><input name="zonal" type="number" value="{{this.zonal}}" readonly></td>
 						</tr>
-
+                        <tr> <!-- title no -->
+							<th><label for="title_no">Title No</label></th>
+                            <td><input name="title_no" type="text" value="{{this.title_no}}" readonly></td>
+						</tr>
 						<tr>	<!-- LABELS -->
 							<th></th>
 							<th>SUBJECT PROPERTY</th>
@@ -560,36 +563,12 @@
                         <td><input type="text" id="filename" name="filename" value="{{this.filename}}" ></td>
                     </tr>
                     <tr>
-                        <th><label for="company_name">Company Name</label></th>
-                        <td><input type="text" id="company_name" name="company_name" value="{{this.company_name}}" ></td>
-                    </tr>
-                    <tr>
-                        <th><label for="company_address">Company Address</label></th>
-                        <td><input type="text" id="company_address" name="company_address" value="{{this.company_address}}" >  </td>
-                    </tr>
-                    <tr>
-                        <th><label for="appraiser_address">Appraiser Address</label></th>
-                        <td><input type="text" id="appraiser_address" name="appraiser_address" value="{{this.appraiser_address}}" ></td>
-                    </tr>
-                    <tr>
-                        <th><label for="market_value">Market Value</label></th>
-                        <td><input type="text" id="market_value" name="market_value" value="{{this.market_value}}" ></td>
-                    </tr>
-                    <tr>
-                        <th><label for="parcel_id">Parcel ID</label></th>
-                        <td><input type="text" id="parcel_id" name="parcel_id" value="{{this.parcel_id}}" ></td>
-                    </tr>
-                    <tr>
                         <th><label for="improvements">Improvements</label></th>
                         <td><input type="text" id="improvements" name="improvements" value="{{this.improvements}}" ></td>
                     </tr>
                     <tr>
-                        <th><label for="zoning_class">Zoning Class</label></th>
-                        <td><input type="text" id="zoning_class" name="zoning_class" value="{{this.zoning_class}}" ></td>
-                    </tr>
-                    <tr>
-                        <th><label for="interest_appraised">Interest Appraised</label></th>
-                        <td><input type="text" id="interest_appraised" name="interest_appraised" value="{{this.interest_appraised}}" ></td>
+                        <th><label for="zoning_classification">Zoning Classification</label></th>
+                        <td><input type="text" id="zoning_classification" name="zoning_classification" value="{{this.zoning_classification}}" ></td>
                     </tr>
 
                     <tr>
@@ -618,10 +597,6 @@
                     </tr>
 
                     <tr>
-                        <th><label for="title_no">Title No.</label></th>
-                        <td><input type="text" id="title_no" name="title_no" value="{{this.title_no}}" ></td>
-                    </tr>
-                    <tr>
                         <th><label for="utilities">Utilities</label></th>
                         <td><input type="text" id="utilities" name="utilities" value="{{this.utilities}}" ></td>
                     </tr>
@@ -636,10 +611,6 @@
                     <tr>
                         <th><label for="real_estate_taxes">Real Estate Tax</label></th>
                         <td><input type="text" id="real_estate_taxes" name="real_estate_taxes" value="{{this.real_estate_taxes}}" ></td>
-                    </tr>
-                    <tr>
-                        <th><label for="zoning_desc">Zoning Description</label></th>
-                        <td><input type="text" id="zoning_desc" name="zoning_desc" value="{{this.zoning_desc}}" ></td>
                     </tr>
 
                     <tr>
@@ -656,78 +627,17 @@
                     </tr>
 
                     <tr>
-                        <th><label for="highest_best_use">Highest and Best Use</label></th>
-                        <td><textarea id="highest_best_use" name="highest_best_use" value="{{this.highest_best_use}}" style="width:80%;" rows="10">{{this.highest_best_use}}</textarea></td>
-                    </tr>
-                    <tr>
-                        <th><label for="legally_permissible">Legally Permissible</label></th>
-                        <td><textarea id="legally_permissible" name="legally_permissible" value="{{this.legally_permissible}}" style="width:80%;" rows="10">{{this.legally_permissible}}</textarea></td>
-                    </tr>
-                    <tr>
-                        <th><label for="physical_possibility">Physical Possibility</label></th>
-                        <td><textarea id="physical_possibility" name="physical_possibility" value="{{this.physical_possibility}}" style="width:80%;" rows="10">{{this.physical_possibility}}</textarea></td>
-                    </tr>
-                    <tr>
-                        <th><label for="financial_feasibility">Financial Feasibility</label></th>
-                        <td><textarea id="financial_feasibility" name="financial_feasibility" value="{{this.financial_feasibility}}" style="width:80%;" rows="10">{{this.financial_feasibility}}</textarea></td>
-                    </tr>
-                    <tr>
-                        <th><label for="maximum_productivity">Maximum Productivity</label></th>
-                        <td><textarea id="maximum_productivity" name="maximum_productivity" value="{{this.maximum_productivity}}" style="width:80%;" rows="10">{{this.maximum_productivity}}</textarea></td>
-                    </tr>
-                    <tr>
                         <th><label for="conclusion">Conclusion</label></th>
                         <td><textarea id="conclusion" name="conclusion" value="{{this.conclusion}}" style="width:80%;" rows="10">{{this.conclusion}}</textarea></td>
                     </tr>
                     <tr>
-                        <th><label for="valuation_process">The Valuation Process</label></th>
-                        <td><textarea id="valuation_process" name="valuation_process" value="{{this.valuation_process}}" style="width:80%;" rows="10">{{this.valuation_process}}</textarea></td>
-                    </tr>
-                    <tr>
-                        <th><label for="market_data_approach">Market Data Approach</label></th>
-                        <td><textarea id="market_data_approach" name="market_data_approach" value="{{this.market_data_approach}}" style="width:80%;" rows="10">{{this.market_data_approach}}</textarea></td>
-                    </tr>
-
-                    <tr>
                         <th><label for="explanation_adjustments">Explanation of Adjustments</label></th>
                         <td><textarea id="explanation_adjustments" name="explanation_adjustments" value="{{this.explanation_adjustments}}" style="width:80%;" rows="10">{{this.explanation_adjustments}}</textarea></td>
-                    </tr>
-                    <tr>
-                        <th><label for="range_value_per_sqm">Range Value per sqm</label></th>
-                        <td><input type="text" id="range_value_per_sqm" name="range_value_per_sqm" value="{{this.range_value_per_sqm}}"></td>
-                    </tr>
-                    <tr>
-                        <th><label for="final_value_per_sqm">Final Value per sqm</label></th>
-                        <td><input type="text" id="final_value_per_sqm" name="final_value_per_sqm" value="{{this.final_value_per_sqm}}"></td>
                     </tr>
 
                     <tr>
                         <th><label for="recon_final_value_opinion">Reconciliation and Final Value Opinion</label></th>
                         <td><textarea id="recon_final_value_opinion" name="recon_final_value_opinion" value="{{this.recon_final_value_opinion}}" style="width:80%;" rows="10">{{this.recon_final_value_opinion}}</textarea></td>
-                    </tr>
-                    <tr>
-                        <th><label for="cost_value">Cost Approach Value</label></th>
-                        <td><input type="text" id="cost_value" name="cost_value" value={{this.cost_value}}></td>
-                    </tr>
-                    <tr>
-                        <th><label for="cost_value_per_sqm">Cost Approach Value per sqm</label></th>
-                        <td><input type="text" id="cost_value_per_sqm" name="cost_value_per_sqm" value="{{this.cost_value_per_sqm}}"></td>
-                    </tr>
-                    <tr>
-                        <th><label for="income_value">Income Capitalization Approach Value</label></th>
-                        <td><input type="text" id="income_value" name="income_value" value="{{this.income_value}}"></td>
-                    </tr>
-                    <tr>
-                        <th><label for="market_value_per_sqm">Income Capitalization Approach Value per sqm</label></th>
-                        <td><input type="text" id="income_value_per_sqm" name="income_value_per_sqm" value="{{this.income_value_per_sqm}}"></td>
-                    </tr>
-                    <tr>
-                        <th><label for="final_value_indication">Final Value Indication</label></th>
-                        <td><input type="text" id="final_value_indication" name="final_value_indication" value="{{this.final_value_indication}}"></td>
-                    </tr>
-                    <tr>
-                        <th><label for="final_value_indication_per_sqm">Final Value Indication per sqm</label></th>
-                        <td><input type="text" id="final_value_indication_per_sqm" name="final_value_indication_per_sqm" value="{{this.final_value_indication_per_sqm}}"></td>
                     </tr>
                     </table>
                 </div>

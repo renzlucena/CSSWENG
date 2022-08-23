@@ -297,7 +297,10 @@
 							<th><label for="zonal">Zonal Value</label></th>
                             <td><input name="zonal" type="number" value="{{this.zonal}}" readonly></td>
 						</tr>
-
+						<tr> <!-- title no -->
+							<th><label for="title_no">Title No</label></th>
+                            <td><input name="title_no" type="text" value="{{this.title_no}}" readonly></td>
+						</tr>
 						<tr>	<!-- LABELS -->
 							<th></th>
 							<th>SUBJECT PROPERTY</th>
@@ -545,7 +548,7 @@
                 <textarea name="comment" id="comment" type="text">{{this.comment}}</textarea>
                       </div>
               <button type = "submit" name="save_ass" formaction="/admin-comment">Return and comment</button>
-                      <button type="submit" name="send_ass" formaction="/admin-approve">Approve</button>
+                      <button type="submit" name="send_ass" formaction="/admin-approve">Proceed to Report</button>
               </div>
               </form>
           </div>
