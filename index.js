@@ -3,14 +3,17 @@ mongoose.connect('mongodb://localhost/appraisers-db')
 
 const express = require('express')
 const app = new express()
-//for session
+
 const path = require('path');
+//for session
 const session = require('express-session');
 
 //schemas
 const Assignment = require('./database/models/assignment')
 const Account = require('./database/models/account')
 const Document = require('./database/models/document')
+
+
 
 app.use(express.json())
 
@@ -19,7 +22,6 @@ app.use(express.urlencoded ({extended:true}))
 
 app.get('/', function(req,res) {
 	res.sendFile(path.join(__dirname, 'login.html'));
-//	res.sendFile(__dirname + '\\' + 'viewAssignment.html');
 });
 
 // hbs for template chuchu
