@@ -4,6 +4,7 @@ mongoose.connect('mongodb://localhost/appraisers-db')
 const express = require('express')
 const app = new express()
 //for session
+const path = require('path');
 const session = require('express-session');
 
 //schemas
@@ -17,7 +18,7 @@ app.use(express.json())
 app.use(express.urlencoded ({extended:true}))
 
 app.get('/', function(req,res) {
-	res.sendFile(__dirname + '\\' + 'login.html');
+	res.sendFile(path.join(__dirname, 'login.html'));
 //	res.sendFile(__dirname + '\\' + 'viewAssignment.html');
 });
 
