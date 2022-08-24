@@ -34,13 +34,11 @@
         var improvement1 = parseInt(document.getElementById("improvement_percent1").value);
         var zoning1 = parseInt(document.getElementById("zoning_percent1").value);
 
-
         //mixed bools, 6 because there are 6 booleans
         // todo make this return the resultsofr bools
         //for (var i=0; i=6; i++)
         //{
         //}
-
 
         <!-- var corner_bool = document.getElementById("corner"); -->
 
@@ -50,12 +48,10 @@
         var checked_items = document.getElementsByName("corner")
         // WORKING PATRT - checked_items[0].checked = true if naka check
 
-
                 //[corner_bool[0].checked,
                   //	corner1.checked,
                   //	corner1.checked,
                   //	corner1.checked ]
-
 
         //var bools_percent = document.getElementById("bools_percent") // dont forget to parse to int when using
 
@@ -75,7 +71,6 @@
         var public_transpo2 = parseInt(document.getElementById("public_transpo_percent2").value);
         var improvement2 = parseInt(document.getElementById("improvement_percent2").value);
         var zoning2 = parseInt(document.getElementById("zoning_percent2").value);
-
 
         var startingValue0 = parseInt(document.getElementById("price_per_sqm").value);
         var startingValue1 = parseInt(document.getElementById("price_per_sqm1").value);
@@ -98,7 +93,6 @@
         (startingValue1*public_transpo1*0.01) +
         (startingValue1*zoning1*0.01);
 
-
         value2 = startingValue2 + (startingValue2*ref_date2*0.01) +
         (startingValue2*property_type2*0.01)+
         (startingValue2*property_interest2*0.01)+
@@ -115,14 +109,12 @@
         (startingValue2*public_transpo2*0.01) +
         (startingValue2*zoning2*0.01);
 
-
         var comp_percent1 = parseInt(document.getElementById("computation_percent1").value);
         var comp_percent2 = parseInt(document.getElementById("computation_percent2").value);
 
         var computationText = document.getElementById("computation");
 
         <!-- computationText.value = parseInt(startingValue0.value)+423;	//WORKS NOW -->
-
 
   //			computationText.value = value0;	//WORKS NOW
         var computationText1 = document.getElementById("computation1");
@@ -133,10 +125,7 @@
         //computationText.value = parseInt(computationText1.value)*(comp_percent1*0.01)
         computationText.value = (parseInt(computationText1.value)*(comp_percent1*0.01)) + (parseInt(computationText2.value)*(comp_percent2*0.01))
 
-
         var zonal_value = parseInt(document.getElementById("zonal").value);
-
-
 
         //not working zonal value
         if (parseInt(computationText1.value)*(comp_percent1*0.01) + parseInt(computationText2.value)*(comp_percent2*0.01) > zonal_value)//does not work -> this.zonal)
@@ -147,23 +136,15 @@
           computationText.value = zonal_value
         }
 
-
         //computationText.value = bools;
         <!-- computationText1.value = startValue2; -->
         <!-- computationText2.setAttribute("value", "Hi") -->
-
       }
-
     </script>
 
     <script>
-
-
-
-
       //prevent unsaved stuff
           window.addEventListener('beforeunload', function (e) {
-
 
         <!-- document.getElementById("property_type_percent1"); -->
         <!-- document.getElementById("property_interest_percent1"); -->
@@ -179,8 +160,6 @@
         <!-- document.getElementById("mall_percent1"); -->
         <!-- document.getElementById("public_transpo1"); -->
         <!-- document.getElementById("zoning_percent1"); -->
-
-
 
               // TODO complete this
               <!-- if (document.getElementById("property_type_percent2") !== 0 || -->
@@ -204,7 +183,6 @@
                   e.preventDefault();
                   e.returnValue = '';
               }
-
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -395,29 +373,51 @@
 
             {text: 'Valuation\n\n', style: 'h2'},
             {text: 'A. Highest and Best Use\n\n', style: 'h3'},
-            {text: '\t\t\t' + this.highest_best_use +
-            '\n\n', preserveLeadingSpaces: true},
-            {text: 'Legally Permissible\n\n', style: 'h3'},
-            {text: '\t\t\t' + this.legally_permissible +
-            '\n\n', preserveLeadingSpaces: true},
+            {text: '\t\t\t' + 'Highest and Best Use is a real estate valuation principle that dictates that the market ' +
+            'tends to put property to its most profitable use which provides the greatest benefits of ' +
+            'ownership. The Philippine Valuation Standards, 2nd Edition, defines highest and best use as ' +
+            'the use of an asset that maximizes its potential and that is possible, legally permissible, and ' +
+            'financially feasible. The highest and best use may be for continuation of an asset’s existing use ' +
+            'or for some alternative use.' + '\n\n' +
+            'Because the principle of highest and best use reflects the actions of the market, ' +
+            'generally accepted professional appraisal practice requires that the subject property must be ' +
+            'valued under this premise.' + '\n\n', preserveLeadingSpaces: true},
+            {text: 'Legal Permissibility\n\n', style: 'h3'},
+            {text: '\t\t\t' + 'As previously noted, the subject property is zoned RR – Residential Regular. Any ' +
+            'improvement or renovation on the property for the purpose of dwelling is allowed. There are no other legal ' +
+            'restrictions other than the deed of restrictions that would adversely impact the property or prohibit the use of dwelling. ' +
+            'Ordinary utility and storm water easements that may be present are not considered to ' +
+            'impact the subject property negatively.' + '\n\n', preserveLeadingSpaces: true},
             {text: 'Physical Possibility\n\n', style: 'h3'},
-            {text: '\t\t\t' + this.physical_possibility +
-            '\n\n', preserveLeadingSpaces: true},
+            {text: '\t\t\t' + 'The physical characteristics of the site such as size, shape, terrain, and existence of ' +
+            'utility availability affect the potential use of the site. As previously noted, the site is well ' +
+            'located and appropriated for residential use.' + '\n\n', preserveLeadingSpaces: true},
             {text: 'Financial Feasibility\n\n', style: 'h3'},
-            {text: '\t\t\t' + this.financial_feasibility +
-            '\n\n', preserveLeadingSpaces: true},
+            {text: '\t\t\t' + 'A use is considered financially feasible if it is likely to produce an income or return ' +
+            'equal to or greater than the amount needed to satisfy operating expenses, financial obligations, and capital ' +
+            'amortization of the investment, if there is any. Although, as previously noted, there are leased properties in ' +
+            'the area, they are not considered a regular source of income. Further, apartment type of dwellings are not allowed ' + 
+            'at the site under the deed restrictions.' + '\n\n', preserveLeadingSpaces: true},
             {text: 'Maximum Productivity\n\n', style: 'h3'},
-            {text: '\t\t\t' + this.maximum_productivity +
-            '\n\n', preserveLeadingSpaces: true},
+            {text: '\t\t\t' + 'The maximum productive use of the site is the financially feasible use that produces ' +
+            'the highest net return to the land. Therefore, it is determined that the maximum productive ' +
+            'use of the subject property is the continuation of an asset’s existing use.' + '\n\n', preserveLeadingSpaces: true},
             {text: 'Conclusion\n\n', style: 'h3'},
             {text: '\t\t\t' + this.conclusion +
             '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
 
             {text: 'B. The Valuation Process\n\n', style: 'h3'},
-            {text: '\t\t\t' + this.valuation_process +
-            '\n\n', preserveLeadingSpaces: true},
+            {text: '\t\t\t' + 'The valuation process is the orderly program in which data used to estimate the value of ' +
+            'the subject property are acquired, classified, analyzed, and presented. The data are analyzed ' +
+            'within the three (3) approaches to value: Market Data Approach, Cost Approach, and Income ' +
+            'Capitalization Approach. The approaches utilized in an appraisal depend on the type of ' +
+            'property, intended use of the appraisal, the scope of work, and the quality and quantity of data ' +
+            'available for analysis.' + '\n\n', preserveLeadingSpaces: true},
             {text: 'Market Data Approach.\n\n', style: 'h3'},
-            {text: '\t\t\t' + this.market_data_approach +
+            {text: '\t\t\t' + 'The Market Data Approach is most useful when a number of similar properties have ' +
+            'recently been sold or are currently for sale in the subject property’s market. Using this ' +
+            'approach, a value indication is produced by comparing the subject with similar ' +
+            'properties available within the neighborhood having the same property development concept.' +
             '\n\n', preserveLeadingSpaces: true},
             {text: "Comparables'\n\n", style: 'h3'},
             //{text: '\t\t\t' +
@@ -540,7 +540,7 @@
         }   
         };
         function downloadPDF(){
-            pdfMake.createPdf(docDefinition).download(this.filename + '.pdf');
+            pdfMake.createPdf(docDefinition).download(); //ref_id
         }
 
     </script>
@@ -885,10 +885,6 @@
 				</div>
 				<div class="main-table">
 					<table>
-					<tr>
-						<th><label for="filename">Filename</label></th>
-						<td><input readonly type="text" id="filename" name="filename" value="{{this.filename}}" ></td>
-					</tr>
 					<tr>
 						<th><label for="improvements">Improvements</label></th>
 						<td><input readonly type="text" id="improvements" name="improvements" value="{{this.improvements}}" ></td>

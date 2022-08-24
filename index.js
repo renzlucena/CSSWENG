@@ -246,7 +246,6 @@ app.get('/admin-approve', async(req,res)=>{
 				Document.create({
 					ref_id : req.query.ref_id,
 					
-					filename: "",
 					improvements: "",
 					zoning_classification: "",
 					//Start of Body of Document
@@ -742,7 +741,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				})
 				
 				res.render('viewAssignment_4_admin.hbs',{
-					filename: docu.filename,
 					improvements: docu.improvements,
 					zoning_classification: docu.zoning_classification,
 					//Start of Body of Document
@@ -1562,65 +1560,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						//created_at : "aaa",//(assignment.created_at.getMonth().toString())+" "+assignment.created_at.getFullYear().toString(),
 						assignment_ass: assignment,	//short ver lol
 						doc_details: docu,
-						/*filename: docu.filename,
-						company_name: docu.filename,
-						company_address: docu.company_address,
-						appraiser_num: docu.appraiser_num,
-						appraiser_address: docu.appraiser_address,
-						market_value: docu.market_value,
-						market_data_value: docu.market_data_value,
-						parcel_id: docu.parcel_id,
-						improvements: docu.improvements,
-						zoning_class: docu.zoning_class,
-						interest_appraised: docu.interest_appraised,
-
-						//Start of Body of Document
-						property_identification: "",
-						appraisal_objective_property_rights: "",
-						intended_use_intended_users: "",
-						effective_date_report: "",
-						statement_ownership_sales_history: "",
-						scope_of_work: "",
-
-						//property description
-						title_no: "", 
-						utilities: "",
-						flood: "",
-						easements: "",
-						real_estate_taxes: "",
-						zoning_desc: "",
-
-						//area & neighborhood overview
-						description_improvements: "",
-						neighborhood: "",
-						area_development: "",
-						market_analysis: "",
-
-						//valuation
-						highest_best_use: "",
-						legally_permissible: "",
-						physical_possibility: "",
-						financial_feasibility: "",
-						maximum_productivity: "",
-						conclusion: "",
-						valuation_process: "",
-						market_data_approach: "",
-						explanation_adjustments: "",
-						range_value_per_sqm: "",
-						final_value_per_sqm: "",
-
-						//reconciliation & final value opinion
-						recon_final_value_opinion: "",
-						market_value: "",
-						market_value_per_sqm: "",
-						cost_value: "",
-						cost_value_per_sqm: "",
-						income_value: "",
-						income_value_per_sqm: "",
-						final_value_indication: "",
-						final_value_indication_per_sqm: "",*/
-
-
 						// ref_id 			: ass.ref_id,
 						// type_of_approach: ass.type_of_approach,
 						// client_f_name 	: ass.client_f_name,
@@ -2835,7 +2774,6 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 		{	
 			res.render('viewAssignment_4.hbs', {
 				ref_id : req.params.ref_id,
-				filename: docu.filename,
 				improvements: docu.improvements,
 				zoning_classification: docu.zoning_classification,
 				// //Start of Body of Document
@@ -2907,7 +2845,6 @@ app.get('/save-doc/:ref_id', async(req,res)=> {
 			//So the thing is, just save everything on the screen, even if user put blank there, still save
 			//the error checkng will be done in <script> of that page nalang so it's easier to seee
 			await Document.findOneAndUpdate({ref_id: req.query.ref_id},{
-				filename: req.query.filename,
 				improvements: req.query.improvements,
 				zoning_classification: req.query.zoning_classification,
 
@@ -2964,7 +2901,6 @@ app.get('/download-doc/:ref_id', async(req,res)=> {
 			{	
 			res.render('viewAssignment_1_admin.hbs', {
 				ref_id : req.params.ref_id,
-				filename: docu.filename,
 				improvements: docu.improvements,
 				zoning_classification: docu.zoning_classification,
 				// //Start of Body of Document

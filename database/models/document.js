@@ -3,7 +3,7 @@ const mongoose =	require('mongoose')
 
 const documentSchema = new mongoose.Schema({
 	ref_id: Number,
-	filename: String,
+	//filename: String, from ref_id
     //client_name: String, //client name
     //company_address: String, //get from assignment
     //appraisal_date: {type: Date, required: true, default: Date.now}, remove
