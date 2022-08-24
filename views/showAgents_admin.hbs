@@ -101,6 +101,27 @@
 						</td>
 					</tr>
 					{{/each}}
+					
+					<tr>
+						<th colspan='6'>Inactive Agents</th>
+					</tr>
+					
+					{{#each inactive}}
+					<tr>
+						<td>{{this.username}}</td>
+						<td>{{this.email}}</td>
+						<td>{{this.appnum}}</td>
+						<td>{{this.appadress}}</td>
+						<td>{{this.can_accept}}</td>
+						<td>
+							<div class="main-assignments-status-btns">
+								<button type="submit" formaction="/admin/del/{{ref_id}}">Delete</button>
+								<button type="submit" formaction="/admin/reset-password/{{ref_id}}">Reset Password</button>
+								<button type="submit" formaction="/admin/deact/{{ref_id}}">Deactivate</button>
+							</div>
+						</td>
+					</tr>
+					{{/each}}
                 </table>
             </div>
         </div>
