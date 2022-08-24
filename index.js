@@ -2269,13 +2269,15 @@ app.get('/set-settings', async(req,res)=> {
 
 app.get('/account', async(req,res)=>{
 	sess = req.session;
-	if(sess.username == "admin")
-		{	//show all if admin
+	if(sess.username=="admin")
+		{	//show all
 			const acc_a = await Account.find({
-				status: "true"
+				status: "true",
+				username: {$ne:"admin"}
 			})
 			const acc_i = await Account.find({
-				status: "false"
+				status: "false",
+				username: {$ne:"admin"}
 			})
 
 			res.render('showAgents_admin.hbs', {
@@ -2293,6 +2295,30 @@ app.get('/account', async(req,res)=>{
 				appaddress: sess.appaddress,
 				can_accept: sess.can_accept
 			});
+		}
+	else{
+		res.redirect('/login-fail.html')
+		//if you're trying to access the page but you're not logged in
+	}
+});
+
+app.get("/admin/reset-password/:ref_id", async(req,res)=>{
+	sess = req.session;
+	
+	if(sess.username=="admin")
+		{
+			const acc_a = await Account.findOne({
+				username: ref_id
+			}).exec()
+			
+			await Account.findOneAndUpdate({
+					username: ref_id},
+					{
+						password: acc_a.appnum//reset their password
+			})
+			//parang di  nag ggo
+
+			res.redirect('/account');
 		}
 	else{
 		res.redirect('/login-fail.html')
