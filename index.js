@@ -2269,6 +2269,11 @@ app.get('/set-settings', async(req,res)=> {
 	}
 });
 
+
+app.get('/admin/accounts', async(req,res)=>{
+
+		res.redirect('/account')
+})
 app.get('/account', async(req,res)=>{
 	sess = req.session;
 	if(sess.username=="admin")
@@ -2304,22 +2309,42 @@ app.get('/account', async(req,res)=>{
 	}
 });
 
-app.get("/admin/reset-password/:ref_id", async(req,res)=>{
+app.get("/admin/reset-password/:username", async(req,res)=>{
 	sess = req.session;
 	
 	if(sess.username=="admin")
 		{
 			const acc_a = await Account.findOne({
-				username: ref_id
+				username: req.params.username
 			}).exec()
 			
 			await Account.findOneAndUpdate({
-					username: ref_id},
+					username: req.params.username},
 					{
 						password: acc_a.appnum//reset their password
 			})
 			//parang di  nag ggo
 
+			res.redirect('/account');
+		}
+	else{
+		res.redirect('/login-fail.html')
+		//if you're trying to access the page but you're not logged in
+	}
+});
+
+//todo
+app.get("/admin/del/:username", async(req,res)=>{
+	sess = req.session;
+	
+	if(sess.username=="admin")
+		{
+			
+			await Account.findOneAndDelete({
+				username: req.params.username
+			}).exec()
+			
+			//parang di  nag ggo
 			res.redirect('/account');
 		}
 	else{
