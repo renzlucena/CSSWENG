@@ -5,7 +5,6 @@ const accountSchema = new mongoose.Schema({
 	username: String,
 	password: String,
 	remember: {type:Boolean, default:false},
-	acc_id: Number,
 	email: String,
 	status: Boolean,	//false- inactive     true-active
 	fname: String,

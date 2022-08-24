@@ -85,7 +85,6 @@ app.get('/login', async(req,res)=> {
 				sess = req.session,
 				sess.username = req.query.username,
 				sess.password = req.query.password,
-				sess.acc_id  = acct.acc_id,
 				sess.email	  = acct.email,
 				sess.status   = acct.status,
                 sess.fname	  = acct.fname,
@@ -135,7 +134,6 @@ app.get('/history', async(req,res)=>{
 
 				username: sess.username,
 				password: sess.password,
-				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
@@ -156,7 +154,6 @@ app.get('/history', async(req,res)=>{
 				assignment : ass,
 				username: sess.username,
 				password: sess.password,
-				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
@@ -372,7 +369,6 @@ app.get('/admin-add-assignment', async(req,res)=>{
 		res.render('addAssignment.hbs',{
 			username: sess.username,
 			password: sess.password,
-			acc_id: sess.acc_id,
 			remember: sess.remember,
 			status: sess.status,
 			email: sess.email,
@@ -416,7 +412,6 @@ app.get('/admin-add-agent', async(req,res)=>{
 		res.render('addAgent.hbs',{
 			username: sess.username,
 			password: sess.password,
-			acc_id: sess.acc_id,
 			remember: sess.remember,
 			status: sess.status,
 			email: sess.email,
@@ -588,7 +583,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 						username: sess.username,
 						password: sess.password,
-						acc_id: sess.acc_id,
 						remember: sess.remember,
 						status: sess.status,
 						email: sess.email,
@@ -730,7 +724,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 						username: sess.username,
 						password: sess.password,
-						acc_id: sess.acc_id,
 						remember: sess.remember,
 						status: sess.status,
 						email: sess.email,
@@ -899,7 +892,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 						username: sess.username,
 						password: sess.password,
-						acc_id: sess.acc_id,
 						remember: sess.remember,
 						status: sess.status,
 						email: sess.email,
@@ -923,7 +915,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					
 					username: sess.username,
 					password: sess.password,
-					acc_id: sess.acc_id,
 					remember: sess.remember,
 					status: sess.status,
 					email: sess.email,
@@ -963,7 +954,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 					username: sess.username,
 					password: sess.password,
-					acc_id: sess.acc_id,
 					remember: sess.remember,
 					status: sess.status,
 					email: sess.email,
@@ -1105,7 +1095,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 						username: sess.username,
 						password: sess.password,
-						acc_id: sess.acc_id,
 						remember: sess.remember,
 						status: sess.status,
 						email: sess.email,
@@ -1265,7 +1254,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 							username: sess.username,
 							password: sess.password,
-							acc_id: sess.acc_id,
 							remember: sess.remember,
 							status: sess.status,
 							email: sess.email,
@@ -1409,7 +1397,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 							username: sess.username,
 							password: sess.password,
-							acc_id: sess.acc_id,
 							remember: sess.remember,
 							status: sess.status,
 							email: sess.email,
@@ -1553,7 +1540,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					*/
 						username: sess.username,
 						password: sess.password,
-						acc_id: sess.acc_id,
 						remember: sess.remember,
 						status: sess.status,
 						email: sess.email,
@@ -1760,7 +1746,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 							username: sess.username,
 							password: sess.password,
-							acc_id: sess.acc_id,
 							remember: sess.remember,
 							status: sess.status,
 							email: sess.email,
@@ -1902,7 +1887,6 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 							username: sess.username,
 							password: sess.password,
-							acc_id: sess.acc_id,
 							remember: sess.remember,
 							status: sess.status,
 							email: sess.email,
@@ -1963,7 +1947,6 @@ app.get('/viewAssignment/0/:ref_id', async(req,res)=>{
 				status: sess.status,
 				remember: sess.remember,
 				password: sess.password,
-				acc_id : sess.acc_id,
 				email   : sess.email,
 				fname   : sess.fname,
 				lName   : sess.lName,
@@ -2122,16 +2105,15 @@ app.post('/submit-assignment', function(req,res) {
 //formatme
 app.post('/new-agent', function(req,res) {
 	sess = req.session
-
+	var year = new Date();
 	var username = req.body.username
 	try{
 		Account.create(
 		{
-			username: req.body.username,
-			password: req.body.password,
+			username: (year.getFullYear()).toString()+req.body.fname[0]+req.body.lname[0],
+			password: req.body.appnum,
 			email: req.body.email,
 			remember: false,
-			acc_id: req.body.acc_id,
 			status: true,
 			fname: req.body.fname,
 			lname: req.body.lname,
@@ -2155,7 +2137,6 @@ app.get('/dashboard', async(req,res)=> {
 			res.render('dashboard.hbs', {
 				username: sess.username,
 				password: sess.password,
-				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
@@ -2185,7 +2166,6 @@ app.get('/dashboard', async(req,res)=> {
 				res.render('dashboard.hbs', {
 					username: sess.username,
 					password: sess.password,
-					acc_id: sess.acc_id,
 					remember: sess.remember,
 					status: sess.status,
 					email: sess.email,
@@ -2203,7 +2183,6 @@ app.get('/dashboard', async(req,res)=> {
 				res.render('dashboard_unactivated.hbs', {
 					username: sess.username,
 					password: sess.password,
-					acc_id: sess.acc_id,
 					remember: sess.remember,
 					status: sess.status,
 					email: sess.email,
@@ -2241,7 +2220,6 @@ app.get('/settings', (req,res)=> {
 		res.render('settings.hbs', {
 			username: sess.username,
 			password: sess.password,
-			acc_id: sess.acc_id,
 			remember: sess.remember,
 			status: sess.status,
 			email: sess.email,
@@ -2316,7 +2294,6 @@ app.get('/set-settings', async(req,res)=> {
 			res.render('settings.hbs', {
 				username: sess.username,
 				password: sess.password,
-				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
@@ -2389,7 +2366,6 @@ app.get('/assignments', async(req,res)=> {
 
 				username: sess.username,
 				password: sess.password,
-				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
@@ -2453,7 +2429,6 @@ app.get('/assignments', async(req,res)=> {
 					//assignment_sub:ass_sub,
 					username: sess.username,
 					password: sess.password,
-					acc_id: sess.acc_id,
 					remember: sess.remember,
 					status: sess.status,
 					email: sess.email,
@@ -2477,7 +2452,6 @@ app.get('/assignments', async(req,res)=> {
 					
 					username: sess.username,
 					password: sess.password,
-					acc_id: sess.acc_id,
 					remember: sess.remember,
 					status: sess.status,
 					email: sess.email,
@@ -2503,7 +2477,6 @@ app.get('/profile', (req,res)=> {
 		res.render('profile.hbs', {
 			username: sess.username,
 			password: sess.password,
-			acc_id: sess.acc_id,
 			remember: sess.remember,
 			status: sess.status,
 			email: sess.email,
@@ -2528,7 +2501,6 @@ app.get('/terms', function(req,res){
 			res.render('terms_active.hbs', {
 				username: sess.username,
 				password: sess.password,
-				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
@@ -2543,7 +2515,6 @@ app.get('/terms', function(req,res){
 			res.render('terms.hbs', {
 				username: sess.username,
 				password: sess.password,
-				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
@@ -2891,7 +2862,6 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 				
 				username: sess.username,
 				password: sess.password,
-				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
@@ -3025,7 +2995,6 @@ app.get('/download-doc/:ref_id', async(req,res)=> {
 				
 				username: sess.username,
 				password: sess.password,
-				acc_id: sess.acc_id,
 				remember: sess.remember,
 				status: sess.status,
 				email: sess.email,
