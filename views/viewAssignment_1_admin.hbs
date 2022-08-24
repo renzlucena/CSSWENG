@@ -194,7 +194,7 @@
     <script src='pdfmake/build/pdfmake.min.js'></script>
     <script src='pdfmake/build/vfs_fonts.js'></script>
 
-    <script> 
+    <script>
         var company_name = document.getElementById("company_name").value;
         var company_address = document.getElementById("company_address").value;
         var docDefinition = {
@@ -207,7 +207,7 @@
                 {
                     width: '*',
                     text: 'Appraisal of Real Property for ' + this.property_type, alignment: 'left', margin: [80, 20]
-                }, 
+                },
                 {
                     width: '40',
                     text: currpage.toString(), alignment: 'right', margin: [80, 20]
@@ -231,24 +231,24 @@
             {text: 'As Of: \n' + this.appraisal_date + '\n\n\n\n\n', style: 'h1'},*/
             {text: 'Prepared for \n' + company_name + '\n' + company_address + '\n\n\n\n\n', style: 'h1'},
             {text: 'Prepared By\n', style: 'h1'},
-            /*{text: this.assigned_to +  'REA Lic. No. ' + this.appraiser_num + '\n' + appraiser_address, style: 'titletext', 
+            /*{text: this.assigned_to +  'REA Lic. No. ' + this.appraiser_num + '\n' + appraiser_address, style: 'titletext',
             pageBreak: 'after'},*/
 
             {text: '\n\nTransmittal Letter\n\n\n', style: 'h2'},
             /*{columns: [
             {
                 text: this.client_f_name + ' ' + this.client_l_name + '\n' + this.company_name
-            }, 
+            },
             {
                 text: this.completed_on + '\n\nRe: Summary Appraisal Report \n' + this.property_type + this.lot_size + 'sqm \n' + this.loc_brgy + this.loc_city
             }
-            ]},*/  
+            ]},*/
             /*{text: '\n\n\nDear Mr./Ms. ' + this.client_f_name + ',\n\n'},*/
             {text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is ' + this.appraisal_date },
-            {text: '\n\nSubmitted here with is my report containing facts and data gathered.\n\n'}, 
+            {text: '\n\nSubmitted here with is my report containing facts and data gathered.\n\n'},
             /*{text: 'The method of appraising is detailed in the attached narrative report as of ' + this.appraisal_date + '. It is my opinion that the Market Value with Fee Simple Interest in the subject property, subject to the attached limiting conditions, is”'},
             {text: '\n\n' + this.market_value, style: 'appraisalval'},*/
-            {text: '\n\nIt has been a pleasure to serve you in this matter\n\n\n\n'}, 
+            {text: '\n\nIt has been a pleasure to serve you in this matter\n\n\n\n'},
             {text: 'Respectfully submitted,\n\n\n\n', margin: [0, 0, 5, 5], alignment: 'right'},
             /*{text: this.assigned_to + ',', margin: [0, 0, 5, 0], alignment: 'right'},
             {text: 'Certified Real Estate Appraiser # ' + this.appraiser_num, margin: [0, 0, 5, 0], alignment: 'right', pageBreak: 'after'},
@@ -259,10 +259,10 @@
                 widths: ['*', '*'],
                 body: [
                     ['Intended User of Appraisal:', this.company_name],
-                    ['Property Type:', this.property_type], 
+                    ['Property Type:', this.property_type],
                     ['Property Address:', this.lot_loc],
                     ['Parcel ID:', this.parcel_id],
-                    ['Owner: ', this.client_f_name + ' ' + this.client_l_name], 
+                    ['Owner: ', this.client_f_name + ' ' + this.client_l_name],
                     ['Land Size: ', this.lot_size + ' square meters'],
                     ['Improvements: ', this.improvements],
                     ['Zoning Classification:', this.zoning_class],
@@ -271,7 +271,7 @@
                     ['Date of Report:', this.completed_on],
                     ['Final Estimate of Value:', this.market_value]
                 ]
-                }, 
+                },
                 layout: 'noBorders',
                 pageBreak: 'after'
             },*/
@@ -288,7 +288,7 @@
                 'The value estimates reported herein apply to the entire property and any proration or division of the total into fractional interests will invalidate the value estimate.\n\n',
                 'This report may not be used for any purpose other than as stated in the report, by anyone other than the client without prior consent of the appraiser.\n\n',
                 'Neither all nor any part of the contents of this report shall be conveyed to the public through advertising, public relations, news, sales, or other media, without the prior written consent and approval of the appraiser. This pertains particularly to valuation conclusions, the identity of the appraiser, or firm with which she is associated.\n\n',
-                'The final value estimate has been concluded on the basis that property is environmentally compliant. Further, the land area was based on information provided by the owner and/or public records. If the actual land area is different from the area used in this report, the appraiser reserves the right to modify this report.\n\n', 
+                'The final value estimate has been concluded on the basis that property is environmentally compliant. Further, the land area was based on information provided by the owner and/or public records. If the actual land area is different from the area used in this report, the appraiser reserves the right to modify this report.\n\n',
                 'The final value estimate has been concluded on the basis that the property is not subject to flooding nor within fault range. A certified survey is recommended.\n\n',
                 'Any erasure on appraisal date and values invalidates this report.\n\n',
                 'The appraisal report is invalid unless it bears the signature of the appraiser and conformity of client.'
@@ -298,11 +298,11 @@
             {text: 'I certify, to the best of my knowledge and belief:\n\n'},
             {ol: [
                 'That statements of facts contained in this report are true and correct.\n\n',
-                'That I have diligently used all possible means of verifying the physical character, location and kind of neighborhood of the subject property and the comparables that are available given the travel restrictions imposed by the Inter-Agency Task Force on Emerging Infectious Diseases (IATF)\n\n', 
-                'That I have taken into consideration factors which may affect its value and the highest and best use of the property\n\n', 
+                'That I have diligently used all possible means of verifying the physical character, location and kind of neighborhood of the subject property and the comparables that are available given the travel restrictions imposed by the Inter-Agency Task Force on Emerging Infectious Diseases (IATF)\n\n',
+                'That I have taken into consideration factors which may affect its value and the highest and best use of the property\n\n',
                 'That the reported analyses, opinions, and conclusions in this report are limited only by the assumptions and limiting conditions stated in this report, and are my personal, unbiased professional analyses, opinions, and conclusions.\n\n',
                 'That I have no present nor contemplated future interest in the subject property.\n\n',
-                'That my compensation is not contingent upon the reporting of a predetermined value\n\n', 
+                'That my compensation is not contingent upon the reporting of a predetermined value\n\n',
                 'That my analyses, opinions, and conclusions were developed, and this report was prepared in conformity with the Philippine Valuation Standards and the Code of Conducts for real estate appraisers.\n\n\n\n\n\n\n\n'
             ]},
             {canvas: [
@@ -350,7 +350,7 @@
                     ['Real Estate Taxes:', this.real_estate_taxes],
                     ['Zoning:', this.zoning_desc]
                 ]
-                }, 
+                },
                 layout: 'noBorders',
                 pageBreak: 'after'
             },
@@ -396,7 +396,7 @@
             {text: '\t\t\t' + 'A use is considered financially feasible if it is likely to produce an income or return ' +
             'equal to or greater than the amount needed to satisfy operating expenses, financial obligations, and capital ' +
             'amortization of the investment, if there is any. Although, as previously noted, there are leased properties in ' +
-            'the area, they are not considered a regular source of income. Further, apartment type of dwellings are not allowed ' + 
+            'the area, they are not considered a regular source of income. Further, apartment type of dwellings are not allowed ' +
             'at the site under the deed restrictions.' + '\n\n', preserveLeadingSpaces: true},
             {text: 'Maximum Productivity\n\n', style: 'h3'},
             {text: '\t\t\t' + 'The maximum productive use of the site is the financially feasible use that produces ' +
@@ -443,7 +443,7 @@
                     [{text: 'Improvements', style: tablebold}, this.subject.improvement, this.comp1.improvement, this.comp2.improvement],
                     [{text: 'Total Adjustments', style: tablebold}, this.subject.computation, this.comp1.computation, this.comp2.computation]
                 ]
-            }, 
+            },
             layout: {
                 fillColor: function (rowIndex) {
                     return (rowIndex == 1 ) ? '#CCCCCC' : null;
@@ -462,10 +462,10 @@
                 headerRows: 1,
                 body: [
                     [{text: 'Value Indications', style: tableheader}, {text: 'Value per sqm.', style: tableheader}],
-                    ['Range', this.range_value_per_sqm], 
+                    ['Range', this.range_value_per_sqm],
                     [{text: 'Final Value Indication', style:tablebold}, this.final_value_per_sqm + ' per sqm'],
                 ]
-            }, 
+            },
             layout: {
                 fillColor: function (rowIndex) {
                     return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
@@ -482,12 +482,12 @@
                 headerRows: 1,
                 body: [
                     [{text: 'Approaches to Value', style: tableheader}, {text: 'Value', style: tableheader}, {text: 'Value per sqm', style: tableheader}],
-                    ['Market Data Approach', this.market_value, this.market_value_per_sqm], 
+                    ['Market Data Approach', this.market_value, this.market_value_per_sqm],
                     ['Cost Approach', this.cost_value, this.cost_value_per_sqm],
                     ['Income Capitalization Approach', this.income_value, this.income_value_per_sqm],
                     [{text: 'Final Value Indication', style: tablebold}, this.final_value_indication, this.final_value_indication_per_sqm],
                 ]
-            }, 
+            },
             layout: {
                 fillColor: function (rowIndex) {
                     return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
@@ -537,7 +537,7 @@
             tablebold: {
                 bold: true
             }
-        }   
+        }
         };
         function downloadPDF(){
             pdfMake.createPdf(docDefinition).download(); //ref_id
@@ -568,6 +568,10 @@
               </div>
               <div class="sidebar-history-btn">
                         <a  href="/admin-add-agent">Add New Agent</a>
+              </div>
+
+              <div class="sidebar-history-btn">
+                        <a  href="/account">See All Agents</a>
               </div>
               <div class="sidebar-history-btn">
 
@@ -877,8 +881,8 @@
                         </tr>
                     </table>
                 </div>
-                {{/each}}  
-				 
+                {{/each}}
+
 				{{#each doc_details}}
 				<div class="main-header">
 					<h1>Document Details for Printing</p>
@@ -963,15 +967,15 @@
 					</tr>
 					</table>
 				</div>
-				
+
 				{{/each}}
-				
-				
+
+
 				<div id="main-table-bottom">
 					</div>
 						<!-- dito mo na lagay yung code mo sa download pdf/save as pdf  erin -->
 						<button onclick="downloadPDF()">Download PDF</button>
-						
+
 						<!-- will make it so that the comment will be "For Printing." again and agent can edit the doc -->
 						<button>Unlock Document</button>
 						<br><br><br>

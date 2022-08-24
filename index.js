@@ -177,15 +177,15 @@ app.get('/send-ass', async(req,res)=> {
 	sess = req.session;
 	console.log("in /send-ass " + req.query.ref_id)
 //	console.log(req.query + "Logged In: "+sess.username)
-	
-	
+
+
 	//TODO: Perform saving first before sending to admin
 	if(sess.username){
 		try{
 			const ass = await Assignment.findOne({
 				ref_id : req.query.ref_id
 			})
-					
+
 			// change comment to "Submitted for Document Review." bc step 2
 			if (ass.comment=="For Printing.")
 			{
@@ -206,7 +206,7 @@ app.get('/send-ass', async(req,res)=> {
 		}
 		//dont forget to redirect/render a page in all branches
 		res.redirect('/assignments')
-	}	
+	}
 	else{
 		res.redirect('/login-fail.html')
 	}
@@ -229,8 +229,8 @@ app.get('/admin-approve', async(req,res)=>{
 			const ass = await Assignment.findOne({
 				ref_id : req.query.ref_id
 			})
-					
-			
+
+
 			if (ass.comment=="Submitted.")
 			{
 				await Assignment.findOneAndUpdate(
@@ -238,14 +238,14 @@ app.get('/admin-approve', async(req,res)=>{
 					{ref_id: req.query.ref_id},
 					{comment: "For Printing."}) //agent can now proceed to write the document
 				//also create a new document
-				
+
 				//TODO check if document already exists
 				//const ass = await Document.findOne({ref_id: req.params.ref_id})
-				
+
 				//if (ass==null) { //it doesnt exist yet, create one
 				Document.create({
 					ref_id : req.query.ref_id,
-					
+
 					improvements: "",
 					zoning_classification: "",
 					//Start of Body of Document
@@ -270,7 +270,7 @@ app.get('/admin-approve', async(req,res)=>{
 					//reconciliation & final value opinion
 					recon_final_value_opinion: "",
 				})
-			
+
 				res.redirect('/assignments')
 			}
 			else	//means it's "For Printing."
@@ -281,10 +281,10 @@ app.get('/admin-approve', async(req,res)=>{
 					{comment: "Approved."})		//puts it to history
 				await Document.findOneAndUpdate(
 					{ref_id: req.query.ref_id},
-					{comment: "Approved"})	
+					{comment: "Approved"})
 
 				res.redirect('/history')
-				
+
 			}
 		}
 		catch(err){
@@ -299,7 +299,7 @@ app.get('/admin-approve', async(req,res)=>{
 //this submits the comment and updates the assignment
 app.get('/admin-comment', async(req,res)=>{
 	sess = req.session;
-	
+
 	if(sess.username)
 	{
 		try{
@@ -326,14 +326,14 @@ app.get('/admin-comment', async(req,res)=>{
 					{ref_id: req.query.ref_id},
 					{comment: "For Printing."
 					})
-				
+
 				res.redirect('/assignments')
 			}
 		}
 			catch(err){
 				console.log(err)
 			}
-			
+
 	}
 	else{
 		res.redirect('/login-fail.html')
@@ -441,7 +441,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 			try{
 				const ass = await Assignment.findOne({
 						ref_id : req.params.ref_id
-					})		
+					})
 				const assignment = await Assignment.find({
 						ref_id : req.params.ref_id
 					})
@@ -592,7 +592,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						can_accept: sess.can_accept
 					});
 			}
-			
+
 				//	IF REVIEWING SUBMITTED ASSIGNMENTS (comment="Submitted.")
 			else if (ass.comment == "Submitted."){
 				console.log("viewAssignment_0_admin.hbs")
@@ -733,13 +733,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						can_accept: sess.can_accept
 				});
 			}
-			
+
 			else if (ass.comment == "For Printing."){
 				console.log("viewAssignment_4_admin.hbs")
 				const docu = await Document.findOne({
 					ref_id : req.params.ref_id
 				})
-				
+
 				res.render('viewAssignment_4_admin.hbs',{
 					improvements: docu.improvements,
 					zoning_classification: docu.zoning_classification,
@@ -900,17 +900,17 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						can_accept: sess.can_accept
 				});
 			}
-			
+
 			else if (ass.comment == "Submitted for Document Review."){
-				
-				
+
+
 				console.log("viewAssignment_5_admin.hbs")
 				console.log(docu)
-				
+
 				res.render('viewAssignment_5_admin.hbs',{	//TODO: MAKE EVERYTHING LIKE THIS
 					doc_details: docu,	//short ver lol
 					assignment_ass: assignment,	//short ver lol
-					
+
 					username: sess.username,
 					password: sess.password,
 					remember: sess.remember,
@@ -934,9 +934,9 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						ref_id: ass.ref_id},{
 						assigned_to: sess.username
 					})
-				
+
 				res.render('viewAssignment_2_admin.hbs', {
-				
+
 					ref_id: ass.ref_id,
 					assigned_to: sess.username,
 					type_of_approach: ass.type_of_approach,
@@ -1102,7 +1102,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						appaddress: sess.appaddress,
 						can_accept: sess.can_accept
 					});
-					
+
 				}
 			}
 			catch(err)
@@ -1262,7 +1262,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							can_accept: sess.can_accept
 						});
 				}
-				
+
 				else if(ass.comment == "Submitted."){
 					console.log("viewAssignment_1.hbs")
 
@@ -1405,14 +1405,14 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							can_accept: sess.can_accept
 						});
 				}
-				
+
 				//saved the doc for printing, so moved to approve na
 				else if(ass.comment == "Approved."){
 					console.log("viewAssignment_3.hbs")
 					res.render('viewAssignment_3.hbs',{
 						assignment_ass: assignment,	//short ver lol
 						doc_details: docu,
-						
+
 						/*ref_id 			: ass.ref_id,
 						type_of_approach: ass.type_of_approach,
 						client_f_name 	: ass.client_f_name,
@@ -1548,14 +1548,14 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						can_accept: sess.can_accept
 					});
 				}
-				
+
 				//Can edit
 				else if (ass.comment == "For Printing."){
 					console.log("viewAssignment_4.hbs")
-					
+
 					//TODO make the assignment's dates formatted like this
 					assignment.created_at = (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
-						
+
 					res.render('viewAssignment_4.hbs',{
 						//created_at : "aaa",//(assignment.created_at.getMonth().toString())+" "+assignment.created_at.getFullYear().toString(),
 						assignment_ass: assignment,	//short ver lol
@@ -2072,7 +2072,7 @@ app.get('/dashboard', async(req,res)=> {
 	sess = req.session;
 	if(sess.username){ //username exists
 		if(sess.username=="admin")
-		{			
+		{
 			res.render('dashboard.hbs', {
 				username: sess.username,
 				password: sess.password,
@@ -2266,28 +2266,46 @@ app.get('/set-settings', async(req,res)=> {
 	}
 });
 
+app.get('/account', async(req,res)=>){
+	sess = req.session;
+	res.render('showAgents_admin.hbs', {
+		agent_details:agent_deets,
 
+		username: sess.username,
+		password: sess.password,
+		remember: sess.remember,
+		status: sess.status,
+		email: sess.email,
+		fname: sess.fname,
+		lname: sess.lname,
+		appnum: sess.appnum,
+		appaddress: sess.appaddress,
+		can_accept: sess.can_accept
+	})
+}
+
+}
 
 app.get('/assignments', async(req,res)=> {
 	sess = req.session;
 	if(sess.username){
 		if(sess.username=="admin")
 		{ // IF ADMIN, UNASSIGNED ASSIGNMENTS and (ASSIGNED & UNFINISHED)
-			
+
 			console.log("in /assignments (ADMIN)")
 			//refresh if in admin and went to other pages without saving details
 			await Assignment.findOneAndUpdate({assigned_to: sess.username},{
 					assigned_to: "",	//reset so that it will still show up in agents' /assignments
 			})
-			
+
 			const ass_new = await Assignment.find({
 				assigned_to: ["", "admin"],
 				comment: "New!"})
-			
+
 			const ass = await Assignment.find({
 				assigned_to: {$nin: ["", "admin"]},//ASSIGNED TO SOMEONE
 				comment: {$nin: ["Approved.","Submitted.","Submitted for Document Review."]}})
-			
+
 			const ass_sub = await Assignment.find({
 				assigned_to: {$nin: ["", "admin"]},
 				comment: "Submitted."
@@ -2296,7 +2314,7 @@ app.get('/assignments', async(req,res)=> {
 				assigned_to: {$nin: ["", "admin"]},
 				comment: "Submitted for Document Review."
 				})
-			
+
 			res.render('assignments_admin.hbs', {
 				assignment_new:ass_new,
 				assignment_ass:ass,
@@ -2316,23 +2334,23 @@ app.get('/assignments', async(req,res)=> {
 			})
 		}
 		else{
-			
+
 			console.log("in /assignments (AGENT)")
 			const ass_new = await Assignment.find({
 				assigned_to: "",
 				comment: "New!"
 				})
-			
+
 			const ass_sub = await Assignment.find({
 				assigned_to: sess.username,
 				comment: "Submitted."
 				})
-				
+
 			const ass_sub2 = await Assignment.find({
 				assigned_to: sess.username,
 				comment: "For Printing."
 				})
-				
+
 			const ass_returned= await Assignment.find({
 				assigned_to: sess.username,
 				comment: {$nin: ["Submitted.","Submitted for Document Review.", "Approved."]}
@@ -2344,7 +2362,7 @@ app.get('/assignments', async(req,res)=> {
 				// comment: {$nin : ["Approved.","Submitted"]}
 				})//that is not equal to Approved. (or it will go to history)
 												//also not equal to "Submitted."bc it will have a different button
-												
+
 			const howmany = await Assignment.countDocuments({
 				assigned_to: sess.username,
 				comment: {$ne: "Approved."}})
@@ -2388,7 +2406,7 @@ app.get('/assignments', async(req,res)=> {
 					assignment_sub:ass_sub,
 					assignment_sub2:ass_sub2,
 					assignment_returned:ass_returned,
-					
+
 					username: sess.username,
 					password: sess.password,
 					remember: sess.remember,
@@ -2409,6 +2427,8 @@ app.get('/assignments', async(req,res)=> {
 		//if you're trying to access the profile page but you're not logged in
 	}
 });
+
+
 
 app.get('/profile', (req,res)=> {
 	sess = req.session;
@@ -2491,18 +2511,18 @@ app.get('/save-ass', async(req,res)=> {
 
 					assigned_to: "",	//reset so that it will still show up in agents' /assignments
 					type_of_approach: req.query.type_of_approach,
-					
+
 					client_f_name: req.query.client_f_name,
 					client_l_name: req.query.client_l_name,
-					
+
 					//will only be visible to admin
 					client_contact_num: req.query.client_contact_num,
 					client_email: req.query.client_email,
-					
+
 					lot_brgy: req.query.lot_brgy,
 					lot_city: req.query.lot_city,
 					lot_region: req.query.lot_region,
-					
+
 					zonal: req.query.zonal,
 					title_no: req.query.title_no
 				})
@@ -2761,17 +2781,17 @@ app.get('/save-ass', async(req,res)=> {
 // goes to the page where you can input the docunent texts
 app.get('/edit-doc/:ref_id', async(req,res)=> {
 	sess = req.session
-	
+
 	console.log("in /edit-doc/"+req.params.ref_id)
 	//check if document already exists
-	
+
 	if(sess.username)
 	{
 		const docu = await Document.findOne({ref_id: req.params.ref_id}).exec();
 		console.log(docu)
 
 		if (docu) //it exists
-		{	
+		{
 			res.render('viewAssignment_4.hbs', {
 				ref_id : req.params.ref_id,
 				improvements: docu.improvements,
@@ -2797,7 +2817,7 @@ app.get('/edit-doc/:ref_id', async(req,res)=> {
 				explanation_adjustments: docu.explanation_adjustments,
 				// //reconciliation & final value opinion
 				recon_final_value_opinion: docu.recon_final_value_opinion,
-				
+
 				username: sess.username,
 				password: sess.password,
 				remember: sess.remember,
@@ -2888,7 +2908,7 @@ app.get('/download-doc/:ref_id', async(req,res)=> {
 	sess = req.session;
 	console.log("in /download-doc-"+req.params.ref_id)
 	//console.log(req.query.ref_id)
-	
+
 	if(sess.username){
 		console.log(req.query)
 		try{
@@ -2898,7 +2918,7 @@ app.get('/download-doc/:ref_id', async(req,res)=> {
 			console.log(docu)
 
 			if (docu) //it exists
-			{	
+			{
 			res.render('viewAssignment_1_admin.hbs', {
 				ref_id : req.params.ref_id,
 				improvements: docu.improvements,
@@ -2928,7 +2948,7 @@ app.get('/download-doc/:ref_id', async(req,res)=> {
 
 				// //reconciliation & final value opinion
 				recon_final_value_opinion: docu.recon_final_value_opinion,
-				
+
 				username: sess.username,
 				password: sess.password,
 				remember: sess.remember,
@@ -2943,7 +2963,7 @@ app.get('/download-doc/:ref_id', async(req,res)=> {
 			}
 
 			//edit comment  to "Submitted."
-			
+
 		}
 		catch(err)
 		{

@@ -237,6 +237,9 @@
 				<a  href="/admin-add-agent">Add New Agent</a>
             </div>
             <div class="sidebar-history-btn">
+                      <a  href="/account">See All Agents</a>
+            </div>
+            <div class="sidebar-history-btn">
                 <a  href="/history">History</a>
             </div>
             <div class="sidebar-settings-btn">
@@ -260,7 +263,7 @@
 
             <form class="assignments-form">
 				{{#each assignment_ass}}
-					<div class="main-table">	
+					<div class="main-table">
 						<table>
 							<tr>
 								<th colspan="4">ADMIN PANEL</th>
@@ -537,14 +540,14 @@
 							</tr>
 						</table>
 					</div>
-				{{/each}}  
-				 
+				{{/each}}
+
 				{{#each doc_details}}
 					<div class="main-header">
 						<h1>Document Details For Assignment #{{ref_id}}</p>
 						<h1>TODO: render this page with the document info</p>
 					</div>
-					
+
 					<div class="main-table">
 						<table>
 						<tr>
@@ -626,7 +629,7 @@
 						</tr>
 					</table>
 				</div>
-						
+
 				<div id="main-table-bottom">
 					<div class="comment">
 						<button type = "submit" name="admin-comment" formaction="/admin-comment">Return Document for Revision</button>
