@@ -2,8 +2,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <html>
 <head>
-    <link rel = "stylesheet" href="agent_ass.css">
-    <title>Assignments</title>
+    <link rel = "stylesheet" href="agent_add_view.css">
+    <title>See All Agents</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,7 @@
                 <a  href="/admin-add-agent">Add New Agent</a>
             </div>
 
-      <div class="sidebar-history-btn">
+      <div class="sidebar-add-btn">
                 <a  href="/account">See All Agents</a>
             </div>
 
@@ -67,11 +67,9 @@
 
         <div class="main">
             <div class="main-header">
-                <h1>Assignments</h1>
+                <h1>See All Agents</h1>
                 <p><b><i>Admin Panel</b></i></p>
-                <p>If you have any questions how to use, please do not hesitate to contact the group through Erin.</p>
             </div>
-
 
 			<form method="get" action="/account">
 				<div class="main-table">
@@ -83,24 +81,19 @@
 							<th><p>APPNUM</p></th>
 							<th><p>APPADRESS</p></th>
 						</tr>
-						{{#each agent_details}}
+
+						{{#each activated}}
 						<tr>
-							<td><p>-</p></td>
-							<td><p>{{this.username}}, {{this.password}}, {{this.email}}</p></td>
-							<td><p>{{this.appnum}} {{this.appadress}}</p></td>
-							<td>
-								<div class="main-assignments-status-btns">
-									<button>Not sure what to do with this</button>
-								</div>
-							</td>
+							<td>{{this.username}}</td>
+                            <td>{{this.password}}</td>
+                            <td>{{this.email}}</td>
+							<td>{{this.appnum}}</td>
+                            <td>{{this.appadress}}</td>
 						</tr>
 						{{/each}}
 
-
                 </table>
             </div>
-			</form>
-
         </div>
     </div>
 </body>

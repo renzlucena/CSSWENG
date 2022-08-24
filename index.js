@@ -2266,25 +2266,38 @@ app.get('/set-settings', async(req,res)=> {
 	}
 });
 
-app.get('/account', async(req,res)=>){
+app.get('/account', async(req,res)=>{
 	sess = req.session;
-	res.render('showAgents_admin.hbs', {
-		agent_details:agent_deets,
+	if(sess.username == "admin")
+		{	//show all if admin
+			const acc_a = await Account.find({
+				status: "true"
+			})
+			const acc_i = await Account.find({
+				status: "false"
+			})
 
-		username: sess.username,
-		password: sess.password,
-		remember: sess.remember,
-		status: sess.status,
-		email: sess.email,
-		fname: sess.fname,
-		lname: sess.lname,
-		appnum: sess.appnum,
-		appaddress: sess.appaddress,
-		can_accept: sess.can_accept
-	})
-}
+			res.render('showAgents_admin.hbs', {
+				activated: acc_a,
+				inactive: acc_i,
 
-}
+				username: sess.username,
+				password: sess.password,
+				remember: sess.remember,
+				status: sess.status,
+				email: sess.email,
+				fname: sess.fname,
+				lname: sess.lname,
+				appnum: sess.appnum,
+				appaddress: sess.appaddress,
+				can_accept: sess.can_accept
+			});
+		}
+	else{
+		res.redirect('/login-fail.html')
+		//if you're trying to access the page but you're not logged in
+	}
+});
 
 app.get('/assignments', async(req,res)=> {
 	sess = req.session;
