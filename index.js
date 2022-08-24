@@ -2368,7 +2368,7 @@ app.get('/assignments', async(req,res)=> {
 				comment: "New!"})
 			
 			const ass = await Assignment.find({
-				assigned_to: {$nin: ["", "admin"]},//ASSIGNED TO SOMEONE
+				assigned_to: {$nin: ["", "admin"]},
 				comment: {$nin: ["Approved.","Submitted.","Submitted for Document Review."]}})
 			
 			const ass_sub = await Assignment.find({
@@ -2407,17 +2407,17 @@ app.get('/assignments', async(req,res)=> {
 			
 			const ass_sub = await Assignment.find({
 				assigned_to: sess.username,
-				comment: "Submitted."
+				comment: ["Submitted.", "Submitted for Document Review."]
 				})
 				
-			const ass_sub2 = await Assignment.find({
+			const ass_returned1 = await Assignment.find({
 				assigned_to: sess.username,
 				comment: "For Printing."
 				})
 				
-			const ass_returned= await Assignment.find({
+			const ass_returned2 = await Assignment.find({
 				assigned_to: sess.username,
-				comment: {$nin: ["Submitted.","Submitted for Document Review.", "Approved."]}
+				comment: {$nin: ["Submitted.","For Printing.","Submitted for Document Review.", "Approved."]}
 				})
 
 			const ass = await Assignment.find({
@@ -2468,8 +2468,8 @@ app.get('/assignments', async(req,res)=> {
 					assignment_new:ass_new,
 					assignment_ass:ass,
 					assignment_sub:ass_sub,
-					assignment_sub2:ass_sub2,
-					assignment_returned:ass_returned,
+					assignment_returned1:ass_returned1,
+					assignment_returned2:ass_returned2,
 					
 					username: sess.username,
 					password: sess.password,

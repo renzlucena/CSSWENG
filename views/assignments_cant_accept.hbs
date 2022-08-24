@@ -6,11 +6,33 @@
     <link rel = "stylesheet" href="agent_ass.css">
     <title>Assignments</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<!-- Bootstrap chenes -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+	
+		
 	<script>
 		function openNav() {
+			if(document.getElementById("mySidenav").style.width == "64px"){		  
+				document.getElementById("mySidenav").style.width = "20%";
+				document.getElementById("main").style.marginLeft = "20%";
+			}
+			else{
+				document.getElementById("mySidenav").style.width = "64px";
+				document.getElementById("main").style.marginLeft = "64px";
+			}
+		}
+	</script>
+
+
+	
+	<script>
+		function openNavi() {
 			if(document.getElementById("sidebar").style.width=="0%")
 			{
 				document.getElementById("sidebar").style.width = "110%";
@@ -22,134 +44,193 @@
 			}
 		}
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </head>
 <body>
-    <div class="container">
-        <div id="sidebar">
-            <div class="sidebar-profile">
-                <img src="temp_pic.png" width="100" height="100">
-                <div class="sidebar-profile-text">
-                    <p class="sidebar-profile-name">Agent {{this.username}}</p>
-                    <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
-                    <a href="/login">Log Out</a>
-                </div>
-            </div>
 
-            <div class="sidebar-profile-btn">
-                <a href="/dashboard">Dashboard</a>
-            </div>
-            <div class="sidebar-assignments-btn">
-                <a  href="/assignments">Assignments</a>
-            </div>
-            <div class="sidebar-history-btn">
-                <a  href="/history">History</a>
-            </div>
-            <div class="sidebar-settings-btn">
-                <a href="/profile">Profile</a>
-            </div>
-            <div class="bottom-button">
-                <a href="/login">Logout</a>
-            </div>
-        </div>
+	<div id="main">
+		<div class="container-fluid">		
+			<div id="mySidenav" class="sidenav">
+			  <a href="javascript:void(0)" style="right:5%" class="closebtn" onclick="openNav()">&#9776;</a>
+				  <!-- <a href="#">About</a> -->
+				  <!-- <a href="#">Services</a> -->
+				  <!-- <a href="#">Clients</a> -->
+				  <!-- <a href="#">Contact</a> -->
 
-		<div class="openbtn" >
-			<a href="#" onclick="openNav()">☰</a>
-		</div>
+				<!-- <div class="sidebar-profile-btn"> -->
+					<div class="sidebar-profile-btn sidenav-btn active color-white">
+						<img class="d-inline" src="_book-fill-64.png">
+						<a class="d-inline" href="/dashboard">Profile</a>
+					</div>
+				<!-- </div> -->
 
-        <div class="main">
-            <div class="main-header">
-                <h1>Assignments</h1>
-                <p><b><i>You have {{how_many_ongoing}} ongoing assignment(s)!</b></i></p>
-                <p>Please confirm immediately to secure the job or it might be reassigned.
-                If the assignments is not finished in one week, it will be reopened to all agents week, it will be reopened to all agents.</p>
-            </div>
-
-			<form method="get" action="/assignments">
-				<div class="main-table">
-					<table>
-						<tr>
-							<th>REF NO.</th>
-							<th>DATE OF REQUEST</th>
-							<th>CITY, REGION</th>
-							<th>ACTION</th>
-						</tr>			
-						
-						<tr>
-							<th colspan='4'>New Assignments</th>
-						</tr>
-			
-						{{#each assignment_new}}
-							<tr>
-								<td><p>{{this.ref_id}}</p></td>
-								<td><p>{{this.created_at}}</p></td>
-								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
-								<td>
-									<div class="main-assignments-status-btns">
-											<button disabled type="submit" name="accept" formaction="/accept-assignment/{{ref_id}}">Can't Accept</button>
-									</div>
-								</td>
-							</tr>
-						{{/each}}
-						
-						<tr>
-							<th colspan='4'>Assigned Assignments</th>
-						</tr>
-						
-						{{#each assignment_sub}}
-							<tr>
-								<td><p>{{this.ref_id}}</p></td>
-								<td><p>{{this.created_at}}</p></td>
-								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
-								<td>
-									<div class="main-assignments-status-btns">
-										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">View Assignment</button>
-									</div>
-								</td>
-							</tr>
-							
-							<tr>
-								<td colspan='4'><p class="center-align">Sent to Admin for Review and Processing.</p></td>
-							</tr>
-						{{/each}}	
-					
-						{{#each assignment_print}}
-							<td><p>{{this.ref_id}}</p></td> 
-							<td><p>{{this.created_at}}</p></td> 
-							<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td> 
-							<td> 
-							<div class="main-assignments-status-btns"> 
-								<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit Document</button> 
-								</div> 
-								<td> 
-							</tr> 
-							
-							<tr>
-								<td colspan='4'><p class="center-align">For Printing. Please edit the document and get the print from admin.</p></td>
-							</tr>
-						{{/each}}
-						
-						{{#each assignment_returned}}
-							<td><p>{{this.ref_id}}</p></td> 
-							<td><p>{{this.created_at}}</p></td> 
-							<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td> 
-							<td> 
-							<div class="main-assignments-status-btns"> 
-								<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit Assignment</button> 
-								</div> 
-								<td> 
-							</tr> 
-							
-							<tr>
-								<th>Comment:</th>
-								<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
-							</tr>
-						{{/each}}
-					
-					</table>
+				<div class="sidebar-assignments-btn sidenav-btn color-white">
+					<img src="_edit-2-fill.png">
+					<a  href="/assignments">Assignments</a>
 				</div>
-			</form>
-        </div>
-    </div>
+				<div class="sidebar-history-btn sidenav-btn color-white">
+					<img src="_file-list-2-fill.png">
+					<a  href="/history">History</a>
+				</div>
+				<div class="sidebar-settings-btn sidenav-btn color-white">
+					<img src="_file-list-2-fill.png">
+					<a href="/profile">Settings</a>
+				</div>
+			</div>
+		
+		
+		
+
+
+			<nav class="navbar pl-5 navbar-expand-lg bg-dark2 mb-">
+				<!-- <a class="navbar-brand title-text" href="#">VENTUCILLO ASSOCIATES</a> -->
+				<div class="navbar-collapse" id="navbarTogglerDemo03">
+					<img style="padding-left:24px" src="6227853b83e54f2e94c29519d7c234db (1).jpg" height="40px">
+					<ul style="padding-left:24px" class="navbar-nav mr-auto mt-2 mt-lg-0">
+						<li class="nav-item active color-white">
+							<a class="nav-link" href="/dashboard">Dashboard</a>
+						</li>
+						<li class="nav-item color-white">
+							<a class="nav-link" href="/assignments">Assignment</a>
+						</li>
+						<li class="nav-item color-white">
+							<a class="nav-link" href="/history">History</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="dropdown">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a class="dropdown-toggle navbar-brand" data-toggle="dropdown" href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{this.username}} ({{this.email}})</a>
+							<ul class="dropdown-menu">
+								<li><a href="/profile">Profile</a></li>
+								<li><a href="/settings">Settings</a></li>
+								<li><a href="/logout">Log Out</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+	<!-- <div class="dropdown"> -->
+		<!-- <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> -->
+		  <!-- Dropdown button -->
+		<!-- </button> -->
+		<!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
+		  <!-- <li><a class="dropdown-item" href="#">Action</a></li> -->
+		  <!-- <li><a class="dropdown-item" href="#">Another action</a></li> -->
+		  <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+		<!-- </ul> -->
+	  <!-- </div> -->
+
+
+			<!-- <div class="openbtn" > -->
+				<!-- <a href="#" onclick="openNav()">☰</a> -->
+			<!-- </div> -->
+			
+			<!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span> -->
+			
+			<div>
+				<!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span> -->
+
+				<div class="main-header">
+					<h1>Assignments</h1>
+					<p><b><i>You have {{how_many_ongoing}} ongoing assignment(s)!</b></i></p>
+					<p>Please confirm immediately to secure the job or it might be reassigned.
+					If the assignments is not finished in one week, it will be reopened to all agents week, it will be reopened to all agents.</p>
+				</div>
+
+				<form method="get" action="/assignments">
+					<div class="main-table">
+						<table>
+							<tr>
+								<th>REF NO.</th>
+								<th>DATE OF REQUEST</th>
+								<th>CITY, REGION</th>
+								<th>ACTION</th>
+							</tr>			
+							
+							<tr>
+								<th colspan='4'>New Assignments</th>
+							</tr>
+				
+							{{#each assignment_new}}
+								<tr>
+									<td><p>{{this.ref_id}}</p></td>
+									<td><p>{{this.created_at}}</p></td>
+									<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+									<td>
+										<div class="main-assignments-status-btns">
+												<button disabled type="submit" name="accept" formaction="/accept-assignment/{{ref_id}}">Can't Accept</button>
+										</div>
+									</td>
+								</tr>
+							{{/each}}
+							
+							<tr>
+								<th colspan='4'>Assigned Assignments</th>
+							</tr>
+						
+							{{#each assignment_returned2}}
+								<td><p>{{this.ref_id}}</p></td> 
+								<td><p>{{this.created_at}}</p></td> 
+								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td> 
+								<td> 
+								<div class="main-assignments-status-btns"> 
+									<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit Document</button> 
+									</div> 
+									<td> 
+								</tr> 
+								
+								<tr>
+									<td colspan='4'><p class="center-align">Sen</p></td>
+								</tr>
+							{{/each}}
+							
+							{{#each assignment_returned1}}
+								<td><p>{{this.ref_id}}</p></td> 
+								<td><p>{{this.created_at}}</p></td> 
+								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td> 
+								<td> 
+								<div class="main-assignments-status-btns"> 
+									<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit Assignment</button> 
+									</div> 
+									<td> 
+								</tr> 
+								
+								<tr>
+									<th>Comment:</th>
+									<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
+								</tr>
+							{{/each}}
+							
+							<tr>
+								<th colspan='4'>For Admin Review</th>
+							</tr>
+							
+							{{#each assignment_sub}}
+								<tr>
+									<td><p>{{this.ref_id}}</p></td>
+									<td><p>{{this.created_at}}</p></td>
+									<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+									<td>
+										<div class="main-assignments-status-btns">
+											<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">View Assignment</button>
+										</div>
+									</td>
+								</tr>
+								
+								<tr>
+									<td colspan='4'><p class="center-align">Sent to Admin for Review and Processing.</p></td>
+								</tr>
+							{{/each}}	
+						
+						</table>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

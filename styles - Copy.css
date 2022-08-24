@@ -12,16 +12,15 @@ td
 
 #sidebar
 {
+    position:fixed;
+    height: 110%;
+    width: 400px;
+    display:block;
+    margin: -10px;
+    padding: 0px;
     background-color: #15223B;
 }
 
-#mySidenav{
-	width:64px;
-}
-
-#main{
-	margin-left:64px;
-}
 
 .bottom-button
 {
@@ -34,8 +33,11 @@ td
 
 #sidebar a
 {
+    padding: 20px;
+    font-size: 20px;
     color: white;
     background-color: none;
+    display: block;
     text-decoration: none;
 }
 
@@ -60,112 +62,35 @@ td
 	padding-right: 20px;
 }
 
+
 .body{
     width: 100%;
     height: 100%;
 }
 
 .container{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    overflow-y: scroll;
+    
     height: 100%;
-    width: 100%;   
+    width: 100%;
+    
 }
 
-
-.sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-#main {
-  transition: margin-left .5s;
-  padding: 16px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-
-.bg-dark
+.color-dark
 {
     background-color: #15223B
 }
-.bg-dark2
-{
-    background-color: #588BAE
-}
-.bg-white
+.color-white
 {
     background-color: #FFFFFF
-}	
-.bg-light
+}
+.color-light
 {
     background-color: #ADD3E6
 }
-
-.color-dark:hover
-{
-    color: #FFFFFF
-}
-.color-dark2:hover
-{
-    color: #FFFFFF
-}
-.color-white:hover
-{
-    color: #588BAE
-}	
-.color-light:hover
-{
-    color: #588BAE
-}
-
-.color-dark a
-{
-    color: #15223B
-}
-.color-dark2 a
-{
-    color: #588BAE
-}
-.color-white a
-{
-    color: #FFFFFF
-}	
-.color-light a
-{
-    color: #ADD3E6
-}
-
 .small-text{
     font-size: 10px;
 }
@@ -179,6 +104,7 @@ td
     background-color: none;
     text-align:center;
 }
+
 
 /* Login page styles */
 
@@ -250,7 +176,15 @@ select{
 }
 
 #login-panel{
+    position: fixed;
+    
     background-color: #FFFFFF;
+    margin:auto;
+    width: 30%;
+    right: 0px;
+    left: 0px;
+    top: 0px;
+    height: 100%;
     text-align: center;
 }
 
@@ -382,7 +316,6 @@ td{
 }
 .sidebar-profile-text a
 {
-	width:100%;
     font-size: 16px !important;
     text-decoration:underline !important;
 	padding:0px !important;
@@ -438,12 +371,6 @@ td{
     background-color: none;
     display: block;
 }
-
-.sidenav-btn a:focus{
-	background-color: red;
-	color: red;
-}
-
 .main-header h1
 {
     font-size:30px;
