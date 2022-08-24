@@ -115,13 +115,29 @@ td
   .sidenav a {font-size: 18px;}
 }
 
+<<<<<<< Updated upstream
 .bg-dark
+=======
+.color-orange
 {
-    background-color: #15223B
+    color: #C35817
+}
+.color-super-dark
+{
+    color: #15223B
+}
+.color-dark
+>>>>>>> Stashed changes
+{
+    color: #588BAE
 }
 .bg-dark2
 {
+<<<<<<< Updated upstream
     background-color: #588BAE
+=======
+    color: #FFFFFF
+>>>>>>> Stashed changes
 }
 .bg-white
 {
@@ -129,9 +145,32 @@ td
 }	
 .bg-light
 {
+    color: #ADD3E6
+}
+
+
+.bgc-orange
+{
+    background-color: #C35817;
+}
+.bgc-super-dark
+{
+    background-color: #15223B
+}
+.bgc-dark
+{
+    background-color: #588BAE
+}
+.bgc-white
+{
+    background-color: #FFFFFF
+}
+.bgc-light
+{
     background-color: #ADD3E6
 }
 
+<<<<<<< Updated upstream
 .color-dark:hover
 {
     color: #FFFFFF
@@ -165,6 +204,9 @@ td
 {
     color: #ADD3E6
 }
+=======
+
+>>>>>>> Stashed changes
 
 .small-text{
     font-size: 10px;
@@ -172,14 +214,58 @@ td
 .main
 {
     padding-top: 40px;
-    width: 1500px;
+    width: 90%	;
     height: 80%;
-    display: inline-block;
-    margin-left: 400px;
     background-color: none;
     text-align:center;
 }
 
+<<<<<<< Updated upstream
+=======
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+>>>>>>> Stashed changes
 /* Login page styles */
 
 input[type=text]{
@@ -325,8 +411,6 @@ background: #FFFFFF;
 }
 
 
-
-
 /* Table styles */
 table {
     width: 100%;
@@ -336,12 +420,12 @@ table {
 
 th{
     height: 20px;
-    background-color: #15223B;
+    background-color: #15223B  !important;
     color: white;
 }
 
 tr {
-  border-bottom: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF !important	;
 }
 tr:hover
 {

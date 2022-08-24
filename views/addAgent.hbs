@@ -23,19 +23,20 @@
 				document.getElementById("bottom-button").style.width = "0%";
 			}
 		}
-
+	</script>
+	<script>	
 		function checkForm()
         {
             var valid = true;
 
-            var username = document.getElementById("username");
             var email = document.getElementById("email");
             var fname = document.getElementById("fname");
             var lname = document.getElementById("lname");
             var appnum = document.getElementById("appnum");
 
             //if either field is empty, do not proceed.
-            if (username.value == "")
+            /*
+			if (username.value == "")
             {
                 username.style.backgroundColor = "red";
                 valid = false;
@@ -52,6 +53,7 @@
                 password.style.backgroundColor = "white";
             }
             return valid;
+<<<<<<< Updated upstream
 
             if (email.value == "")
             {
@@ -91,6 +93,57 @@
             else{
                 appnum.style.backgroundColor = "white";
             }
+=======
+			*/
+			
+
+				if (email.value == "")
+				{
+					email.style.backgroundColor = "red";
+					valid = false;
+				}
+				else{
+					email.style.backgroundColor = "white";
+				}
+				
+				
+				if (fname.value == "")
+				{
+					fname.style.backgroundColor = "red";
+					valid = false;
+				}
+				else{
+					fname.style.backgroundColor = "white";
+				}
+
+				if (lname.value == "")
+				{
+					lname.style.backgroundColor = "red";
+					valid = false;
+				}
+				else{
+					lname.style.backgroundColor = "white";
+				}	
+
+				if (appnum.value == "")
+				{
+					appnum.style.backgroundColor = "red";
+					valid = false;
+				}
+				else{
+					appnum.style.backgroundColor = "white";
+				}
+				
+				
+				if (appaddress.value == "")
+				{
+					appaddress.style.backgroundColor = "red";
+					valid = false;
+				}
+				else{
+					appaddress.style.backgroundColor = "white";
+				}
+>>>>>>> Stashed changes
             return valid;
         }
 	</script>
@@ -133,7 +186,7 @@
                 <h1>Create Agent</p>
                 <p><b><i>Create New Agent</b></i></p>
             </div>
-            <form class="assignments-form" action = "/assignments" method = "post">
+            <form class="assignments-form" action = "/new-agent" method = "post" onsubmit="return checkForm()">
                 <div class="main-table">
                     <table>
                         
@@ -158,7 +211,7 @@
                 </div>
 
 				<div id="main-table-bottom">
-					<button type = "submit" formaction="/new-agent" name="new_age" onsubmit="return checkForm()">Add Agent</button>
+					<button type = "submit">Add Agent</button>
 				</div>
             </form>
         </div>
