@@ -48,7 +48,7 @@
                 <a  href="/admin-add-agent">Add New Agent</a>
             </div>
 
-      <div class="sidebar-add-btn">
+			<div class="sidebar-add-btn">
                 <a  href="/account">See All Agents</a>
             </div>
 
@@ -70,28 +70,37 @@
                 <h1>See All Agents</h1>
                 <p><b><i>Admin Panel</b></i></p>
             </div>
-
-			<form method="get" action="/account">
-				<div class="main-table">
-					<table>
-						<tr>
-							<th><p>USERNAME.</p></th>
-							<th><p>PASSWORD</p></th>
-							<th><p>EMAIL</p></th>
-							<th><p>APPNUM</p></th>
-							<th><p>APPADRESS</p></th>
-						</tr>
-
-						{{#each activated}}
-						<tr>
-							<td>{{this.username}}</td>
-                            <td>{{this.password}}</td>
-                            <td>{{this.email}}</td>
-							<td>{{this.appnum}}</td>
-                            <td>{{this.appadress}}</td>
-						</tr>
-						{{/each}}
-
+			<div class="main-table">
+				<table>
+					<tr>
+						<th><p>USERNAME.</p></th>
+						<th><p>EMAIL</p></th>
+						<th><p>APPNUM</p></th>
+						<th><p>APPADRESS</p></th>
+						<th><p>CAN ACCEPT?</p></th>
+						<th><p>ACTION</p></th>
+					</tr>
+					
+					<tr>
+						<th colspan='6'>Active Agents</th>
+					</tr>
+					
+					{{#each activated}}
+					<tr>
+						<td>{{this.username}}</td>
+						<td>{{this.email}}</td>
+						<td>{{this.appnum}}</td>
+						<td>{{this.appadress}}</td>
+						<td>{{this.can_accept}}</td>
+						<td>
+							<div class="main-assignments-status-btns">
+								<button type="submit" formaction="/admin/del/{{ref_id}}">Delete</button>
+								<button type="submit" formaction="/admin/reset-password/{{ref_id}}">Reset Password</button>
+								<button type="submit" formaction="/admin/deact/{{ref_id}}">Deactivate</button>
+							</div>
+						</td>
+					</tr>
+					{{/each}}
                 </table>
             </div>
         </div>
