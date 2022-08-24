@@ -316,204 +316,204 @@
 
 						<tr>	<!-- price_per_sqm -->
                             <th><label for="price_per_sqm">Price per SQM</label></th>
-                            <td><input name="price_per_sqm" id="price_per_sqm" type="number" value="{{this.price_per_sqm}}"></td>
-                            <td><input name="price_per_sqm" id="price_per_sqm1" type="number" value="{{this.price_per_sqm1}}"></td>
-                            <td><input name="price_per_sqm" id="price_per_sqm2" type="number" value="{{this.price_per_sqm2}}"></td>
+                            <td></td>
+                            <td><input readonly  name="price_per_sqm" id="price_per_sqm1" type="number" value="{{this.price_per_sqm1}}"></td>
+                            <td><input readonly  name="price_per_sqm" id="price_per_sqm2" type="number" value="{{this.price_per_sqm2}}"></td>
                         </tr>
 
                         <tr>	<!-- ref_date -->
                             <th><label for="ref_date">Reference Date</label></th>
-                            <td><input name="ref_date" id="ref_date" type="date" value="{{this.ref_date}}"></td>
-                            <td><input name="ref_date" id="ref_date1" type="date" value="{{this.ref_date1}}">
-								<input class="percentage" id="ref_date_percent1" name="ref_date" type="number" value="{{this.ref_date_percent1}}"> %
+                            <td><input readonly  name="ref_date" id="ref_date" type="date" value="{{this.created_at}}"></td>
+                            <td><input readonly  name="ref_date" id="ref_date1" type="date" value="{{this.ref_date1}}">
+								<input readonly  class="percentage" id="ref_date_percent1" name="ref_date" type="number" value="{{this.ref_date_percent1}}"> %
 							</td>
-                            <td><input name="ref_date" id="ref_date2" type="date" value="{{this.ref_date2}}">
-								<input class="percentage" id="ref_date_percent2" name="ref_date" type="number" value="{{this.ref_date_percent2}}"> %
+                            <td><input readonly  name="ref_date" id="ref_date2" type="date" value="{{this.ref_date2}}">
+								<input readonly  class="percentage" id="ref_date_percent2" name="ref_date" type="number" value="{{this.ref_date_percent2}}"> %
 							</td>
                         </tr>
 
 						<tr>	<!-- lot_loc - agent will write down the specific location here -->
                             <th><label for="lot_loc">Property Location</label></th>
-                            <td><input name="lot_loc" id="lot_loc" type="text" value="{{this.lot_loc}}"></td>
-                            <td><input name="lot_loc" id="lot_loc1" type="text" value="{{this.lot_loc1}}"></td>
-                            <td><input name="lot_loc" id="lot_loc2" type="text" value="{{this.lot_loc2}}"></td>
+                            <td><input readonly  name="lot_loc" id="lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
+                            <td><input readonly  name="lot_loc" id="lot_loc1" type="text" value="{{this.lot_loc1}}"></td>
+                            <td><input readonly  name="lot_loc" id="lot_loc2" type="text" value="{{this.lot_loc2}}"></td>
 						</tr>
 
 						<tr>	<!-- property_type -->
                             <th><label for="property_type">Property Type</label></th>
-                            <td><input name="property_type" type="text" value="{{this.property_type}}"></td>
-                            <td><input name="property_type" class="text-next-to-percentage" type="text" value="{{this.property_type1}}">
-								<input class="percentage" id="property_type_percent1" name="property_type" type="number" value="{{this.property_type_percent1}}"> %
+                            <td><input readonly  name="property_type" type="text" value="{{this.property_type}}"></td>
+                            <td><input readonly  name="property_type" class="text-next-to-percentage" type="text" value="{{this.property_type1}}">
+								<input readonly  class="percentage" id="property_type_percent1" name="property_type" type="number" value="{{this.property_type_percent1}}"> %
 							</td>
-                            <td><input name="property_type" class="text-next-to-percentage" type="text" value="{{this.property_type2}}">
-								<input class="percentage" id="property_type_percent2" name="property_type" type="number" value="{{this.property_type_percent2}}"> %
+                            <td><input readonly  name="property_type" class="text-next-to-percentage" type="text" value="{{this.property_type2}}">
+								<input readonly  class="percentage" id="property_type_percent2" name="property_type" type="number" value="{{this.property_type_percent2}}"> %
 							</td>
                         </tr>
 						<tr>	<!-- property_interest -->
                             <th><label for="property_interest" >Property Interest</label></th>
-							<td><inputname="property_interest" type="text" value="{{this.property_interest}}"></td>
-                            <td><inputname="property_interest" class="text-next-to-percentage" type="text" value="{{this.property_interest1}}">
-								<inputclass="percentage" id="property_interest_percent1" name="property_interest" type="number" value="{{this.property_interest_percent1}}"> %
+							<td><input readonly name="property_interest" type="text" value="{{this.property_interest}}"></td>
+                            <td><input readonly name="property_interest" class="text-next-to-percentage" type="text" value="{{this.property_interest1}}">
+								<input readonly class="percentage" id="property_interest_percent1" name="property_interest" type="number" value="{{this.property_interest_percent1}}"> %
 							</td>
-                            <td><inputname="property_interest" class="text-next-to-percentage" type="text" value="{{this.property_interest2}}">
-								<inputclass="percentage" id="property_interest_percent2" name="property_interest" type="number" value="{{this.property_interest_percent2}}"> %
+                            <td><input readonly name="property_interest" class="text-next-to-percentage" type="text" value="{{this.property_interest2}}">
+								<input readonly class="percentage" id="property_interest_percent2" name="property_interest" type="number" value="{{this.property_interest_percent2}}"> %
 							</td>
                         </tr>
 
                         <!-- <tr>	<!-- property_images (DECLARE AS MISSING FEATURE NALANG ANG HIRAAAAP) -->
                             <!-- <th><label for="property_images">Property Images</label></th> -->
-                            <!-- <td><input type="file" id="pimg" name="property_images"></td> -->
-                            <!-- <td><input type="file" id="pimg1" name="property_images"></td> -->
-                            <!-- <td><input type="file" id="pimg2" name="property_images"></td> -->
+                            <!-- <td><input readonly  type="file" id="pimg" name="property_images"></td> -->
+                            <!-- <td><input readonly  type="file" id="pimg1" name="property_images"></td> -->
+                            <!-- <td><input readonly  type="file" id="pimg2" name="property_images"></td> -->
                         <!-- </tr> -->
 
                         <tr>	<!-- propeerty area size / lot_size -->
                             <th><label for="lot_size">Property Area Size</label></th>
-                            <td><input name="lot_size" type="text" value="{{this.lot_size}}" readonly></td>
-                            <td><input name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size1}}">
-								<input class="percentage" id="lot_size_percent1" name="lot_size" type="number" value="{{this.lot_size_percent1}}"> %
+                            <td><input readonly  name="lot_size" type="text" value="{{this.lot_size}}" readonly></td>
+                            <td><input readonly  name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size1}}">
+								<input readonly  class="percentage" id="lot_size_percent1" name="lot_size" type="number" value="{{this.lot_size_percent1}}"> %
 							</td>
-                            <td><input name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size2}}">
-								<input class="percentage" id="lot_size_percent2" name="lot_size" type="number" value="{{this.lot_size_percent2}}"> %
+                            <td><input readonly  name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size2}}">
+								<input readonly  class="percentage" id="lot_size_percent2" name="lot_size" type="number" value="{{this.lot_size_percent2}}"> %
 							</td>
                         </tr>
 
 						<tr>	<!-- shape -->
                             <th><label for="shape">Shape</label></th>
-                            <td><input name="shape" type="text" id="shape" value="{{this.shape}}"></td>
-                            <td><input name="shape" type="text" class="text-next-to-percentage" id="shape1" value="{{this.shape1}}">
-								<input class="percentage" id="shape_percent1" name="shape" type="number" value="{{this.shape_percent1}}"> %
+                            <td><input readonly  name="shape" type="text" id="shape" value="{{this.shape}}"></td>
+                            <td><input readonly  name="shape" type="text" class="text-next-to-percentage" id="shape1" value="{{this.shape1}}">
+								<input readonly  class="percentage" id="shape_percent1" name="shape" type="number" value="{{this.shape_percent1}}"> %
 							</td>
-                            <td><input name="shape" class="text-next-to-percentage" type="text" id="shape2" value="{{this.shape2}}">
-								<input class="percentage" id="shape_percent2" name="shape" type="number" value="{{this.shape_percent2}}"> %
+                            <td><input readonly  name="shape" class="text-next-to-percentage" type="text" id="shape2" value="{{this.shape2}}">
+								<input readonly  class="percentage" id="shape_percent2" name="shape" type="number" value="{{this.shape_percent2}}"> %
 							</td>
                         </tr>
 
 						<tr>	<!-- topo -->
                             <th><label for="topo">Topography</label></th>
-                            <td><input name="topo" type="text" value="{{this.topo}}"></td>
-                            <td><input name="topo" class="text-next-to-percentage" type="text" value="{{this.topo1}}">
-								<input class="percentage" id="topo_percent1" name="topo" type="number" value="{{this.topo_percent1}}"> %
+                            <td><input readonly  name="topo" type="text" value="{{this.topo}}"></td>
+                            <td><input readonly  name="topo" class="text-next-to-percentage" type="text" value="{{this.topo1}}">
+								<input readonly  class="percentage" id="topo_percent1" name="topo" type="number" value="{{this.topo_percent1}}"> %
 							</td>
-                            <td><input name="topo" class="text-next-to-percentage" type="text" value="{{this.topo2}}">
-								<input class="percentage" id="topo_percent2" name="topo" type="number" value="{{this.topo_percent2}}"> %
+                            <td><input readonly  name="topo" class="text-next-to-percentage" type="text" value="{{this.topo2}}">
+								<input readonly  class="percentage" id="topo_percent2" name="topo" type="number" value="{{this.topo_percent2}}"> %
 							</td>
                         </tr>
 
 						<tr>	<!-- frontage -->
                             <th><label for="frontage">Frontage</label></th>
-                            <td><input name="frontage" type="text" value="{{this.frontage}}"></td>
-                            <td><input name="frontage" class="text-next-to-percentage" type="text" value="{{this.frontage1}}">
-								<input class="percentage" id="frontage_percent1" name="frontage" type="number" value="{{this.frontage_percent1}}"> %
+                            <td><input readonly  name="frontage" type="text" value="{{this.frontage}}"></td>
+                            <td><input readonly  name="frontage" class="text-next-to-percentage" type="text" value="{{this.frontage1}}">
+								<input readonly  class="percentage" id="frontage_percent1" name="frontage" type="number" value="{{this.frontage_percent1}}"> %
 							</td>
-                            <td><input name="frontage" class="text-next-to-percentage" type="text" value="{{this.frontage2}}">
-								<input class="percentage" id="frontage_percent2" name="frontage" type="number" value="{{this.frontage_percent2}}"> %
+                            <td><input readonly  name="frontage" class="text-next-to-percentage" type="text" value="{{this.frontage2}}">
+								<input readonly  class="percentage" id="frontage_percent2" name="frontage" type="number" value="{{this.frontage_percent2}}"> %
 							</td>
                         </tr>
 
 						<tr>	<!-- terms_of_sale -->
                             <th><label for="terms_of_sale">Terms of Sale</label></th>
-                            <td><input name="terms_of_sale" type="text" value="{{this.terms_of_sale}}"></td>
-                            <td><input name="terms_of_sale" class="text-next-to-percentage" type="text" value="{{this.terms_of_sale1}}">
-								<input class="percentage" id="terms_of_sale_percent1" name="terms_of_sale" type="number" value="{{this.terms_of_sale_percent1}}"> %
+                            <td><input readonly  name="terms_of_sale" type="text" value="{{this.terms_of_sale}}"></td>
+                            <td><input readonly  name="terms_of_sale" class="text-next-to-percentage" type="text" value="{{this.terms_of_sale1}}">
+								<input readonly  class="percentage" id="terms_of_sale_percent1" name="terms_of_sale" type="number" value="{{this.terms_of_sale_percent1}}"> %
 							</td>
-                            <td><input name="terms_of_sale" class="text-next-to-percentage" type="text" value="{{this.terms_of_sale2}}">
-								<input class="percentage" id="terms_of_sale_percent2" name="terms_of_sale" type="number" value="{{this.terms_of_sale_percent2}}"> %
+                            <td><input readonly  name="terms_of_sale" class="text-next-to-percentage" type="text" value="{{this.terms_of_sale2}}">
+								<input readonly  class="percentage" id="terms_of_sale_percent2" name="terms_of_sale" type="number" value="{{this.terms_of_sale_percent2}}"> %
 							</td>
                         </tr>
 
 						<tr>	<!-- corner -->
                             <th><label>Is a Corner Lot?</label></th>
-                            <td><input name="corner" type="checkbox" value="{{this.corner}}"></td>
-                            <td><input name="corner" type="checkbox" value="{{this.corner1}}">
-								<input class="percentage" id="corner_percent1" name="corner" type="number" value="{{this.corner_percent1}}"> %
+                            <td><input readonly  name="corner" type="checkbox" value="{{this.corner}}"></td>
+                            <td><input readonly  name="corner" type="checkbox" value="{{this.corner1}}">
+								<input readonly  class="percentage" id="corner_percent1" name="corner" type="number" value="{{this.corner_percent1}}"> %
 							</td>
-                            <td><input name="corner" type="checkbox" value="{{this.corner2}}">
-								<input class="percentage" id="corner_percent2" name="corner" type="number" value="{{this.corner_percent2}}"> %
+                            <td><input readonly  name="corner" type="checkbox" value="{{this.corner2}}">
+								<input readonly  class="percentage" id="corner_percent2" name="corner" type="number" value="{{this.corner_percent2}}"> %
 							</td>
                         </tr>
 						<tr>	<!-- prime -->
                             <th><label>Is Prime Lot?</label></th>
-                            <td><input name="prime" type="checkbox" value="{{this.prime}}"></td>
-                            <td><input name="prime" type="checkbox" value="{{this.prime1}}">
-								<input class="percentage" id="prime_percent1" name="prime" type="number" value="{{this.prime_percent1}}"> %
+                            <td><input readonly  name="prime" type="checkbox" value="{{this.prime}}"></td>
+                            <td><input readonly  name="prime" type="checkbox" value="{{this.prime1}}">
+								<input readonly  class="percentage" id="prime_percent1" name="prime" type="number" value="{{this.prime_percent1}}"> %
 							</td>
-                            <td><input name="prime" type="checkbox" value="{{this.prime2}}">
-								<input class="percentage" id="prime_percent2" name="prime" type="number" value="{{this.prime_percent2}}"> %
+                            <td><input readonly  name="prime" type="checkbox" value="{{this.prime2}}">
+								<input readonly  class="percentage" id="prime_percent2" name="prime" type="number" value="{{this.prime_percent2}}"> %
 							</td>
                         </tr>
 
 						<tr>	<!-- hospital -->
                             <th><label>Has nearby Hospital(s)?</label></th>
-                            <td><input name="hospital" type="checkbox" value="{{this.hospital}}"></td>
-                            <td><input name="hospital" type="checkbox" value="{{this.hospital1}}">
-								<input class="percentage" id="hospital_percent1" name="hospital" type="number" value="{{this.hospital_percent1}}"> %
+                            <td><input readonly  name="hospital" type="checkbox" value="{{this.hospital}}"></td>
+                            <td><input readonly  name="hospital" type="checkbox" value="{{this.hospital1}}">
+								<input readonly  class="percentage" id="hospital_percent1" name="hospital" type="number" value="{{this.hospital_percent1}}"> %
 							</td>
-                            <td><input name="hospital" type="checkbox" value="{{this.hospital2}}">
-								<input class="percentage" id="hospital_percent2" name="hospital" type="number" value="{{this.hospital_percent2}}"> %
+                            <td><input readonly  name="hospital" type="checkbox" value="{{this.hospital2}}">
+								<input readonly  class="percentage" id="hospital_percent2" name="hospital" type="number" value="{{this.hospital_percent2}}"> %
 							</td>
                         </tr>
 						<tr>	<!-- school -->
 							<th><label>Has nearby School(s)?</label></th>
-                            <td><input name="school" type="checkbox" value="{{this.school}}"></td>
-                            <td><input name="school" type="checkbox" value="{{this.school1}}">
-								<input class="percentage" id="school_percent1" name="school" type="number" value="{{this.school_percent1}}"> %
+                            <td><input readonly  name="school" type="checkbox" value="{{this.school}}"></td>
+                            <td><input readonly  name="school" type="checkbox" value="{{this.school1}}">
+								<input readonly  class="percentage" id="school_percent1" name="school" type="number" value="{{this.school_percent1}}"> %
 							</td>
-                            <td><input name="school" type="checkbox" value="{{this.school2}}">
-								<input class="percentage" id="school_percent2" name="school" type="number" value="{{this.school_percent2}}"> %
+                            <td><input readonly  name="school" type="checkbox" value="{{this.school2}}">
+								<input readonly  class="percentage" id="school_percent2" name="school" type="number" value="{{this.school_percent2}}"> %
 							</td>
                         </tr>
 						<tr>	<!-- school -->
 							<th><label>Has nearby Shop/Mall(s)?</label></th>
-                            <td><input name="mall" type="checkbox" value="{{this.mall}}"></td>
-                            <td><input name="mall" type="checkbox" value="{{this.mall1}}">
+                            <td><input readonly  name="mall" type="checkbox" value="{{this.mall}}"></td>
+                            <td><input readonly  name="mall" type="checkbox" value="{{this.mall1}}">
 																												<!-- ERROR nagpproblem pag mall_percent1 cast error daw :< -->
-								<input class="percentage" id="mall_percent1" name="mall" type="number" value="{{this.mall_percent1}}"> %
+								<input readonly  class="percentage" id="mall_percent1" name="mall" type="number" value="{{this.mall_percent1}}"> %
 							</td>
-                            <td><input name="mall" type="checkbox" value="{{this.mall2}}">
-								<input class="percentage" id="mall_percent2" name="mall" type="number" value="{{this.mall_percent2}}"> %
+                            <td><input readonly  name="mall" type="checkbox" value="{{this.mall2}}">
+								<input readonly  class="percentage" id="mall_percent2" name="mall" type="number" value="{{this.mall_percent2}}"> %
 							</td>
                         </tr>
 						<!-- <tr>	<!-- mall -->
                             <!-- <th><label>Has nearby Shop/Mall(s)?</label></th> -->
-                            <!-- <td><input name="malls" type="checkbox" value="{{this.mall}}"></td> -->
-                            <!-- <td><input name="malls" type="checkbox" value="{{this.mall1}}"> -->
-								<!-- <input class="percentage" id="mall_percent1" name="mall_percent" type="number" value="{{this.mall_percent1}}"> % -->
+                            <!-- <td><input readonly  name="malls" type="checkbox" value="{{this.mall}}"></td> -->
+                            <!-- <td><input readonly  name="malls" type="checkbox" value="{{this.mall1}}"> -->
+								<!-- <input readonly  class="percentage" id="mall_percent1" name="mall_percent" type="number" value="{{this.mall_percent1}}"> % -->
 							<!-- </td> -->
-                            <!-- <td><input name="malls" type="checkbox" value="{{this.mall2}}"> -->
-								<!-- <input class="percentage" id="mall_percent2" name="mall_percent" type="number" value="{{this.mall_percent2}}"> % -->
+                            <!-- <td><input readonly  name="malls" type="checkbox" value="{{this.mall2}}"> -->
+								<!-- <input readonly  class="percentage" id="mall_percent2" name="mall_percent" type="number" value="{{this.mall_percent2}}"> % -->
 							<!-- </td> -->
 						<!-- </tr> -->
 						<tr>	<!-- public transpo -->
                             <th><label for="public_transpo" >Access to Main Public Transport</label></th>
-							<td><input name="public_transpo" type="text" value="{{this.public_transpo}}"></td>
-                            <td><input name="public_transpo" class="text-next-to-percentage" type="text" value="{{this.public_transpo1}}">
-								<input class="percentage" id="public_transpo_percent1" name="public_transpo" type="number" value="{{this.public_transpo_percent1}}"> %
+							<td><input readonly name="public_transpo" type="text" value="{{this.public_transpo}}"></td>
+                            <td><input readonly name="public_transpo" class="text-next-to-percentage" type="text" value="{{this.public_transpo1}}">
+								<input readonly class="percentage" id="public_transpo_percent1" name="public_transpo" type="number" value="{{this.public_transpo_percent1}}"> %
 							</td>
-                            <td><input name="public_transpo" class="text-next-to-percentage" type="text" value="{{this.public_transpo2}}">
-								<input class="percentage" id="public_transpo_percent2" name="public_transpo" type="number" value="{{this.public_transpo_percent2}}"> %
+                            <td><input readonly name="public_transpo" class="text-next-to-percentage" type="text" value="{{this.public_transpo2}}">
+								<input readonly class="percentage" id="public_transpo_percent2" name="public_transpo" type="number" value="{{this.public_transpo_percent2}}"> %
 							</td>
 
                         </tr>
 						<tr>	<!-- improvement -->
                             <th><label>Has Improvement(s)?</label></th>
-                            <td><input name="improvement" type="checkbox" value="{{this.improvement}}"></td>
-                            <td><input name="improvement" type="checkbox" value="{{this.improvement1}}">
-								<input class="percentage" id="improvement_percent1" name="improvement" type="number" value="{{this.improvement_percent1}}"> %
+                            <td><input readonly  name="improvement" type="checkbox" value="{{this.improvement}}"></td>
+                            <td><input readonly  name="improvement" type="checkbox" value="{{this.improvement1}}">
+								<input readonly  class="percentage" id="improvement_percent1" name="improvement" type="number" value="{{this.improvement_percent1}}"> %
 							</td>
-                            <td><input name="improvement" type="checkbox" value="{{this.improvement2}}">
-								<input class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
+                            <td><input readonly  name="improvement" type="checkbox" value="{{this.improvement2}}">
+								<input readonly  class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
 							</td>
 						</tr>
 
 						<tr>	<!-- zoning -->
                             <th><label for="zoning">Zoning</label></th>
-                            <td><input name="zoning" id="zoning" type="text" value="{{this.zoning}}"></td>
-                            <td><input name="zoning" id="zoning1" class="text-next-to-percentage" type="text" value="{{this.zoning1}}">
-								<input class="percentage" id="zoning_percent1" name="zoning" type="number" value="{{this.zoning_percent1}}"> %
+                            <td><input readonly  name="zoning" id="zoning" type="text" value="{{this.zoning}}"></td>
+                            <td><input readonly  name="zoning" id="zoning1" class="text-next-to-percentage" type="text" value="{{this.zoning1}}">
+								<input readonly  class="percentage" id="zoning_percent1" name="zoning" type="number" value="{{this.zoning_percent1}}"> %
 							</td>
-                            <td><input name="zoning" name="zoning2" class="text-next-to-percentage" type="text" value="{{this.zoning2}}">
-								<input class="percentage" id="zoning_percent2" name="zoning" type="number" value="{{this.zoning_percent2}}"> %
+                            <td><input readonly  name="zoning" name="zoning2" class="text-next-to-percentage" type="text" value="{{this.zoning2}}">
+								<input readonly  class="percentage" id="zoning_percent2" name="zoning" type="number" value="{{this.zoning_percent2}}"> %
 							</td>
                         </tr>
 						<tr>
@@ -522,28 +522,15 @@
 							<th>ADJUSTED VALUE & WEIGHT</th>
 							<th>ADJUSTED VALUE & WEIGHT</th>
 						</tr>
-
-
-
-						<tr>	<!-- propeerty area size / lot_size but  without names because clones-->
-                            <th><label for="lot_size">Property Area Size</label></th>
-                            <td><input type="text" value="{{this.lot_size}}"></td>
-                            <td><input class="text-next-to-percentage" type="text" value="{{this.lot_size1}}">
-								<input class="percentage" id="lot_size_percent1" type="number" value="{{this.lot_size_percent1}}"> %
-							</td>
-                            <td><input class="text-next-to-percentage" type="text" value="{{this.lot_size2}}">
-								<input class="percentage" id="lot_size_percent2" type="number" value="{{this.lot_size_percent2}}"> %
-							</td>
-                        </tr>
-
+						
 						<tr>
                             <th><label for="computation">Computation</label></th>
-                            <td><input name="computation" value="{{this.computation}}" id="computation" type="text"></td>
-                            <td><input name="computation" class="text-next-to-percentage" value="{{this.computation1}}" id="computation1" type="text">
-								<input class="percentage" id="computation_percent1" value="{{this.computation_percent1}}" name="computation" type="number"> %
+                            <td><input readonly  name="computation" value="{{this.computation}}" id="computation" type="text"></td>
+                            <td><input readonly  name="computation" class="text-next-to-percentage" value="{{this.computation1}}" id="computation1" type="text">
+								<input readonly  class="percentage" id="computation_percent1" value="{{this.computation_percent1}}" name="computation" type="number"> %
 							</td>
-                            <td><input name="computation" class="text-next-to-percentage" value="{{this.computation2}}" id="computation2" type="text">
-								<input class="percentage" id="computation_percent2"  value="{{this.computation_percent2}}" name="computation" type="number"> %
+                            <td><input readonly  name="computation" class="text-next-to-percentage" value="{{this.computation2}}" id="computation2" type="text">
+								<input readonly  class="percentage" id="computation_percent2"  value="{{this.computation_percent2}}" name="computation" type="number"> %
 							</td>
                         </tr>
                     </table>
@@ -553,7 +540,6 @@
 				{{#each doc_details}}
 				<div class="main-header">
 					<h1>Document Details For Assignment #{{ref_id}}</p>
-					<h1>TODO: render this page with the document info</p>
 				</div>
 				
                 <div class="main-table">

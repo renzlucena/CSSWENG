@@ -1126,9 +1126,15 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 		else		// IF AGENT IS LOGGED IN
 		{
 			try{
-			const ass = await Assignment.findOne({
-				ref_id : req.params.ref_id
-				})
+				const ass = await Assignment.findOne({
+					ref_id : req.params.ref_id
+					})
+				const assignment = await Assignment.find({
+					ref_id : req.params.ref_id
+					})
+				const docu = await Document.find({
+					ref_id : req.params.ref_id
+					})
 
 				if(ass.comment == "Submitted for Document Review."){
 					console.log("viewAssignment_2.hbs")
@@ -1419,7 +1425,10 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				else if(ass.comment == "Approved."){
 					console.log("viewAssignment_3.hbs")
 					res.render('viewAssignment_3.hbs',{
-						ref_id 			: ass.ref_id,
+						assignment_ass: assignment,	//short ver lol
+						doc_details: docu,
+						
+						/*ref_id 			: ass.ref_id,
 						type_of_approach: ass.type_of_approach,
 						client_f_name 	: ass.client_f_name,
 						client_l_name 	: ass.client_l_name,
@@ -1541,7 +1550,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						improvement_percent2		: ass.comparative2.improvement.num,
 						zoning_percent2				: ass.comparative2.zoning.num,
 						computation_percent2		: ass.comparative2.computation.num2,
-
+					*/
 						username: sess.username,
 						password: sess.password,
 						acc_id: sess.acc_id,
@@ -1559,13 +1568,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				//Can edit
 				else if (ass.comment == "For Printing."){
 					console.log("viewAssignment_4.hbs")
-					const docu = await Document.findOne({
-						ref_id : req.params.ref_id
-					})
 					
-					console.log("viewAssignment_4.hbs")
-					
+					//TODO make the assignment's dates formatted like this
+					assignment.created_at = (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
+						
 					res.render('viewAssignment_4.hbs',{
+						//created_at : "aaa",//(assignment.created_at.getMonth().toString())+" "+assignment.created_at.getFullYear().toString(),
+						assignment_ass: assignment,	//short ver lol
 						doc_details: docu,
 						/*filename: docu.filename,
 						company_name: docu.filename,
@@ -1626,43 +1635,43 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						final_value_indication_per_sqm: "",*/
 
 
-						ref_id 			: ass.ref_id,
-						type_of_approach: ass.type_of_approach,
-						client_f_name 	: ass.client_f_name,
-						client_l_name 	: ass.client_l_name,
-						lot_brgy		: ass.lot_brgy,
-						lot_city		: ass.lot_city,
-						lot_region		: ass.lot_region,
-						zonal			: ass.zonal,
-						title_no		: ass.title_no,
-						assigned_to		: ass.assigned_to,
+						// ref_id 			: ass.ref_id,
+						// type_of_approach: ass.type_of_approach,
+						// client_f_name 	: ass.client_f_name,
+						// client_l_name 	: ass.client_l_name,
+						// lot_brgy		: ass.lot_brgy,
+						// lot_city		: ass.lot_city,
+						// lot_region		: ass.lot_region,
+						// zonal			: ass.zonal,
+						// title_no		: ass.title_no,
+						// assigned_to		: ass.assigned_to,
 
-						//dates
-						ref_date		: ass.ref_date,
-						created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
-						completed_on	: ass.completed_on,
-						expiring_on 	: ass.expiring_on,
+						// //dates
+						// ref_date		: ass.ref_date,
+						//created_at		: (ass.created_at.getMonth().toString())+" "+ass.created_at.getFullYear().toString(),
+						// completed_on	: ass.completed_on,
+						// expiring_on 	: ass.expiring_on,
 
 			// SUPJECT PROPERTY
-						price_per_sqm	: ass.price_per_sqm,
-						lot_loc			: ass.lot_loc,
-						property_type	: ass.property_type,
-						property_interest: ass.property_interest,
-						// property_images: [imageSchema],
-						lot_size		: ass.lot_size,
-						shape			: ass.shape,
-						topo			: ass.topo,
-						frontage		: ass.frontage,
-						terms_of_sale	: ass.terms_of_sale,
-						corner			: ass.corner,
-						prime			: ass.prime,
-						hospital		: ass.hospital,
-						school			: ass.school,
-						mall				: ass.mall,
-						public_transpo	: ass.public_transpo,
-						improvement		: ass.improvement,
-						zoning			: ass.zoning,
-						computation		: ass.computation,
+						// price_per_sqm	: ass.price_per_sqm,
+						// lot_loc			: ass.lot_loc,
+						// property_type	: ass.property_type,
+						// property_interest: ass.property_interest,
+						// // property_images: [imageSchema],
+						// lot_size		: ass.lot_size,
+						// shape			: ass.shape,
+						// topo			: ass.topo,
+						// frontage		: ass.frontage,
+						// terms_of_sale	: ass.terms_of_sale,
+						// corner			: ass.corner,
+						// prime			: ass.prime,
+						// hospital		: ass.hospital,
+						// school			: ass.school,
+						// mall				: ass.mall,
+						// public_transpo	: ass.public_transpo,
+						// improvement		: ass.improvement,
+						// zoning			: ass.zoning,
+						// computation		: ass.computation,
 
 						//comment
 						comment: ass.comment,

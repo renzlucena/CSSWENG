@@ -74,9 +74,10 @@
 					<table>
 						<tr>
 							<th><p>REF NO.</p></th>
-							<th><p>ASSIGNED TO</p></th>
+							<th><p>CLIENT</p></th>
 							<th><p>LOCATION</p></th>
 							<th><p>ACTION</p></th>
+							<th><p>ASSIGNED TO</p></th>
 						</tr>
 
 						<tr>
@@ -84,14 +85,15 @@
 						</tr>
 						{{#each assignment_new}}
 						<tr>
-							<td><p>{{this.ref_id}}</p></td>
 							<td><p>-</p></td>
 							<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+							<td><p>{{this.client_f_name}} {{this.client_l_name}}</p></td>
 							<td>
 								<div class="main-assignments-status-btns">
 									<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit Assignment</button>
 								</div>
 							</td>
+							<td><p>{{this.ref_id}}</p></td>
 						</tr>
 						{{/each}}
 

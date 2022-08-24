@@ -291,6 +291,13 @@
                             <th><label for="appnum">License</label></th>
                             <td><input name="appnum" type="number" value="{{this.appnum}}" readonly></td>
                         </tr>
+						<tr>	<!-- client details -->
+                            <th><label for="client_num">Client Contact Number</label></th>
+                            <td><input name="client_num" type="text" value="{{this.client_contact_num}}" readonly></td>
+
+                            <th><label for="appnum">Client Email</label></th>
+                            <td><input name="appnum" type="number" value="{{this.client_email}}" readonly></td>
+                        </tr>
 						<tr>	<!-- lot_brgy,city,region - will serve as general location for interest check of agents/appraisers & zonal value-->
 							<th><label for="gen_lot_loc">Lot Location</label></th>
 							<td><input name="gen_lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
