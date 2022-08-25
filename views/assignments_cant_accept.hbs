@@ -55,7 +55,7 @@
 		<div id="sidebar" class=" d-inline-block h-100">
 	       <div class="sidebar-profile ">
 				<div class="sidebar-profile-text">
-					<p class="sidebar-profile-name">Administrator</p>
+					<p class="sidebar-profile-name">{{this.username}}</p>
 					<p class="sidebar-profile-email"><i>{{this.lname}}, {{this.fname}} #{{this.appnum}}</i></p>
 					<br>
 					<p class="sidebar-profile-email"><i>{{this.email}}</i></p>
@@ -63,17 +63,15 @@
 				</div>
 			</div>
 
-			<div><a href="/dashboard">Profile</a></div>
 			
-			<div><a href="/assignments">Assignments</a></div>
+			<div><a href="/dashboard">Dashboard</a></div>
 			
-			<div><a href="/admin-add-agent">Add New Agent</a></div>
-			
-			<div><a class="active" href="/account">See All Agents</a></div>
+			<div><a class="active" href="/assignments">Assignments</a></div>
 			
 			<div><a href="/history">History</a></div>
 			
-			<div><a href="/profile">Settings</a></div>
+			<div><a href="/profile">Profile</a></div>
+			
         </div>
 
 		<div class ="main d-inline-block main w-75 container-flex">
@@ -85,6 +83,7 @@
 			<form method="get" action="/assignments" class="mx-auto">
 				<div class="table-responsive main-table">
 					<table>
+					
 						<tr>
 							<th>REF NO.</th>
 							<th>DATE OF REQUEST</th>

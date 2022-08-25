@@ -9,10 +9,16 @@ td
 	font-family: 'Open Sans', sans-serif;  
 }
 
+.td-none{
+	text-decoration:none;
+}
+
+.navbar{
+	/* position: fixed !important; */
+	width: 100%;
+}
 
 .sidebar {
-  margin: 0;
-  padding: 0;
   width: 250px;
   position: fixed;
   height: 100%;
@@ -25,6 +31,10 @@ td
   color: #15223B;
   padding: 16px;
   text-decoration: none;
+}
+
+.pos-absolute{
+	position: absolute !important;
 }
 
 .active {
@@ -171,12 +181,10 @@ div.content {
     height: 100%;
 }
 
-
-
-
 .small-text{
-    font-size: 10px;
+    font-size: 16px !important;
 }
+
 .main
 {
     padding-top: 40px;

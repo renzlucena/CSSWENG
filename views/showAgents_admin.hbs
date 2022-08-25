@@ -28,6 +28,14 @@
 			} else {
 				return false;
 		  }
+		}	
+
+		function toggleCell(x) {
+			if (x == 0) {
+				return true
+			} else {
+				return false;
+		  }
 		}
 	</script>
 
@@ -78,20 +86,26 @@
 
 		<div class ="main d-inline-block main w-75 container-flex">
             <div class="main-header">
-                <h1 class="px-5">Agents</h1>
+                <h1 class="px-4">Agents</h1>
                 <p class="px-5"><b><i>Admin Panel</b></i></p>
             </div>
 			
 			<form method="get" action="/assignments" class="mx-auto">
 				<div class="table-responsive main-table">
 					<table>
-						<tr>
-							<th><p>USERNAME</p></th>
-							<th><p>EMAIL</p></th>
-							<th><p>CAN ACCEPT?</p></th>
-							<th><p>ACTION</p></th>
+						<tr class="th-big">
+							<th>USERNAME</th>
+							<th>EMAIL</th>
+							<th>CAN ACCEPT?</th>
+							<th>ACTION</th>
 						</tr>
 						
+							<!-- <th colspan='4'> -->
+								<!-- <a href="#" class="w-100 bgc-white td-none color-white" onclick="return toggleCell(0)"> -->
+										<!-- Active Agents -->
+									<!-- <span class="badge badge-red">{{this.n_active}}</span> -->
+								<!-- </a> -->
+							<!-- </th> -->
 						<tr>
 							<th colspan='4'>Active Agents</th>
 						</tr>
@@ -121,10 +135,10 @@
 							<td>{{this.email}}</td>
 							<td>{{this.can_accept}}</td>
 							<td>
-								<div class="main-assignments-status-btns">
+								<div>
 									<a onclick="return confirmAction()" href="/admin/del/{{username}}"><img src="icons8-delete-30.png"></a>
-									<a onclick="return confirmAction()" href="/admin/reset-password/{{username}}">Reset Password</a>
-									<a onclick="return confirmAction()" href="/admin/deact/{{username}}">Deactivate</a>
+									<a onclick="return confirmAction()" href="/admin/reset-password/{{username}}"><img src="icons8-reset-30.png"></a>
+									<a onclick="return confirmAction()" href="/admin/deact/{{username}}"><img src="icons8-lock-{{this.can_accept}}.png"></a>
 								</div>
 							</td>
 						</tr>

@@ -73,7 +73,7 @@
 
 		<div class ="main d-inline-block main w-75 container-flex">
             <div class="main-header">
-                <h1 class="px-5">See All Agents</h1>
+                <h1 class="px-4">See All Agents</h1>
                 <p class="px-5"><b><i>Admin Panel</b></i></p>
             </div>
 			
@@ -81,25 +81,23 @@
 				<div class="table-responsive main-table">
 					<table>
 					
-					<tr>
+					<tr class="th-big">
 						<th>REF NO.</th>
 						<th>DATE OF COMPLETION</th>
-						<th>VALID THRU</th>
 						<th>ACTION</th>
-						<th><p style="width:400" class="table-long-text">ASSIGNED AGENT</p></th>
+						<th><p>ASSIGNED AGENT</p></th>
 					</tr>
 
 					{{#each assignment}}
 					<tr>
 						<td>{{this.ref_id}}</td>
 							<td>{{this.created_at}}</td>
-							<td>4/8/26</td>
 							<td>
 								<div class="main-assignments-status-btns">
-									<a href="/viewAssignment/0/{{ref_id}}">Review Assignment</a>
+									<a href="/viewAssignment/0/{{ref_id}}">Details</a>
 								</div>
 							</td>
-							<td><p class="comment-text left-align">{{this.assigned_to}}</p>
+							<td class="comment-text center-align">{{this.assigned_to}}
 						</td>
 					</tr>
 				  {{/each}}

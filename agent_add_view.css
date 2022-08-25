@@ -1,92 +1,5 @@
 @import "styles.css";
 
-.sidebar-profile-text a:hover
-{
-    background-color: none;
-    margin: 0px;
-    color: white;
-}
-
-.sidebar-history-btn
-{
-	color: white;
-    background-color: #588BAE;
-    display: fixed;
-}
-
-.sidebar-profile-btn
-{
-	color: white;
-    background-color: #588BAE;
-    display: fixed;
-}
-
-.sidebar-assignments-btn a
-{
-	color: white;
-    background-color: #588BAE;
-    display: fixed;
-}
-
-
-.sidebar-settings-btn
-{
-	color: white;
-    background-color: #588BAE;
-    display: fixed;
-}
-
-
-.sidebar-profile-btn a:hover
-{
-    color: white;
-    background-color: black;
-}
-
-.sidebar-settings-btn a:hover
-{
-    color: white;
-    background-color: black;
-}
-
-.sidebar-history-btn a:hover
-{
-    color: white;
-    background-color: black;
-}
-
-
-.sidebar-assignments-btn a:hover
-{
-    color: white;
-    background-color: black;
-}
-
-/*active button*/
-.sidebar-add-btn a
-{
-    background-color: white !important;
-    color: black !important;
-}
-
-.sidebar-add-btn a:hover
-{
-    color: black;
-    background-color: white;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 .main-assignments-btn
 {
     padding: 10px;
@@ -131,6 +44,6 @@
     background-color: #588BAE;
 }
 
-tr {
+.th-big {
     height: 50px;
 }

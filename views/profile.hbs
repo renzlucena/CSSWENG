@@ -23,64 +23,90 @@
 		}
 	</script>
 
+	<link rel = "stylesheet" href="agent_add_view.css">	
+	<!-- BOOTSTRAP  CHENEZ   AYAWKOANANAJKDBAKJW -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
 </head>
 <body>
-    <div class="container">
-        <div id="sidebar">
-            <div class="sidebar-profile">
-                <img src="temp_pic.png" width="100" height="100">
-                <div class="sidebar-profile-text">
-                    <p class="sidebar-profile-name">Agent {{this.username}}</p>
-                    <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
-                    <a href="/logout">Log Out</a>
-                </div>
-            </div>
-
-
-            <div class="sidebar-profile-btn">
-                <a href="/dashboard">Dashboard</a>
-            </div>
-            <div class="sidebar-assignments-btn">
-                <a  href="/assignments">Assignments</a>
-            </div>
-            <div class="sidebar-history-btn">
-                <a  href="/history">History</a>
-            </div>
-            <div class="sidebar-settings-btn">
-                <a href="/profile">Profile</a>
-            </div>
-            <div class="bottom-button">
-                <a href="/logout">Logout</a>
-            </div>
-        </div>
-		
-		
+	<nav class="navbar navbar-dark navbar-inverse bgc-super-dark navbar-fixed-top pb-3">
+		<div class= "d-inline-block">
+			<img src="6227853b83e54f2e94c29519d7c234db (1).jpg" height="72px" class="mx-3">
+			<a class="color-white td-none" href="mailto:philhauz@yahoo.com">Contact Admin</a>
+			
 		<div class="openbtn" >
 			<a href="#" onclick="openNav()">☰</a>
 		</div>
-		
-		
-        <div class="main">
-            <img src="temp_pic.png" width="300">
 
-            <div class="main-profile-welcome">
-                <h1>Welcome, {{this.fname}} {{this.lname}}!</h1>
-                <p>Email Address: {{this.email}}</p>
-                <p class="small-text">Status: Active</p>
-            </div>
-            <div>
-				<h3>Username: {{this.username}}</h3>
-                <h3>Appraiser Registration Number: {{this.appnum}}</h3>
-                <h3>Appraiser Address: {{this.appaddress}}</h3>
-                <h3>Appraiser Expiration Date:  {{this.appexp}}</h3>
-            </div>
+		</div>
+		
+	</nav>
+	
+	<div class="container-flex">
+		
+		<div id="sidebar" class=" d-inline-block h-100">
+	       <div class="sidebar-profile ">
+				<div class="sidebar-profile-text">
+					<p class="sidebar-profile-name">{{this.username}}</p>
+					<p class="sidebar-profile-email"><i>{{this.lname}}, {{this.fname}} #{{this.appnum}}</i></p>
+					<br>
+					<p class="sidebar-profile-email"><i>{{this.email}}</i></p>
+					<a class="bgc-none" href="/logout">Log Out</a>
+				</div>
+			</div>
+
 			
+			<div><a href="/dashboard">Dashboard</a></div>
 			
-			<br><br><br><br>
-            <div class="main-profile-links">
-				<h3>To deactivate account, contact admin.</h3>
-                <a href="/settings">Edit Account Details</a>
-            </div>
+			<div><a href="/assignments">Assignments</a></div>
+			
+			<div><a href="/history">History</a></div>
+			
+			<div><a class="active" href="/profile">Profile</a></div>
+			
+        </div>
+
+		<div class ="main d-inline-block main w-75 container-flex">
+            <div class="main-header">
+                <h1 class="px-4">MY ACCOUNT DETAILS</h1>
+				<a href="/settings"class="px-5"><b><i>Edit Details</b></i></a>
+				<p class="px-5 small-text">Please change your password as soon as your account has been created.</p>
+				<p class="px-5 small-text">The default username is the year your account has been created plus the first letter of your first name and last name respectively.</p>
+				<p class="px-5 small-text">To reset your password, <a href="mailto:philhauz@yahoo.com">contact Administrator</a>.</p>
+				<br>
+				<hr>
+				<div class="d-inline-block">
+					<h3 class="px-4">PERSONAL INFORMATION</h3>
+					<div class="px-5">
+						<p>Username: <b>{{this.username}}</b></p>
+						<p>Full Name: <b>{{this.fname}} {{this.lname}}</b></p>
+						<p>Email Address: <b>{{this.email}}</b></p>
+						<p>Mailing Address: {{this.appaddress}}</p>
+						<p>License Number: {{this.appnum}}</p>
+						<p>Can accept new assignments?: {{this.can_accept}}</p>
+						<p>Activated: {{this.status}}</p>
+					</div>
+				</div>
+				<div class="d-inline-block">
+					<h3 class="px-4">STATISTICS</h3>
+					<div class="px-5">
+						<p>Current Assignments: {{this.stats_assignments}}</p>
+						<p>Historical Assignments: {{this.history}}</p>
+						<p>Overall: {{this.overall}}</p>
+						<br>
+						<br>
+						<br>
+						<br>
+					</div>
+				</div>
+				<hr>
+				
+				<div class="main-profile-links">
+					<p>To deactivate account, contact admin.</p>
+				</div>
+			</div>
 
         </div>
     </div>

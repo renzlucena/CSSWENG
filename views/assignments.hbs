@@ -32,52 +32,63 @@
 		}
 	</script>
 
+	<link rel = "stylesheet" href="agent_add_view.css">	
+	<!-- BOOTSTRAP  CHENEZ   AYAWKOANANAJKDBAKJW -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
 </head>
 <body>
-    <div class="container">
-        <div id="sidebar">
-            <div class="sidebar-profile">
-                <img src="temp_pic.png" width="100" height="100">
-                <div class="sidebar-profile-text">
-                    <p class="sidebar-profile-name">Agent {{this.username}}</p>
-                    <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
-                    <a href="/login">Log Out</a>
-                </div>
-            </div>
-
-            <div class="sidebar-profile-btn">
-                <a href="/dashboard">Dashboard</a>
-            </div>
-            <div class="sidebar-assignments-btn">
-                <a  href="/assignments">Assignments</a>
-            </div>
-            <div class="sidebar-history-btn">
-                <a  href="/history">History</a>
-            </div>
-            <div class="sidebar-settings-btn">
-                <a href="/profile">Profile</a>
-            </div>
-            <div class="bottom-button">
-                <a href="/login">Logout</a>
-            </div>
-        </div>
-
+	<nav class="navbar navbar-dark navbar-inverse bgc-super-dark navbar-fixed-top pb-3">
+		<div class= "d-inline-block">
+			<img src="6227853b83e54f2e94c29519d7c234db (1).jpg" height="72px" class="mx-3">
+			<a class="color-white td-none" href="mailto:philhauz@yahoo.com">Contact Admin</a>
+			
 		<div class="openbtn" >
 			<a href="#" onclick="openNav()">☰</a>
 		</div>
 
-        <div class="main">
+		</div>
+		
+	</nav>
+	
+	<div class="container-flex">
+		
+		<div id="sidebar" class=" d-inline-block h-100">
+	       <div class="sidebar-profile ">
+				<div class="sidebar-profile-text">
+					<p class="sidebar-profile-name">{{this.username}}</p>
+					<p class="sidebar-profile-email"><i>{{this.lname}}, {{this.fname}} #{{this.appnum}}</i></p>
+					<br>
+					<p class="sidebar-profile-email"><i>{{this.email}}</i></p>
+					<a class="bgc-none" href="/logout">Log Out</a>
+				</div>
+			</div>
+
+			
+			<div><a href="/dashboard">Dashboard</a></div>
+			
+			<div><a class="active" href="/assignments">Assignments</a></div>
+			
+			<div><a href="/history">History</a></div>
+			
+			<div><a href="/profile">Profile</a></div>
+			
+        </div>
+
+		<div class ="main d-inline-block main w-75 container-flex">
             <div class="main-header">
-                <h1>Assignments</h1>
-                <p><b><i>You have {{how_many_ongoing}} ongoing assignment(s)!</b></i></p>
-                <p>Please confirm immediately to secure the job or it might be reassigned.
+                <h1 class="px-4">Assignments</h1>
+                <p class="px-5"><b><i>You have {{how_many_ongoing}} ongoing assignment(s)!</b></i></p>
+                <p class="px-5">Please confirm immediately to secure the job or it might be reassigned.
                 If the assignments is not finished in one week, it will be reopened to all agents week, it will be reopened to all agents.</p>
             </div>
 
 			<form method="get" action="/assignments">
 				<div class="main-table">
 					<table>
-						<tr>
+						<tr class="th-big">
 							<th>REF NO.</th>
 							<th>DATE OF REQUEST</th>
 							<th>CITY, REGION</th>
@@ -90,9 +101,9 @@
 			
 						{{#each assignment_new}}
 							<tr>
-								<td><p>{{this.ref_id}}</p></td>
-								<td><p>{{this.created_at}}</p></td>
-								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>{{this.ref_id}}</td>
+								<td>{{this.created_at}}</td>
+								<td>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</td>
 								<td>
 									<div class="main-assignments-status-btns">
 											<button type="submit" name="accept" formaction="/accept-assignment/{{ref_id}}">Accept</button>
@@ -107,9 +118,9 @@
 						
 						{{#each assignment_sub}}
 							<tr>
-								<td><p>{{this.ref_id}}</p></td>
-								<td><p>{{this.created_at}}</p></td>
-								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>{{this.ref_id}}</td>
+								<td>{{this.created_at}}</td>
+								<td>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</td>
 								<td>
 									<div class="main-assignments-status-btns">
 										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">View Assignment</button>
@@ -117,15 +128,15 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan='4'><p class="left-align">Assignment Sent to Admin for Review and Processing.</p></td>
+								<td colspan='4' class="left-align">Assignment Sent to Admin for Review and Processing.</td>
 							</tr>
 						{{/each}}				
 					
 						{{#each assignment_sub2}}
 							<tr>
-								<td><p>{{this.ref_id}}</p></td>
-								<td><p>{{this.created_at}}</p></td>
-								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>{{this.ref_id}}</td>
+								<td>{{this.created_at}}</td>
+								<td>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</td>
 								<td>
 									<div class="main-assignments-status-btns">
 										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">View Assignment</button>
@@ -133,15 +144,15 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan='4'><p class="left-align">Document Sent to Admin for Review and Processing.</p></td>
+								<td colspan='4' class="left-align">Document Sent to Admin for Review and Processing.</td>
 							</tr>
 						{{/each}}				
 					
 						{{#each assignment_ass}}
 							<tr>
-								<td><p>{{this.ref_id}}</p></td>
-								<td><p>{{this.created_at}}</p></td>
-								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>{{this.ref_id}}</td>
+								<td>{{this.created_at}}</td>
+								<td>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</td>
 								<td>
 									<div class="main-assignments-status-btns">
 										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">View Assignment</button>
@@ -150,7 +161,7 @@
 							</tr>
 							<tr>
 								<th>Admin's Comment:</th>
-								<td colspan='4'><p class="left-align">"{{this.comment}}"</p></td>
+								<td colspan='4' class="left-align">"{{this.comment}}"</p></td>
 							</tr>
 						{{/each}}
 					

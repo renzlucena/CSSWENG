@@ -23,7 +23,7 @@
 
 	<!-- <link rel = "stylesheet" href="agent_ass.css">	 -->
 	
-	<link rel = "stylesheet" href="agent_add_view.css">	
+	<link rel = "stylesheet" href="agent_add_view.css">
 	<!-- BOOTSTRAP  CHENEZ   AYAWKOANANAJKDBAKJW -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,92 +70,92 @@
 
 		<div class ="main d-inline-block main w-75 container-flex">
             <div class="main-header">
-                <h1 class="px-5">Assignments</h1>
+                <h1 class="px-4">Assignments</h1>
                 <p class="px-5"><b><i>Admin Panel</b></i></p>
             </div>
 			
 			<form method="get" action="/assignments" class="mx-auto">
 				<div class="table-responsive main-table">
 					<table>
-						<tr>
-							<th><p>REF NO.</p></th>
-							<th><p>CLIENT</p></th>
-							<th><p>LOCATION</p></th>
-							<th><p>ACTION</p></th>
-							<th><p>ASSIGNED TO</p></th>
+						<tr class="th-big">
+							<th>REF NO.</th>
+							<th>CLIENT</th>
+							<th>LOCATION</th>
+							<th>ACTION</th>
+							<th>ASSIGNED TO</th>
 						</tr>
 
 						<tr>
-							<th colspan='4'>Unassigned Assignments</th>
+							<th colspan='5'>Unassigned Assignments</th>
 						</tr>
 						{{#each assignment_new}}
 						<tr>
-							<td><p>{{this.ref_id}}</p></td>
-							<td><p>{{this.client_f_name}} {{this.client_l_name}}</p></td>
-							<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+							<td>{{this.ref_id}}</td>
+							<td>{{this.client_f_name}} {{this.client_l_name}}</td>
+							<td>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</td>
 							<td>
 								<div class="main-assignments-status-btns">
-									<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit Assignment</button>
+									<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit</button>
 								</div>
 							</td>
-							<td><p>-</p></td>
+							<td>UNASSIGNED</td>
 						</tr>
 						{{/each}}
 
 						<tr>
-							<th colspan='4'>Submitted For Review</th>
+							<th colspan='5'>Submitted For Review</th>
 						</tr>
 
 						{{#each assignment_sub}}
 							<tr>
-								<td><p>{{this.ref_id}}</p></td>
-								<td><p>{{this.client_f_name}} {{this.client_l_name}}</p></td>
-								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>{{this.ref_id}}</td>
+								<td>{{this.client_f_name}} {{this.client_l_name}}</td>
+								<td>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</td>
 								<td>
 									<div class="main-assignments-status-btns">
 										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Review</button>
 									</div>
 								</td>
-								<td><p>{{this.assigned_to}}</p></td>
+								<td>{{this.assigned_to}}</td>
 							</tr>
 							<tr>
 								<th>Comment:</th>
-								<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
+								<td colspan='4' class="left-align">"{{this.comment}}"</td>
 							</tr>
 						{{/each}}
 						{{#each assignment_sub2}}
 							<tr>
-								<td><p>{{this.ref_id}}</p></td>
-								<td><p>{{this.client_f_name}} {{this.client_l_name}}</p></td>
-								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>{{this.ref_id}}</td>
+								<td>{{this.client_f_name}} {{this.client_l_name}}</td>
+								<td>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</td>
 								<td>
 									<div class="main-assignments-status-btns">
 										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Review</button>
 									</div>
 								</td>
-								<td><p>{{this.assigned_to}}</p></td>
+								<td>{{this.assigned_to}}</td>
 							</tr>
 							<tr>
 								<th>Comment:</th>
-								<td colspan='3'><p class="left-align">"{{this.comment}}"</p></td>
+								<td colspan='4' class="left-align">"{{this.comment}}"</td>
 							</tr>
 						{{/each}}
 
 						<tr>
-							<th colspan='4'>Other Assignments</th>
+							<th colspan='5'>Other Assignments</th>
 						</tr>
 
 						{{#each assignment_ass}}
 							<tr>
-								<td><p>{{this.ref_id}}</p></td>
-								<td><p>{{this.client_f_name}} {{this.client_l_name}}</p></td>
-								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+								<td>{{this.ref_id}}</td>
+								<td>{{this.client_f_name}} {{this.client_l_name}}</td>
+								<td>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</td>
 								<td>
 									<div class="main-assignments-status-btns">
 										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Details</button>
 									</div>
 								</td>
-								<td><p>{{this.assigned_to}}</p></td>
+								<td>{{this.assigned_to}}</td>
 							</tr>
 						{{/each}}
 

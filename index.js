@@ -2056,7 +2056,7 @@ app.post('/new-agent', function(req,res) {
 			password: req.body.appnum,
 			email: req.body.email,
 			remember: false,
-			status: true,
+			status: false,
 			fname: req.body.fname,
 			lname: req.body.lname,
 			appnum: req.body.appnum,
