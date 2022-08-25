@@ -2971,67 +2971,48 @@ app.get('/save-doc/:ref_id', async(req,res)=> {
 	}
 });
 
-app.get('/download-doc/:ref_id', async(req,res)=> {
+app.get('/download-doc/:ref_id', async(req,res,)=> {
 	sess = req.session;
 	console.log("in /download-doc-"+req.params.ref_id)
 	//console.log(req.query.ref_id)
 
+	var pdfMake = require('pdfmake/build/pdfmake.js');
+	var pdfFonts = require('pdfmake/build/vfs_fonts.js');
+	pdfMake.vfs = pdfFonts.pdfMake.vfs;
+	
 	if(sess.username){
 		console.log(req.query)
 		try{
-			const docu = await Document.findOne({
-				ref_id : req.params.ref_id
+			console.log(parseInt(req.params.ref_id))
+			/*const ass = await Assignment.find({
+					ref_id : parseInt(req.params.ref_id)
+				})
+			console.log(ass)
+			//find wag findOne pag may {{#each}} NOTE
+			const doc = await Document.find({
+				ref_id : parseInt(req.params.ref_id)
 			})
-			console.log(docu)
+			console.log(doc)*/
+				var appraiser = JSON.stringify(req.param.assigned_to);
 
-			if (docu) //it exists
-			{
-			res.render('viewAssignment_1_admin.hbs', {
-				ref_id : req.params.ref_id,
-				improvements: docu.improvements,
-				zoning_classification: docu.zoning_classification,
-				// //Start of Body of Document
-				property_identification: docu.property_identification,
-				appraisal_objective_property_rights: docu.appraisal_objective_property_rights,
-				intended_use_intended_users: docu.intended_use_intended_users,
-				effective_date_report: docu.effective_date_report,
-				statement_ownership_sales_history: docu.statement_ownership_sales_history,
-				scope_of_work: docu.scope_of_work,
-
-				// //property description
-				utilities: docu.utilities,
-				flood: docu.flood,
-				easements: docu.easements,
-				real_estate_taxes: docu.real_estate_taxes,
-
-				// //area & neighborhood overview
-				description_improvements: docu.description_improvements,
-				area_development: docu.area_development,
-				market_analysis: docu.market_analysis,
-
-				// //valuation
-				conclusion: docu.conclusion,
-				explanation_adjustments: docu.explanation_adjustments,
-
-				// //reconciliation & final value opinion
-				recon_final_value_opinion: docu.recon_final_value_opinion,
-
-				username: sess.username,
-				password: sess.password,
-				remember: sess.remember,
-				status: sess.status,
-				email: sess.email,
-				fname: sess.fname,
-				lname: sess.lname,
-				appnum: sess.appnum,
-				appaddress: sess.appaddress,
-				can_accept: sess.can_accept
+				var docDefinition = {
+					content: [
+						'text ' +{appraiser}
+					]
+				};
+			
+				var pdf = pdfMake.createPdf(docDefinition);
+				pdf.getBase64((data)=>{
+					res.writeHead(200,
+					{
+						'Content-Type': 'application/pdf',
+						'Content-Disposition': 'attachment;filename="test.pdf"'
+					});
+			
+					const download = Buffer.from(data.toString('utf-8'), 'base64');
+					res.end(download);
 				});
-			}
-
-			//edit comment  to "Submitted."
-
-		}
+			}	
 		catch(err)
 		{
 			console.log(err)
