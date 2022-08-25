@@ -2,9 +2,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <html>
 <head>
-    <link rel = "stylesheet" href="agent_ass.css">
     <title>Assignments</title>
-
+	
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
@@ -13,68 +12,70 @@
 			if(document.getElementById("sidebar").style.width=="0%")
 			{
 				document.getElementById("sidebar").style.width = "110%";
-				document.getElementById("bottom-button").style.width = "110%";
 			}
 			else{
 				document.getElementById("sidebar").style.width = "0%";
-				document.getElementById("bottom-button").style.width = "0%";
 
 			}
 		}
 	</script>
 
+
+	<!-- <link rel = "stylesheet" href="agent_ass.css">	 -->
+	
+	<link rel = "stylesheet" href="agent_add_view.css">	
+	<!-- BOOTSTRAP  CHENEZ   AYAWKOANANAJKDBAKJW -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
 </head>
 <body>
-    <div class="container">
-        <div id="sidebar">
-            <div class="sidebar-profile">
-                <div class="sidebar-profile-text">
-                    <p class="sidebar-profile-name">Admin</p>
-                    <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
-                    <a href="/logout">Log Out</a>
-                </div>
-            </div>
-
-
-            <div class="sidebar-assignments-btn">
-                <a  href="/assignments">Assignments</a>
-            </div>
-
-			<div class="sidebar-profile-btn">
-                <a  href="/admin-add-assignment">Add New Assignment</a>
-            </div>
-
-			<div class="sidebar-history-btn">
-                <a  href="/admin-add-agent">Add New Agent</a>
-            </div>
-
-      		<div class="sidebar-history-btn">
-                <a  href="/account">See All Agents</a>
-           	</div>
-
-            <div class="sidebar-history-btn">
-                <a  href="/history">History</a>
-            </div>
-
-            <div class="bottom-button">
-                <a href="/logout">Logout</a>
-            </div>
-        </div>
-
+	<nav class="navbar navbar-dark navbar-inverse bgc-super-dark navbar-fixed-top pb-3">
+		<div class= "d-inline-block">
+			<img src="6227853b83e54f2e94c29519d7c234db (1).jpg" height="72px" class="mx-3">
+			
 		<div class="openbtn" >
 			<a href="#" onclick="openNav()">☰</a>
 		</div>
 
-        <div class="main">
+		</div>
+		
+	</nav>
+	
+	<div class="container-flex">
+		
+		<div id="sidebar" class=" d-inline-block h-100">
+	       <div class="sidebar-profile ">
+				<div class="sidebar-profile-text">
+					<p class="sidebar-profile-name">Administrator</p>
+					<p class="sidebar-profile-email"><i>{{this.lname}}, {{this.fname}} #{{this.appnum}}</i></p>
+					<br>
+					<p class="sidebar-profile-email"><i>{{this.email}}</i></p>
+					<a class="bgc-none" href="/logout">Log Out</a>
+				</div>
+			</div>
+
+			<div><a class="active" href="/assignments">Assignment Management</a></div>
+			
+			<div><a href="/admin/accounts">Agent Management</a></div>
+			
+			<div><a href="/history">History</a></div>
+			
+			<div><a href="/admin-add-agent">Add New Agent</a></div>
+			
+			<div><a href="/admin-add-assignment">Add New Assignment</a></div>
+			
+        </div>
+
+		<div class ="main d-inline-block main w-75 container-flex">
             <div class="main-header">
-                <h1>Assignments</h1>
-                <p><b><i>Admin Panel</b></i></p>
-                <p>If you have any questions how to use, please do not hesitate to contact the group through Erin.</p>
+                <h1 class="px-5">Assignments</h1>
+                <p class="px-5"><b><i>Admin Panel</b></i></p>
             </div>
-
-
-			<form method="get" action="/assignments">
-				<div class="main-table">
+			
+			<form method="get" action="/assignments" class="mx-auto">
+				<div class="table-responsive main-table">
 					<table>
 						<tr>
 							<th><p>REF NO.</p></th>
@@ -89,15 +90,15 @@
 						</tr>
 						{{#each assignment_new}}
 						<tr>
-							<td><p>-</p></td>
-							<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
+							<td><p>{{this.ref_id}}</p></td>
 							<td><p>{{this.client_f_name}} {{this.client_l_name}}</p></td>
+							<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
 							<td>
 								<div class="main-assignments-status-btns">
 									<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Edit Assignment</button>
 								</div>
 							</td>
-							<td><p>{{this.ref_id}}</p></td>
+							<td><p>-</p></td>
 						</tr>
 						{{/each}}
 
@@ -108,13 +109,14 @@
 						{{#each assignment_sub}}
 							<tr>
 								<td><p>{{this.ref_id}}</p></td>
-								<td><p>{{this.assigned_to}}</p></td>
+								<td><p>{{this.client_f_name}} {{this.client_l_name}}</p></td>
 								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
 								<td>
 									<div class="main-assignments-status-btns">
 										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Review</button>
 									</div>
 								</td>
+								<td><p>{{this.assigned_to}}</p></td>
 							</tr>
 							<tr>
 								<th>Comment:</th>
@@ -124,13 +126,14 @@
 						{{#each assignment_sub2}}
 							<tr>
 								<td><p>{{this.ref_id}}</p></td>
-								<td><p>{{this.assigned_to}}</p></td>
+								<td><p>{{this.client_f_name}} {{this.client_l_name}}</p></td>
 								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
 								<td>
 									<div class="main-assignments-status-btns">
 										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Review</button>
 									</div>
 								</td>
+								<td><p>{{this.assigned_to}}</p></td>
 							</tr>
 							<tr>
 								<th>Comment:</th>
@@ -145,20 +148,20 @@
 						{{#each assignment_ass}}
 							<tr>
 								<td><p>{{this.ref_id}}</p></td>
-								<td><p>{{this.assigned_to}}</p></td>
+								<td><p>{{this.client_f_name}} {{this.client_l_name}}</p></td>
 								<td><p>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</p></td>
 								<td>
 									<div class="main-assignments-status-btns">
 										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">Details</button>
 									</div>
 								</td>
+								<td><p>{{this.assigned_to}}</p></td>
 							</tr>
 						{{/each}}
 
-                </table>
-            </div>
+					</table>
+				</div>
 			</form>
-
         </div>
     </div>
 </body>

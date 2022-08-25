@@ -10,17 +10,134 @@ td
 }
 
 
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  background-color: #588BAE;
+  color: #15223B;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.active {
+  background-color: white !important;
+  color: black !important;
+}
+/* ayaw gumana nung nasa baba eh */
+
+.sidebar a.active {
+  background-color: red !important;
+  color: black;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #15223B;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  margin-top: 100px;
+  padding: 1px 16px;
+  height: 100%;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+.color-super-dark
+{
+    color: #15223B
+}
+.color-dark
+{
+    color: #588BAE
+}
+.color-white
+{
+    color: #FFFFFF
+}
+.color-light
+{
+    color: #ADD3E6
+}
+.bgc-super-dark
+{
+    background-color: #15223B
+}
+.bgc-dark
+{
+    background-color: #588BAE
+}
+.bgc-white
+{
+    background-color: #FFFFFF
+}
+.bgc-light
+{
+    background-color: #ADD3E6
+}
+
+/* //lol idk THIS IS for logout btn in sidebar */
+.bgc-none
+{
+	width: 40%;
+    background-color: #15223B !important;
+}
+
 #sidebar
 {
     position:fixed;
     height: 110%;
+	left: 0px;
     width: 400px;
-    display:block;
-    margin: -10px;
+    /* display:inline-block; */
+    /* margin: -10px; */
     padding: 0px;
     background-color: #15223B;
 }
 
+#sidebar a
+{
+    padding: 20px;
+    font-size: 20px;
+    color: white;
+    background-color: #588BAE;
+    display: block;
+    text-decoration: none;
+}
+
+#sidebar a:hover
+{
+    color: white;
+    background-color: black;
+}
+
+#side-main{
+	width: 80%;
+}
 
 .bottom-button
 {
@@ -31,21 +148,6 @@ td
     width: 400px;
 }
 
-#sidebar a
-{
-    padding: 20px;
-    font-size: 20px;
-    color: white;
-    background-color: none;
-    display: block;
-    text-decoration: none;
-}
-
-#sidebar a:hover
-{
-    color: white;
-    background-color: black;
-}
 
 .red-text{
     color:red;
@@ -64,42 +166,24 @@ td
 
 
 .body{
+	margin: 0px;
     width: 100%;
     height: 100%;
 }
 
-.container{
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    overflow-y: scroll;
-    
-    height: 100%;
-    width: 100%;
-    
-}
 
-.color-dark
-{
-    background-color: #15223B
-}
-.color-white
-{
-    background-color: #FFFFFF
-}
-.color-light
-{
-    background-color: #ADD3E6
-}
+
+
 .small-text{
     font-size: 10px;
 }
 .main
 {
     padding-top: 40px;
-    width: 1500px;
-    height: 80%;
-    display: inline-block;
+    /* width: 1500px; */
+    height: 100%;
+	/* margin-right: 10px; */
+    /* display: inline-block; */
     margin-left: 400px;
     background-color: none;
     text-align:center;
@@ -225,7 +309,7 @@ select{
 .main-table
 {
     overflow-y: scroll;
-    width: 1400px;
+    /* width: 1400px; */
     height: 50%;
     padding-right: 10px;
     border: 3px solid #15223B;
@@ -275,7 +359,7 @@ th{
 }
 
 tr {
-  border-bottom: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF !important;
 }
 tr:hover
 {
@@ -366,15 +450,16 @@ td{
 .main-header
 {
     text-align: left;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+	padding-bottom: 50px;
     background-color: none;
     display: block;
 }
 .main-header h1
 {
     font-size:30px;
-    margin-bottom: 50px;
+    /* margin-bottom: 0px; */
 }
 .main-header p
 {
@@ -399,11 +484,14 @@ button{
     background-color: #15223B;
 }
 
-.openBtn{
+.openbtn{
 	z-index:1000;
 	position:absolute;
 	display: none;
-	padding:100px;
+
+	top:0px;
+	right:0px;
+	padding:20px;
 }
 
 .pager{
@@ -469,19 +557,27 @@ input:read-only {
 
 @media screen and (max-width: 912px){
 	
+	
+	div.content {
+	  /* margin-left: 200px; */
+	  margin-top: 200px;
+	  padding: 1px 16px;
+	  height: 1000px;
+	}
+
 	.main-header
 	{
-		margin-top: -15px;
+		padding: 0px;
 		text-align: left;
-		padding-left: 0px;
-		padding-right: 0px;
 		background-color: none;
 		display: block;
+		padding-bottom: 20px;
 	}
+	
 	.main-header h1
 	{
 		font-size:20px;
-		margin-bottom: 50px;
+		margin-bottom: 30px;
 	}
 	.main-header p
 	{
@@ -489,8 +585,15 @@ input:read-only {
 		font-size: 15px;
 	}
 	
+	
+	#side-main{
+		width: 100%;
+	}
+	
 	.main
 	{
+		padding-top: 80px;
+
 		width: 100%;
 		height: 91%;
 		display: absolute;
@@ -499,7 +602,6 @@ input:read-only {
 		left:0px;
 		right:0px;
 		bottom:0px;
-		padding-top:0px;
 		text-align:center;
 		margin: 10%;
 	}
@@ -558,7 +660,7 @@ input:read-only {
 		width: 0%;
 		z-index:10;
 		display:block;
-		margin: -10px;
+		margin: 0px;
 		padding: 0px;
 		background-color: #15223B;
 		overflow-x: hidden;
@@ -645,6 +747,7 @@ input:read-only {
 	}
 	
 	.openbtn{
+		display: block;
 		z-index:100 !important;
 		position:fixed;
 		right:0px;
@@ -656,8 +759,9 @@ input:read-only {
 		font-size:25px;
 		text-align:right;
 		padding: 15px;
+		color: white;
 		text-decoration:none !important;
-		background-color: #588BAE;
+		/* background-color: #588BAE; */
 	}
 	
 	#main-table-bottom{
@@ -798,6 +902,9 @@ input:read-only {
 		width: 100%;
 	}
 	
+	#side-main{
+		width: 100%;
+	}
 	.main
 	{
 		width: 80%;
@@ -951,6 +1058,11 @@ input:read-only {
 
 
 @media screen and (max-height: 915px){
+
+	
+	#side-main{
+		width: 100% !important;
+	}
 
 	.main-table
 	{
