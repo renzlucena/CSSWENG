@@ -187,8 +187,13 @@ div.content {
 
 .main
 {
+	max-width: 100%;
+    overflow-x: hidden;
+	
+	overflow-y:scroll;
+	max-height:900px;
     padding-top: 40px;
-    /* width: 1500px; */
+    width:100%;
     height: 100%;
 	/* margin-right: 10px; */
     /* display: inline-block; */
@@ -317,9 +322,8 @@ select{
 .main-table
 {
     overflow-y: scroll;
-    /* width: 1400px; */
-    height: 50%;
-    padding-right: 10px;
+    /* height: 50%; */
+    padding-right: 0px;
     border: 3px solid #15223B;
     
     border-radius: 10px;
@@ -600,13 +604,13 @@ input:read-only {
 	
 	.main
 	{
-		padding-top: 80px;
-
+		padding-top: 50px;
+		
 		width: 100%;
-		height: 91%;
+		height: 100%;
 		display: absolute;
 		position: fixed;
-		top:0px;
+		top:50px;
 		left:0px;
 		right:0px;
 		bottom:0px;
@@ -616,6 +620,7 @@ input:read-only {
 	
 	.main-table
 	{
+		max-height:80%;
 		overflow-y: scroll;
 		width: 100% !important;
 		height: 100%  !important;

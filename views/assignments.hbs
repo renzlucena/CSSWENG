@@ -101,9 +101,9 @@
 			
 						{{#each assignment_new}}
 							<tr>
-								<td>{{this.ref_id}}</td>
-								<td>{{this.created_at}}</td>
-								<td>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</td>
+								<td>{{ref_id}}</td>
+								<td>{{created_at}}</td>
+								<td>{{this.lot_brgy}} {{this.lot_city}} {{this.lot_region}}</td>
 								<td>
 									<div class="main-assignments-status-btns">
 											<button type="submit" name="accept" formaction="/accept-assignment/{{ref_id}}">Accept</button>
@@ -118,9 +118,9 @@
 						
 						{{#each assignment_sub}}
 							<tr>
-								<td>{{this.ref_id}}</td>
+								<td>{{ref_id}}</td>
 								<td>{{this.created_at}}</td>
-								<td>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</td>
+								<td>{{this.lot_brgy}} {{this.lot_city}} {{this.lot_region}}</td>
 								<td>
 									<div class="main-assignments-status-btns">
 										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">View Assignment</button>
@@ -136,7 +136,7 @@
 							<tr>
 								<td>{{this.ref_id}}</td>
 								<td>{{this.created_at}}</td>
-								<td>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</td>
+								<td>{{this.lot_brgy}} {{this.lot_city}} {{this.lot_region}}</td>
 								<td>
 									<div class="main-assignments-status-btns">
 										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">View Assignment</button>
@@ -152,7 +152,7 @@
 							<tr>
 								<td>{{this.ref_id}}</td>
 								<td>{{this.created_at}}</td>
-								<td>{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}</td>
+								<td>{{this.lot_brgy}} {{this.lot_city}} {{this.lot_region}}</td>
 								<td>
 									<div class="main-assignments-status-btns">
 										<button type="submit" formaction="/viewAssignment/0/{{ref_id}}">View Assignment</button>

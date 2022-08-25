@@ -30,9 +30,10 @@
 /* yung box sa baba */
 .main-table
 {
-    overflow-y: scroll;
-    width: 1200px;
-    height: 80%;
+	margin-left:50px;
+	overflow-y: scroll;
+    width: 1300px;
+    /*	 height: 50% !important; */
     padding-right: 10px;
     border: 3px solid #15223B;
     

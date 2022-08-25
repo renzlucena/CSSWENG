@@ -1703,6 +1703,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					// Show the page with same input chuchu, except this page has buttons to compute, send to admin for review/processing, and save details
 					console.log("viewAssignment_0.hbs")
 
+					console.log(ass)
 					res.render('viewAssignment_0.hbs',{
 							ref_id 			: ass.ref_id,
 							type_of_approach: ass.type_of_approach,
@@ -2560,8 +2561,8 @@ app.get('/terms', function(req,res){
 
 app.get('/save-ass', async(req,res)=> {
 	// sess = req.session;
-	console.log(req.query)
 	console.log("in /save-ass - " +req.query.ref_id)
+	console.log(req.query)
 
 	if(sess.username){
 		if(sess.username == "admin")
@@ -2608,7 +2609,7 @@ app.get('/save-ass', async(req,res)=> {
 			//agent no need for params because the ref_id is shown
 			try{
 
-				// console.log(req.query)
+				console.log(req.query)
 				//console.log(req.params)
 				// console.log(parseInt(req.query.price_per_sqm[0]))
 
