@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<head>
+    <link rel = "stylesheet" href="agent_add_view.css">
+    <title>See All Agents</title>
+
+	<!-- BOOTSTRAP  CHENEZ   AYAWKOANANAJKDBAKJW -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+	
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+	<script>
+		function openNav() {
+			if(document.getElementById("sidebar").style.width=="0%")
+			{
+				document.getElementById("sidebar").style.width = "100%";
+				//document.getElementById("bottom-button").style.width = "110%";
+			}
+			else{
+				document.getElementById("sidebar").style.width = "0%";
+				//document.getElementById("bottom-button").style.width = "0%";
+
+			}
+		}
+		
+		
+		function confirmAction() {
+			if (confirm("Are you sure?") == true) {
+				return true
+			} else {
+				return false;
+		  }
+		}
+	</script>
+
+</head>
+<body>
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
+			
+	<!-- <div class="pb-3"> -->
+		<!-- <a href="#" onclick="openNav()">☰</a> -->
+	<!-- </div> -->
+	
+	<nav class="navbar navbar-dark navbar-inverse bgc-super-dark navbar-fixed-top pb-3">
+	<!-- <a class="navbar-brand" href="#">Navbar</a> -->
+		<div class= "d-inline-block">
+			<img src="6227853b83e54f2e94c29519d7c234db (1).jpg" height="72px" class="mx-3">
+			
+		<div class="openbtn" >
+			<a href="#" onclick="openNav()">☰</a>
+		</div>
+
+		</div>
+		
+		
+		<div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#" class="">designs</a>
+                </li>
+                <li><a href="#" class="">designers</a>
+                </li>
+                <li><a href="#" class="">buy</a>
+                </li>
+                <li><a href="#" class="">about</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login" class="">login</a>
+                </li>
+                <li>
+                    <div class="btn-nav"><a class="btn btn-primary btn-small navbar-btn" href="/register">Sign up!</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+	</nav>
+	
+	<div class="container-flex">	
+        <!-- <div class="bgc-dark d-inline-block w-50"> -->
+		<!-- 	aa -->
+		<!-- </div>	 -->
+		<!-- <div class="bgc-super-dark d-inline-block w-50"> -->
+		<!--	 aa -->
+		<!-- </div> -->
+		
+		
+		<div id="sidebar" class=" d-inline-block h-100">
+	       <div class="sidebar-profile ">
+                  <div class="sidebar-profile-text">
+                      <p class="sidebar-profile-name">Administrator</p>
+                      <p class="sidebar-profile-email"><i>{{this.lname}}, {{this.fname}} #{{this.appnum}}</i></p>
+					  <br>
+                      <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
+                      <a href="/logout">Log Out</a>
+                  </div>
+              </div>
+
+              <div class="sidebar-profile-btn">
+
+                  <a href="/dashboard">Profile</a>
+              </div>
+              <div class="sidebar-assignments-btn">
+
+                  <a  href="/assignments">Assignments</a>
+              </div>
+              <div class="sidebar-history-btn">
+                        <a  href="/admin-add-agent">Add New Agent</a>
+              </div>
+
+              <div class="sidebar-history-btn">
+                        <a  href="/account">See All Agents</a>
+              </div>
+              <div class="sidebar-history-btn">
+
+                  <a  href="/history">History</a>
+              </div>
+              <div class="sidebar-settings-btn">
+
+                  <a href="/profile">Settings</a>
+              </div>
+        </div>
+
+		<div class ="main d-inline-block main w-75 container-flex">
+            <div class="main-header">
+                <h1 class="px-5">See All Agents</h1>
+                <p class="px-5"><b><i>Admin Panel</b></i></p>
+            </div>
+			
+			<form method="get" action="/assignments" class="mx-auto">
+				<div class="table-responsive main-table">
+					<table>
+						<tr>
+							<th><p>USERNAME.</p></th>
+							<th><p>EMAIL</p></th>
+							<th><p>CAN ACCEPT?</p></th>
+							<th><p>ACTION</p></th>
+						</tr>
+						
+						<tr>
+							<th colspan='6'>Active Agents</th>
+						</tr>
+						
+						{{#each activated}}
+						<tr>
+							<td>{{this.username}}</td>
+							<td>{{this.email}}</td>
+							<td>{{this.can_accept}}</td>
+							<td>
+								<div>
+									<a onclick="return confirmAction()" href="/admin/del/{{username}}"><img src="icons8-delete-30.png"></a>
+									<a onclick="return confirmAction()" href="/admin/reset-password/{{username}}"><img src="icons8-reset-30.png"></a>
+									<a onclick="return confirmAction()" href="/admin/deact/{{username}}"><img src="icons8-lock-{{this.can_accept}}.png"></a>
+								</div>
+							</td>
+						</tr>
+						{{/each}}
+						
+						<tr>
+							<th colspan='6'>Inactive Agents</th>
+						</tr>
+						
+						{{#each inactive}}
+												<tr>
+							<td>{{this.username}}</td>
+							<td>{{this.email}}</td>
+							<td>{{this.can_accept}}</td>
+							<td>
+								<div class="main-assignments-status-btns">
+									<a onclick="return confirmAction()" href="/admin/del/{{username}}"><img src="icons8-delete-30.png"></a>
+									<a onclick="return confirmAction()" href="/admin/reset-password/{{username}}">Reset Password</a>
+									<a onclick="return confirmAction()" href="/admin/deact/{{username}}">Deactivate</a>
+								</div>
+							</td>
+						</tr>
+						{{/each}}
+					</table>
+				</div>
+			</form>
+        </div>
+    </div>
+</body>
+</html>

@@ -4,9 +4,16 @@
 <html>
 <head>
     <!-- <link rel = "stylesheet" href="add_view.css"> -->
-	<link rel = "stylesheet" href="agent_add_view.css">
+	<!-- <link rel = "stylesheet" href="agent_add_view.css"> -->
     <title>Create Assignment</title>
-
+	
+	<!-- USE agent_add_view FOR SOME REASON TABLES LOOK MUCH BETTER -->
+    <link rel = "stylesheet" href="agent_add_view.css">	
+	<!-- BOOTSTRAP  CHENEZ   AYAWKOANANAJKDBAKJW -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,33 +33,13 @@
 
 		function checkForm()
         {
-            var valid = true;
+            var valid = false;
 
-            var username = document.getElementById("username");
             var email = document.getElementById("email");
             var fname = document.getElementById("fname");
             var lname = document.getElementById("lname");
             var appnum = document.getElementById("appnum");
             var appaddress = document.getElementById("appaddress");
-
-            //if either field is empty, do not proceed.
-            if (username.value == "")
-            {
-                username.style.backgroundColor = "red";
-                valid = false;
-            }
-            else{
-                username.style.backgroundColor = "white";
-            }
-            if (password.value == "")
-            {
-                password.style.backgroundColor = "red";
-                valid = false;
-            }
-            else{
-                password.style.backgroundColor = "white";
-            }
-            return valid;
 
             if (email.value == "")
             {
@@ -62,7 +49,6 @@
             else{
                 email.style.backgroundColor = "white";
             }
-            return valid;
 
             if (fname.value == "")
             {
@@ -72,8 +58,7 @@
             else{
                 fname.style.backgroundColor = "white";
             }
-            return valid;
-
+			
             if (lname.value == "")
             {
                 lname.style.backgroundColor = "red";
@@ -82,7 +67,6 @@
             else{
                 lname.style.backgroundColor = "white";
             }
-            return valid;
 
 			if (appnum.value == "")
             {
@@ -101,59 +85,66 @@
             else{
                 appaddress.style.backgroundColor = "white";
             }
+			
+			
             return valid;
         }
 	</script>
-
+		
+	<link rel = "stylesheet" href="agent_add_view.css">	
+	<!-- BOOTSTRAP  CHENEZ   AYAWKOANANAJKDBAKJW -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
 </head>
 <body>
-    <div class="container">
-        <div id="sidebar">
-            <div class="sidebar-profile">
-                <div class="sidebar-profile-text">
-                    <p class="sidebar-profile-name">Admin</p>
-                    <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
-                    <a href="/logout">Log Out</a>
-                </div>
-            </div>
-
-
-            <div class="sidebar-assignments-btn">
-                <a  href="/assignments">Assignments</a>
-            </div>
-
-			<div class="sidebar-profile-btn">
-                <a  href="/admin-add-assignment">Add New Assignment</a>
-            </div>
-
-			<div class="sidebar-add-btn">
-                <a  href="/admin-add-agent">Add New Agent</a>
-            </div>
-            <div class="sidebar-history-btn">
-                <a  href="/account">See All Agents</a>
-           	</div>
-
-            <div class="sidebar-history-btn">
-                <a  href="/history">History</a>
-            </div>
-
-            <div class="bottom-button">
-                <a href="/logout">Logout</a>
-            </div>
-        </div>
-
+	<nav class="navbar navbar-dark navbar-inverse bgc-super-dark navbar-fixed-top pb-3">
+		<div class= "d-inline-block">
+			<img src="6227853b83e54f2e94c29519d7c234db (1).jpg" height="72px" class="mx-3">
+			
 		<div class="openbtn" >
 			<a href="#" onclick="openNav()">☰</a>
 		</div>
 
-        <div class="main">
+		</div>
+		
+	</nav>
+	
+	<div class="container-flex">
+		
+		<div id="sidebar" class=" d-inline-block h-100">
+	       <div class="sidebar-profile ">
+				<div class="sidebar-profile-text">
+					<p class="sidebar-profile-name">Administrator</p>
+					<p class="sidebar-profile-email"><i>{{this.lname}}, {{this.fname}} #{{this.appnum}}</i></p>
+					<br>
+					<p class="sidebar-profile-email"><i>{{this.email}}</i></p>
+					<a class="bgc-none" href="/logout">Log Out</a>
+				</div>
+			</div>
+
+			<div><a href="/assignments">Assignment Management</a></div>
+			
+			<div><a class="active" href="/admin/accounts">Agent Management</a></div>
+			
+			<div><a href="/history">History</a></div>
+			
+			<div><a href="/admin-add-agent">Add New Agent</a></div>
+			
+			<div><a href="/admin-add-assignment">Add New Assignment</a></div>
+			
+        </div>
+
+		<div class ="main d-inline-block main w-75 container-flex">
             <div class="main-header">
-                <h1>Create Agent</p>
-                <p><b><i>Create New Agent</b></i></p>
+                <h1 class="px-5">See All Agents</h1>
+                <p class="px-5"><b><i>Admin Panel</b></i></p>
             </div>
-            <form class="assignments-form" action = "/assignments" method = "post">
-                <div class="main-table">
-                    <table>
+			
+			<form method="get" action="/assignments" class="mx-auto">
+				<div class="table-responsive main-table">
+					<table>
                         
                         <tr>
                             <th><label for="email">Email</label></th>
@@ -169,7 +160,7 @@
                         </tr>
 						<tr>
                             <th><label for="appnum">License Number</label></th>
-                            <td><input name="appnum" id="appnum" type="number"></td>
+                            <td><input name="appnum" id="appnum" type="text"></td>
                         </tr>
                         <tr>
                             <th><label for="appaddress">Appraiser Address</label></th>
