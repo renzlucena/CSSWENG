@@ -589,16 +589,29 @@
 								<input class="percentage" id="public_transpo_percent2" name="public_transpo" type="number" value="{{this.public_transpo_percent2}}"> %
 							</td>
                         </tr>
-						<tr>	<!-- improvement -->
-                            <th><label>Has Improvement(s)?</label></th>
-                            <td><input name="improvement" type="checkbox" value="{{this.improvement}}"></td>
-                            <td><input name="improvement" type="checkbox" value="{{this.improvement1}}">
-								<input class="percentage" id="improvement_percent1" name="improvement" type="number" value="{{this.improvement_percent1}}"> %
-							</td>
-                            <td><input name="improvement" type="checkbox" value="{{this.improvement2}}">
-								<input class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
-							</td>
-						</tr>
+                        <tr>	<!-- Improvement -->
+                                        <th><label for="improvement" >Has Improvement(s)?</label></th>
+                          <td>
+                            <select id="improvement" name="improvement">
+                              <option value="Yes">Yes</option>
+                              <option value="No">No</option>
+                            </select>
+                          </td>
+                          <td>
+                            <select id="improvement1" name="improvement">
+                              <option value="Yes">Yes</option>
+                              <option value="No">No</option>
+                            </select>
+                            <input class="percentage" id="improvement_percent1" name="improvement" type="number" value="{{this.improvement_percent1}}"> %
+                          </td>
+                          <td>
+                            <select id="improvement2" name="improvement">
+                              <option value="Yes">Yes</option>
+                              <option value="No">No</option>
+                            </select>
+                            <input class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
+                          </td>
+                                    </tr>
 
 						<tr>	<!-- zoning -->
                             <th><label for="zoning">Zoning</label></th>
