@@ -10,11 +10,6 @@ const imageSchema = new mongoose.Schema({
 	}
 },{ _id : false });
 
-const boolnum = new mongoose.Schema({
-	bool: Boolean,
-	num: Number
-},{ _id : false });
-
 const numnum = new mongoose.Schema({
 	num1: Number,
 	num2: Number
@@ -43,13 +38,13 @@ const comparativeSchema = new mongoose.Schema({
 	topo: strnum,
 	frontage: strnum,
 	terms_of_sale: strnum,
-	corner: boolnum,
-	prime: boolnum,
-	hospital: boolnum,
-	school: boolnum,
-	mall: boolnum,
+	corner: strnum,
+	prime: strnum,
+	hospital: strnum,
+	school: strnum,
+	mall: strnum,
 	public_transpo: strnum,
-	improvement: boolnum,
+	improvement: strnum,
 	zoning: strnum,
 	computation: numnum //range value per sqm is from lowest to highest comparable
 
@@ -58,13 +53,13 @@ const comparativeSchema = new mongoose.Schema({
 const assignmentSchema = new mongoose.Schema({
 	ref_id: Number,
 	type_of_approach: String,
-	client_f_name: String, 
+	client_f_name: String,
 	client_l_name: String,
-	
+
 	//will only be visible to admin
 	client_contact_num: String,
 	client_email: String,
-	
+
 	lot_brgy: String, //change to street or lot address; client address
 	lot_city: String,
 	lot_region: String,
@@ -72,7 +67,7 @@ const assignmentSchema = new mongoose.Schema({
 	assigned_to: String,
 	zonal: Number,
 	title_no: String,
-	
+
 	//from here onwards the agents can edit the details na
 	price_per_sqm: Number,
 	ref_date: { type: Date, required: false, default: Date.now },

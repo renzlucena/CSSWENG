@@ -513,13 +513,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						// topo1				: ass.comparative1.topo.str,
 						// frontage1			: ass.comparative1.frontage.str,
 						// terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-						// corner1				: ass.comparative1.corner.bool,
-						// prime1				: ass.comparative1.prime.bool,
-						// hospital1			: ass.comparative1.hospital.bool,
-						// school1				: ass.comparative1.school.bool,
-						// mall1				: ass.comparative1.mall.bool,
+						// corner1				: ass.comparative1.corner.str,
+						// prime1				: ass.comparative1.prime.str,
+						// hospital1			: ass.comparative1.hospital.str,
+						// school1				: ass.comparative1.school.str,
+						// mall1				: ass.comparative1.mall.str,
 						// public_transpo1		: ass.comparative1.public_transpo.str,
-						// improvement1		: ass.comparative1.improvement.bool,
+						// improvement1		: ass.comparative1.improvement.str,
 						// zoning1				: ass.comparative1.zoning.str,
 						// computation1		: ass.comparative1.computation.num1,
 
@@ -554,13 +554,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						// topo2				: ass.comparative2.topo.str,
 						// frontage2			: ass.comparative2.frontage.str,
 						// terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-						// corner2				: ass.comparative2.corner.bool,
-						// prime2				: ass.comparative2.prime.bool,
-						// hospital2			: ass.comparative2.hospital.bool,
-						// school2				: ass.comparative2.school.bool,
-						// mall2				: ass.comparative2.mall.bool,
+						// corner2				: ass.comparative2.corner.str,
+						// prime2				: ass.comparative2.prime.str,
+						// hospital2			: ass.comparative2.hospital.str,
+						// school2				: ass.comparative2.school.str,
+						// mall2				: ass.comparative2.mall.str,
 						// public_transpo2		: ass.comparative2.public_transpo.str,
-						// improvement2		: ass.comparative2.improvement.bool,
+						// improvement2		: ass.comparative2.improvement.str,
 						// zoning2				: ass.comparative2.zoning.str,
 						// computation2		: ass.comparative2.computation.num1,
 
@@ -654,13 +654,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						topo1				: ass.comparative1.topo.str,
 						frontage1			: ass.comparative1.frontage.str,
 						terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-						corner1				: ass.comparative1.corner.bool,
-						prime1				: ass.comparative1.prime.bool,
-						hospital1			: ass.comparative1.hospital.bool,
-						school1				: ass.comparative1.school.bool,
-						mall1				: ass.comparative1.mall.bool,
+						corner1				: ass.comparative1.corner.str,
+						prime1				: ass.comparative1.prime.str,
+						hospital1			: ass.comparative1.hospital.str,
+						school1				: ass.comparative1.school.str,
+						mall1				: ass.comparative1.mall.str,
 						public_transpo1		: ass.comparative1.public_transpo.str,
-						improvement1		: ass.comparative1.improvement.bool,
+						improvement1		: ass.comparative1.improvement.str,
 						zoning1				: ass.comparative1.zoning.str,
 						computation1		: ass.comparative1.computation.num1,
 
@@ -695,13 +695,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						topo2				: ass.comparative2.topo.str,
 						frontage2			: ass.comparative2.frontage.str,
 						terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-						corner2				: ass.comparative2.corner.bool,
-						prime2				: ass.comparative2.prime.bool,
-						hospital2			: ass.comparative2.hospital.bool,
-						school2				: ass.comparative2.school.bool,
-						mall2				: ass.comparative2.mall.bool,
+						corner2				: ass.comparative2.corner.str,
+						prime2				: ass.comparative2.prime.str,
+						hospital2			: ass.comparative2.hospital.str,
+						school2				: ass.comparative2.school.str,
+						mall2				: ass.comparative2.mall.str,
 						public_transpo2		: ass.comparative2.public_transpo.str,
-						improvement2		: ass.comparative2.improvement.bool,
+						improvement2		: ass.comparative2.improvement.str,
 						zoning2				: ass.comparative2.zoning.str,
 						computation2		: ass.comparative2.computation.num1,
 
@@ -821,13 +821,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						topo1				: ass.comparative1.topo.str,
 						frontage1			: ass.comparative1.frontage.str,
 						terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-						corner1				: ass.comparative1.corner.bool,
-						prime1				: ass.comparative1.prime.bool,
-						hospital1			: ass.comparative1.hospital.bool,
-						school1				: ass.comparative1.school.bool,
-						mall1				: ass.comparative1.mall.bool,
+						corner1				: ass.comparative1.corner.str,
+						prime1				: ass.comparative1.prime.str,
+						hospital1			: ass.comparative1.hospital.str,
+						school1				: ass.comparative1.school.str,
+						mall1				: ass.comparative1.mall.str,
 						public_transpo1		: ass.comparative1.public_transpo.str,
-						improvement1		: ass.comparative1.improvement.bool,
+						improvement1		: ass.comparative1.improvement.str,
 						zoning1				: ass.comparative1.zoning.str,
 						computation1		: ass.comparative1.computation.num1,
 
@@ -862,13 +862,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						topo2				: ass.comparative2.topo.str,
 						frontage2			: ass.comparative2.frontage.str,
 						terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-						corner2				: ass.comparative2.corner.bool,
-						prime2				: ass.comparative2.prime.bool,
-						hospital2			: ass.comparative2.hospital.bool,
-						school2				: ass.comparative2.school.bool,
-						mall2				: ass.comparative2.mall.bool,
+						corner2				: ass.comparative2.corner.str,
+						prime2				: ass.comparative2.prime.str,
+						hospital2			: ass.comparative2.hospital.str,
+						school2				: ass.comparative2.school.str,
+						mall2				: ass.comparative2.mall.str,
 						public_transpo2		: ass.comparative2.public_transpo.str,
-						improvement2		: ass.comparative2.improvement.bool,
+						improvement2		: ass.comparative2.improvement.str,
 						zoning2				: ass.comparative2.zoning.str,
 						computation2		: ass.comparative2.computation.num1,
 
@@ -1024,13 +1024,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						topo1				: ass.comparative1.topo.str,
 						frontage1			: ass.comparative1.frontage.str,
 						terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-						corner1				: ass.comparative1.corner.bool,
-						prime1				: ass.comparative1.prime.bool,
-						hospital1			: ass.comparative1.hospital.bool,
-						school1				: ass.comparative1.school.bool,
-						mall1				: ass.comparative1.mall.bool,
+						corner1				: ass.comparative1.corner.str,
+						prime1				: ass.comparative1.prime.str,
+						hospital1			: ass.comparative1.hospital.str,
+						school1				: ass.comparative1.school.str,
+						mall1				: ass.comparative1.mall.str,
 						public_transpo1		: ass.comparative1.public_transpo.str,
-						improvement1		: ass.comparative1.improvement.bool,
+						improvement1		: ass.comparative1.improvement.str,
 						zoning1				: ass.comparative1.zoning.str,
 						computation1		: ass.comparative1.computation.num1,
 
@@ -1065,13 +1065,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						topo2				: ass.comparative2.topo.str,
 						frontage2			: ass.comparative2.frontage.str,
 						terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-						corner2				: ass.comparative2.corner.bool,
-						prime2				: ass.comparative2.prime.bool,
-						hospital2			: ass.comparative2.hospital.bool,
-						school2				: ass.comparative2.school.bool,
-						mall2				: ass.comparative2.mall.bool,
+						corner2				: ass.comparative2.corner.str,
+						prime2				: ass.comparative2.prime.str,
+						hospital2			: ass.comparative2.hospital.str,
+						school2				: ass.comparative2.school.str,
+						mall2				: ass.comparative2.mall.str,
 						public_transpo2		: ass.comparative2.public_transpo.str,
-						improvement2		: ass.comparative2.improvement.bool,
+						improvement2		: ass.comparative2.improvement.str,
 						zoning2				: ass.comparative2.zoning.str,
 						computation2		: ass.comparative2.computation.num1,
 
@@ -1183,13 +1183,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							topo1				: ass.comparative1.topo.str,
 							frontage1			: ass.comparative1.frontage.str,
 							terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-							corner1				: ass.comparative1.corner.bool,
-							prime1				: ass.comparative1.prime.bool,
-							hospital1			: ass.comparative1.hospital.bool,
-							school1				: ass.comparative1.school.bool,
-							mall1				: ass.comparative1.mall.bool,
+							corner1				: ass.comparative1.corner.str,
+							prime1				: ass.comparative1.prime.str,
+							hospital1			: ass.comparative1.hospital.str,
+							school1				: ass.comparative1.school.str,
+							mall1				: ass.comparative1.mall.str,
 							public_transpo1		: ass.comparative1.public_transpo.str,
-							improvement1		: ass.comparative1.improvement.bool,
+							improvement1		: ass.comparative1.improvement.str,
 							zoning1				: ass.comparative1.zoning.str,
 							computation1		: ass.comparative1.computation.num1,
 
@@ -1224,13 +1224,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							topo2				: ass.comparative2.topo.str,
 							frontage2			: ass.comparative2.frontage.str,
 							terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-							corner2				: ass.comparative2.corner.bool,
-							prime2				: ass.comparative2.prime.bool,
-							hospital2			: ass.comparative2.hospital.bool,
-							school2				: ass.comparative2.school.bool,
-							mall2				: ass.comparative2.mall.bool,
+							corner2				: ass.comparative2.corner.str,
+							prime2				: ass.comparative2.prime.str,
+							hospital2			: ass.comparative2.hospital.str,
+							school2				: ass.comparative2.school.str,
+							mall2				: ass.comparative2.mall.str,
 							public_transpo2		: ass.comparative2.public_transpo.str,
-							improvement2		: ass.comparative2.improvement.bool,
+							improvement2		: ass.comparative2.improvement.str,
 							zoning2				: ass.comparative2.zoning.str,
 							computation2		: ass.comparative2.computation.num1,
 
@@ -1326,13 +1326,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							topo1				: ass.comparative1.topo.str,
 							frontage1			: ass.comparative1.frontage.str,
 							terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-							corner1				: ass.comparative1.corner.bool,
-							prime1				: ass.comparative1.prime.bool,
-							hospital1			: ass.comparative1.hospital.bool,
-							school1				: ass.comparative1.school.bool,
-							mall1				: ass.comparative1.mall.bool,
+							corner1				: ass.comparative1.corner.str,
+							prime1				: ass.comparative1.prime.str,
+							hospital1			: ass.comparative1.hospital.str,
+							school1				: ass.comparative1.school.str,
+							mall1				: ass.comparative1.mall.str,
 							public_transpo1		: ass.comparative1.public_transpo.str,
-							improvement1		: ass.comparative1.improvement.bool,
+							improvement1		: ass.comparative1.improvement.str,
 							zoning1				: ass.comparative1.zoning.str,
 							computation1		: ass.comparative1.computation.num1,
 
@@ -1367,13 +1367,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							topo2				: ass.comparative2.topo.str,
 							frontage2			: ass.comparative2.frontage.str,
 							terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-							corner2				: ass.comparative2.corner.bool,
-							prime2				: ass.comparative2.prime.bool,
-							hospital2			: ass.comparative2.hospital.bool,
-							school2				: ass.comparative2.school.bool,
-							mall2				: ass.comparative2.mall.bool,
+							corner2				: ass.comparative2.corner.str,
+							prime2				: ass.comparative2.prime.str,
+							hospital2			: ass.comparative2.hospital.str,
+							school2				: ass.comparative2.school.str,
+							mall2				: ass.comparative2.mall.str,
 							public_transpo2		: ass.comparative2.public_transpo.str,
-							improvement2		: ass.comparative2.improvement.bool,
+							improvement2		: ass.comparative2.improvement.str,
 							zoning2				: ass.comparative2.zoning.str,
 							computation2		: ass.comparative2.computation.num1,
 
@@ -1469,13 +1469,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						topo1				: ass.comparative1.topo.str,
 						frontage1			: ass.comparative1.frontage.str,
 						terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-						corner1				: ass.comparative1.corner.bool,
-						prime1				: ass.comparative1.prime.bool,
-						hospital1			: ass.comparative1.hospital.bool,
-						school1				: ass.comparative1.school.bool,
-						mall1				: ass.comparative1.mall.bool,
+						corner1				: ass.comparative1.corner.str,
+						prime1				: ass.comparative1.prime.str,
+						hospital1			: ass.comparative1.hospital.str,
+						school1				: ass.comparative1.school.str,
+						mall1				: ass.comparative1.mall.str,
 						public_transpo1		: ass.comparative1.public_transpo.str,
-						improvement1		: ass.comparative1.improvement.bool,
+						improvement1		: ass.comparative1.improvement.str,
 						zoning1				: ass.comparative1.zoning.str,
 						computation1		: ass.comparative1.computation.num1,
 
@@ -1510,13 +1510,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						topo2				: ass.comparative2.topo.str,
 						frontage2			: ass.comparative2.frontage.str,
 						terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-						corner2				: ass.comparative2.corner.bool,
-						prime2				: ass.comparative2.prime.bool,
-						hospital2			: ass.comparative2.hospital.bool,
-						school2				: ass.comparative2.school.bool,
-						mall2				: ass.comparative2.mall.bool,
+						corner2				: ass.comparative2.corner.str,
+						prime2				: ass.comparative2.prime.str,
+						hospital2			: ass.comparative2.hospital.str,
+						school2				: ass.comparative2.school.str,
+						mall2				: ass.comparative2.mall.str,
 						public_transpo2		: ass.comparative2.public_transpo.str,
-						improvement2		: ass.comparative2.improvement.bool,
+						improvement2		: ass.comparative2.improvement.str,
 						zoning2				: ass.comparative2.zoning.str,
 						computation2		: ass.comparative2.computation.num1,
 
@@ -1616,13 +1616,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							topo1				: ass.comparative1.topo.str,
 							frontage1			: ass.comparative1.frontage.str,
 							terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-							corner1				: ass.comparative1.corner.bool,
-							prime1				: ass.comparative1.prime.bool,
-							hospital1			: ass.comparative1.hospital.bool,
-							school1				: ass.comparative1.school.bool,
-							mall1				: ass.comparative1.mall.bool,
+							corner1				: ass.comparative1.corner.str,
+							prime1				: ass.comparative1.prime.str,
+							hospital1			: ass.comparative1.hospital.str,
+							school1				: ass.comparative1.school.str,
+							mall1				: ass.comparative1.mall.str,
 							public_transpo1		: ass.comparative1.public_transpo.str,
-							improvement1		: ass.comparative1.improvement.bool,
+							improvement1		: ass.comparative1.improvement.str,
 							zoning1				: ass.comparative1.zoning.str,
 							computation1		: ass.comparative1.computation.num1,
 
@@ -1657,13 +1657,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							topo2				: ass.comparative2.topo.str,
 							frontage2			: ass.comparative2.frontage.str,
 							terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-							corner2				: ass.comparative2.corner.bool,
-							prime2				: ass.comparative2.prime.bool,
-							hospital2			: ass.comparative2.hospital.bool,
-							school2				: ass.comparative2.school.bool,
-							mall2				: ass.comparative2.mall.bool,
+							corner2				: ass.comparative2.corner.str,
+							prime2				: ass.comparative2.prime.str,
+							hospital2			: ass.comparative2.hospital.str,
+							school2				: ass.comparative2.school.str,
+							mall2				: ass.comparative2.mall.str,
 							public_transpo2		: ass.comparative2.public_transpo.str,
-							improvement2		: ass.comparative2.improvement.bool,
+							improvement2		: ass.comparative2.improvement.str,
 							zoning2				: ass.comparative2.zoning.str,
 							computation2		: ass.comparative2.computation.num1,
 
@@ -1757,13 +1757,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							topo1				: ass.comparative1.topo.str,
 							frontage1			: ass.comparative1.frontage.str,
 							terms_of_sale1		: ass.comparative1.terms_of_sale.str,
-							corner1				: ass.comparative1.corner.bool,
-							prime1				: ass.comparative1.prime.bool,
-							hospital1			: ass.comparative1.hospital.bool,
-							school1				: ass.comparative1.school.bool,
-							mall1				: ass.comparative1.mall.bool,
+							corner1				: ass.comparative1.corner.str,
+							prime1				: ass.comparative1.prime.str,
+							hospital1			: ass.comparative1.hospital.str,
+							school1				: ass.comparative1.school.str,
+							mall1				: ass.comparative1.mall.str,
 							public_transpo1		: ass.comparative1.public_transpo.str,
-							improvement1		: ass.comparative1.improvement.bool,
+							improvement1		: ass.comparative1.improvement.str,
 							zoning1				: ass.comparative1.zoning.str,
 							computation1		: ass.comparative1.computation.num1,
 
@@ -1798,13 +1798,13 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							topo2				: ass.comparative2.topo.str,
 							frontage2			: ass.comparative2.frontage.str,
 							terms_of_sale2		: ass.comparative2.terms_of_sale.str,
-							corner2				: ass.comparative2.corner.bool,
-							prime2				: ass.comparative2.prime.bool,
-							hospital2			: ass.comparative2.hospital.bool,
-							school2				: ass.comparative2.school.bool,
-							mall2				: ass.comparative2.mall.bool,
+							corner2				: ass.comparative2.corner.str,
+							prime2				: ass.comparative2.prime.str,
+							hospital2			: ass.comparative2.hospital.str,
+							school2				: ass.comparative2.school.str,
+							mall2				: ass.comparative2.mall.str,
 							public_transpo2		: ass.comparative2.public_transpo.str,
-							improvement2		: ass.comparative2.improvement.bool,
+							improvement2		: ass.comparative2.improvement.str,
 							zoning2				: ass.comparative2.zoning.str,
 							computation2		: ass.comparative2.computation.num1,
 
@@ -1999,13 +1999,13 @@ app.post('/submit-assignment', function(req,res) {
 				topo: {str: "", num:0},
 				frontage: {str: "", num:0},
 				terms_of_sale: {str: "", num:0},
-				corner: {bool:0,num:0},
-				prime: {bool:0,num:0},
-				hospital: {bool:0,num:0},
-				school: {bool:0,num:0},
-				mall: {bool:0,num:0},
+				corner: {str:0,num:0},
+				prime: {str:0,num:0},
+				hospital: {str:0,num:0},
+				school: {str:0,num:0},
+				mall: {str:0,num:0},
 				public_transpo: {str:"", num:0},
-				improvement: {bool:0,num:0},
+				improvement: {str:0,num:0},
 				zoning: {str: "", num:0},
 				computation: {num1: 0, num2: 0}
 			},
@@ -2023,13 +2023,13 @@ app.post('/submit-assignment', function(req,res) {
 				topo: {str: "", num:0},
 				frontage: {str: "", num:0},
 				terms_of_sale: {str: "", num:0},
-				corner: {bool:0,num:0},
-				prime: {bool:0,num:0},
-				hospital: {bool:0,num:0},
-				school: {bool:0,num:0},
-				mall: {bool:0,num:0},
+				corner: {str:0,num:0},
+				prime: {str:0,num:0},
+				hospital: {str:0,num:0},
+				school: {str:0,num:0},
+				mall: {str:0,num:0},
 				public_transpo: {str: "", num:0},
-				improvement: {bool:0,num:0},
+				improvement: {str:0,num:0},
 				zoning: {str: "", num:0},
 				computation: {num1: 0, num2: 0}
 			}
@@ -2311,13 +2311,13 @@ app.get('/account', async(req,res)=>{
 
 app.get("/admin/reset-password/:username", async(req,res)=>{
 	sess = req.session;
-	
+
 	if(sess.username=="admin")
 		{
 			const acc_a = await Account.findOne({
 				username: req.params.username
 			}).exec()
-			
+
 			await Account.findOneAndUpdate({
 					username: req.params.username},
 					{
@@ -2336,14 +2336,14 @@ app.get("/admin/reset-password/:username", async(req,res)=>{
 //todo
 app.get("/admin/del/:username", async(req,res)=>{
 	sess = req.session;
-	
+
 	if(sess.username=="admin")
 		{
-			
+
 			await Account.findOneAndDelete({
 				username: req.params.username
 			}).exec()
-			
+
 			//parang di  nag ggo
 			res.redirect('/account');
 		}
@@ -2673,29 +2673,29 @@ app.get('/save-ass', async(req,res)=> {
 
 
 
-						//hiding bools for now bc idk how to make them save :v
+						//hiding strs for now bc idk how to make them save :v
 						// I saw this baka makahelp sa mag fifix:
 						//		https://stackoverflow.com/questions/39962676/updating-mongodb-with-checkbox-information
 
 						/*
 						corner: {
-							bool: req.query.corner[1],
+							str: req.query.corner[1],
 							num: req.query.corner[2]
 							},
 						prime: {
-							bool: req.query.prime[1],
+							str: req.query.prime[1],
 							num: req.query.prime[2]
 							},
 						hospital: {
-							bool: req.query.hospital[1],
+							str: req.query.hospital[1],
 							num: req.query.hospital[2]
 							},
 						school: {
-							bool: req.query.school[1],
+							str: req.query.school[1],
 							num: req.query.school[2]
 							},
 						mall: {
-							bool: req.query.mall[1],
+							str: req.query.mall[1],
 							num: req.query.mall[2]
 							},
 						*/
@@ -2704,36 +2704,36 @@ app.get('/save-ass', async(req,res)=> {
 							num: req.query.public_transpo[2]
 							},
 
-						//also bool
+						//also str
 						/*improvement: {
-							bool: req.query.improvement[1],
+							str: req.query.improvement[1],
 							num: req.query.improvement[2]
 							},
 						*/
 
-						//remove when boolis fixed, these are just placeholders
+						//remove when stris fixed, these are just placeholders
 						corner: {
-							bool: true,
+							str: true,
 							num: 0
 							},
 						prime: {
-							bool: true,
+							str: true,
 							num: 0
 							},
 						hospital: {
-							bool: true,
+							str: true,
 							num: 0
 							},
 						school: {
-							bool: true,
+							str: true,
 							num: 0
 							},
 						mall: {
-							bool: true,
+							str: true,
 							num: 0
 							},
 						improvement: {
-							bool: true,
+							str: true,
 							num: 0
 							},
 
@@ -2791,29 +2791,29 @@ app.get('/save-ass', async(req,res)=> {
 
 
 
-						//remove when boolis fixed, these are just placeholders
+						//remove when stris fixed, these are just placeholders
 						corner: {
-							bool: true,
+							str: true,
 							num: 0
 							},
 						prime: {
-							bool: true,
+							str: true,
 							num: 0
 							},
 						hospital: {
-							bool: true,
+							str: true,
 							num: 0
 							},
 						school: {
-							bool: true,
+							str: true,
 							num: 0
 							},
 						mall: {
-							bool: true,
+							str: true,
 							num: 0
 							},
 						improvement: {
-							bool: true,
+							str: true,
 							num: 0
 							},
 
