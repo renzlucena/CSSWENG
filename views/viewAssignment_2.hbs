@@ -262,14 +262,14 @@
 		</div>
 
         <div class="main">
-            			
+
 			<div class="main-header">
 				<h1>Assignment #{{ref_id}}</p>
                 <p><b><i>This Assignment has been Reviewed and Approved for Printing.</b></i></p>
 				<p>You may now edit the document for printing.</p>
 				<br>
             </div>
-				
+
 
             <form class="assignments-form">
                 <div class="main-table">
@@ -488,16 +488,34 @@
 								<!-- <input readonly  class="percentage" id="mall_percent2" name="mall_percent" type="number" value="{{this.mall_percent2}}"> % -->
 							<!-- </td> -->
 						<!-- </tr> -->
-						<tr>	<!-- public transpo -->
+            <tr>	<!-- public transpo -->
                             <th><label for="public_transpo" >Access to Main Public Transport</label></th>
-							<td><input readonly name="public_transpo" type="text" value="{{this.public_transpo}}"></td>
-                            <td><input readonly name="public_transpo" class="text-next-to-percentage" type="text" value="{{this.public_transpo1}}">
-								<input readonly class="percentage" id="public_transpo_percent1" name="public_transpo" type="number" value="{{this.public_transpo_percent1}}"> %
-							</td>
-                            <td><input readonly name="public_transpo" class="text-next-to-percentage" type="text" value="{{this.public_transpo2}}">
-								<input readonly class="percentage" id="public_transpo_percent2" name="public_transpo" type="number" value="{{this.public_transpo_percent2}}"> %
-							</td>
-							
+              <td>
+                <select id="public_transpo" name="public_transpo">
+                  <option value="very-near">Very Near</option>
+                  <option value="near">Near</option>
+                  <option value="relatively-near">Relatively Near</option>
+                  <option value="far">Far</option>
+                </select>
+              </td>
+              <td>
+                <select id="public_transpo1" name="public_transpo">
+                  <option value="very-near">Very Near</option>
+                  <option value="near">Near</option>
+                  <option value="relatively-near">Relatively Near</option>
+                  <option value="far">Far</option>
+                </select>
+                <input class="percentage" id="public_transpo_percent1" readonly name="public_transpo" type="number" value="{{this.public_transpo_percent1}}"> %
+              </td>
+              <td>
+                <select id="public_transpo2" name="public_transpo">
+                  <option value="very_near">Very Near</option>
+                  <option value="near">Near</option>
+                  <option value="relatively-near">Relatively Near</option>
+                  <option value="far">Far</option>
+                </select>
+                <input class="percentage" id="public_transpo_percent2" readonly name="public_transpo" type="number" value="{{this.public_transpo_percent2}}"> %
+              </td>
                         </tr>
 						<tr>	<!-- improvement -->
                             <th><label>Has Improvement(s)?</label></th>
@@ -529,7 +547,7 @@
 
 
 
-	
+
 
 						<tr>
                             <th><label for="computation">Computation</label></th>
