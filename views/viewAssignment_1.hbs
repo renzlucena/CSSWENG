@@ -143,7 +143,7 @@
 <body>
 	<nav class="navbar navbar-dark navbar-inverse bgc-super-dark navbar-fixed-top pb-3">
 		<div class= "d-inline-block">
-			<img src="6227853b83e54f2e94c29519d7c234db (1).jpg" height="72px" class="mx-3">
+			<img src="/6227853b83e54f2e94c29519d7c234db (1).jpg" height="72px" class="mx-3">
 			<a class="color-white td-none" href="mailto:philhauz@yahoo.com">Contact Admin</a>
 			
 		<div class="openbtn" >
@@ -261,23 +261,11 @@
 						</tr>
 						<tr>	<!-- property_interest -->
 							<th><label for="property_interest" >Property Interest</label></th>
-							<td><select id="property_interest" name="property_interest">
-									<option value="{{this.property_interest}}" selected hidden>{{this.property_interest}}</option>
-									<option value="Fee Simple">Fee Simple</option>
-									<option value="Lease Hold">Lease Hold</option>
-							</select></td>
-							<td><select id="property_interest1" name="property_interest">
-									<option value="{{this.property_interest1}}" selected hidden>{{this.property_interest1}}</option>
-									<option value="Fee Simple">Fee Simple</option>
-									<option value="Lease Hold">Lease Hold</option>
-								</select>
+							<td><input readonly  name="property_interest" type="text" value="{{this.property_interest}}"></td>
+							<td><input readonly  name="property_interest" class="text-next-to-percentage" type="text" value="{{this.property_interest1}}">
 								<input readonly  class="percentage" id="property_interest_percent1" name="property_interest" type="number" value="{{this.property_interest_percent1}}"> %
 							</td>
-							<td><select id="property_interest2" name="property_interest">
-								<option value="{{this.property_interest2}}" selected hidden>{{this.property_interest2}}</option>
-									<option value="Fee Simple">Fee Simple</option>
-									<option value="Lease Hold">Lease Hold</option>
-								</select>
+							<td><input readonly  name="property_interest" class="text-next-to-percentage" type="text" value="{{this.property_interest2}}">
 								<input readonly  class="percentage" id="property_interest_percent2" name="property_interest" type="number" value="{{this.property_interest_percent2}}"> %
 							</td>
 						</tr>
@@ -337,209 +325,81 @@
 								<input readonly  class="percentage" id="terms_of_sale_percent2" name="terms_of_sale" type="number" value="{{this.terms_of_sale_percent2}}"> %
 							</td>
 						</tr>
-							
 						<tr>	<!-- Corner lot -->
 							<th><label for="corner" >Is Corner Lot?</label></th>
-						  <td>
-							<select id="corner" name="corner">
-							  <option value="{{this.corner}}" selected hidden>{{this.corner}}</option>		  <!-- will work if value is the same as the display -->
-							  <option value="Yes">Yes</option>
-							  <option value="No">No</option>
-							</select>
-						  </td>
-						  <td>
-							<select id="corner1" name="corner">
-							  <option value="{{this.corner1}}" selected hidden>{{this.corner1}}</option>		  <!-- will work if value is the same as the display -->
-							  <option value="Yes">Yes</option>
-							  <option value="No">No</option>
-							</select>
-							<input readonly  class="percentage" id="corner_percent1" name="corner" type="number" value="{{this.corner_percent1}}"> %
-						  </td>
-						  <td>
-							<select id="corner2" name="corner">
-							  <option value="{{this.corner2}}" selected hidden>{{this.corner2}}</option>	
-							  <option value="Yes">Yes</option>
-							  <option value="No">No</option>
-							</select>
-							<input readonly  class="percentage" id="corner_percent2" name="corner" type="number" value="{{this.corner_percent2}}"> %
-						  </td>
-									</tr>
+							<td><input readonly  name="corner" type="text" value="{{this.corner}}"></td>
+							<td><input readonly  name="corner" class="text-next-to-percentage" type="text" value="{{this.corner1}}">
+								<input readonly  class="percentage" id="corner_percent1" name="corner" type="number" value="{{this.corner_percent1}}"> %
+							</td>
+							<td><input readonly  name="corner" class="text-next-to-percentage" type="text" value="{{this.corner2}}">
+								<input readonly  class="percentage" id="corner_percent2" name="corner" type="number" value="{{this.corner_percent2}}"> %
+							</td>
+						</tr>
 
 						<tr>	<!-- Prime lot -->
 						<th><label for="prime" >Is Prime Lot?</label></th>
-						  <td>
-							<select id="prime" name="prime">
-							  <option value="{{this.prime}}" selected hidden>{{this.prime}}</option>	
-							  <option value="Yes">Yes</option>
-							  <option value="No">No</option>
-							</select>
-						  </td>
-						  <td>
-							<select id="prime1" name="prime">
-							  <option value="{{this.prime1}}" selected hidden>{{this.prime1}}</option>	
-							  <option value="Yes">Yes</option>
-							  <option value="No">No</option>
-							</select>
-							<input readonly  class="percentage" id="prime_percent1" name="prime" type="number" value="{{this.prime_percent1}}"> %
-						  </td>
-						  <td>
-							<select id="prime2" name="prime">
-							  <option value="{{this.prime2}}" selected hidden>{{this.prime2}}</option>
-							  <option value="Yes">Yes</option>
-							  <option value="No">No</option>
-							</select>
-							<input readonly  class="percentage" id="prime_percent2" name="prime" type="number" value="{{this.prime_percent2}}"> %
-						  </td>
+						  <td><input readonly  name="prime" type="text" value="{{this.prime}}"></td>
+							<td><input readonly  name="prime" class="text-next-to-percentage" type="text" value="{{this.prime1}}">
+								<input readonly  class="percentage" id="prime_percent1" name="prime" type="number" value="{{this.prime_percent1}}"> %
+							</td>
+							<td><input readonly  name="prime" class="text-next-to-percentage" type="text" value="{{this.prime2}}">
+								<input readonly  class="percentage" id="prime_percent2" name="prime" type="number" value="{{this.prime_percent2}}"> %
+							</td>
 									</tr>
 
 
 						<tr>	<!-- hospitals -->
 										<th><label for="hospital" >Has nearby Hospital(s)?</label></th>
-						  <td>
-							<select id="hospital" name="hospital">
-							  <option value="{{this.hospital}}" selected hidden>{{this.hospital}}</option>		  <!-- will work if value is the same as the display -->
-
-							  <option value="near">Near</option>
-							  <option value="relatively-near">Relatively Near</option>
-							  <option value="far">Far</option>
-							</select>
-						  </td>
-						  <td>
-							<select id="hospital1" name="hospital">
-							  <option value="{{this.hospital1}}" selected hidden>{{this.hospital1}}</option>		  <!-- will work if value is the same as the display -->
-
-							  <option value="near">Near</option>
-							  <option value="relatively-near">Relatively Near</option>
-							  <option value="far">Far</option>
-							</select>
-							<input readonly  class="percentage" id="hospital_percent1" name="hospital" type="number" value="{{this.hospital_percent1}}"> %
-						  </td>
-						  <td>
-							<select id="hospital2" name="hospital">
-							  <option value="{{this.hospital2}}" selected hidden>{{this.hospital2}}</option>		  <!-- will work if value is the same as the display -->
-
-							  <option value="near">Near</option>
-							  <option value="relatively-near">Relatively Near</option>
-							  <option value="far">Far</option>
-							</select>
-							<input readonly  class="percentage" id="hospital_percent2" name="hospital" type="number" value="{{this.hospital_percent2}}"> %
-						  </td>
+						  <td><input readonly  name="hospital" type="text" value="{{this.hospital}}"></td>
+							<td><input readonly  name="hospital" class="text-next-to-percentage" type="text" value="{{this.hospital1}}">
+								<input readonly  class="percentage" id="hospital_percent1" name="hospital" type="number" value="{{this.hospital_percent1}}"> %
+							</td>
+							<td><input readonly  name="hospital" class="text-next-to-percentage" type="text" value="{{this.hospital2}}">
+								<input readonly  class="percentage" id="hospital_percent2" name="hospital" type="number" value="{{this.hospital_percent2}}"> %
+							</td>
 									</tr>
 
 						<tr>	<!-- school -->
 										<th><label for="school" >Has nearby School(s)?</label></th>
-						  <td>
-							<select id="school" name="school">
-							<option value="{{this.school}}" selected hidden>{{this.school}}</option>
-							  <option value="near">Near</option>
-							  <option value="relatively-near">Relatively Near</option>
-							  <option value="far">Far</option>
-							</select>
-						  </td>
-						  <td>
-							<select id="school1" name="school">
-							<option value="{{this.school1}}" selected hidden>{{this.school1}}</option>
-							  <option value="near">Near</option>
-							  <option value="relatively-near">Relatively Near</option>
-							  <option value="far">Far</option>
-							</select>
-							<input readonly  class="percentage" id="school_percent1" name="school" type="number" value="{{this.school_percent1}}"> %
-						  </td>
-						  <td>
-							<select id="school2" name="school">
-							<option value="{{this.school2}}" selected hidden>{{this.school2}}</option>
-							  <option value="near">Near</option>
-							  <option value="relatively-near">Relatively Near</option>
-							  <option value="far">Far</option>
-							</select>
-							<input readonly  class="percentage" id="school_percent2" name="school" type="number" value="{{this.school_percent2}}"> %
-						  </td>
+						  <td><input readonly  name="school" type="text" value="{{this.school}}"></td>
+							<td><input readonly  name="school" class="text-next-to-percentage" type="text" value="{{this.school1}}">
+								<input readonly  class="percentage" id="school_percent1" name="school" type="number" value="{{this.school_percent1}}"> %
+							</td>
+							<td><input readonly  name="school" class="text-next-to-percentage" type="text" value="{{this.school2}}">
+								<input readonly  class="percentage" id="school_percent2" name="school" type="number" value="{{this.school_percent2}}"> %
+							</td>
 									</tr>
 
 						<tr>	<!-- mall -->
 										<th><label for="mall" >Has nearby Shop/Mall(s)?</label></th>
-						  <td>
-							<select id="mall" name="mall">
-							<option value="{{this.mall}}" selected hidden>{{this.mall}}</option>
-							  <option value="near">Near</option>
-							  <option value="relatively-near">Relatively Near</option>
-							  <option value="far">Far</option>
-							</select>
-						  </td>
-						  <td>
-							<select id="mall1" name="mall">
-							<option value="{{this.mall1}}" selected hidden>{{this.mall1}}</option>
-							  <option value="near">Near</option>
-							  <option value="relatively-near">Relatively Near</option>
-							  <option value="far">Far</option>
-							</select>
-							<input readonly  class="percentage" id="mall_percent1" name="mall" type="number" value="{{this.mall_percent1}}"> %
-						  </td>
-						  <td>
-							<select id="mall2" name="mall">
-							<option value="{{this.mall2}}" selected hidden>{{this.mall2}}</option>
-							  <option value="near">Near</option>
-							  <option value="relatively-near">Relatively Near</option>
-							  <option value="far">Far</option>
-							</select>
-							<input readonly  class="percentage" id="mall_percent2" name="mall" type="number" value="{{this.mall_percent2}}"> %
-						  </td>
+						 <td><input readonly  name="mall" type="text" value="{{this.mall}}"></td>
+							<td><input readonly  name="mall" class="text-next-to-percentage" type="text" value="{{this.mall1}}">
+								<input readonly  class="percentage" id="mall_percent1" name="mall" type="number" value="{{this.mall_percent1}}"> %
+							</td>
+							<td><input readonly  name="mall" class="text-next-to-percentage" type="text" value="{{this.mall2}}">
+								<input readonly  class="percentage" id="mall_percent2" name="mall" type="number" value="{{this.mall_percent2}}"> %
+							</td>
 									</tr>
 
 						<tr>	<!-- public transpo -->
 							<th><label for="public_transpo" >Access to Main Public Transport</label></th>
-							<td>
-								<select id="public_transpo" name="public_transpo">
-								<option value="{{this.public_transpo}}" selected hidden>{{this.public_transpo}}</option>
-									<option value="near">Near</option>
-									<option value="relatively-near">Relatively Near</option>
-									<option value="far">Far</option>
-								</select>
-							</td>
-							<td>
-								<select id="public_transpo1" name="public_transpo">
-								<option value="{{this.public_transpo1}}" selected hidden>{{this.public_transpo1}}</option>
-									<option value="near">Near</option>
-									<option value="relatively-near">Relatively Near</option>
-									<option value="far">Far</option>
-								</select>
+							<td><input readonly  name="public_transpo" type="text" value="{{this.public_transpo}}"></td>
+							<td><input readonly  name="public_transpo" class="text-next-to-percentage" type="text" value="{{this.public_transpo1}}">
 								<input readonly  class="percentage" id="public_transpo_percent1" name="public_transpo" type="number" value="{{this.public_transpo_percent1}}"> %
 							</td>
-							<td>
-								<select id="public_transpo2" name="public_transpo">
-								<option value="{{this.public_transpo2}}" selected hidden>{{this.public_transpo2}}</option>
-									<option value="near">Near</option>
-									<option value="relatively-near">Relatively Near</option>
-									<option value="far">Far</option>
-								</select>
+							<td><input readonly  name="public_transpo" class="text-next-to-percentage" type="text" value="{{this.public_transpo2}}">
 								<input readonly  class="percentage" id="public_transpo_percent2" name="public_transpo" type="number" value="{{this.public_transpo_percent2}}"> %
 							</td>
 						</tr>
 						<tr>	<!-- Improvement -->
 										<th><label for="improvement" >Has Improvement(s)?</label></th>
-						  <td>
-							<select id="improvement" name="improvement">
-								<option value="{{this.improvement}}" selected hidden>{{this.improvement}}</option>
-							  <option value="Yes">Yes</option>
-							  <option value="No">No</option>
-							</select>
-						  </td>
-						  <td>
-							<select id="improvement1" name="improvement">
-							<option value="{{this.improvement1}}" selected hidden>{{this.improvement1}}</option>
-							  <option value="Yes">Yes</option>
-							  <option value="No">No</option>
-							</select>
-							<input readonly  class="percentage" id="improvement_percent1" name="improvement" type="number" value="{{this.improvement_percent1}}"> %
-						  </td>
-						  <td>
-							<select id="improvement2" name="improvement">
-							<option value="{{this.improvement2}}" selected hidden>{{this.improvement2}}</option>
-							  <option value="Yes">Yes</option>
-							  <option value="No">No</option>
-							</select>
-							<input readonly  class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
-						  </td>
+						  <td><input readonly  name="improvement" type="text" value="{{this.improvement}}"></td>
+							<td><input readonly  name="improvement" class="text-next-to-percentage" type="text" value="{{this.improvement1}}">
+								<input readonly  class="percentage" id="improvement_percent1" name="improvement" type="number" value="{{this.improvement_percent1}}"> %
+							</td>
+							<td><input readonly  name="improvement" class="text-next-to-percentage" type="text" value="{{this.improvement2}}">
+								<input readonly  class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
+							</td>
 									</tr>
 
 						<tr>	<!-- zoning -->

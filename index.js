@@ -498,7 +498,8 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				console.log("viewAssignment_0_admin.hbs")
 
 				res.render('viewAssignment_0_admin.hbs',{
-					ref_id 			: ass.ref_id,
+					ref_id 			: ass.ref.params.ref_id,
+					// ref_id 			: ass.ref_id,
 					type_of_approach: ass.type_of_approach,
 					client_f_name 	: ass.client_f_name,
 					client_l_name 	: ass.client_l_name,
@@ -665,7 +666,8 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 					//reconciliation & final value opinion
 					recon_final_value_opinion: "",
 
-					ref_id 			: ass.ref_id,
+					ref_id 			: req.params.ref_id,
+					// ref_id 			: ass.ref_id,
 					type_of_approach: ass.type_of_approach,
 					client_f_name 	: ass.client_f_name,
 					client_l_name 	: ass.client_l_name,
@@ -810,7 +812,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				res.render('viewAssignment_5_admin.hbs',{	//TODO: MAKE EVERYTHING LIKE THIS
 					doc_details: docu,	//short ver lol
 					assignment_ass: assignment,	//short ver lol
-
+					ref_id: req.params.ref_id,
 					username: sess.username,
 					password: sess.password,
 					remember: sess.remember,
@@ -1888,7 +1890,7 @@ app.post('/submit-assignment', function(req,res) {
 				price_per_sqm: 0,
 				ref_date: {date: 0, num: 0}, //idk if this works
 				lot_loc: "",
-				property_type: {str: "", num:0},
+				property_type: {str: "Lease Hold", num:0},
 				property_interest: {str:"",num:0},
 				//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
 				// property_images: [imageSchema],
@@ -1914,7 +1916,7 @@ app.post('/submit-assignment', function(req,res) {
 				ref_date: {date: 0, num: 0},
 				lot_loc: "",
 				property_type: {str: "", num:0},
-				property_interest: {str:"",num:0},
+				property_interest: {str:"Lease Hold",num:0},
 				// property_images: [imageSchema],
 				lot_size: {num1: 0, num2: 0},
 				shape: {str: "", num:0},
@@ -2459,7 +2461,7 @@ app.get('/terms', function(req,res){
 app.get('/save-ass', async(req,res)=> {
 	// sess = req.session;
 	console.log("in /save-ass - " +req.query.ref_id)
-	// console.log(req.query)
+	console.log(req.query)
 
 	if(sess.username){
 		if(sess.username == "admin")
@@ -2537,7 +2539,7 @@ app.get('/save-ass', async(req,res)=> {
 					comparative1 : {
 						price_per_sqm: req.query.price_per_sqm[1],
 						ref_date: {
-							date: req.query.ref_date[1],
+							date: 0,//req.query.ref_date[1],
 							num: req.query.ref_date[2]
 							},
 						property_type: {
@@ -2613,7 +2615,7 @@ app.get('/save-ass', async(req,res)=> {
 					comparative2:{
 						price_per_sqm: req.query.price_per_sqm[2],
 						ref_date: {
-							date: req.query.ref_date[3],
+							date: 0,//req.query.ref_date[3],
 							num: req.query.ref_date[4]
 							},
 						lot_loc: req.query.property_type[2],
