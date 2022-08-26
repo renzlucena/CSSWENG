@@ -259,12 +259,19 @@
                             <td><input name="created_at" id="created_at" type="text" value="{{this.created_at}}" readonly></td>
                         </tr>
 
-					    <tr>	<!-- type_of_approach & assigned appraiser -->
+                        <tr>	<!--  & completed on date -->
                             <th><label for="type_of_approach">Type of Approach</label></th>
-							<td><input name="type_of_approach" id="type_of_approach" type="text" value="{{this.type_of_approach}}" readonly></td>
+						              	<td><input name="type_of_approach" id="type_of_approach" type="text" value="{{this.type_of_approach}}" readonly></td>
 
+                            <th><label for="completed_on">Completed On</label></th>
+                            <td><input name="completed_on" id="completed_on" type="text" value="{{this.completed_on}}" readonly></td>
+                        </tr>
+
+					              <tr>	<!-- type_of_approach & assigned appraiser -->
+                            <th><label for="appnum">Appraiser Number</label></th>
+                            <td><input name="appnum" id="appnum" type="number" value="{{app_appnum}}" readonly></td>
                             <th><label for="assigned_to">Assigned Appraiser</th>
-                            <td><input name="assigned_to" id="assigned_to" type="text" value="{{this.assigned_to}}" readonly></td>
+                            <td><input name="assigned_to" id="assigned_to" type="text" value="{{app_fname}} {{app_lname}}" readonly></td>
                         </tr>
                         <tr>	<!-- client_name -->
                             <th><label for="client_name">Client Name</label></th>
@@ -686,7 +693,20 @@
         var gen_lot_loc = document.getElementById("gen_lot_loc").value;
         var property_type = document.getElementById("property_type").value;
 
+        <!--var assigned_to = document.getElementById("assigned_to").value;-->
         <!--var appnum = document.getElementById("appnum").value.;-->
+        var complete_date = "";
+        complete_date = document.getElementById("completed_on").value;
+        var test = complete_date.split(" ");
+        var combine = test[1];
+        completed_on = combine.concat(' ',test[2],' ',test[3]);
+        <!--var date = "";-->
+        <!--date = document.getElementById("created_at").value;-->
+        <!--var x = date.split(" ");-->
+        <!--var comb = x[1];-->
+        <!--created_at = comb.concat(' ',x[2],' ',x[3]);-->
+        <!--created_at = document.getElementById("created_at").value;-->
+
         var computation = document.getElementById("computation").value;
         var title_no = document.getElementById("title_no").value;
         var lot_size = document.getElementById("lot_size").value;
@@ -748,7 +768,7 @@
             }
             ]},*/
             {text: gen_lot_loc + '\n\n\n\n\n', style: 'titletext'},
-            //{text: 'As Of: \n' + completed_on + '\n\n\n\n\n', style: 'h1'},
+            {text: 'As Of: \n' + completed_on + '\n\n\n\n\n', style: 'h1'},
             {text: 'Prepared for \n' + client_name + '\n' + gen_lot_loc + '\n\n\n\n\n', style: 'h1'},
             {text: 'Prepared By\n', style: 'h1'},
             //{text: assigned_to +  'REA Lic. No. ' + appnum + '\n' + appraiser_address, style: 'titletext',
@@ -759,14 +779,14 @@
             {
                 text: client_name
             },
-            //{
-            //    text: completed_on + '\n\nRe: Summary Appraisal Report \n' + property_type + lot_size + 'sqm \n' + loc_brgy + loc_city
-            //}
+            {
+                text: completed_on + '\n\nRe: Summary Appraisal Report \n' + property_type + lot_size + 'sqm \n' + gen_lot_loc
+            }
             ]},
-            //{text: '\n\n\nDear Mr./Ms. ' + client_f_name + ',\n\n'},
-            //{text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is ' + appraisal_date },
+            {text: '\n\n\nDear Mr./Ms. ' + client_name + ',\n\n'},
+            //{text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is ' + created_at },
             {text: '\n\nSubmitted here with is my report containing facts and data gathered.\n\n'},
-            //{text: 'The method of appraising is detailed in the attached narrative report as of ' + appraisal_date + '. It is my opinion that the Market Value with Fee Simple Interest in the subject property, subject to the attached limiting conditions, is”'},
+            //{text: 'The method of appraising is detailed in the attached narrative report as of ' + created_at + '. It is my opinion that the Market Value with Fee Simple Interest in the subject property, subject to the attached limiting conditions, is”'},
             //, style: 'appraisalval'},
             {text: '\n\nIt has been a pleasure to serve you in this matter\n\n\n\n'},
             {text: 'Respectfully submitted,\n\n\n\n', margin: [0, 0, 5, 5], alignment: 'right'},
@@ -787,8 +807,8 @@
                     ['Improvements: ', improvements],
                     ['Zoning Classification:', zoning_classification],
                     ['Interest Appraised:', property_interest],
-                    //['Effective Date of Appraisal:', appraisal_date],
-                    //['Date of Report:', completed_on],
+                    //['Effective Date of Appraisal:', created_at],
+                    ['Date of Report:', completed_on],
                     ['Final Estimate of Value:', computation]
                 ]
                 },
