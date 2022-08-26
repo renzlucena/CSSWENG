@@ -2971,8 +2971,8 @@ app.get('/save-doc/:ref_id', async(req,res)=> {
 		res.redirect('/login-fail.html')
 	}
 });
-
-app.get('/download-doc/:ref_id', async(req,res,)=> {
+/*
+app.get('/download-doc/:ref_id', async(req,res,)=>{
 	sess = req.session;
 	console.log("in /download-doc-"+req.params.ref_id)
 	//console.log(req.query.ref_id)
@@ -2980,11 +2980,13 @@ app.get('/download-doc/:ref_id', async(req,res,)=> {
 	var pdfMake = require('pdfmake/build/pdfmake.js');
 	var pdfFonts = require('pdfmake/build/vfs_fonts.js');
 	pdfMake.vfs = pdfFonts.pdfMake.vfs;
+	filename = req.params.ref_id.toString();
+	console.log(filename)
 	
 	if(sess.username){
 		console.log(req.query)
 		try{
-			console.log(parseInt(req.params.ref_id))
+			/*console.log(parseInt(req.params.ref_id))
 			const ass = await Assignment.find({
 					ref_id : req.params.ref_id
 				})
@@ -3007,7 +3009,7 @@ app.get('/download-doc/:ref_id', async(req,res,)=> {
 					res.writeHead(200,
 					{
 						'Content-Type': 'application/pdf',
-						'Content-Disposition': 'attachment;filename="test.pdf"'
+						'Content-Disposition': 'attachment;filename='+filename+'.pdf'
 					});
 			
 					const download = Buffer.from(data.toString('utf-8'), 'base64');
@@ -3024,7 +3026,7 @@ app.get('/download-doc/:ref_id', async(req,res,)=> {
 		res.redirect('/login-fail.html')
 	}
 });
-
+*/
 
 var server = app.listen(3000,function(){
 });

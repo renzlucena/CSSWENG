@@ -254,30 +254,30 @@
 						</tr>
                         <tr>	<!-- ref_id & creation date -->
                             <th><label for="ref_id">Reference ID</label></th>
-                            <td><input name="ref_id" type="text" value="{{this.ref_id}}" readonly></td>
+                            <td><input name="ref_id" id="ref_id" type="text" value="{{this.ref_id}}" readonly></td>
                             <th><label for="created_at">Created On</label></th>
-                            <td><input name="created_at" type="text" value="{{this.created_at}}" readonly></td>
+                            <td><input name="created_at" id="created_at" type="text" value="{{this.created_at}}" readonly></td>
                         </tr>
 
 					    <tr>	<!-- type_of_approach & assigned appraiser -->
                             <th><label for="type_of_approach">Type of Approach</label></th>
-							<td><input name="type_of_approach" type="text" value="{{this.type_of_approach}}" readonly></td>
+							<td><input name="type_of_approach" id="type_of_approach" type="text" value="{{this.type_of_approach}}" readonly></td>
 
                             <th><label for="assigned_to">Assigned Appraiser</th>
-                            <td><input name="assigned_to" type="text" value="{{this.assigned_to}}" readonly></td>
+                            <td><input name="assigned_to" id="assigned_to" type="text" value="{{this.assigned_to}}" readonly></td>
                         </tr>
                         <tr>	<!-- client_name -->
                             <th><label for="client_name">Client Name</label></th>
-                            <td><input name="client_name" type="text" value="{{this.client_l_name}}, {{this.client_f_name}}" readonly></td>
+                            <td><input name="client_name" id="client_name" type="text" value="{{this.client_l_name}}, {{this.client_f_name}}" readonly></td>
 							<!-- title no -->
 							<th><label for="title_no">Title No.</label></th>
-                            <td><input name="title_no" type="text" value="{{this.title_no}}" readonly></td>
+                            <td><input name="title_no" id="title_no" type="text" value="{{this.title_no}}" readonly></td>
                         </tr>
 						<tr>	<!-- lot_brgy,city,region - will serve as general location for interest check of agents/appraisers & zonal value-->
 							<th><label for="gen_lot_loc">Property Location</label></th>
-							<td><input name="gen_lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
+							<td><input name="gen_lot_loc" id="gen_lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
 							<th><label for="zonal">Zonal Value</label></th>
-                            <td><input name="zonal" type="number" value="{{this.zonal}}" readonly></td>
+                            <td><input name="zonal" id="zonal" type="number" value="{{this.zonal}}" readonly></td>
 						</tr>
 						<tr>	<!-- LABELS -->
 							<th></th>
@@ -313,11 +313,11 @@
 
 						<tr>	<!-- property_type -->
                             <th><label for="property_type">Property Type</label></th>
-                            <td><input readonly  name="property_type" type="text" value="{{this.property_type}}"></td>
-                            <td><input readonly  name="property_type" class="text-next-to-percentage" type="text" value="{{this.property_type1}}">
+                            <td><input readonly  name="property_type" id="property_type" type="text" value="{{this.property_type}}"></td>
+                            <td><input readonly  name="property_type1" id="property_type1" class="text-next-to-percentage" type="text" value="{{this.property_type1}}">
 								<input readonly  class="percentage" id="property_type_percent1" name="property_type" type="number" value="{{this.property_type_percent1}}"> %
 							</td>
-                            <td><input readonly  name="property_type" class="text-next-to-percentage" type="text" value="{{this.property_type2}}">
+                            <td><input readonly  name="property_type2" id="property_type2" class="text-next-to-percentage" type="text" value="{{this.property_type2}}">
 								<input readonly  class="percentage" id="property_type_percent2" name="property_type" type="number" value="{{this.property_type_percent2}}"> %
 							</td>
                         </tr>
@@ -344,11 +344,11 @@
 
                         <tr>	<!-- propeerty area size / lot_size -->
                             <th><label for="lot_size">Property Area Size</label></th>
-                            <td><input readonly  name="lot_size" type="text" value="{{this.lot_size}}" readonly></td>
-                            <td><input readonly  name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size1}}">
+                            <td><input readonly  name="lot_size" id="lot_size" type="text" value="{{this.lot_size}}" readonly></td>
+                            <td><input readonly  name="lot_siz1e" id="lot_size1" class="text-next-to-percentage" type="text" value="{{this.lot_size1}}">
 								<input readonly  class="percentage" id="lot_size_percent1" name="lot_size" type="number" value="{{this.lot_size_percent1}}"> %
 							</td>
-                            <td><input readonly  name="lot_size" class="text-next-to-percentage" type="text" value="{{this.lot_size2}}">
+                            <td><input readonly  name="lot_size2" id="lot_size2" class="text-next-to-percentage" type="text" value="{{this.lot_size2}}">
 								<input readonly  class="percentage" id="lot_size_percent2" name="lot_size" type="number" value="{{this.lot_size_percent2}}"> %
 							</td>
                         </tr>
@@ -366,44 +366,44 @@
 
 						<tr>	<!-- topo -->
                             <th><label for="topo">Topography</label></th>
-                            <td><input readonly  name="topo" type="text" value="{{this.topo}}"></td>
-                            <td><input readonly  name="topo" class="text-next-to-percentage" type="text" value="{{this.topo1}}">
+                            <td><input readonly  name="topo" id="topo" type="text" value="{{this.topo}}"></td>
+                            <td><input readonly  name="topo1" id="topo1" class="text-next-to-percentage" type="text" value="{{this.topo1}}">
 								<input readonly  class="percentage" id="topo_percent1" name="topo" type="number" value="{{this.topo_percent1}}"> %
 							</td>
-                            <td><input readonly  name="topo" class="text-next-to-percentage" type="text" value="{{this.topo2}}">
+                            <td><input readonly  name="topo2" id="topo2" class="text-next-to-percentage" type="text" value="{{this.topo2}}">
 								<input readonly  class="percentage" id="topo_percent2" name="topo" type="number" value="{{this.topo_percent2}}"> %
 							</td>
                         </tr>
 
 						<tr>	<!-- frontage -->
                             <th><label for="frontage">Frontage</label></th>
-                            <td><input readonly  name="frontage" type="text" value="{{this.frontage}}"></td>
-                            <td><input readonly  name="frontage" class="text-next-to-percentage" type="text" value="{{this.frontage1}}">
+                            <td><input readonly  name="frontage" id="frontage" type="text" value="{{this.frontage}}"></td>
+                            <td><input readonly  name="frontage1" id="frontage1" class="text-next-to-percentage" type="text" value="{{this.frontage1}}">
 								<input readonly  class="percentage" id="frontage_percent1" name="frontage" type="number" value="{{this.frontage_percent1}}"> %
 							</td>
-                            <td><input readonly  name="frontage" class="text-next-to-percentage" type="text" value="{{this.frontage2}}">
+                            <td><input readonly  name="frontage2" id="frontage2" class="text-next-to-percentage" type="text" value="{{this.frontage2}}">
 								<input readonly  class="percentage" id="frontage_percent2" name="frontage" type="number" value="{{this.frontage_percent2}}"> %
 							</td>
                         </tr>
 
 						<tr>	<!-- terms_of_sale -->
                             <th><label for="terms_of_sale">Terms of Sale</label></th>
-                            <td><input readonly  name="terms_of_sale" type="text" value="{{this.terms_of_sale}}"></td>
-                            <td><input readonly  name="terms_of_sale" class="text-next-to-percentage" type="text" value="{{this.terms_of_sale1}}">
+                            <td><input readonly  name="terms_of_sale" id="terms_of_sale" type="text" value="{{this.terms_of_sale}}"></td>
+                            <td><input readonly  name="terms_of_sale1" id="terms_of_sale1" class="text-next-to-percentage" type="text" value="{{this.terms_of_sale1}}">
 								<input readonly  class="percentage" id="terms_of_sale_percent1" name="terms_of_sale" type="number" value="{{this.terms_of_sale_percent1}}"> %
 							</td>
-                            <td><input readonly  name="terms_of_sale" class="text-next-to-percentage" type="text" value="{{this.terms_of_sale2}}">
+                            <td><input readonly  name="terms_of_sale2" id="terms_of_sale2" class="text-next-to-percentage" type="text" value="{{this.terms_of_sale2}}">
 								<input readonly  class="percentage" id="terms_of_sale_percent2" name="terms_of_sale" type="number" value="{{this.terms_of_sale_percent2}}"> %
 							</td>
                         </tr>
 
                         <tr>	<!-- Corner lot -->
 							<th><label for="corner" >Is Corner Lot?</label></th>
-                            <td><input readonly  name="corner" type="text" value="{{this.corner}}"></td>
-                            <td><input readonly  name="corner" class="text-next-to-percentage" type="text" value="{{this.corner1}}">
+                            <td><input readonly  name="corner" id="corner" type="text" value="{{this.corner}}"></td>
+                            <td><input readonly  name="corner" id="corner1" class="text-next-to-percentage" type="text" value="{{this.corner1}}">
 								<input readonly  class="percentage" id="corner_percent1" name="corner" type="number" value="{{this.corner_percent1}}"> %
 							</td>
-                            <td><input readonly  name="corner" class="text-next-to-percentage" type="text" value="{{this.corner2}}">
+                            <td><input readonly  name="corner" id="corner2" class="text-next-to-percentage" type="text" value="{{this.corner2}}">
 								<input readonly  class="percentage" id="corner_percent2" name="corner" type="number" value="{{this.corner_percent2}}"> %
 							</td>
 						</tr>
@@ -681,40 +681,46 @@
 				{{/each}}
 
         <script async>
-        <--var client_name = document.getElementById("client_name").value;-->
-        <--var gen_lot_loc = document.getElementById("gen_lot_loc").value;-->
-        <!--var property_type = document.getElementById("property_type").value;-->
+        var ref_id = document.getElementById("ref_id").value;
+        var client_name = document.getElementById("client_name").value;
+        var gen_lot_loc = document.getElementById("gen_lot_loc").value;
+        var property_type = document.getElementById("property_type").value;
+
         <!--var appnum = document.getElementById("appnum").value.;-->
-        <!--var computation = document.getElementById("computation").value;-->
-        <!--var title_no = document.getElementById("title_no").value;-->
-        <!--var lot_size = document.getElementById("lot_size").value.toString();-->
-        <!--var improvements = document.getElementById("improvements").value;-->
-        <!--var zoning_classification = document.getElementById("zoning_classification").value;-->
-        <!--var property_interest = document.getElementById("property_interest").value;-->
-        <!--var property_identification = document.getElementById("property_identification").value;-->
-        <!--var appraisal_objective_property_rights = document.getElementById("appraisal_objective_property_rights").value;-->
-        <!--var intended_use_intended_users = document.getElementById("intended_use_intended_users").value;-->
-        <!--var effective_date_report = document.getElementById("effective_date_report").value;-->
-        <!--var statement_ownership_sales_history = document.getElementById("statement_ownership_sales_history").value;-->
-        <!--var scope_of_work = document.getElementById("scope_of_work").value;-->
-        <!--var property_type = document.getElementById("property_type").value;-->
-        <!--var shape = document.getElementById("shape").value;-->
-        <!--var frontage = document.getElementById("frontage").value;-->
-        <!--var utilities = document.getElementById("utilities").value;-->
-        <!--var flood = document.getElementById("flood").value;-->
-        <!--var easements = document.getElementById("easements").value;-->
-        <!--var real_estate_taxes = document.getElementById("real_estate_taxes).value;-->
-        <!--var description_improvements = document.getElementById("description_improvements").value;-->
-        <!--var area_development = document.getElementById("area_development").value;-->
-        <!--var market_analysis = document.getElementById("market_analysis").value;-->
-        <!--var conclusion = document.getElementById("conclusion).value;-->
-        <!--var explanation_adjustments = document.getElementById("explanation_adjustments).value;-->
-        <!--var recon_final_value_opinion = document.getElementById("recon_final_value_opinion").value;-->
+        var computation = document.getElementById("computation").value;
+        var title_no = document.getElementById("title_no").value;
+        var lot_size = document.getElementById("lot_size").value;
+
+        var improvements = document.getElementById("improvements").value;
+        var zoning_classification = document.getElementById("zoning_classification").value;
+        var property_interest = document.getElementById("property_interest").value;
+
+        var property_identification = document.getElementById("property_identification").value;
+        var appraisal_objective_property_rights = document.getElementById("appraisal_objective_property_rights").value;
+        var intended_use_intended_users = document.getElementById("intended_use_intended_users").value;
+        var effective_date_report = document.getElementById("effective_date_report").value;
+        var statement_ownership_sales_history = document.getElementById("statement_ownership_sales_history").value;
+        var scope_of_work = document.getElementById("scope_of_work").value;
+
+        var shape = document.getElementById("shape").value;
+        var frontage = document.getElementById("frontage").value;
+        var topo = document.getElementById("topo").value;
+        var utilities = document.getElementById("utilities").value;
+        var flood = document.getElementById("flood").value;
+        var easements = document.getElementById("easements").value;
+        var real_estate_taxes = document.getElementById("real_estate_taxes").value;
+
+        var description_improvements = document.getElementById("description_improvements").value;
+        var area_development = document.getElementById("area_development").value;
+        var market_analysis = document.getElementById("market_analysis").value;
+        var conclusion = document.getElementById("conclusion").value;
+        var explanation_adjustments = document.getElementById("explanation_adjustments").value;
+        var recon_final_value_opinion = document.getElementById("recon_final_value_opinion").value;
 
         var docDefinition = {
         pageSize: 'LETTER',
         pageMargins: [80, 60],
-        /*header: function(currpage){
+        header: function(currpage){
             if (currpage != 1){
             return [{
                 columns: [
@@ -729,10 +735,10 @@
                 ],
             }]
             }
-        },*/
+        },
         content: [
             {text: '\n\n\n\nAppraisal of Real Estate \nFor', style: 'title'},
-            //{text: property_type + '\n\n', style: 'title', color: 'green'},
+            {text: property_type + '\n\n', style: 'title', color: 'green'},
             /*{canvas: [
             {
                 type: 'line',
@@ -741,22 +747,22 @@
                 lineWidth: 1
             }
             ]},*/
-            //{text: gen_lot_loc + '\n\n\n\n\n', style: 'titletext'},
+            {text: gen_lot_loc + '\n\n\n\n\n', style: 'titletext'},
             //{text: 'As Of: \n' + completed_on + '\n\n\n\n\n', style: 'h1'},
-            //{text: 'Prepared for \n' + client_name + '\n' + gen_lot_loc + '\n\n\n\n\n', style: 'h1'},
+            {text: 'Prepared for \n' + client_name + '\n' + gen_lot_loc + '\n\n\n\n\n', style: 'h1'},
             {text: 'Prepared By\n', style: 'h1'},
             //{text: assigned_to +  'REA Lic. No. ' + appnum + '\n' + appraiser_address, style: 'titletext',
             //pageBreak: 'after'},
 
             {text: '\n\nTransmittal Letter\n\n\n', style: 'h2'},
-            /*{columns: [
+            {columns: [
             {
                 text: client_name
             },
             //{
             //    text: completed_on + '\n\nRe: Summary Appraisal Report \n' + property_type + lot_size + 'sqm \n' + loc_brgy + loc_city
             //}
-            ]},*/
+            ]},
             //{text: '\n\n\nDear Mr./Ms. ' + client_f_name + ',\n\n'},
             //{text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is ' + appraisal_date },
             {text: '\n\nSubmitted here with is my report containing facts and data gathered.\n\n'},
@@ -768,27 +774,27 @@
             //{text: 'Certified Real Estate Appraiser # ' + appnum, margin: [0, 0, 5, 0], alignment: 'right', pageBreak: 'after'},
 
             {text: 'Appraisal Summary\n\n\n', style: 'h2'},
-            /*{table: {
+            {table: {
                 heights: 40,
                 widths: ['*', '*'],
                 body: [
                     ['Intended User of Appraisal:', client_name],
-                    //['Property Type:', property_type],
-                    //['Property Address:', gen_lot_loc],
-                    //['Title No.:', title_no],
+                    ['Property Type:', property_type],
+                    ['Property Address:', gen_lot_loc],
+                    ['Title No.:', title_no],
                     ['Owner: ', client_name],
-                    //['Land Size: ', lot_size + ' square meters'],
-                    //['Improvements: ', improvements],
-                    //['Zoning Classification:', zoning_classification],
-                    //['Interest Appraised:', property_interest],
+                    ['Land Size: ', lot_size + ' square meters'],
+                    ['Improvements: ', improvements],
+                    ['Zoning Classification:', zoning_classification],
+                    ['Interest Appraised:', property_interest],
                     //['Effective Date of Appraisal:', appraisal_date],
                     //['Date of Report:', completed_on],
-                    //['Final Estimate of Value:', computation]
+                    ['Final Estimate of Value:', computation]
                 ]
                 },
                 layout: 'noBorders',
                 pageBreak: 'after'
-            },*/
+            },
 
             {text: 'Assumptions and Limiting Conditions\n\n', style: 'h2'},
             {text: 'The appraisal is made subject to the following conditions and assumptions\n\n'},
@@ -819,68 +825,68 @@
                 'That my compensation is not contingent upon the reporting of a predetermined value\n\n',
                 'That my analyses, opinions, and conclusions were developed, and this report was prepared in conformity with the Philippine Valuation Standards and the Code of Conducts for real estate appraisers.\n\n\n\n\n\n\n\n'
             ]},
-            {canvas: [
+            /*{canvas: [
             {
                 type: 'line',
                 x1: 250, y1: -10,
                 x2: 450, y2: -10,
                 lineWidth: 1
             }
-            ]},
+            ]},*/
             //{text: assigned_to + '- REA #' + appnum, alignment: 'right'},
-            {text: 'Approved by the Admin', pageBreak: 'after'},
+            {text: 'Approved by the Admin', alignment: 'right', pageBreak: 'after'},
 
             {text: 'Assignment Description\n', style: 'h2'},
             {text: 'A. Property Identification\n\n', style: 'h3'},
-            //{text: '\t\t\t' + property_identification, preserveLeadingSpaces: true},
+            {text: '\t\t\t' + property_identification, preserveLeadingSpaces: true},
             {text: '\nAppraisal objective and property rights\n\n', style: 'h3'},
-            //{text: '\t\t\t' + appraisal_objective_property_rights, preserveLeadingSpaces: true},
+            {text: '\t\t\t' + appraisal_objective_property_rights, preserveLeadingSpaces: true},
             {text: '\nIntended use and intended users\n\n', style: 'h3'},
-            //{text: '\t\t\t' + intended_use_intended_users, preserveLeadingSpaces: true},
+            {text: '\t\t\t' + intended_use_intended_users, preserveLeadingSpaces: true},
             {text: '\nEffective Date of Appraisal/Report Date\n\n', style: 'h3'},
-            //{text: '\t\t\t' + effective_date_report, preserveLeadingSpaces: true},
+            {text: '\t\t\t' + effective_date_report, preserveLeadingSpaces: true},
             {text: '\nStatement of ownership and sales history\n\n', style: 'h3'},
-            //{text: '\t\t\t' + statement_ownership_sales_history, preserveLeadingSpaces: true, pageBreak: 'after'},
+            {text: '\t\t\t' + statement_ownership_sales_history, preserveLeadingSpaces: true, pageBreak: 'after'},
 
             {text: 'B. Scope of Work\n\n', style: 'h3'},
-            //{text: '\t\t\t' + scope_of_work + '\n\n', preserveLeadingSpaces: true},*/
+            {text: '\t\t\t' + scope_of_work + '\n\n', preserveLeadingSpaces: true},
 
             {text: 'Property Description\n\n', style: 'h2'},
             {text: 'A. Description of Lot.\n\n', style:'h3'},
-            /*{table: {
+            {table: {
                 heights: 40,
                 widths: ['*', '*'],
                 body: [
-                    //['Title No.:', title_no],
+                    ['Title No.:', title_no],
                     ['Location:', gen_lot_loc],
-                    //['Property Type:', property_type],
-                    //['Land Area: ', lot_size + ' square meters'],
-                    //['Shape: ', shape],
-                    //['Frontage:', frontage],
-                    //['Topography::', topo],
-                    //['Utilities:', utilities],
-                    //['Flood:', flood],
-                    //['Easements:', easements],
-                    //['Real Estate Taxes:', real_estate_taxes],
-                    //['Zoning:', zoning_classification]
+                    ['Property Type:', property_type],
+                    ['Land Area: ', lot_size + ' square meters'],
+                    ['Shape: ', shape],
+                    ['Frontage:', frontage],
+                    ['Topography::', topo],
+                    ['Utilities:', utilities],
+                    ['Flood:', flood],
+                    ['Easements:', easements],
+                    ['Real Estate Taxes:', real_estate_taxes],
+                    ['Zoning:', zoning_classification]
                 ]
                 },
                 layout: 'noBorders',
                 pageBreak: 'after'
-            },*/
+            },
 
             {text: 'B. Description of Improvements.\n\n', style:'h3'},
-            //{text: '\t\t\t' + description_improvements + '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
+            {text: '\t\t\t' + description_improvements + '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
 
             {text: 'Area and Neighborhood Overview\n\n', style: 'h2'},
-            //{text: '\t\t\tThe purpose of this analysis is to review historic and projected economic data to ' +
-            //'determine whether' + gen_lot_loc + 'and the subject neighborhood will experience ' +
-            //'future economic stability, or decline, given the current situation.\n\n\n', preserveLeadingSpaces: true,},
+            {text: '\t\t\tThe purpose of this analysis is to review historic and projected economic data to ' +
+            'determine whether' + gen_lot_loc + ' and the subject neighborhood will experience ' +
+            'future economic stability, or decline, given the current situation.\n\n\n', preserveLeadingSpaces: true,},
             {text: 'A. Area Development.\n\n', style: 'h3'},
-            //{text: '\t\t\t' + area_development + '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
+            {text: '\t\t\t' + area_development + '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
 
             {text: 'B. Market Analysis\n\n', style: 'h3'},
-            //{text: '\t\t\t' + market_analysis + '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
+            {text: '\t\t\t' + market_analysis + '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
 
             {text: 'Valuation\n\n', style: 'h2'},
             {text: 'A. Highest and Best Use\n\n', style: 'h3'},
@@ -914,7 +920,7 @@
             'the highest net return to the land. Therefore, it is determined that the maximum productive ' +
             'use of the subject property is the continuation of an asset’s existing use.' + '\n\n', preserveLeadingSpaces: true},
             {text: 'Conclusion\n\n', style: 'h3'},
-            //{text: '\t\t\t' + conclusion + '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
+            {text: '\t\t\t' + conclusion + '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
 
             {text: 'B. The Valuation Process\n\n', style: 'h3'},
             {text: '\t\t\t' + 'The valuation process is the orderly program in which data used to estimate the value of ' +
@@ -963,7 +969,7 @@
             },*/
 
             {text: 'C. Explanation of Adjustments\n\n', style: 'h3'},
-            //{text: '\t\t\t' + explanation_adjustments + '\n\n', preserveLeadingSpaces: true},
+            {text: '\t\t\t' + explanation_adjustments + '\n\n', preserveLeadingSpaces: true},
             {text: "Value Indications'\n\n", style: 'h3'},
             /*{table: {
                 heights: 40,
@@ -984,8 +990,8 @@
             },*/
 
             {text: 'Reconciliation and Final Value Opinion\n\n', style: 'h2'},
-            //{text: '\t\t\t' + recon_final_value_opinion + '\n\n', preserveLeadingSpaces: true},
-            {table: {
+            {text: '\t\t\t' + recon_final_value_opinion + '\n\n', preserveLeadingSpaces: true},
+            /*{table: {
                 heights: 40,
                 widths: ['*', 'auto', 'auto'],
                 headerRows: 1,
@@ -1001,10 +1007,10 @@
                 },
             pageBreak: 'after',
             }
-            },
+            },*/
 
             {text: '\n\n\t\t\tBased on the investigation of the subject property and the analysis of all relevant data, the Fee Simple Market Value of the subject property, as of May 5, 2021, is:\n\n\n', preserveLeadingSpaces: true},
-            //{text: computation, style: 'appraisalval'}
+            {text: computation, style: 'appraisalval'}
             ],
         defaultStyle:{
             fontSize: 11,
@@ -1047,17 +1053,15 @@
         }
         };
         function downloadPDF(){
-            pdfMake.createPdf(docDefinition).download(); //ref_id
+            pdfMake.createPdf(docDefinition).download(ref_id+'.pdf');
         }
-
     </script>
 
 				<div id="main-table-bottom">
 					</div>
 						<!-- dito mo na lagay yung code mo sa download pdf/save as pdf  erin -->
-						<button onclick="downloadPDF()">Download PDF Clientside</button>
-            <button type="submit" name="download_doc" formaction="/download-doc/:ref_id">Download PDF Serverside</button>
-
+						<button onclick="downloadPDF()">Download PDF</button>
+      
 						<!-- will make it so that the comment will be "For Printing." again and agent can edit the doc -->
 						<button>Unlock Document</button>
 						<br><br><br>
