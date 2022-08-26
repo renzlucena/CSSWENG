@@ -2540,6 +2540,7 @@ app.get('/save-ass', async(req,res)=> {
 							str: req.query.property_type[1],
 							num: req.query.property_type[2]
 							},
+						lot_loc: req.query.property_type[1],
 						property_interest: {
 							str: req.query.property_interest[1],
 							num: req.query.property_interest[2]
@@ -2612,6 +2613,7 @@ app.get('/save-ass', async(req,res)=> {
 							date: req.query.ref_date[3],
 							num: req.query.ref_date[4]
 							},
+						lot_loc: req.query.property_type[2],
 						property_type: {
 							str: req.query.property_type[3],
 							num: req.query.property_type[4]
