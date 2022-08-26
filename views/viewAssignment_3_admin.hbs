@@ -34,13 +34,11 @@
         var improvement1 = parseInt(document.getElementById("improvement_percent1").value);
         var zoning1 = parseInt(document.getElementById("zoning_percent1").value);
 
-
         //mixed bools, 6 because there are 6 booleans
         // todo make this return the resultsofr bools
         //for (var i=0; i=6; i++)
         //{
         //}
-
 
         <!-- var corner_bool = document.getElementById("corner"); -->
 
@@ -55,7 +53,6 @@
                   //	corner1.checked,
                   //	corner1.checked,
                   //	corner1.checked ]
-
 
         //var bools_percent = document.getElementById("bools_percent") // dont forget to parse to int when using
 
@@ -98,7 +95,6 @@
         (startingValue1*public_transpo1*0.01) +
         (startingValue1*zoning1*0.01);
 
-
         value2 = startingValue2 + (startingValue2*ref_date2*0.01) +
         (startingValue2*property_type2*0.01)+
         (startingValue2*property_interest2*0.01)+
@@ -115,14 +111,12 @@
         (startingValue2*public_transpo2*0.01) +
         (startingValue2*zoning2*0.01);
 
-
         var comp_percent1 = parseInt(document.getElementById("computation_percent1").value);
         var comp_percent2 = parseInt(document.getElementById("computation_percent2").value);
 
         var computationText = document.getElementById("computation");
 
         <!-- computationText.value = parseInt(startingValue0.value)+423;	//WORKS NOW -->
-
 
   //			computationText.value = value0;	//WORKS NOW
         var computationText1 = document.getElementById("computation1");
@@ -133,10 +127,7 @@
         //computationText.value = parseInt(computationText1.value)*(comp_percent1*0.01)
         computationText.value = (parseInt(computationText1.value)*(comp_percent1*0.01)) + (parseInt(computationText2.value)*(comp_percent2*0.01))
 
-
         var zonal_value = parseInt(document.getElementById("zonal").value);
-
-
 
         //not working zonal value
         if (parseInt(computationText1.value)*(comp_percent1*0.01) + parseInt(computationText2.value)*(comp_percent2*0.01) > zonal_value)//does not work -> this.zonal)
@@ -147,23 +138,17 @@
           computationText.value = zonal_value
         }
 
-
         //computationText.value = bools;
         <!-- computationText1.value = startValue2; -->
         <!-- computationText2.setAttribute("value", "Hi") -->
-
       }
 
     </script>
 
     <script>
 
-
-
-
       //prevent unsaved stuff
           window.addEventListener('beforeunload', function (e) {
-
 
         <!-- document.getElementById("property_type_percent1"); -->
         <!-- document.getElementById("property_interest_percent1"); -->
@@ -179,8 +164,6 @@
         <!-- document.getElementById("mall_percent1"); -->
         <!-- document.getElementById("public_transpo1"); -->
         <!-- document.getElementById("zoning_percent1"); -->
-
-
 
               // TODO complete this
               <!-- if (document.getElementById("property_type_percent2") !== 0 || -->
@@ -204,71 +187,63 @@
                   e.preventDefault();
                   e.returnValue = '';
               }
-
     </script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+	<!-- BOOTSTRAP  CHENEZ   AYAWKOANANAJKDBAKJW -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+</head>
+<body>
+	<nav class="navbar navbar-dark navbar-inverse bgc-super-dark navbar-fixed-top pb-3">
+		<div class= "d-inline-block">
+			<img src="/6227853b83e54f2e94c29519d7c234db (1).jpg" height="72px" class="mx-3">
+			<a class="color-white td-none" href="mailto:philhauz@yahoo.com">Contact Admin</a>
+			
+		<div class="openbtn" >
+			<a href="#" onclick="openNav()">☰</a>
+		</div>
 
-  </head>
-  <body>
-      <div class="container">
-          <div id="sidebar">
-              <div class="sidebar-profile">
-                  <img src="/temp_pic.png" width="100" height="100">
-                  <div class="sidebar-profile-text">
-                      <p class="sidebar-profile-name">{{this.username}}</p>
-                      <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
-                      <a href="/logout">Log Out</a>
-                  </div>
-              </div>
+		</div>
+		
+	</nav>
+	
+	<div class="container-flex">
+		
+		<div id="sidebar" class=" d-inline-block h-100">
+	       <div class="sidebar-profile ">
+				<div class="sidebar-profile-text">
+					<p class="sidebar-profile-name">{{this.username}}</p>
+					<p class="sidebar-profile-email"><i>{{this.lname}}, {{this.fname}} #{{this.appnum}}</i></p>
+					<br>
+					<p class="sidebar-profile-email"><i>{{this.email}}</i></p>
+					<a class="bgc-none" href="/logout">Log Out</a>
+				</div>
+			</div>
 
-              <div class="sidebar-profile-btn">
+			
+			<div><a href="/dashboard">Dashboard</a></div>
+			
+			<div><a class="active" href="/assignments">Assignments</a></div>
+			
+			<div><a href="/history">History</a></div>
+			
+			<div><a href="/profile">Profile</a></div>
+			
+        </div>
 
-                  <a href="/dashboard">Profile</a>
-              </div>
-              <div class="sidebar-assignments-btn">
+		<div class ="main d-inline-block main w-75 container-flex">
+            <div class="main-header">
+                <h1 class="px-4">Assignment #{{ref_id}}</h1>
+            </div>
 
-                  <a  href="/assignments">Assignments</a>
-              </div>
-              <div class="sidebar-history-btn">
-                  <a  href="/admin-add-agent">Add New Agent</a>
-              </div>
-
-              <div class="sidebar-history-btn">
-                        <a  href="/account">See All Agents</a>
-              </div>
-              <div class="sidebar-history-btn">
-
-                  <a  href="/history">History</a>
-              </div>
-              <div class="sidebar-settings-btn">
-
-                  <a href="/profile">Settings</a>
-              </div>
-
-              <div class="bottom-button">
-
-                  <a href="/logout">Logout</a>
-              </div>
-          </div>
-
-      <div class="openbtn" >
-        <a href="#" onclick="openNav()">☰</a>
-      </div>
-
-          <div class="main">
-              <div class="main-header">
-                  <h1>Assignment #{{ref_id}}</p>
-                  <p><b><i>Viewing Assignment</b></i></p>
-                  <p>You are currently in Spectator Mode. You cannot edit nor comment until the agent passes it for review, but you can see their progress.</p>
-              </div>
-
-              <form class="assignments-form">
-                  <div class="main-table">
-
+            <form class="assignments-form">
+                <div class="table-responsive main-table">
 					<table>
 						<tr>
 							<th></th>

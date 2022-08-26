@@ -8,71 +8,62 @@
 	<link rel = "stylesheet" href="/styles.css" type="text/css" >
 
     <title>Assignment No. {{this.ref_id}}</title>
-    <script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 
-    </script>
+	<!-- BOOTSTRAP  CHENEZ   AYAWKOANANAJKDBAKJW -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+</head>
+<body>
+	<nav class="navbar navbar-dark navbar-inverse bgc-super-dark navbar-fixed-top pb-3">
+		<div class= "d-inline-block">
+			<img src="/6227853b83e54f2e94c29519d7c234db (1).jpg" height="72px" class="mx-3">
+			<a class="color-white td-none" href="mailto:philhauz@yahoo.com">Contact Admin</a>
+			
+		<div class="openbtn" >
+			<a href="#" onclick="openNav()">☰</a>
+		</div>
 
+		</div>
+		
+	</nav>
+	
+	<div class="container-flex">
+		
+		<div id="sidebar" class=" d-inline-block h-100">
+	       <div class="sidebar-profile ">
+				<div class="sidebar-profile-text">
+					<p class="sidebar-profile-name">{{this.username}}</p>
+					<p class="sidebar-profile-email"><i>{{this.lname}}, {{this.fname}} #{{this.appnum}}</i></p>
+					<br>
+					<p class="sidebar-profile-email"><i>{{this.email}}</i></p>
+					<a class="bgc-none" href="/logout">Log Out</a>
+				</div>
+			</div>
 
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+			
+			<div><a href="/dashboard">Dashboard</a></div>
+			
+			<div><a class="active" href="/assignments">Assignments</a></div>
+			
+			<div><a href="/history">History</a></div>
+			
+			<div><a href="/profile">Profile</a></div>
+			
+        </div>
 
-  </head>
-  <body>
-      <div class="container">
-          <div id="sidebar">
-              <div class="sidebar-profile">
-                  <img src="/temp_pic.png" width="100" height="100">
-                  <div class="sidebar-profile-text">
-                      <p class="sidebar-profile-name">{{this.username}}</p>
-                      <p class="sidebar-profile-email"><i>{{this.email}}</i></p>
-                      <a href="/logout">Log Out</a>
-                  </div>
-              </div>
+		<div class ="main d-inline-block main w-75 container-flex">
+            <div class="main-header">
+                <h1 class="px-4">Assignment #{{ref_id}}</h1>
+            </div>
 
-              <div class="sidebar-profile-btn">
-
-                  <a href="/dashboard">Profile</a>
-              </div>
-              <div class="sidebar-assignments-btn">
-
-                  <a  href="/assignments">Assignments</a>
-              </div>
-              <div class="sidebar-history-btn">
-                        <a  href="/admin-add-agent">Add New Agent</a>
-              </div>
-              <div class="sidebar-history-btn">
-                        <a  href="/account">See All Agents</a>
-              </div>
-              <div class="sidebar-history-btn">
-
-                  <a  href="/history">History</a>
-              </div>
-              <div class="sidebar-settings-btn">
-
-                  <a href="/profile">Settings</a>
-              </div>
-
-              <div class="bottom-button">
-
-                  <a href="/logout">Logout</a>
-              </div>
-          </div>
-
-      <div class="openbtn" >
-        <a href="#" onclick="openNav()">☰</a>
-      </div>
-
-          <div class="main">
-              <div class="main-header">
-                  <h1>Editing Assignment #{{ref_id}}</p>
-                  <p><b><i>Items will NOT be autosaved!</b></i></p>
-                  <p>Please be mindful before you close the page. This assignment will be hidden until you save or navigate back to Assignments.</p>
-              </div>
-
-              <form class="assignments-form">
-                  <div class="main-table">
+            <form class="assignments-form">
+                <div class="table-responsive main-table">
 
 					<table>
 						<tr>
@@ -99,7 +90,7 @@
                         </tr>
 
 					    <tr>	<!-- Contact Info -->
-							<th><label for="client_email">Client Esaamail</label></th>
+							<th><label for="client_email">Client Email</label></th>
 							<td><input name="client_email" id="client_email" type="text" value="{{this.client_email}}"></td>
 
                             <th><label for="client_contact_num">Client Contact Number</label></th>
@@ -138,10 +129,11 @@
 
 							<th><label for="zonal">Zonal Value</label></th>
                             <td><input name="zonal" type="number" value="{{this.zonal}}"></td>
-
-                            <th><label for="title_no">Title No</label></th>
-                            <td><input name="title_no" type="text" value="{{this.title_no}}"></td>
                         </tr>
+						<tr>
+							<th><label for="title_no">Title No</label></th>
+							<td><input name="title_no" type="text" value="{{this.title_no}}"></td>
+						</tr>
                     </table>
                   </div>
               <div id="main-table-bottom">

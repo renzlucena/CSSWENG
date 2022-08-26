@@ -2985,15 +2985,15 @@ app.get('/download-doc/:ref_id', async(req,res,)=> {
 		console.log(req.query)
 		try{
 			console.log(parseInt(req.params.ref_id))
-			/*const ass = await Assignment.find({
-					ref_id : parseInt(req.params.ref_id)
+			const ass = await Assignment.find({
+					ref_id : req.params.ref_id
 				})
 			console.log(ass)
 			//find wag findOne pag may {{#each}} NOTE
 			const doc = await Document.find({
-				ref_id : parseInt(req.params.ref_id)
+				ref_id : req.params.ref_id
 			})
-			console.log(doc)*/
+			console.log(doc)
 				var appraiser = JSON.stringify(req.param.assigned_to);
 
 				var docDefinition = {

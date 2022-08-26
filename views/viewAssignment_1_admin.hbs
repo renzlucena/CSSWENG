@@ -680,9 +680,9 @@
 
 				{{/each}}
 
-                <script async>
-        var client_name = document.getElementById("client_name").value;
-        var gen_lot_loc = document.getElementById("gen_lot_loc").value;
+        <script async>
+        <--var client_name = document.getElementById("client_name").value;-->
+        <--var gen_lot_loc = document.getElementById("gen_lot_loc").value;-->
         <!--var property_type = document.getElementById("property_type").value;-->
         <!--var appnum = document.getElementById("appnum").value.;-->
         <!--var computation = document.getElementById("computation").value;-->
@@ -741,22 +741,22 @@
                 lineWidth: 1
             }
             ]},*/
-            {text: gen_lot_loc + '\n\n\n\n\n', style: 'titletext'},
+            //{text: gen_lot_loc + '\n\n\n\n\n', style: 'titletext'},
             //{text: 'As Of: \n' + completed_on + '\n\n\n\n\n', style: 'h1'},
-            {text: 'Prepared for \n' + client_name + '\n' + gen_lot_loc + '\n\n\n\n\n', style: 'h1'},
+            //{text: 'Prepared for \n' + client_name + '\n' + gen_lot_loc + '\n\n\n\n\n', style: 'h1'},
             {text: 'Prepared By\n', style: 'h1'},
             //{text: assigned_to +  'REA Lic. No. ' + appnum + '\n' + appraiser_address, style: 'titletext',
             //pageBreak: 'after'},
 
             {text: '\n\nTransmittal Letter\n\n\n', style: 'h2'},
-            {columns: [
+            /*{columns: [
             {
                 text: client_name
             },
             //{
             //    text: completed_on + '\n\nRe: Summary Appraisal Report \n' + property_type + lot_size + 'sqm \n' + loc_brgy + loc_city
             //}
-            ]},
+            ]},*/
             //{text: '\n\n\nDear Mr./Ms. ' + client_f_name + ',\n\n'},
             //{text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is ' + appraisal_date },
             {text: '\n\nSubmitted here with is my report containing facts and data gathered.\n\n'},
@@ -768,7 +768,7 @@
             //{text: 'Certified Real Estate Appraiser # ' + appnum, margin: [0, 0, 5, 0], alignment: 'right', pageBreak: 'after'},
 
             {text: 'Appraisal Summary\n\n\n', style: 'h2'},
-            {table: {
+            /*{table: {
                 heights: 40,
                 widths: ['*', '*'],
                 body: [
@@ -788,7 +788,7 @@
                 },
                 layout: 'noBorders',
                 pageBreak: 'after'
-            },
+            },*/
 
             {text: 'Assumptions and Limiting Conditions\n\n', style: 'h2'},
             {text: 'The appraisal is made subject to the following conditions and assumptions\n\n'},
@@ -847,7 +847,7 @@
 
             {text: 'Property Description\n\n', style: 'h2'},
             {text: 'A. Description of Lot.\n\n', style:'h3'},
-            {table: {
+            /*{table: {
                 heights: 40,
                 widths: ['*', '*'],
                 body: [
@@ -867,15 +867,15 @@
                 },
                 layout: 'noBorders',
                 pageBreak: 'after'
-            },
+            },*/
 
             {text: 'B. Description of Improvements.\n\n', style:'h3'},
             //{text: '\t\t\t' + description_improvements + '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
 
             {text: 'Area and Neighborhood Overview\n\n', style: 'h2'},
-            {text: '\t\t\tThe purpose of this analysis is to review historic and projected economic data to ' +
-            'determine whether' + gen_lot_loc + 'and the subject neighborhood will experience ' +
-            'future economic stability, or decline, given the current situation.\n\n\n', preserveLeadingSpaces: true,},
+            //{text: '\t\t\tThe purpose of this analysis is to review historic and projected economic data to ' +
+            //'determine whether' + gen_lot_loc + 'and the subject neighborhood will experience ' +
+            //'future economic stability, or decline, given the current situation.\n\n\n', preserveLeadingSpaces: true,},
             {text: 'A. Area Development.\n\n', style: 'h3'},
             //{text: '\t\t\t' + area_development + '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
 
@@ -1056,7 +1056,7 @@
 					</div>
 						<!-- dito mo na lagay yung code mo sa download pdf/save as pdf  erin -->
 						<button onclick="downloadPDF()">Download PDF Clientside</button>
-                        <button type="submit" name="download_doc" formaction="/download-doc/:ref_id">Download PDF Serverside</button>
+            <button type="submit" name="download_doc" formaction="/download-doc/:ref_id">Download PDF Serverside</button>
 
 						<!-- will make it so that the comment will be "For Printing." again and agent can edit the doc -->
 						<button>Unlock Document</button>
