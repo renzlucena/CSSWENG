@@ -262,18 +262,21 @@
 						<tr>	<!-- property_interest -->
                             <th><label for="property_interest" >Property Interest</label></th>
 							<td><select id="property_interest" name="property_interest">
-									<option value="fee_simple">Fee Simple</option>
-									<option value="lease_hold">Lease Hold</option>
+									<option value="{{this.property_interest}}" selected hidden>{{this.property_interest}}</option>
+									<option value="Fee Simple">Fee Simple</option>
+									<option value="Lease Hold">Lease Hold</option>
 							</select></td>
 							<td><select id="property_interest1" name="property_interest">
-									<option value="fee_simple">Fee Simple</option>
-									<option value="lease_hold">Lease Hold</option>
+									<option value="{{this.property_interest1}}" selected hidden>{{this.property_interest1}}</option>
+									<option value="Fee Simple">Fee Simple</option>
+									<option value="Lease Hold">Lease Hold</option>
 								</select>
 								<input class="percentage" id="property_interest_percent1" name="property_interest" type="number" value="{{this.property_interest_percent1}}"> %
 							</td>
 							<td><select id="property_interest2" name="property_interest">
-									<option value="fee_simple">Fee Simple</option>
-									<option value="lease_hold">Lease Hold</option>
+								<option value="{{this.property_interest2}}" selected hidden>{{this.property_interest2}}</option>
+									<option value="Fee Simple">Fee Simple</option>
+									<option value="Lease Hold">Lease Hold</option>
 								</select>
 								<input class="percentage" id="property_interest_percent2" name="property_interest" type="number" value="{{this.property_interest_percent2}}"> %
 							</td>
@@ -334,19 +337,19 @@
 								<input class="percentage" id="terms_of_sale_percent2" name="terms_of_sale" type="number" value="{{this.terms_of_sale_percent2}}"> %
 							</td>
                         </tr>
-
+							
                         <tr>	<!-- Corner lot -->
 							<th><label for="corner" >Is Corner Lot?</label></th>
                           <td>
-                            <select id="corner" selected="{{this.corner}}">
-							  <option value="{{this.corner}}" selected disabled hidden>{{this.corner}}</option>	
+                            <select id="corner" name="corner">
+							  <option value="{{this.corner}}" selected hidden>{{this.corner}}</option>		  <!-- will work if value is the same as the display -->
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
                           </td>
                           <td>
                             <select id="corner1" name="corner">
-							  <option value="{{this.corner1}}" selected disabled hidden>{{this.corner1}}</option>		  <!-- will work if value is the same as the display -->
+							  <option value="{{this.corner1}}" selected hidden>{{this.corner1}}</option>		  <!-- will work if value is the same as the display -->
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
@@ -354,7 +357,7 @@
                           </td>
                           <td>
                             <select id="corner2" name="corner">
-							  <option value="{{this.corner2}}" selected disabled hidden>{{this.corner2}}</option>	
+							  <option value="{{this.corner2}}" selected hidden>{{this.corner2}}</option>	
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
@@ -363,17 +366,17 @@
                                     </tr>
 
                         <tr>	<!-- Prime lot -->
-                                        <th><label for="prime" >Is Prime Lot?</label></th>
+						<th><label for="prime" >Is Prime Lot?</label></th>
                           <td>
                             <select id="prime" name="prime">
-							  <option value="{{this.prime}}" selected disabled hidden>{{this.prime}}</option>	
+							  <option value="{{this.prime}}" selected hidden>{{this.prime}}</option>	
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
                           </td>
                           <td>
                             <select id="prime1" name="prime">
-							  <option value="{{this.prime1}}" selected disabled hidden>{{this.prime1}}</option>	
+							  <option value="{{this.prime1}}" selected hidden>{{this.prime1}}</option>	
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
@@ -381,7 +384,7 @@
                           </td>
                           <td>
                             <select id="prime2" name="prime">
-							  <option value="{{this.prime2}}" selected disabled hidden>{{this.prime2}}</option>
+							  <option value="{{this.prime2}}" selected hidden>{{this.prime2}}</option>
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
@@ -394,6 +397,8 @@
                                         <th><label for="hospital" >Has nearby Hospital(s)?</label></th>
                           <td>
                             <select id="hospital" name="hospital">
+							  <option value="{{this.hospital}}" selected hidden>{{this.hospital}}</option>		  <!-- will work if value is the same as the display -->
+
                               <option value="near">Near</option>
                               <option value="relatively-near">Relatively Near</option>
                               <option value="far">Far</option>
@@ -401,6 +406,8 @@
                           </td>
                           <td>
                             <select id="hospital1" name="hospital">
+							  <option value="{{this.hospital1}}" selected hidden>{{this.hospital1}}</option>		  <!-- will work if value is the same as the display -->
+
                               <option value="near">Near</option>
                               <option value="relatively-near">Relatively Near</option>
                               <option value="far">Far</option>
@@ -409,6 +416,8 @@
                           </td>
                           <td>
                             <select id="hospital2" name="hospital">
+							  <option value="{{this.hospital2}}" selected hidden>{{this.hospital2}}</option>		  <!-- will work if value is the same as the display -->
+
                               <option value="near">Near</option>
                               <option value="relatively-near">Relatively Near</option>
                               <option value="far">Far</option>
@@ -421,6 +430,7 @@
                                         <th><label for="school" >Has nearby School(s)?</label></th>
                           <td>
                             <select id="school" name="school">
+							<option value="{{this.school}}" selected hidden>{{this.school}}</option>
                               <option value="near">Near</option>
                               <option value="relatively-near">Relatively Near</option>
                               <option value="far">Far</option>
@@ -428,6 +438,7 @@
                           </td>
                           <td>
                             <select id="school1" name="school">
+							<option value="{{this.school1}}" selected hidden>{{this.school1}}</option>
                               <option value="near">Near</option>
                               <option value="relatively-near">Relatively Near</option>
                               <option value="far">Far</option>
@@ -436,6 +447,7 @@
                           </td>
                           <td>
                             <select id="school2" name="school">
+							<option value="{{this.school2}}" selected hidden>{{this.school2}}</option>
                               <option value="near">Near</option>
                               <option value="relatively-near">Relatively Near</option>
                               <option value="far">Far</option>
@@ -448,6 +460,7 @@
                                         <th><label for="mall" >Has nearby Shop/Mall(s)?</label></th>
                           <td>
                             <select id="mall" name="mall">
+							<option value="{{this.mall}}" selected hidden>{{this.mall}}</option>
                               <option value="near">Near</option>
                               <option value="relatively-near">Relatively Near</option>
                               <option value="far">Far</option>
@@ -455,6 +468,7 @@
                           </td>
                           <td>
                             <select id="mall1" name="mall">
+							<option value="{{this.mall1}}" selected hidden>{{this.mall1}}</option>
                               <option value="near">Near</option>
                               <option value="relatively-near">Relatively Near</option>
                               <option value="far">Far</option>
@@ -463,6 +477,7 @@
                           </td>
                           <td>
                             <select id="mall2" name="mall">
+							<option value="{{this.mall2}}" selected hidden>{{this.mall2}}</option>
                               <option value="near">Near</option>
                               <option value="relatively-near">Relatively Near</option>
                               <option value="far">Far</option>
@@ -475,6 +490,7 @@
                             <th><label for="public_transpo" >Access to Main Public Transport</label></th>
 							<td>
 								<select id="public_transpo" name="public_transpo">
+								<option value="{{this.public_transpo}}" selected hidden>{{this.public_transpo}}</option>
 									<option value="near">Near</option>
 									<option value="relatively-near">Relatively Near</option>
 									<option value="far">Far</option>
@@ -482,6 +498,7 @@
 							</td>
 							<td>
 								<select id="public_transpo1" name="public_transpo">
+								<option value="{{this.public_transpo1}}" selected hidden>{{this.public_transpo1}}</option>
 									<option value="near">Near</option>
 									<option value="relatively-near">Relatively Near</option>
 									<option value="far">Far</option>
@@ -490,6 +507,7 @@
 							</td>
 							<td>
 								<select id="public_transpo2" name="public_transpo">
+								<option value="{{this.public_transpo2}}" selected hidden>{{this.public_transpo2}}</option>
 									<option value="near">Near</option>
 									<option value="relatively-near">Relatively Near</option>
 									<option value="far">Far</option>
@@ -501,12 +519,14 @@
                                         <th><label for="improvement" >Has Improvement(s)?</label></th>
                           <td>
                             <select id="improvement" name="improvement">
+								<option value="{{this.improvement}}" selected hidden>{{this.improvement}}</option>
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
                           </td>
                           <td>
                             <select id="improvement1" name="improvement">
+							<option value="{{this.improvement1}}" selected hidden>{{this.improvement1}}</option>
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
@@ -514,6 +534,7 @@
                           </td>
                           <td>
                             <select id="improvement2" name="improvement">
+							<option value="{{this.improvement2}}" selected hidden>{{this.improvement2}}</option>
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>

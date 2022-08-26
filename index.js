@@ -1865,20 +1865,20 @@ app.post('/submit-assignment', function(req,res) {
 			ref_date: 0,
 			lot_loc: "",
 			property_type: "",
-			property_interest: "",
+			property_interest: "Lease Hold",
 			// property_images: [imageSchema], //REPORT AS MISSING FEATURE NALANG, WE CAN'T IMPLEMENT THIS AT THIS TIME...
 			lot_size: req.body.lot_size,
 			shape: "",
 			topo: "",
 			frontage: "",
 			terms_of_sale: "",
-			corner: "",
-			prime: "",
-			hospital: "",
-			school: "",
-			mall:   "",
-			public_transpo: "",
-			improvement: "",
+			corner:"No",
+			prime: "Yes",
+			hospital: "Near",
+			school: "Near",
+			mall:   "Near",
+			public_transpo: "Near",
+			improvement: "No",
 			zoning: "",
 			computation: 0,
 			//don't set comment because it has a default value that marks it as "New!"
@@ -1897,14 +1897,14 @@ app.post('/submit-assignment', function(req,res) {
 				topo: {str: "", num:0},
 				frontage: {str: "", num:0},
 				terms_of_sale: {str: "", num:0},
-				corner: {str: "",num:0},
-				prime: {str: "",num:0},
-				hospital: {str: "",num:0},
-				school: {str: "",num:0},
-				mall: {str: "",num:0},
-				public_transpo: {str:"", num:0},
-				improvement: {str: "",num:0},
-				zoning: {str: "", num:0},
+				corner: {str: "No",num:0},
+				prime: {str: "No",num:0},
+				hospital: {str: "Near",num:0},
+				school: {str: "Near",num:0},
+				mall: {str: "Near",num:0},
+				public_transpo: {str:"Near", num:0},
+				improvement: {str: "No",num:0},
+				zoning: {str: "No", num:0},
 				computation: {num1: 0, num2: 0}
 			},
 
@@ -1921,14 +1921,14 @@ app.post('/submit-assignment', function(req,res) {
 				topo: {str: "", num:0},
 				frontage: {str: "", num:0},
 				terms_of_sale: {str: "", num:0},
-				corner: {str: "",num:0},
-				prime: {str: "",num:0},
-				hospital: {str: "",num:0},
-				school: {str: "",num:0},
-				mall: {str: "",num:0},
-				public_transpo: {str: "", num:0},
-				improvement: {str: "",num:0},
-				zoning: {str: "", num:0},
+				corner: {str: "No",num:0},
+				prime: {str: "No",num:0},
+				hospital: {str: "Near",num:0},
+				school: {str: "Near",num:0},
+				mall: {str: "Near",num:0},
+				public_transpo: {str:"Near", num:0},
+				improvement: {str: "No",num:0},
+				zoning: {str: "No", num:0},
 				computation: {num1: 0, num2: 0}
 			}
 		})
@@ -2459,7 +2459,7 @@ app.get('/terms', function(req,res){
 app.get('/save-ass', async(req,res)=> {
 	// sess = req.session;
 	console.log("in /save-ass - " +req.query.ref_id)
-	console.log(req.query)
+	// console.log(req.query)
 
 	if(sess.username){
 		if(sess.username == "admin")
@@ -2513,9 +2513,9 @@ app.get('/save-ass', async(req,res)=> {
 					price_per_sqm: req.query.price_per_sqm[0],
 					// ref_date: req.query.ref_date[0],
 					lot_loc: req.query.lot_loc[0],
-					lot_brgy: req.query.lot_brgy[0],
-					lot_city: req.query.lot_city[0],
-					lot_region: req.query.lot_region[0],
+					// lot_brgy: req.query.lot_brgy[0],
+					// lot_city: req.query.lot_city[0],
+					// lot_region: req.query.lot_region[0],
 					property_type: req.query.property_type[0],
 					property_interest: req.query.property_interest[0],
 					//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
@@ -2569,7 +2569,6 @@ app.get('/save-ass', async(req,res)=> {
 							str: req.query.terms_of_sale[1],
 							num: req.query.terms_of_sale[2]
 							},
-
 						corner: {
 							str: req.query.corner[1],
 							num: req.query.corner[2]
