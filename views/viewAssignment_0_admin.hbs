@@ -214,24 +214,24 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
+
 </head>
 <body>
 	<nav class="navbar navbar-dark navbar-inverse bgc-super-dark navbar-fixed-top pb-3">
 		<div class= "d-inline-block">
 			<img src="/6227853b83e54f2e94c29519d7c234db (1).jpg" height="72px" class="mx-3">
 			<a class="color-white td-none" href="mailto:philhauz@yahoo.com">Contact Admin</a>
-			
+
 		<div class="openbtn" >
 			<a href="#" onclick="openNav()">☰</a>
 		</div>
 
 		</div>
-		
+
 	</nav>
-	
+
 	<div class="container-flex">
-		
+
 		<div id="sidebar" class=" d-inline-block h-100">
 	       <div class="sidebar-profile ">
 				<div class="sidebar-profile-text">
@@ -243,15 +243,15 @@
 				</div>
 			</div>
 
-			
+
 			<div><a href="/dashboard">Dashboard</a></div>
-			
+
 			<div><a class="active" href="/assignments">Assignments</a></div>
-			
+
 			<div><a href="/history">History</a></div>
-			
+
 			<div><a href="/profile">Profile</a></div>
-			
+
         </div>
 
 		<div class ="main d-inline-block main w-75 container-flex">
@@ -424,63 +424,63 @@
 
 						<tr>	<!-- corner -->
                             <th><label>Is a Corner Lot?</label></th>
-                            <td><input readonly  name="corner" type="checkbox" value="{{this.corner}}"></td>
-                            <td><input readonly  name="corner" type="checkbox" value="{{this.corner1}}">
+                            <td><input readonly  name="corner" type="text" value="{{this.corner}}"></td>
+                            <td><input readonly  name="corner" type="text" value="{{this.corner1}}">
 								<input readonly  class="percentage" id="corner_percent1" name="corner" type="number" value="{{this.corner_percent1}}"> %
 							</td>
-                            <td><input readonly  name="corner" type="checkbox" value="{{this.corner2}}">
+                            <td><input readonly  name="corner" type="text" value="{{this.corner2}}">
 								<input readonly  class="percentage" id="corner_percent2" name="corner" type="number" value="{{this.corner_percent2}}"> %
 							</td>
                         </tr>
 						<tr>	<!-- prime -->
                             <th><label>Is Prime Lot?</label></th>
-                            <td><input readonly  name="prime" type="checkbox" value="{{this.prime}}"></td>
-                            <td><input readonly  name="prime" type="checkbox" value="{{this.prime1}}">
+                            <td><input readonly  name="prime" type="text" value="{{this.prime}}"></td>
+                            <td><input readonly  name="prime" type="text" value="{{this.prime1}}">
 								<input readonly  class="percentage" id="prime_percent1" name="prime" type="number" value="{{this.prime_percent1}}"> %
 							</td>
-                            <td><input readonly  name="prime" type="checkbox" value="{{this.prime2}}">
+                            <td><input readonly  name="prime" type="text" value="{{this.prime2}}">
 								<input readonly  class="percentage" id="prime_percent2" name="prime" type="number" value="{{this.prime_percent2}}"> %
 							</td>
                         </tr>
 
 						<tr>	<!-- hospital -->
                             <th><label>Has nearby Hospital(s)?</label></th>
-                            <td><input readonly  name="hospital" type="checkbox" value="{{this.hospital}}"></td>
-                            <td><input readonly  name="hospital" type="checkbox" value="{{this.hospital1}}">
+                            <td><input readonly  name="hospital" type="text" value="{{this.hospital}}"></td>
+                            <td><input readonly  name="hospital" type="text" value="{{this.hospital1}}">
 								<input readonly  class="percentage" id="hospital_percent1" name="hospital" type="number" value="{{this.hospital_percent1}}"> %
 							</td>
-                            <td><input readonly  name="hospital" type="checkbox" value="{{this.hospital2}}">
+                            <td><input readonly  name="hospital" type="text" value="{{this.hospital2}}">
 								<input readonly  class="percentage" id="hospital_percent2" name="hospital" type="number" value="{{this.hospital_percent2}}"> %
 							</td>
                         </tr>
 						<tr>	<!-- school -->
 							<th><label>Has nearby School(s)?</label></th>
-                            <td><input readonly  name="school" type="checkbox" value="{{this.school}}"></td>
-                            <td><input readonly  name="school" type="checkbox" value="{{this.school1}}">
+                            <td><input readonly  name="school" type="text" value="{{this.school}}"></td>
+                            <td><input readonly  name="school" type="text" value="{{this.school1}}">
 								<input readonly  class="percentage" id="school_percent1" name="school" type="number" value="{{this.school_percent1}}"> %
 							</td>
-                            <td><input readonly  name="school" type="checkbox" value="{{this.school2}}">
+                            <td><input readonly  name="school" type="text" value="{{this.school2}}">
 								<input readonly  class="percentage" id="school_percent2" name="school" type="number" value="{{this.school_percent2}}"> %
 							</td>
                         </tr>
 						<tr>	<!-- school -->
 							<th><label>Has nearby Shop/Mall(s)?</label></th>
-                            <td><input readonly  name="mall" type="checkbox" value="{{this.mall}}"></td>
-                            <td><input readonly  name="mall" type="checkbox" value="{{this.mall1}}">
+                            <td><input readonly  name="mall" type="text" value="{{this.mall}}"></td>
+                            <td><input readonly  name="mall" type="text" value="{{this.mall1}}">
 																												<!-- ERROR nagpproblem pag mall_percent1 cast error daw :< -->
 								<input readonly  class="percentage" id="mall_percent1" name="mall" type="number" value="{{this.mall_percent1}}"> %
 							</td>
-                            <td><input readonly  name="mall" type="checkbox" value="{{this.mall2}}">
+                            <td><input readonly  name="mall" type="text" value="{{this.mall2}}">
 								<input readonly  class="percentage" id="mall_percent2" name="mall" type="number" value="{{this.mall_percent2}}"> %
 							</td>
                         </tr>
 						<!-- <tr>	<!-- mall -->
                             <!-- <th><label>Has nearby Shop/Mall(s)?</label></th> -->
-                            <!-- <td><input readonly  name="malls" type="checkbox" value="{{this.mall}}"></td> -->
-                            <!-- <td><input readonly  name="malls" type="checkbox" value="{{this.mall1}}"> -->
+                            <!-- <td><input readonly  name="malls" type="text" value="{{this.mall}}"></td> -->
+                            <!-- <td><input readonly  name="malls" type="text" value="{{this.mall1}}"> -->
 								<!-- <input readonly  class="percentage" id="mall_percent1" name="mall_percent" type="number" value="{{this.mall_percent1}}"> % -->
 							<!-- </td> -->
-                            <!-- <td><input readonly  name="malls" type="checkbox" value="{{this.mall2}}"> -->
+                            <!-- <td><input readonly  name="malls" type="text" value="{{this.mall2}}"> -->
 								<!-- <input readonly  class="percentage" id="mall_percent2" name="mall_percent" type="number" value="{{this.mall_percent2}}"> % -->
 							<!-- </td> -->
 						<!-- </tr> -->
@@ -497,11 +497,11 @@
                         </tr>
 						<tr>	<!-- improvement -->
                             <th><label>Has Improvement(s)?</label></th>
-                            <td><input readonly  name="improvement" type="checkbox" value="{{this.improvement}}"></td>
-                            <td><input readonly  name="improvement" type="checkbox" value="{{this.improvement1}}">
+                            <td><input readonly  name="improvement" type="text" value="{{this.improvement}}"></td>
+                            <td><input readonly  name="improvement" type="text" value="{{this.improvement1}}">
 								<input readonly  class="percentage" id="improvement_percent1" name="improvement" type="number" value="{{this.improvement_percent1}}"> %
 							</td>
-                            <td><input readonly  name="improvement" type="checkbox" value="{{this.improvement2}}">
+                            <td><input readonly  name="improvement" type="text" value="{{this.improvement2}}">
 								<input readonly  class="percentage" id="improvement_percent2" name="improvement" type="number" value="{{this.improvement_percent2}}"> %
 							</td>
 						</tr>
@@ -525,7 +525,7 @@
 
 
 
-					
+
 
 						<tr>
                             <th><label for="computation">Computation</label></th>
