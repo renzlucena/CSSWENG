@@ -53,7 +53,17 @@ app.get('/',(req,res)=> {
 })
 
 // destroy session at log out
-app.get('/logout',(req,res)=> {
+app.get('/logout',async(req,res)=> {
+	sess = req.session
+	//make sure to reset everything back to normal
+	if (username=="admin")
+	{
+		const ass = await Assignment.findOneAndUpdate(
+		{	assigned_to: "admin"},
+		{	assigned_to: ""		})
+	}
+	
+	
 	req.session.destroy((err)=> {
 		if(err){
 			return console.log(err);
@@ -2479,8 +2489,8 @@ app.get('/save-ass', async(req,res)=> {
 					assigned_to: "",	//reset so that it will still show up in agents' /assignments
 					type_of_approach: req.query.type_of_approach,
 
-					client_f_name: req.query.client_f_name,
-					client_l_name: req.query.client_l_name,
+					client_f_name: req.query.client_name[0],
+					client_l_name: req.query.client_name[1],
 
 					//will only be visible to admin
 					client_contact_num: req.query.client_contact_num,
