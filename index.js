@@ -2407,10 +2407,22 @@ app.get('/assignments', async(req,res)=> {
 
 
 
-app.get('/profile', (req,res)=> {
+app.get('/profile', async(req,res)=> {
 	sess = req.session;
+	
+	const stats_his = await Assignment.countDocuments({
+				assigned_to: sess.username,
+				comment: "Approved."})
+				
+	const stats_ass = await Assignment.countDocuments({
+				assigned_to: sess.username,
+				comment: {$ne: "Approved."}})	
+	
 	if(sess.username){
 		res.render('profile.hbs', {
+			stats_assignments : stats_ass,
+			stats_history : stats_his,
+			stats_overall : stats_ass+stats_his,
 			username: sess.username,
 			password: sess.password,
 			remember: sess.remember,
@@ -2549,8 +2561,8 @@ app.get('/save-ass', async(req,res)=> {
 					comparative1 : {
 						price_per_sqm: req.query.price_per_sqm[1],
 						ref_date: {
-							date: 0,//req.query.ref_date[1],
-							num: req.query.ref_date[2]
+							date: req.query.ref_date[0],
+							num: req.query.ref_date[1]
 							},
 						property_type: {
 							str: req.query.property_type[1],
@@ -2625,8 +2637,8 @@ app.get('/save-ass', async(req,res)=> {
 					comparative2:{
 						price_per_sqm: req.query.price_per_sqm[2],
 						ref_date: {
-							date: 0,//req.query.ref_date[3],
-							num: req.query.ref_date[4]
+							date: req.query.ref_date[2],
+							num: req.query.ref_date[3]
 							},
 						lot_loc: req.query.property_type[2],
 						property_type: {
