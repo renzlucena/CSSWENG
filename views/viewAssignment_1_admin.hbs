@@ -268,10 +268,10 @@
                         </tr>
 
 					              <tr>	<!-- type_of_approach & assigned appraiser -->
-                            <th><label for="appnum">Appraiser Number</label></th>
-                            <td><input name="appnum" id="appnum" type="number" value="{{app_appnum}}" readonly></td>
+                            <th><label for="app_appnum">Appraiser Number</label></th>
+                            <td><input name="app_appnum" id="app_appnum" type="number" value="{{this.app_appnum}}" readonly></td>
                             <th><label for="assigned_to">Assigned Appraiser</th>
-                            <td><input name="assigned_to" id="assigned_to" type="text" value="{{app_fname}} {{app_lname}}" readonly></td>
+                            <td><input name="assigned_to" id="assigned_to" type="text" value="{{this.app_fname}} {{this.app_lname}}" readonly></td>
                         </tr>
                         <tr>	<!-- client_name -->
                             <th><label for="client_name">Client Name</label></th>
@@ -694,18 +694,19 @@
         var property_type = document.getElementById("property_type").value;
 
         <!--var assigned_to = document.getElementById("assigned_to").value;-->
-        <!--var appnum = document.getElementById("appnum").value.;-->
+        <!--var appnum = document.getElementById("app_appnum").value;-->
+        <!--var appraiser_address = document.getElementById("app_appaddress").value;-->
+
         var complete_date = "";
         complete_date = document.getElementById("completed_on").value;
         var test = complete_date.split(" ");
         var combine = test[1];
         completed_on = combine.concat(' ',test[2],' ',test[3]);
-        <!--var date = "";-->
-        <!--date = document.getElementById("created_at").value;-->
-        <!--var x = date.split(" ");-->
-        <!--var comb = x[1];-->
-        <!--created_at = comb.concat(' ',x[2],' ',x[3]);-->
-        <!--created_at = document.getElementById("created_at").value;-->
+        var date = "";
+        date = document.getElementById("created_at").value;
+        var x = date.split(" ");
+        var comb = x[1];
+        created_at = comb.concat(' ',x[2],' ',x[3]);
 
         var computation = document.getElementById("computation").value;
         var title_no = document.getElementById("title_no").value;
@@ -784,10 +785,10 @@
             }
             ]},
             {text: '\n\n\nDear Mr./Ms. ' + client_name + ',\n\n'},
-            //{text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is ' + created_at },
+            {text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is ' + created_at },
             {text: '\n\nSubmitted here with is my report containing facts and data gathered.\n\n'},
-            //{text: 'The method of appraising is detailed in the attached narrative report as of ' + created_at + '. It is my opinion that the Market Value with Fee Simple Interest in the subject property, subject to the attached limiting conditions, is”'},
-            //, style: 'appraisalval'},
+            {text: 'The method of appraising is detailed in the attached narrative report as of ' + created_at + '. It is my opinion that the Market Value with Fee Simple Interest in the subject property, subject to the attached limiting conditions, is'},
+            {text: computation, style: 'appraisalval'},
             {text: '\n\nIt has been a pleasure to serve you in this matter\n\n\n\n'},
             {text: 'Respectfully submitted,\n\n\n\n', margin: [0, 0, 5, 5], alignment: 'right'},
             //{text: assigned_to + ',', margin: [0, 0, 5, 0], alignment: 'right'},
@@ -807,7 +808,7 @@
                     ['Improvements: ', improvements],
                     ['Zoning Classification:', zoning_classification],
                     ['Interest Appraised:', property_interest],
-                    //['Effective Date of Appraisal:', created_at],
+                    ['Effective Date of Appraisal:', created_at],
                     ['Date of Report:', completed_on],
                     ['Final Estimate of Value:', computation]
                 ]
@@ -1029,7 +1030,7 @@
             }
             },*/
 
-            {text: '\n\n\t\t\tBased on the investigation of the subject property and the analysis of all relevant data, the Fee Simple Market Value of the subject property, as of May 5, 2021, is:\n\n\n', preserveLeadingSpaces: true},
+            {text: '\n\n\t\t\tBased on the investigation of the subject property and the analysis of all relevant data, the Fee Simple Market Value of the subject property, as of' + completed_on + ', is:\n\n\n', preserveLeadingSpaces: true},
             {text: computation, style: 'appraisalval'}
             ],
         defaultStyle:{

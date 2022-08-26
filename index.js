@@ -457,6 +457,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				if(ass.comment == "Approved.")
 				{
 					console.log("viewAssignment_1_admin.hbs")
+					console.log(assignment)
 					console.log(docu)
 
 					const app = await Account.findOne({
