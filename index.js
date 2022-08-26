@@ -1965,7 +1965,7 @@ app.post('/new-agent', function(req,res) {
 	catch(err)
 	{console.log(err)}
 
-	res.redirect('/assignments')
+	res.redirect('/admin/accounts')
 });
 
 
@@ -2494,7 +2494,8 @@ app.get('/save-ass', async(req,res)=> {
 
 				res.redirect('/assignments') //if admin, just redirct to assignmets
 				//res.redirect('/view/0/'+ req.query.ref_id)
-			}
+			}[3]
+			
 			catch(err)
 			{
 				console.log(err)
@@ -2510,7 +2511,7 @@ app.get('/save-ass', async(req,res)=> {
 				//the error checkng will be done in <script> of that page nalang so it's easier to seee
 				await Assignment.findOneAndUpdate({ref_id: req.query.ref_id},{
 					price_per_sqm: req.query.price_per_sqm[0],
-					ref_date: req.query.ref_date[0],
+					// ref_date: req.query.ref_date[0],
 					lot_loc: req.query.lot_loc[0],
 					property_type: req.query.property_type[0],
 					property_interest: req.query.property_interest[0],
@@ -2642,7 +2643,6 @@ app.get('/save-ass', async(req,res)=> {
 							str: req.query.terms_of_sale[3],
 							num: req.query.terms_of_sale[4]
 							},
-
 						corner: {
 							str: req.query.corner[3],
 							num: req.query.corner[4]
