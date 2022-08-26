@@ -2506,10 +2506,6 @@ app.get('/save-ass', async(req,res)=> {
 			//agent no need for params because the ref_id is shown
 			try{
 
-				console.log(req.query)
-				//console.log(req.params)
-				// console.log(parseInt(req.query.price_per_sqm[0]))
-
 				//So the thing is, just save everything on the screen, even if user put blank there, still save
 				//the error checkng will be done in <script> of that page nalang so it's easier to seee
 				await Assignment.findOneAndUpdate({ref_id: req.query.ref_id},{
@@ -2633,51 +2629,54 @@ app.get('/save-ass', async(req,res)=> {
 							num: req.query.shape[4]
 						},
 						topo: {
-							str: req.query.topo[1],
-							num: req.query.topo[2]
+							str: req.query.topo[3],
+							num: req.query.topo[4]
 							},
 						frontage: {
-							str: req.query.frontage[1],
-							num: req.query.frontage[2]
+							str: req.query.frontage[3],
+							num: req.query.frontage[4]
 							},
 						terms_of_sale: {
-							str: req.query.terms_of_sale[1],
-							num: req.query.terms_of_sale[2]
+							str: req.query.terms_of_sale[3],
+							num: req.query.terms_of_sale[4]
 							},
 
 						corner: {
-							str: req.query.corner[1],
-							num: req.query.corner[2]
+							str: req.query.corner[3],
+							num: req.query.corner[4]
 							},
 						prime: {
-							str: req.query.prime[1],
-							num: req.query.prime[2]
+							str: req.query.prime[3],
+							num: req.query.prime[4]
 							},
 						hospital: {
-							str: req.query.hospital[1],
-							num: req.query.hospital[2]
+							str: req.query.hospital[3],
+							num: req.query.hospital[4]
 							},
 						school: {
-							str: req.query.school[1],
-							num: req.query.school[2]
+							str: req.query.school[3],
+							num: req.query.school[4]
 							},
 						mall: {
-							str: req.query.mall[1],
-							num: req.query.mall[2]
+							str: req.query.mall[3],
+							num: req.query.mall[4]
 							},
-
+						improvement: {
+							str: req.query.improvement[3],
+							num: req.query.improvement[4]
+							},
 						public_transpo: {
-							str: req.query.public_transpo[1],
-							num: req.query.public_transpo[2]
+							str: req.query.public_transpo[3],
+							num: req.query.public_transpo[4]
 							},
 
 						zoning: {
-							str: req.query.zoning[1],
-							num: req.query.zoning[2]
+							str: req.query.zoning[3],
+							num: req.query.zoning[4]
 							},
 						computation: {
-							num1: req.query.computation[1],
-							num2: req.query.computation[2]
+							num1: req.query.computation[3],
+							num2: req.query.computation[4]
 						}
 					}
 				})
