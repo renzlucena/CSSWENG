@@ -2672,13 +2672,6 @@ app.get('/save-ass', async(req,res)=> {
 							num: req.query.terms_of_sale[2]
 							},
 
-
-
-						//hiding strs for now bc idk how to make them save :v
-						// I saw this baka makahelp sa mag fifix:
-						//		https://stackoverflow.com/questions/39962676/updating-mongodb-with-checkbox-information
-
-						/*
 						corner: {
 							str: req.query.corner[1],
 							num: req.query.corner[2]
@@ -2699,45 +2692,16 @@ app.get('/save-ass', async(req,res)=> {
 							str: req.query.mall[1],
 							num: req.query.mall[2]
 							},
-						*/
+
 						public_transpo: {
 							str: req.query.public_transpo[1],
 							num: req.query.public_transpo[2]
 							},
 
-						//also str
-						/*improvement: {
+						improvement: {
 							str: req.query.improvement[1],
 							num: req.query.improvement[2]
 							},
-						*/
-
-						//remove when stris fixed, these are just placeholders
-						corner: {
-							str: true,
-							num: 0
-							},
-						prime: {
-							str: true,
-							num: 0
-							},
-						hospital: {
-							str: true,
-							num: 0
-							},
-						school: {
-							str: true,
-							num: 0
-							},
-						mall: {
-							str: true,
-							num: 0
-							},
-						improvement: {
-							str: true,
-							num: 0
-							},
-
 
 						zoning: {
 							str: req.query.zoning[1],
@@ -2783,42 +2747,32 @@ app.get('/save-ass', async(req,res)=> {
 							str: req.query.terms_of_sale[1],
 							num: req.query.terms_of_sale[2]
 							},
-						//placeholders
+
+						corner: {
+							str: req.query.corner[1],
+							num: req.query.corner[2]
+							},
+						prime: {
+							str: req.query.prime[1],
+							num: req.query.prime[2]
+							},
+						hospital: {
+							str: req.query.hospital[1],
+							num: req.query.hospital[2]
+							},
+						school: {
+							str: req.query.school[1],
+							num: req.query.school[2]
+							},
+						mall: {
+							str: req.query.mall[1],
+							num: req.query.mall[2]
+							},
+
 						public_transpo: {
 							str: req.query.public_transpo[1],
 							num: req.query.public_transpo[2]
 							},
-
-
-
-
-						//remove when stris fixed, these are just placeholders
-						corner: {
-							str: true,
-							num: 0
-							},
-						prime: {
-							str: true,
-							num: 0
-							},
-						hospital: {
-							str: true,
-							num: 0
-							},
-						school: {
-							str: true,
-							num: 0
-							},
-						mall: {
-							str: true,
-							num: 0
-							},
-						improvement: {
-							str: true,
-							num: 0
-							},
-
-
 
 						zoning: {
 							str: req.query.zoning[1],
@@ -2982,7 +2936,7 @@ app.get('/download-doc/:ref_id', async(req,res,)=>{
 	pdfMake.vfs = pdfFonts.pdfMake.vfs;
 	filename = req.params.ref_id.toString();
 	console.log(filename)
-	
+
 	if(sess.username){
 		console.log(req.query)
 		try{
@@ -3003,7 +2957,7 @@ app.get('/download-doc/:ref_id', async(req,res,)=>{
 						'text ' +{appraiser}
 					]
 				};
-			
+
 				var pdf = pdfMake.createPdf(docDefinition);
 				pdf.getBase64((data)=>{
 					res.writeHead(200,
@@ -3011,11 +2965,11 @@ app.get('/download-doc/:ref_id', async(req,res,)=>{
 						'Content-Type': 'application/pdf',
 						'Content-Disposition': 'attachment;filename='+filename+'.pdf'
 					});
-			
+
 					const download = Buffer.from(data.toString('utf-8'), 'base64');
 					res.end(download);
 				});
-			}	
+			}
 		catch(err)
 		{
 			console.log(err)
