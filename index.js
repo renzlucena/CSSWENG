@@ -2494,7 +2494,7 @@ app.get('/save-ass', async(req,res)=> {
 
 				res.redirect('/assignments') //if admin, just redirct to assignmets
 				//res.redirect('/view/0/'+ req.query.ref_id)
-			}[3]
+			}
 			
 			catch(err)
 			{
@@ -2513,6 +2513,9 @@ app.get('/save-ass', async(req,res)=> {
 					price_per_sqm: req.query.price_per_sqm[0],
 					// ref_date: req.query.ref_date[0],
 					lot_loc: req.query.lot_loc[0],
+					lot_brgy: req.query.lot_brgy[0],
+					lot_city: req.query.lot_city[0],
+					lot_region: req.query.lot_region[0],
 					property_type: req.query.property_type[0],
 					property_interest: req.query.property_interest[0],
 					//tut: https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/

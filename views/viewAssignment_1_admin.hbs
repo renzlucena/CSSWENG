@@ -246,7 +246,7 @@
             </div>
 			
 			<form method="get" action="/assignments" class="mx-auto">
-				{{#each assignment_ass}}
+				
 				<div class="table-responsive main-table">
 					<table>
 						<tr class="th-big">
@@ -269,9 +269,9 @@
 
 					              <tr>	<!-- type_of_approach & assigned appraiser -->
                             <th><label for="app_appnum">Appraiser Number</label></th>
-                            <td><input name="app_appnum" id="app_appnum" type="number" value="{{this.app_appnum}}" readonly></td>
+                            <td><input name="app_appnum" id="app_appnum" type="number" value="{{app_appnum}}" readonly></td>
                             <th><label for="assigned_to">Assigned Appraiser</th>
-                            <td><input name="assigned_to" id="assigned_to" type="text" value="{{this.app_fname}} {{this.app_lname}}" readonly></td>
+                            <td><input name="assigned_to" id="assigned_to" type="text" value="{{app_fname}} {{app_lname}}" readonly></td>
                         </tr>
                         <tr>	<!-- client_name -->
                             <th><label for="client_name">Client Name</label></th>
@@ -598,7 +598,6 @@
                         </tr>
                     </table>
                 </div>
-                {{/each}}
 
 				{{#each doc_details}}
 				<div class="main-header">

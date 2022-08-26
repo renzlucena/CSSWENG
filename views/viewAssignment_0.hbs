@@ -339,12 +339,14 @@
 							<th><label for="corner" >Is Corner Lot?</label></th>
                           <td>
                             <select id="corner" selected="{{this.corner}}">
+							  <option value="{{this.corner}}" selected disabled hidden>{{this.corner}}</option>	
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
                           </td>
                           <td>
                             <select id="corner1" name="corner">
+							  <option value="{{this.corner1}}" selected disabled hidden>{{this.corner1}}</option>		  <!-- will work if value is the same as the display -->
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
@@ -352,6 +354,7 @@
                           </td>
                           <td>
                             <select id="corner2" name="corner">
+							  <option value="{{this.corner2}}" selected disabled hidden>{{this.corner2}}</option>	
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
@@ -363,12 +366,14 @@
                                         <th><label for="prime" >Is Prime Lot?</label></th>
                           <td>
                             <select id="prime" name="prime">
+							  <option value="{{this.prime}}" selected disabled hidden>{{this.prime}}</option>	
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
                           </td>
                           <td>
                             <select id="prime1" name="prime">
+							  <option value="{{this.prime1}}" selected disabled hidden>{{this.prime1}}</option>	
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
@@ -376,6 +381,7 @@
                           </td>
                           <td>
                             <select id="prime2" name="prime">
+							  <option value="{{this.prime2}}" selected disabled hidden>{{this.prime2}}</option>
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
