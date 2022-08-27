@@ -504,10 +504,33 @@
                             <td><input readonly name="computation" class="text-next-to-percentage" value="{{this.computation2}}" id="computation2" type="text">
 								<input readonly class="percentage" id="computation_percent2"  value="{{this.computation_percent2}}" name="computation" type="number"> %
 							</td>
+                        </tr>  
+                        <tr>
+                            <th><label for="range_value_per_sqm">Range of the Values per Sqm</label></th>
+                            <td><input readonly name="range_value_per_sqm" id="range_value_per_sqm" type="text"></td>
+                            <th><label for="final_value"></label>Final Value</label></th>
+                            <td><input readonly name="final_value" id="final_value" type="text"></td>
                         </tr>
+                        <script>
+                            var range1_value = parseInt(document.getElementById("price_per_sqm1").value);
+                            var range2_value = parseInt(document.getElementById("price_per_sqm2").value);
+                            var range_value_per_sqm = document.getElementById("range_value_per_sqm");
+                            if(range2_value > range1_value){
+                                range_value_per_sqm.value = parseInt(range1_value) + ' - ' + parseInt(range2_value);
+                            }else if(range2_value < range1_value){
+                                range_value_per_sqm.value = parseInt(range2_value) + ' - ' + parseInt(range1_value);
+                            }else{
+                                range_value_per_sqm.value = parseInt(range1_value);
+                            }
+
+                            var pricesqm = parseInt(document.getElementById("price_per_sqm").value);
+                            var lotarea = parseInt(document.getElementById("lot_size").value);
+                            var final_value = document.getElementById("final_value");
+                            final_value.value = parseInt(pricesqm)*parseInt(lotarea);
+                        </script> 
                     </table>
                 </div>
-
+                <br><br><br>
 				{{#each doc_details}}
 				<div class="main-header">
 					<h1>Document Details for Printing</p>
@@ -637,11 +660,10 @@
         var explanation_adjustments = document.getElementById("explanation_adjustments").value;
         var recon_final_value_opinion = document.getElementById("recon_final_value_opinion").value;
 
-        <!--var computation = document.getElementById("computation").value;-->
-        <!--var final_value = computation * lot_size;-->
-        <!--var price_per_sqm1 = document.getElementById("price_per_sqm1").value;-->
-        <!--var price_per_sqm2 = document.getElementById("price_per_sqm2").value;-->
-        <!--var range_value_per_sqm-->
+        var price_per_sqm = document.getElementById("computation").value;
+        var range_value_per_sqm = document.getElementById("range_value_per_sqm").value;
+        var final_value = document.getElementById("final_value").value;
+        
 
         var docDefinition = {
         pageSize: 'LETTER',
@@ -655,7 +677,7 @@
                     text: 'Appraisal of Real Property for ' + property_type, alignment: 'left', margin: [80, 20]
                 },
                 {
-                    width: '60',
+                    width: '80',
                     text: currpage.toString(), alignment: 'right', margin: [80, 20]
                 }
                 ],
@@ -681,18 +703,15 @@
 
             {text: '\n\nTransmittal Letter\n\n\n', style: 'h2'},
             {columns: [
-            {
-                text: client_name
-            },
-            {
-                text: completed_on + '\n\nRe: Summary Appraisal Report \n' + property_type + ' ' + lot_size + ' sqm \n' + gen_lot_loc
-            }
+                {text: client_name},
+                {text: completed_on + '\n\nRe: Summary Appraisal Report \n' + property_type + ' ' + lot_size + ' sqm \n' + gen_lot_loc}
             ]},
+
             {text: '\n\n\nDear Mr./Ms. ' + client_name + ',\n\n'},
             {text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is ' + created_at },
             {text: '\n\nSubmitted here with is my report containing facts and data gathered.\n\n'},
             {text: 'The method of appraising is detailed in the attached narrative report as of ' + created_at + '. It is my opinion that the Market Value with Fee Simple Interest in the subject property, subject to the attached limiting conditions, is'},
-            //{text: final_value, style: 'appraisalval'},
+            {text: final_value, style: 'appraisalval'},
             {text: '\n\nIt has been a pleasure to serve you in this matter\n\n\n\n'},
             {text: 'Respectfully submitted,\n\n\n\n', margin: [0, 0, 5, 5], alignment: 'right'},
             {text: assigned_to + ',', margin: [0, 0, 5, 0], alignment: 'right'},
@@ -713,8 +732,8 @@
                     ['Zoning Classification:', zoning_classification],
                     ['Interest Appraised:', property_interest],
                     ['Effective Date of Appraisal:', created_at],
-                    ['Date of Report:', completed_on]
-                    //['Final Estimate of Value:', final_value]
+                    ['Date of Report:', completed_on],
+                    ['Final Estimate of Value:', final_value]
                 ]
                 },
                 layout: 'noBorders',
@@ -805,7 +824,7 @@
 
             {text: 'Area and Neighborhood Overview\n\n', style: 'h2'},
             {text: '\t\t\tThe purpose of this analysis is to review historic and projected economic data to ' +
-            'determine whether' + gen_lot_loc + ' and the subject neighborhood will experience ' +
+            'determine whether ' + gen_lot_loc + ' and the subject neighborhood will experience ' +
             'future economic stability, or decline, given the current situation.\n\n\n', preserveLeadingSpaces: true,},
             {text: 'A. Area Development.\n\n', style: 'h3'},
             {text: '\t\t\t' + area_development + '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
@@ -860,10 +879,8 @@
             'approach, a value indication is produced by comparing the subject with similar ' +
             'properties available within the neighborhood having the same property development concept.' +
             '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
-            //{text: "Comparables'\n\n", style: 'h3'},
-            //{text: '\t\t\t' +
-            //'\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
-            /*{table: {
+            /*{text: "Comparables'\n\n", style: 'h3'},
+            {table: {
                 heights: 40,
                 widths: ['*', '*', '*', '*'],
                 headerRows: 1,
@@ -885,57 +902,41 @@
                     [{text: 'Total Adjustments', style: tablebold}, subject.computation, comp1.computation, comp2.computation]
                 ]
             },
-            layout: {
-                fillColor: function (rowIndex) {
-                    return (rowIndex == 1 ) ? '#CCCCCC' : null;
-                }
-            },
             pageBreak: 'after',
             },*/
 
             {text: 'C. Explanation of Adjustments\n\n', style: 'h3'},
             {text: '\t\t\t' + explanation_adjustments + '\n\n', preserveLeadingSpaces: true},
             {text: "Value Indications'\n\n", style: 'h3'},
-            /*{table: {
+            {table: {
                 heights: 40,
                 widths: ['*', 'auto'],
                 headerRows: 1,
                 body: [
                     [{text: 'Value Indications', style: tablehead}, {text: 'Value per sqm.', style: tablehead}],
-                    //['Range', range_value_per_sqm],
-                    //[{text: 'Final Value Indication', style:tablebold}, computation + ' per sqm'],
+                    [{text: 'Range'}, range_value_per_sqm + ' sqm'],
+                    [{text: 'Final Value Indication', style: tablebold}, price_per_sqm + ' per sqm']
                 ]
-            },
-            layout: {
-                fillColor: function (rowIndex) {
-                    return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
                 }
             },
-            pageBreak: 'after',
-            },*/
 
             {text: 'Reconciliation and Final Value Opinion\n\n', style: 'h2'},
             {text: '\t\t\t' + recon_final_value_opinion + '\n\n', preserveLeadingSpaces: true},
-            /*{table: {
+            {table: {
                 heights: 40,
                 widths: ['*', 'auto', 'auto'],
                 headerRows: 1,
                 body: [
                     [{text: 'Approaches to Value', style: tablehead}, {text: 'Value', style: tablehead}, {text: 'Value per sqm', style: tablehead}],
-                    //['Market Data Approach', final_value, computation],
-                    //[{text: 'Final Value Indication', style: tablebold}, final_value, computation],
+                    [{text: 'Market Data Approach'}, 'Php ' + final_value, price_per_sqm + ' per sqm'],
+                    [{text: 'Final Value Indication', style: tablebold}, 'Php ' + final_value, price_per_sqm + ' per sqm']
                 ]
-            },
-            layout: {
-                fillColor: function (rowIndex) {
-                    return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
-                },
-            pageBreak: 'after',
             }
-            },*/
-
+            },
+            //{text: price_per_sqm},
+            //{text: range_value_per_sqm},
             {text: '\n\n\t\t\tBased on the investigation of the subject property and the analysis of all relevant data, the Fee Simple Market Value of the subject property, as of' + completed_on + ', is:\n\n\n', preserveLeadingSpaces: true},
-            //{text: final_value, style: 'appraisalval'}
+            {text: final_value, style: 'appraisalval'}
             ],
         defaultStyle:{
             fontSize: 11,
@@ -977,6 +978,7 @@
             }
         }
         };
+        
         function downloadPDF(){
             pdfMake.createPdf(docDefinition).download(ref_id+'.pdf');
         }
