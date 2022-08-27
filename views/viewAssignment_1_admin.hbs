@@ -736,10 +736,10 @@
         var explanation_adjustments = document.getElementById("explanation_adjustments").value;
         var recon_final_value_opinion = document.getElementById("recon_final_value_opinion").value;
 
-        var computation = document.getElementById("computation").value; <!--per sqm-->
+        <!--var computation = document.getElementById("computation").value;-->
         <!--var final_value = computation * lot_size;-->
-        <!--var price_per_sqm1 = document.getElementById("price_per_sqm1").value;
-        var price_per_sqm2 = document.getElementById("price_per_sqm2").value;-->
+        <!--var price_per_sqm1 = document.getElementById("price_per_sqm1").value;-->
+        <!--var price_per_sqm2 = document.getElementById("price_per_sqm2").value;-->
         <!--var range_value_per_sqm-->
 
         var docDefinition = {
@@ -776,7 +776,7 @@
             {text: 'As Of: \n' + completed_on + '\n\n\n\n\n', style: 'h1'},
             {text: 'Prepared for \n' + client_name + '\n' + gen_lot_loc + '\n\n\n\n\n', style: 'h1'},
             {text: 'Prepared By\n', style: 'h1'},
-            {text: assigned_to +  'REA Lic. No. ' + appnum + '\n' + appraiser_address, style: 'titletext', pageBreak: 'after'},
+            {text: assigned_to +  '\tREA Lic. No. ' + appnum + '\n' + appraiser_address, style: 'titletext', pageBreak: 'after'},
 
             {text: '\n\nTransmittal Letter\n\n\n', style: 'h2'},
             {columns: [
@@ -784,14 +784,14 @@
                 text: client_name
             },
             {
-                text: completed_on + '\n\nRe: Summary Appraisal Report \n' + property_type + lot_size + 'sqm \n' + gen_lot_loc
+                text: completed_on + '\n\nRe: Summary Appraisal Report \n' + property_type + ' ' + lot_size + ' sqm \n' + gen_lot_loc
             }
             ]},
             {text: '\n\n\nDear Mr./Ms. ' + client_name + ',\n\n'},
             {text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is ' + created_at },
             {text: '\n\nSubmitted here with is my report containing facts and data gathered.\n\n'},
             {text: 'The method of appraising is detailed in the attached narrative report as of ' + created_at + '. It is my opinion that the Market Value with Fee Simple Interest in the subject property, subject to the attached limiting conditions, is'},
-            {text: final_value, style: 'appraisalval'},
+            //{text: final_value, style: 'appraisalval'},
             {text: '\n\nIt has been a pleasure to serve you in this matter\n\n\n\n'},
             {text: 'Respectfully submitted,\n\n\n\n', margin: [0, 0, 5, 5], alignment: 'right'},
             {text: assigned_to + ',', margin: [0, 0, 5, 0], alignment: 'right'},
@@ -812,8 +812,8 @@
                     ['Zoning Classification:', zoning_classification],
                     ['Interest Appraised:', property_interest],
                     ['Effective Date of Appraisal:', created_at],
-                    ['Date of Report:', completed_on],
-                    ['Final Estimate of Value:', final_value]
+                    ['Date of Report:', completed_on]
+                    //['Final Estimate of Value:', final_value]
                 ]
                 },
                 layout: 'noBorders',
@@ -958,7 +958,7 @@
             'recently been sold or are currently for sale in the subject property’s market. Using this ' +
             'approach, a value indication is produced by comparing the subject with similar ' +
             'properties available within the neighborhood having the same property development concept.' +
-            '\n\n', preserveLeadingSpaces: true},
+            '\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
             //{text: "Comparables'\n\n", style: 'h3'},
             //{text: '\t\t\t' +
             //'\n\n', preserveLeadingSpaces: true, pageBreak: 'after'},
@@ -995,14 +995,14 @@
             {text: 'C. Explanation of Adjustments\n\n', style: 'h3'},
             {text: '\t\t\t' + explanation_adjustments + '\n\n', preserveLeadingSpaces: true},
             {text: "Value Indications'\n\n", style: 'h3'},
-            {table: {
+            /*{table: {
                 heights: 40,
                 widths: ['*', 'auto'],
                 headerRows: 1,
                 body: [
                     [{text: 'Value Indications', style: tablehead}, {text: 'Value per sqm.', style: tablehead}],
                     //['Range', range_value_per_sqm],
-                    [{text: 'Final Value Indication', style:tablebold}, computation + ' per sqm'],
+                    //[{text: 'Final Value Indication', style:tablebold}, computation + ' per sqm'],
                 ]
             },
             layout: {
@@ -1011,18 +1011,18 @@
                 }
             },
             pageBreak: 'after',
-            },
+            },*/
 
             {text: 'Reconciliation and Final Value Opinion\n\n', style: 'h2'},
             {text: '\t\t\t' + recon_final_value_opinion + '\n\n', preserveLeadingSpaces: true},
-            {table: {
+            /*{table: {
                 heights: 40,
                 widths: ['*', 'auto', 'auto'],
                 headerRows: 1,
                 body: [
                     [{text: 'Approaches to Value', style: tablehead}, {text: 'Value', style: tablehead}, {text: 'Value per sqm', style: tablehead}],
-                    ['Market Data Approach', final_value, computation],
-                    [{text: 'Final Value Indication', style: tablebold}, final_value, computation],
+                    //['Market Data Approach', final_value, computation],
+                    //[{text: 'Final Value Indication', style: tablebold}, final_value, computation],
                 ]
             },
             layout: {
@@ -1031,10 +1031,10 @@
                 },
             pageBreak: 'after',
             }
-            },
+            },*/
 
             {text: '\n\n\t\t\tBased on the investigation of the subject property and the analysis of all relevant data, the Fee Simple Market Value of the subject property, as of' + completed_on + ', is:\n\n\n', preserveLeadingSpaces: true},
-            {text: final_value, style: 'appraisalval'}
+            //{text: final_value, style: 'appraisalval'}
             ],
         defaultStyle:{
             fontSize: 11,
