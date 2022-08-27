@@ -239,7 +239,7 @@
             </div>
 
             <form class="assignments-form">
-				{{#each assignment_ass}}
+
                 <div class="table-responsive main-table">
 						<table>
 							<tr>
@@ -262,20 +262,16 @@
 							<tr>	<!-- client_name -->
 								<th><label for="client_name">Client Name</label></th>
 								<td><input name="client_name" type="text" value="{{this.client_l_name}}, {{this.client_f_name}}" readonly></td>
-
-								<th><label for="appnum">License</label></th>
-								<td><input name="appnum" type="number" value="{{this.appnum}}" readonly></td>
-							</tr>
-							<tr>	<!-- lot_brgy,city,region - will serve as general location for interest check of agents/appraisers & zonal value-->
 								<th><label for="gen_lot_loc">Lot Location</label></th>
 								<td><input name="gen_lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
+							</tr>
+							<tr>	<!-- lot_brgy,city,region - will serve as general location for interest check of agents/appraisers & zonal value-->
 								<th><label for="zonal">Zonal Value</label></th>
 								<td><input name="zonal" type="number" value="{{this.zonal}}" readonly></td>
-							</tr>
-							<tr> <!-- title no -->
-							<th><label for="title_no">Title No</label></th>
+								<!-- title no -->
+								<th><label for="title_no">Title No</label></th>
                             <td><input name="title_no" type="text" value="{{this.title_no}}" readonly></td>
-						</tr>
+							</tr>
 							<tr>	<!-- LABELS -->
 								<th></th>
 								<th>SUBJECT PROPERTY</th>
@@ -292,7 +288,7 @@
 
 							<tr>	<!-- ref_date -->
 								<th><label for="ref_date">Reference Date</label></th>
-								<td><input readonly  name="ref_date" id="ref_date" type="date" value="{{this.ref_date}}"></td>
+								<td></td>
 								<td><input readonly  name="ref_date" id="ref_date1" type="date" value="{{this.ref_date1}}">
 									<input readonly  class="percentage" id="ref_date_percent1" name="ref_date" type="number" value="{{this.ref_date_percent1}}"> %
 								</td>
@@ -505,14 +501,11 @@
 							</tr>
 						</table>
 					</div>
-				{{/each}}
-
-				{{#each doc_details}}
+					<br><br><br>
 					<div class="main-header">
-						<h1>Document Details For Assignment #{{ref_id}}</p>
-						<h1>TODO: render this page with the document info</p>
+						<h1>Document Details For Assignment #{{ref_id}}</h1>
 					</div>
-
+					{{#each doc_details}}
 					<div class="main-table">
 						<table>
 						<tr>
@@ -594,7 +587,7 @@
 						</tr>
 					</table>
 				</div>
-
+				{{/each}}
 				<div id="main-table-bottom">
 					<div class="comment">
 						<button type = "submit" name="admin-comment" formaction="/admin-comment">Return Document for Revision</button>
@@ -602,7 +595,7 @@
 						<br><br><br>
 					</div>
 				</div>
-				{{/each}}
+
             </form>
 		</div>
     </div>

@@ -123,7 +123,7 @@
 
 			var computationText = document.getElementById("computation");
 
-			<!-- computationText.value = parseInt(startingValue0.value)+423;	//WORKS NOW -->
+			computationText.value = parseInt(startingValue0.value)+423;	//WORKS NOW -->
 
 //			computationText.value = value0;	//WORKS NOW
 			var computationText1 = document.getElementById("computation1");
@@ -230,7 +230,6 @@
 					<a class="bgc-none" href="/logout">Log Out</a>
 				</div>
 			</div>
-
 			
 			<div><a href="/dashboard">Dashboard</a></div>
 			
@@ -248,7 +247,6 @@
             </div>
 
             <form class="assignments-form">
-              {{#each assignment_ass}}
 				<div class="table-responsive main-table">
 					<table>
 						<tr class="th-big">
@@ -309,8 +307,8 @@
 						<tr>	<!-- lot_loc - agent will write down the specific location here -->
 							<th><label for="lot_loc">Property Location</label></th>
 							<td><input readonly  name="lot_loc" id="lot_loc" type="text" value="{{this.lot_loc}}"></td>
-							<td><input readonly  name="lot_loc" id="lot_loc1" type="text" value="{{this.lot_loc1}}"></td>
-							<td><input readonly  name="lot_loc" id="lot_loc2" type="text" value="{{this.lot_loc2}}"></td>
+							<td><input readonly  name="lot_loc1" id="lot_loc1" type="text" value="{{this.lot_loc1}}"></td>
+							<td><input readonly  name="lot_loc2" id="lot_loc2" type="text" value="{{this.lot_loc2}}"></td>
 						</tr>
 
 						<tr>	<!-- property_type -->
@@ -482,11 +480,6 @@
 							<th>ADJUSTED VALUE & WEIGHT</th>
 							<th>ADJUSTED VALUE & WEIGHT</th>
 						</tr>
-
-
-
-
-
 						<tr>
 							<th><label for="computation">Computation</label></th>
 							<td><input readonly  name="computation" value="{{this.computation}}" id="computation" type="text"></td>
@@ -499,11 +492,10 @@
 						</tr>
 					</table>
 				</div>
-				{{/each}}
 
 				{{#each doc_details}}
 				<div class="main-header">
-					<h1>Document Details For Assignment #{{ref_id}}</p>
+					<h1>Document Details For Assignment #{{ref_id}}
 				</div>
 
                 <div class="main-table">

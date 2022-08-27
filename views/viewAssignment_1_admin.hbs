@@ -273,19 +273,27 @@
                             <th><label for="assigned_to">Assigned Appraiser</th>
                             <td><input name="assigned_to" id="assigned_to" type="text" value="{{app_fname}} {{app_lname}}" readonly></td>
                         </tr>
-                        <tr>	<!-- client_name -->
+                        <tr>
+                            <!-- appraiser address -->
+                            <th><label for="appraiser_address">Appraiser Address</label></th>
+                            <td><input name="appraiser_address" id="appraiser_address" type="text" value="{{app_appaddress}}" readonly></td>	
+                            <!-- client_name -->
                             <th><label for="client_name">Client Name</label></th>
                             <td><input name="client_name" id="client_name" type="text" value="{{this.client_l_name}}, {{this.client_f_name}}" readonly></td>
-							<!-- title no -->
-							<th><label for="title_no">Title No.</label></th>
-                            <td><input name="title_no" id="title_no" type="text" value="{{this.title_no}}" readonly></td>
                         </tr>
-						<tr>	<!-- lot_brgy,city,region - will serve as general location for interest check of agents/appraisers & zonal value-->
-							<th><label for="gen_lot_loc">Property Location</label></th>
-							<td><input name="gen_lot_loc" id="gen_lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
-							<th><label for="zonal">Zonal Value</label></th>
+                        <tr>
+                            <!-- title no -->
+							              <th><label for="title_no">Title No.</label></th>
+                            <td><input name="title_no" id="title_no" type="text" value="{{this.title_no}}" readonly></td>  
+							              <!-- lot_brgy,city,region - will serve as general location for interest check of agents/appraisers & zonal value-->
+							              <th><label for="gen_lot_loc">Property Location</label></th>
+							              <td><input name="gen_lot_loc" id="gen_lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
+                        </tr>
+                        <tr>
+                            <th><label for="zonal">Zonal Value</label></th>
                             <td><input name="zonal" id="zonal" type="number" value="{{this.zonal}}" readonly></td>
-						</tr>
+                        </tr>
+						    
 						<tr>	<!-- LABELS -->
 							<th></th>
 							<th>SUBJECT PROPERTY</th>
@@ -692,22 +700,13 @@
         var gen_lot_loc = document.getElementById("gen_lot_loc").value;
         var property_type = document.getElementById("property_type").value;
 
-        <!--var assigned_to = document.getElementById("assigned_to").value;-->
-        <!--var appnum = document.getElementById("app_appnum").value;-->
-        <!--var appraiser_address = document.getElementById("app_appaddress").value;-->
+        var assigned_to = document.getElementById("assigned_to").value;
+        var appnum = document.getElementById("app_appnum").value;
+        var appraiser_address = document.getElementById("appraiser_address").value;
+   
+        completed_on = document.getElementById("completed_on").value;
+        created_at = document.getElementById("created_at").value;
 
-        var complete_date = "";
-        complete_date = document.getElementById("completed_on").value;
-        var test = complete_date.split(" ");
-        var combine = test[1];
-        completed_on = combine.concat(' ',test[2],' ',test[3]);
-        var date = "";
-        date = document.getElementById("created_at").value;
-        var x = date.split(" ");
-        var comb = x[1];
-        created_at = comb.concat(' ',x[2],' ',x[3]);
-
-        var computation = document.getElementById("computation").value;
         var title_no = document.getElementById("title_no").value;
         var lot_size = document.getElementById("lot_size").value;
 
@@ -736,6 +735,12 @@
         var conclusion = document.getElementById("conclusion").value;
         var explanation_adjustments = document.getElementById("explanation_adjustments").value;
         var recon_final_value_opinion = document.getElementById("recon_final_value_opinion").value;
+
+        var computation = document.getElementById("computation").value; <!--per sqm-->
+        <!--var final_value = computation * lot_size;-->
+        <!--var price_per_sqm1 = document.getElementById("price_per_sqm1").value;
+        var price_per_sqm2 = document.getElementById("price_per_sqm2").value;-->
+        <!--var range_value_per_sqm-->
 
         var docDefinition = {
         pageSize: 'LETTER',
@@ -771,8 +776,7 @@
             {text: 'As Of: \n' + completed_on + '\n\n\n\n\n', style: 'h1'},
             {text: 'Prepared for \n' + client_name + '\n' + gen_lot_loc + '\n\n\n\n\n', style: 'h1'},
             {text: 'Prepared By\n', style: 'h1'},
-            //{text: assigned_to +  'REA Lic. No. ' + appnum + '\n' + appraiser_address, style: 'titletext',
-            //pageBreak: 'after'},
+            {text: assigned_to +  'REA Lic. No. ' + appnum + '\n' + appraiser_address, style: 'titletext', pageBreak: 'after'},
 
             {text: '\n\nTransmittal Letter\n\n\n', style: 'h2'},
             {columns: [
@@ -787,11 +791,11 @@
             {text: 'In accordance with your request, I have made an investigation and appraisal of the above captioned property for the purpose of estimating the Market Value in the Fee Simple Interest. The effective date of the appraisal is ' + created_at },
             {text: '\n\nSubmitted here with is my report containing facts and data gathered.\n\n'},
             {text: 'The method of appraising is detailed in the attached narrative report as of ' + created_at + '. It is my opinion that the Market Value with Fee Simple Interest in the subject property, subject to the attached limiting conditions, is'},
-            {text: computation, style: 'appraisalval'},
+            {text: final_value, style: 'appraisalval'},
             {text: '\n\nIt has been a pleasure to serve you in this matter\n\n\n\n'},
             {text: 'Respectfully submitted,\n\n\n\n', margin: [0, 0, 5, 5], alignment: 'right'},
-            //{text: assigned_to + ',', margin: [0, 0, 5, 0], alignment: 'right'},
-            //{text: 'Certified Real Estate Appraiser # ' + appnum, margin: [0, 0, 5, 0], alignment: 'right', pageBreak: 'after'},
+            {text: assigned_to + ',', margin: [0, 0, 5, 0], alignment: 'right'},
+            {text: 'Certified Real Estate Appraiser # ' + appnum, margin: [0, 0, 5, 0], alignment: 'right', pageBreak: 'after'},
 
             {text: 'Appraisal Summary\n\n\n', style: 'h2'},
             {table: {
@@ -809,7 +813,7 @@
                     ['Interest Appraised:', property_interest],
                     ['Effective Date of Appraisal:', created_at],
                     ['Date of Report:', completed_on],
-                    ['Final Estimate of Value:', computation]
+                    ['Final Estimate of Value:', final_value]
                 ]
                 },
                 layout: 'noBorders',
@@ -853,7 +857,7 @@
                 lineWidth: 1
             }
             ]},*/
-            //{text: assigned_to + '- REA #' + appnum, alignment: 'right'},
+            {text: assigned_to + '- REA #' + appnum, alignment: 'right'},
             {text: 'Approved by the Admin', alignment: 'right', pageBreak: 'after'},
 
             {text: 'Assignment Description\n', style: 'h2'},
@@ -991,14 +995,14 @@
             {text: 'C. Explanation of Adjustments\n\n', style: 'h3'},
             {text: '\t\t\t' + explanation_adjustments + '\n\n', preserveLeadingSpaces: true},
             {text: "Value Indications'\n\n", style: 'h3'},
-            /*{table: {
+            {table: {
                 heights: 40,
                 widths: ['*', 'auto'],
                 headerRows: 1,
                 body: [
-                    [{text: 'Value Indications', style: tableheader}, {text: 'Value per sqm.', style: tableheader}],
-                    ['Range', range_value_per_sqm],
-                    [{text: 'Final Value Indication', style:tablebold}, final_value_per_sqm + ' per sqm'],
+                    [{text: 'Value Indications', style: tablehead}, {text: 'Value per sqm.', style: tablehead}],
+                    //['Range', range_value_per_sqm],
+                    [{text: 'Final Value Indication', style:tablebold}, computation + ' per sqm'],
                 ]
             },
             layout: {
@@ -1007,18 +1011,18 @@
                 }
             },
             pageBreak: 'after',
-            },*/
+            },
 
             {text: 'Reconciliation and Final Value Opinion\n\n', style: 'h2'},
             {text: '\t\t\t' + recon_final_value_opinion + '\n\n', preserveLeadingSpaces: true},
-            /*{table: {
+            {table: {
                 heights: 40,
                 widths: ['*', 'auto', 'auto'],
                 headerRows: 1,
                 body: [
-                    [{text: 'Approaches to Value', style: tableheader}, {text: 'Value', style: tableheader}, {text: 'Value per sqm', style: tableheader}],
-                    //['Market Data Approach', computation, market_value_per_sqm],
-                    //[{text: 'Final Value Indication', style: tablebold}, computation, final_value_indication_per_sqm],
+                    [{text: 'Approaches to Value', style: tablehead}, {text: 'Value', style: tablehead}, {text: 'Value per sqm', style: tablehead}],
+                    ['Market Data Approach', final_value, computation],
+                    [{text: 'Final Value Indication', style: tablebold}, final_value, computation],
                 ]
             },
             layout: {
@@ -1027,10 +1031,10 @@
                 },
             pageBreak: 'after',
             }
-            },*/
+            },
 
             {text: '\n\n\t\t\tBased on the investigation of the subject property and the analysis of all relevant data, the Fee Simple Market Value of the subject property, as of' + completed_on + ', is:\n\n\n', preserveLeadingSpaces: true},
-            {text: computation, style: 'appraisalval'}
+            {text: final_value, style: 'appraisalval'}
             ],
         defaultStyle:{
             fontSize: 11,
@@ -1063,7 +1067,7 @@
                 alignment: 'center',
                 color: 'green'
             },
-            tableheader: {
+            tablehead: {
                 bold: true,
                 fontSize: 14
             },
@@ -1081,7 +1085,7 @@
 					</div>
 						<!-- dito mo na lagay yung code mo sa download pdf/save as pdf  erin -->
 						<button onclick="downloadPDF()">Download PDF</button>
-      
+
 						<!-- will make it so that the comment will be "For Printing." again and agent can edit the doc -->
 						<button>Unlock Document</button>
 						<br><br><br>

@@ -286,24 +286,19 @@
                         <tr>	<!-- client_name -->
                             <th><label for="client_name">Client Name</label></th>
                             <td><input name="client_name" type="text" value="{{this.client_l_name}}, {{this.client_f_name}}" readonly></td>
-
-                            <th><label for="appnum">License</label></th>
-                            <td><input name="appnum" type="number" value="{{this.appnum}}" readonly></td>
+							<th><label for="client_num">Client Contact Number</label></th>
+                            <td><input name="client_num" type="text" value="{{this.client_contact_num}}" readonly></td>
                         </tr>
 						<tr>	<!-- client details -->
-                            <th><label for="client_num">Client Contact Number</label></th>
-                            <td><input name="client_num" type="text" value="{{this.client_contact_num}}" readonly></td>
-
-                            <th><label for="appnum">Client Email</label></th>
-                            <td><input name="appnum" type="number" value="{{this.client_email}}" readonly></td>
-                        </tr>
-						<tr>	<!-- lot_brgy,city,region - will serve as general location for interest check of agents/appraisers & zonal value-->
+                            <th><label for="client_email">Client Email</label></th>
+                            <td><input name="client_email" type="text" value="{{this.client_email}}" readonly></td>
 							<th><label for="gen_lot_loc">Lot Location</label></th>
 							<td><input name="gen_lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
+                        </tr>
+						<tr>	<!-- lot_brgy,city,region - will serve as general location for interest check of agents/appraisers & zonal value-->
 							<th><label for="zonal">Zonal Value</label></th>
                             <td><input name="zonal" type="number" value="{{this.zonal}}" readonly></td>
-						</tr>
-						<tr> <!-- title no -->
+							<!-- title no -->
 							<th><label for="title_no">Title No</label></th>
                             <td><input name="title_no" type="text" value="{{this.title_no}}" readonly></td>
 						</tr>
@@ -323,7 +318,7 @@
 
                         <tr>	<!-- ref_date -->
                             <th><label for="ref_date">Reference Date</label></th>
-                            <td><input readonly  name="ref_date" id="ref_date" type="date" value="{{this.ref_date}}"></td>
+                            <td></td>
                             <td><input readonly  name="ref_date" id="ref_date1" type="date" value="{{this.ref_date1}}">
 								<input readonly  class="percentage" id="ref_date_percent1" name="ref_date" type="number" value="{{this.ref_date_percent1}}"> %
 							</td>
