@@ -910,12 +910,12 @@
             {text: "Value Indications'\n\n", style: 'h3'},
             {table: {
                 heights: 40,
-                widths: ['*', 'auto'],
-                headerRows: 1,
+                widths: ['*', '*'],
+                //headerRows: 1,
                 body: [
-                    [{text: 'Value Indications', style: tablehead}, {text: 'Value per sqm.', style: tablehead}],
-                    [{text: 'Range'}, range_value_per_sqm + ' sqm'],
-                    [{text: 'Final Value Indication', style: tablebold}, price_per_sqm + ' per sqm']
+                    ['Value Indications', 'Value per sqm.'],
+                    ['Range', range_value_per_sqm + ' sqm'],
+                    ['Final Value Indication', price_per_sqm + ' per sqm']
                 ]
                 }
             },
@@ -924,12 +924,12 @@
             {text: '\t\t\t' + recon_final_value_opinion + '\n\n', preserveLeadingSpaces: true},
             {table: {
                 heights: 40,
-                widths: ['*', 'auto', 'auto'],
-                headerRows: 1,
+                widths: ['*', '*', '*'],
+                //headerRows: 1,
                 body: [
-                    [{text: 'Approaches to Value', style: tablehead}, {text: 'Value', style: tablehead}, {text: 'Value per sqm', style: tablehead}],
-                    [{text: 'Market Data Approach'}, 'Php ' + final_value, price_per_sqm + ' per sqm'],
-                    [{text: 'Final Value Indication', style: tablebold}, 'Php ' + final_value, price_per_sqm + ' per sqm']
+                    ['Approaches to Value', 'Value', 'Value per sqm'],
+                    ['Market Data Approach', 'Php ' + final_value, price_per_sqm + ' per sqm'],
+                    ['Final Value Indication', 'Php ' + final_value, price_per_sqm + ' per sqm']
                 ]
             }
             },
