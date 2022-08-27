@@ -2,8 +2,8 @@ Process:
 
 - Admin creates new assignment
 - Agent accepts the assignment
-- Agent fills up the form and sends for approval (comment: "Submitted.")
-- Admin reviews the assignment and approves it for printing (comment: "For Printing.")
+- Agent fills up the form (compute then save) and sends for approval (comment: "Submitted.")
+- Admin reviews the assignment and either returns & comments it or approves it for printing (comment: "For Printing.")
 - Agent can now edit the document
 - when done filling it up, Agent sends the document for approval again (comment: "Submitted for Document Review.")
 - the document is "locked" so Agent cannot edit anymore

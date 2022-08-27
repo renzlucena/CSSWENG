@@ -342,7 +342,17 @@ app.get('/admin-comment', async(req,res)=>{
 
 				res.redirect('/assignments')
 			}
-		}
+			else //approved
+			{
+				console.log("/admin-comment - Submitted DOCUMENT")
+				const ass = await Assignment.findOneAndUpdate(
+					{ref_id: req.query.ref_id},
+					{comment: "For Printing."
+					})
+
+				res.redirect('/assignments')
+			}
+			}
 			catch(err){
 				console.log(err)
 			}
@@ -1594,10 +1604,10 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 				else if(ass.comment == "Approved."){
 					console.log("viewAssignment_3.hbs")
 					res.render('viewAssignment_3.hbs',{
-						assignment_ass: assignment,	//short ver lol
-						doc_details: docu,
+						//assignment_ass: assignment,	//short ver lol
+						//doc_details: docu,
 
-						/*ref_id 			: ass.ref_id,
+						ref_id 			: ass.ref_id,
 						type_of_approach: ass.type_of_approach,
 						client_f_name 	: ass.client_f_name,
 						client_l_name 	: ass.client_l_name,
@@ -1719,7 +1729,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						improvement_percent2		: ass.comparative2.improvement.num,
 						zoning_percent2				: ass.comparative2.zoning.num,
 						computation_percent2		: ass.comparative2.computation.num2,
-					*/
+					
 						username: sess.username,
 						password: sess.password,
 						remember: sess.remember,

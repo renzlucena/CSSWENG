@@ -121,12 +121,12 @@
 			var zonal_value = parseInt(document.getElementById("zonal").value);
 
 			//not working zonal value
-			if (parseInt(computationText1.value)*(comp_percent1*0.01) + parseInt(computationText2.value)*(comp_percent2*0.01) > zonal_value)//does not work -> this.zonal)
+			if ((parseInt(computationText1.value)*(comp_percent1*0.01) + parseInt(computationText2.value)*(comp_percent2*0.01)) > zonal_value)//does not work -> this.zonal)
 			{
 				computationText.value = (parseInt(computationText1.value)*(comp_percent1*0.01)) + (parseInt(computationText2.value)*(comp_percent2*0.01))
 			}
 			else {
-				computationText.value = zonal_value
+				computationText.value = parseInt(zonal_value)
 			}
 		}
 	</script>
@@ -215,7 +215,7 @@
 							<th><label for="gen_lot_loc">Property Location</label></th>
 							<td><input name="gen_lot_loc" type="text" value="{{this.lot_brgy}}, {{this.lot_city}}, {{this.lot_region}}" readonly></td>
 							<th><label for="zonal">Zonal Value</label></th>
-                            <td><input name="zonal" type="number" value="{{this.zonal}}" readonly></td>
+                            <td><input name="zonal" id="zonal" type="number" value="{{this.zonal}}" readonly></td>
 						</tr>
 						<tr>	<!-- LABELS -->
 							<th></th>
