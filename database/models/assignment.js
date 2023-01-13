@@ -95,6 +95,7 @@ const assignmentSchema = new mongoose.Schema({
 	expiring_on: { type: Date, required: false, default: Date.now },
 	comparative1: comparativeSchema,
 	comparative2: comparativeSchema,
+	comparative3: comparativeSchema,
 	comment: {type:String, default:"New!"}
 })
 

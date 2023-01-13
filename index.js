@@ -62,8 +62,8 @@ app.get('/logout',async(req,res)=> {
 		{	assigned_to: "admin"},
 		{	assigned_to: ""		})
 	}
-	
-	
+
+
 	req.session.destroy((err)=> {
 		if(err){
 			return console.log(err);
@@ -609,6 +609,58 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							improvement_percent2		: ass.comparative2.improvement.num,
 							zoning_percent2				: ass.comparative2.zoning.num,
 							computation_percent2		: ass.comparative2.computation.num2,
+							/* COMPARATIVE 3
+							//	COMPARATIVE III
+							price_per_sqm3		: ass.comparative3.price_per_sqm,
+							ref_date3			: ass.comparative3.ref_date.date, //idk if this works
+							lot_loc3			: ass.comparative3.lot_loc,
+							property_type3		: ass.comparative3.property_type.str,
+							property_interest3	: ass.comparative3.property_interest.str,
+							// property_images: [imageSchema],
+							lot_size3			: ass.comparative3.lot_size.num1,
+							shape3				: ass.comparative3.shape.str,
+							topo3				: ass.comparative3.topo.str,
+							frontage3			: ass.comparative3.frontage.str,
+							terms_of_sale3		: ass.comparative3.terms_of_sale.str,
+							corner3				: ass.comparative3.corner.bool,
+							prime3				: ass.comparative3.prime.bool,
+							hospital3			: ass.comparative3.hospital.bool,
+							school3				: ass.comparative3.school.bool,
+							mall3				: ass.comparative3.mall.bool,
+							public_transpo3		: ass.comparative3.public_transpo.str,
+							improvement3		: ass.comparative3.improvement.bool,
+							zoning3				: ass.comparative3.zoning.str,
+							computation3		: ass.comparative3.computation.num1,
+
+							// COMPARATIVE III - percent3's
+							ref_date_percent3			: ass.comparative3.ref_date.num,
+							property_type_percent3		: ass.comparative3.property_type.num,
+							property_interest_percent3	: ass.comparative3.property_interest.num,
+							lot_size_percent3			: ass.comparative3.lot_size.num2,
+							shape_percent3				: ass.comparative3.shape.num,
+							topo_percent3			: ass.comparative3.topo.num,
+							frontage_percent3			: ass.comparative3.frontage.num,
+							terms_of_sale_percent3		: ass.comparative3.terms_of_sale.num,
+							corner_percent3				: ass.comparative3.corner.num,
+							prime_percent3				: ass.comparative3.prime.num,
+							hospital_percent3			: ass.comparative3.hospital.num,
+							school_percent3				: ass.comparative3.school.num,
+							mall_percent3				: ass.comparative3.mall.num,
+							public_transpo_percent3		: ass.comparative3.public_transpo.num,
+							improvement_percent3		: ass.comparative3.improvement.num,
+							zoning_percent3				: ass.comparative3.zoning.num,
+							computation_percent3		: ass.comparative3.computation.num2,
+							*/
+
+							username: sess.username,
+							password: sess.password,
+							remember: sess.remember,
+							status: sess.status,
+							email: sess.email,
+							fname: sess.fname,
+							lname: sess.lname,
+							appnum: sess.appnum,
+							can_accept: sess.can_accept
 
 						doc_details: docu,	//short ver lol
 
@@ -766,6 +818,49 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						improvement_percent2		: ass.comparative2.improvement.num,
 						zoning_percent2				: ass.comparative2.zoning.num,
 						computation_percent2		: ass.comparative2.computation.num2,
+
+						/* COMPARATIVE 3
+						//	COMPARATIVE III
+						price_per_sqm3		: ass.comparative3.price_per_sqm,
+						ref_date3			: ass.comparative3.ref_date.date, //idk if this works
+						lot_loc3			: ass.comparative3.lot_loc,
+						property_type3		: ass.comparative3.property_type.str,
+						property_interest3	: ass.comparative3.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size3			: ass.comparative3.lot_size.num1,
+						shape3				: ass.comparative3.shape.str,
+						topo3				: ass.comparative3.topo.str,
+						frontage3			: ass.comparative3.frontage.str,
+						terms_of_sale3		: ass.comparative3.terms_of_sale.str,
+						corner3				: ass.comparative3.corner.bool,
+						prime3				: ass.comparative3.prime.bool,
+						hospital3			: ass.comparative3.hospital.bool,
+						school3				: ass.comparative3.school.bool,
+						mall3				: ass.comparative3.mall.bool,
+						public_transpo3		: ass.comparative3.public_transpo.str,
+						improvement3		: ass.comparative3.improvement.bool,
+						zoning3				: ass.comparative3.zoning.str,
+						computation3		: ass.comparative3.computation.num1,
+
+						// COMPARATIVE III - percent3's
+						ref_date_percent3			: ass.comparative3.ref_date.num,
+						property_type_percent3		: ass.comparative3.property_type.num,
+						property_interest_percent3	: ass.comparative3.property_interest.num,
+						lot_size_percent3			: ass.comparative3.lot_size.num2,
+						shape_percent3				: ass.comparative3.shape.num,
+						topo_percent3			: ass.comparative3.topo.num,
+						frontage_percent3			: ass.comparative3.frontage.num,
+						terms_of_sale_percent3		: ass.comparative3.terms_of_sale.num,
+						corner_percent3				: ass.comparative3.corner.num,
+						prime_percent3				: ass.comparative3.prime.num,
+						hospital_percent3			: ass.comparative3.hospital.num,
+						school_percent3				: ass.comparative3.school.num,
+						mall_percent3				: ass.comparative3.mall.num,
+						public_transpo_percent3		: ass.comparative3.public_transpo.num,
+						improvement_percent3		: ass.comparative3.improvement.num,
+						zoning_percent3				: ass.comparative3.zoning.num,
+						computation_percent3		: ass.comparative3.computation.num2,
+						*/
 
 						username: sess.username,
 						password: sess.password,
@@ -935,6 +1030,49 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						zoning_percent2				: ass.comparative2.zoning.num,
 						computation_percent2		: ass.comparative2.computation.num2,
 
+						/* COMPARATIVE 3
+						//	COMPARATIVE III
+						price_per_sqm3		: ass.comparative3.price_per_sqm,
+						ref_date3			: ass.comparative3.ref_date.date, //idk if this works
+						lot_loc3			: ass.comparative3.lot_loc,
+						property_type3		: ass.comparative3.property_type.str,
+						property_interest3	: ass.comparative3.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size3			: ass.comparative3.lot_size.num1,
+						shape3				: ass.comparative3.shape.str,
+						topo3				: ass.comparative3.topo.str,
+						frontage3			: ass.comparative3.frontage.str,
+						terms_of_sale3		: ass.comparative3.terms_of_sale.str,
+						corner3				: ass.comparative3.corner.bool,
+						prime3				: ass.comparative3.prime.bool,
+						hospital3			: ass.comparative3.hospital.bool,
+						school3				: ass.comparative3.school.bool,
+						mall3				: ass.comparative3.mall.bool,
+						public_transpo3		: ass.comparative3.public_transpo.str,
+						improvement3		: ass.comparative3.improvement.bool,
+						zoning3				: ass.comparative3.zoning.str,
+						computation3		: ass.comparative3.computation.num1,
+
+						// COMPARATIVE III - percent3's
+						ref_date_percent3			: ass.comparative3.ref_date.num,
+						property_type_percent3		: ass.comparative3.property_type.num,
+						property_interest_percent3	: ass.comparative3.property_interest.num,
+						lot_size_percent3			: ass.comparative3.lot_size.num2,
+						shape_percent3				: ass.comparative3.shape.num,
+						topo_percent3			: ass.comparative3.topo.num,
+						frontage_percent3			: ass.comparative3.frontage.num,
+						terms_of_sale_percent3		: ass.comparative3.terms_of_sale.num,
+						corner_percent3				: ass.comparative3.corner.num,
+						prime_percent3				: ass.comparative3.prime.num,
+						hospital_percent3			: ass.comparative3.hospital.num,
+						school_percent3				: ass.comparative3.school.num,
+						mall_percent3				: ass.comparative3.mall.num,
+						public_transpo_percent3		: ass.comparative3.public_transpo.num,
+						improvement_percent3		: ass.comparative3.improvement.num,
+						zoning_percent3				: ass.comparative3.zoning.num,
+						computation_percent3		: ass.comparative3.computation.num2,
+						*/
+
 						username: sess.username,
 						password: sess.password,
 						remember: sess.remember,
@@ -956,7 +1094,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 
 				res.render('viewAssignment_5_admin.hbs',{	//TODO: MAKE EVERYTHING LIKE THIS
 					//assignment_ass: assignment,	//short ver lol
-					
+
 						ref_id: req.params.ref_id,
 						type_of_approach: ass.type_of_approach,
 						client_f_name 	: ass.client_f_name,
@@ -1080,6 +1218,49 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							zoning_percent2				: ass.comparative2.zoning.num,
 							computation_percent2		: ass.comparative2.computation.num2,
 
+							/* COMPARATIVE 3
+							//	COMPARATIVE III
+							price_per_sqm3		: ass.comparative3.price_per_sqm,
+							ref_date3			: ass.comparative3.ref_date.date, //idk if this works
+							lot_loc3			: ass.comparative3.lot_loc,
+							property_type3		: ass.comparative3.property_type.str,
+							property_interest3	: ass.comparative3.property_interest.str,
+							// property_images: [imageSchema],
+							lot_size3			: ass.comparative3.lot_size.num1,
+							shape3				: ass.comparative3.shape.str,
+							topo3				: ass.comparative3.topo.str,
+							frontage3			: ass.comparative3.frontage.str,
+							terms_of_sale3		: ass.comparative3.terms_of_sale.str,
+							corner3				: ass.comparative3.corner.bool,
+							prime3				: ass.comparative3.prime.bool,
+							hospital3			: ass.comparative3.hospital.bool,
+							school3				: ass.comparative3.school.bool,
+							mall3				: ass.comparative3.mall.bool,
+							public_transpo3		: ass.comparative3.public_transpo.str,
+							improvement3		: ass.comparative3.improvement.bool,
+							zoning3				: ass.comparative3.zoning.str,
+							computation3		: ass.comparative3.computation.num1,
+
+							// COMPARATIVE III - percent3's
+							ref_date_percent3			: ass.comparative3.ref_date.num,
+							property_type_percent3		: ass.comparative3.property_type.num,
+							property_interest_percent3	: ass.comparative3.property_interest.num,
+							lot_size_percent3			: ass.comparative3.lot_size.num2,
+							shape_percent3				: ass.comparative3.shape.num,
+							topo_percent3			: ass.comparative3.topo.num,
+							frontage_percent3			: ass.comparative3.frontage.num,
+							terms_of_sale_percent3		: ass.comparative3.terms_of_sale.num,
+							corner_percent3				: ass.comparative3.corner.num,
+							prime_percent3				: ass.comparative3.prime.num,
+							hospital_percent3			: ass.comparative3.hospital.num,
+							school_percent3				: ass.comparative3.school.num,
+							mall_percent3				: ass.comparative3.mall.num,
+							public_transpo_percent3		: ass.comparative3.public_transpo.num,
+							improvement_percent3		: ass.comparative3.improvement.num,
+							zoning_percent3				: ass.comparative3.zoning.num,
+							computation_percent3		: ass.comparative3.computation.num2,
+							*/
+
 							doc_details: docu,
 							/*improvements: docu.improvements,
 							zoning_classification: docu.zoning_classification,
@@ -1103,7 +1284,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							conclusion: docu.conclusion,
 							explanation_adjustments: docu.explanation_adjustments,
 							// //reconciliation & final value opinion
-							recon_final_value_opinion: docu.recon_final_value_opinion,	*/						
+							recon_final_value_opinion: docu.recon_final_value_opinion,	*/
 
 							username: sess.username,
 							password: sess.password,
@@ -1285,6 +1466,49 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						zoning_percent2				: ass.comparative2.zoning.num,
 						computation_percent2		: ass.comparative2.computation.num2,
 
+						/* COMPARATIVE 3
+						//	COMPARATIVE III
+						price_per_sqm3		: ass.comparative3.price_per_sqm,
+						ref_date3			: ass.comparative3.ref_date.date, //idk if this works
+						lot_loc3			: ass.comparative3.lot_loc,
+						property_type3		: ass.comparative3.property_type.str,
+						property_interest3	: ass.comparative3.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size3			: ass.comparative3.lot_size.num1,
+						shape3				: ass.comparative3.shape.str,
+						topo3				: ass.comparative3.topo.str,
+						frontage3			: ass.comparative3.frontage.str,
+						terms_of_sale3		: ass.comparative3.terms_of_sale.str,
+						corner3				: ass.comparative3.corner.bool,
+						prime3				: ass.comparative3.prime.bool,
+						hospital3			: ass.comparative3.hospital.bool,
+						school3				: ass.comparative3.school.bool,
+						mall3				: ass.comparative3.mall.bool,
+						public_transpo3		: ass.comparative3.public_transpo.str,
+						improvement3		: ass.comparative3.improvement.bool,
+						zoning3				: ass.comparative3.zoning.str,
+						computation3		: ass.comparative3.computation.num1,
+
+						// COMPARATIVE III - percent3's
+						ref_date_percent3			: ass.comparative3.ref_date.num,
+						property_type_percent3		: ass.comparative3.property_type.num,
+						property_interest_percent3	: ass.comparative3.property_interest.num,
+						lot_size_percent3			: ass.comparative3.lot_size.num2,
+						shape_percent3				: ass.comparative3.shape.num,
+						topo_percent3			: ass.comparative3.topo.num,
+						frontage_percent3			: ass.comparative3.frontage.num,
+						terms_of_sale_percent3		: ass.comparative3.terms_of_sale.num,
+						corner_percent3				: ass.comparative3.corner.num,
+						prime_percent3				: ass.comparative3.prime.num,
+						hospital_percent3			: ass.comparative3.hospital.num,
+						school_percent3				: ass.comparative3.school.num,
+						mall_percent3				: ass.comparative3.mall.num,
+						public_transpo_percent3		: ass.comparative3.public_transpo.num,
+						improvement_percent3		: ass.comparative3.improvement.num,
+						zoning_percent3				: ass.comparative3.zoning.num,
+						computation_percent3		: ass.comparative3.computation.num2,
+						*/
+
 						username: sess.username,
 						password: sess.password,
 						remember: sess.remember,
@@ -1444,6 +1668,49 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							zoning_percent2				: ass.comparative2.zoning.num,
 							computation_percent2		: ass.comparative2.computation.num2,
 
+							/* COMPARATIVE 3
+							//	COMPARATIVE III
+							price_per_sqm3		: ass.comparative3.price_per_sqm,
+							ref_date3			: ass.comparative3.ref_date.date, //idk if this works
+							lot_loc3			: ass.comparative3.lot_loc,
+							property_type3		: ass.comparative3.property_type.str,
+							property_interest3	: ass.comparative3.property_interest.str,
+							// property_images: [imageSchema],
+							lot_size3			: ass.comparative3.lot_size.num1,
+							shape3				: ass.comparative3.shape.str,
+							topo3				: ass.comparative3.topo.str,
+							frontage3			: ass.comparative3.frontage.str,
+							terms_of_sale3		: ass.comparative3.terms_of_sale.str,
+							corner3				: ass.comparative3.corner.bool,
+							prime3				: ass.comparative3.prime.bool,
+							hospital3			: ass.comparative3.hospital.bool,
+							school3				: ass.comparative3.school.bool,
+							mall3				: ass.comparative3.mall.bool,
+							public_transpo3		: ass.comparative3.public_transpo.str,
+							improvement3		: ass.comparative3.improvement.bool,
+							zoning3				: ass.comparative3.zoning.str,
+							computation3		: ass.comparative3.computation.num1,
+
+							// COMPARATIVE III - percent3's
+							ref_date_percent3			: ass.comparative3.ref_date.num,
+							property_type_percent3		: ass.comparative3.property_type.num,
+							property_interest_percent3	: ass.comparative3.property_interest.num,
+							lot_size_percent3			: ass.comparative3.lot_size.num2,
+							shape_percent3				: ass.comparative3.shape.num,
+							topo_percent3			: ass.comparative3.topo.num,
+							frontage_percent3			: ass.comparative3.frontage.num,
+							terms_of_sale_percent3		: ass.comparative3.terms_of_sale.num,
+							corner_percent3				: ass.comparative3.corner.num,
+							prime_percent3				: ass.comparative3.prime.num,
+							hospital_percent3			: ass.comparative3.hospital.num,
+							school_percent3				: ass.comparative3.school.num,
+							mall_percent3				: ass.comparative3.mall.num,
+							public_transpo_percent3		: ass.comparative3.public_transpo.num,
+							improvement_percent3		: ass.comparative3.improvement.num,
+							zoning_percent3				: ass.comparative3.zoning.num,
+							computation_percent3		: ass.comparative3.computation.num2,
+							*/
+
 							username: sess.username,
 							password: sess.password,
 							remember: sess.remember,
@@ -1587,6 +1854,49 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							zoning_percent2				: ass.comparative2.zoning.num,
 							computation_percent2		: ass.comparative2.computation.num2,
 
+							/* COMPARATIVE 3
+							//	COMPARATIVE III
+							price_per_sqm3		: ass.comparative3.price_per_sqm,
+							ref_date3			: ass.comparative3.ref_date.date, //idk if this works
+							lot_loc3			: ass.comparative3.lot_loc,
+							property_type3		: ass.comparative3.property_type.str,
+							property_interest3	: ass.comparative3.property_interest.str,
+							// property_images: [imageSchema],
+							lot_size3			: ass.comparative3.lot_size.num1,
+							shape3				: ass.comparative3.shape.str,
+							topo3				: ass.comparative3.topo.str,
+							frontage3			: ass.comparative3.frontage.str,
+							terms_of_sale3		: ass.comparative3.terms_of_sale.str,
+							corner3				: ass.comparative3.corner.bool,
+							prime3				: ass.comparative3.prime.bool,
+							hospital3			: ass.comparative3.hospital.bool,
+							school3				: ass.comparative3.school.bool,
+							mall3				: ass.comparative3.mall.bool,
+							public_transpo3		: ass.comparative3.public_transpo.str,
+							improvement3		: ass.comparative3.improvement.bool,
+							zoning3				: ass.comparative3.zoning.str,
+							computation3		: ass.comparative3.computation.num1,
+
+							// COMPARATIVE III - percent3's
+							ref_date_percent3			: ass.comparative3.ref_date.num,
+							property_type_percent3		: ass.comparative3.property_type.num,
+							property_interest_percent3	: ass.comparative3.property_interest.num,
+							lot_size_percent3			: ass.comparative3.lot_size.num2,
+							shape_percent3				: ass.comparative3.shape.num,
+							topo_percent3			: ass.comparative3.topo.num,
+							frontage_percent3			: ass.comparative3.frontage.num,
+							terms_of_sale_percent3		: ass.comparative3.terms_of_sale.num,
+							corner_percent3				: ass.comparative3.corner.num,
+							prime_percent3				: ass.comparative3.prime.num,
+							hospital_percent3			: ass.comparative3.hospital.num,
+							school_percent3				: ass.comparative3.school.num,
+							mall_percent3				: ass.comparative3.mall.num,
+							public_transpo_percent3		: ass.comparative3.public_transpo.num,
+							improvement_percent3		: ass.comparative3.improvement.num,
+							zoning_percent3				: ass.comparative3.zoning.num,
+							computation_percent3		: ass.comparative3.computation.num2,
+							*/
+
 							username: sess.username,
 							password: sess.password,
 							remember: sess.remember,
@@ -1729,7 +2039,50 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 						improvement_percent2		: ass.comparative2.improvement.num,
 						zoning_percent2				: ass.comparative2.zoning.num,
 						computation_percent2		: ass.comparative2.computation.num2,
-					
+
+						/* COMPARATIVE 3
+						//	COMPARATIVE III
+						price_per_sqm3		: ass.comparative3.price_per_sqm,
+						ref_date3			: ass.comparative3.ref_date.date, //idk if this works
+						lot_loc3			: ass.comparative3.lot_loc,
+						property_type3		: ass.comparative3.property_type.str,
+						property_interest3	: ass.comparative3.property_interest.str,
+						// property_images: [imageSchema],
+						lot_size3			: ass.comparative3.lot_size.num1,
+						shape3				: ass.comparative3.shape.str,
+						topo3				: ass.comparative3.topo.str,
+						frontage3			: ass.comparative3.frontage.str,
+						terms_of_sale3		: ass.comparative3.terms_of_sale.str,
+						corner3				: ass.comparative3.corner.bool,
+						prime3				: ass.comparative3.prime.bool,
+						hospital3			: ass.comparative3.hospital.bool,
+						school3				: ass.comparative3.school.bool,
+						mall3				: ass.comparative3.mall.bool,
+						public_transpo3		: ass.comparative3.public_transpo.str,
+						improvement3		: ass.comparative3.improvement.bool,
+						zoning3				: ass.comparative3.zoning.str,
+						computation3		: ass.comparative3.computation.num1,
+
+						// COMPARATIVE III - percent3's
+						ref_date_percent3			: ass.comparative3.ref_date.num,
+						property_type_percent3		: ass.comparative3.property_type.num,
+						property_interest_percent3	: ass.comparative3.property_interest.num,
+						lot_size_percent3			: ass.comparative3.lot_size.num2,
+						shape_percent3				: ass.comparative3.shape.num,
+						topo_percent3			: ass.comparative3.topo.num,
+						frontage_percent3			: ass.comparative3.frontage.num,
+						terms_of_sale_percent3		: ass.comparative3.terms_of_sale.num,
+						corner_percent3				: ass.comparative3.corner.num,
+						prime_percent3				: ass.comparative3.prime.num,
+						hospital_percent3			: ass.comparative3.hospital.num,
+						school_percent3				: ass.comparative3.school.num,
+						mall_percent3				: ass.comparative3.mall.num,
+						public_transpo_percent3		: ass.comparative3.public_transpo.num,
+						improvement_percent3		: ass.comparative3.improvement.num,
+						zoning_percent3				: ass.comparative3.zoning.num,
+						computation_percent3		: ass.comparative3.computation.num2,
+						*/
+
 						username: sess.username,
 						password: sess.password,
 						remember: sess.remember,
@@ -1876,6 +2229,49 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							zoning_percent2				: ass.comparative2.zoning.num,
 							computation_percent2		: ass.comparative2.computation.num2,
 
+							/* COMPARATIVE 3
+							//	COMPARATIVE III
+							price_per_sqm3		: ass.comparative3.price_per_sqm,
+							ref_date3			: ass.comparative3.ref_date.date, //idk if this works
+							lot_loc3			: ass.comparative3.lot_loc,
+							property_type3		: ass.comparative3.property_type.str,
+							property_interest3	: ass.comparative3.property_interest.str,
+							// property_images: [imageSchema],
+							lot_size3			: ass.comparative3.lot_size.num1,
+							shape3				: ass.comparative3.shape.str,
+							topo3				: ass.comparative3.topo.str,
+							frontage3			: ass.comparative3.frontage.str,
+							terms_of_sale3		: ass.comparative3.terms_of_sale.str,
+							corner3				: ass.comparative3.corner.bool,
+							prime3				: ass.comparative3.prime.bool,
+							hospital3			: ass.comparative3.hospital.bool,
+							school3				: ass.comparative3.school.bool,
+							mall3				: ass.comparative3.mall.bool,
+							public_transpo3		: ass.comparative3.public_transpo.str,
+							improvement3		: ass.comparative3.improvement.bool,
+							zoning3				: ass.comparative3.zoning.str,
+							computation3		: ass.comparative3.computation.num1,
+
+							// COMPARATIVE III - percent3's
+							ref_date_percent3			: ass.comparative3.ref_date.num,
+							property_type_percent3		: ass.comparative3.property_type.num,
+							property_interest_percent3	: ass.comparative3.property_interest.num,
+							lot_size_percent3			: ass.comparative3.lot_size.num2,
+							shape_percent3				: ass.comparative3.shape.num,
+							topo_percent3			: ass.comparative3.topo.num,
+							frontage_percent3			: ass.comparative3.frontage.num,
+							terms_of_sale_percent3		: ass.comparative3.terms_of_sale.num,
+							corner_percent3				: ass.comparative3.corner.num,
+							prime_percent3				: ass.comparative3.prime.num,
+							hospital_percent3			: ass.comparative3.hospital.num,
+							school_percent3				: ass.comparative3.school.num,
+							mall_percent3				: ass.comparative3.mall.num,
+							public_transpo_percent3		: ass.comparative3.public_transpo.num,
+							improvement_percent3		: ass.comparative3.improvement.num,
+							zoning_percent3				: ass.comparative3.zoning.num,
+							computation_percent3		: ass.comparative3.computation.num2,
+							*/
+
 							doc_details: docu,
 							/*improvements: docu.improvements,
 							zoning_classification: docu.zoning_classification,
@@ -1899,7 +2295,7 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							conclusion: docu.conclusion,
 							explanation_adjustments: docu.explanation_adjustments,
 							// //reconciliation & final value opinion
-							recon_final_value_opinion: docu.recon_final_value_opinion,*/							
+							recon_final_value_opinion: docu.recon_final_value_opinion,*/
 
 							username: sess.username,
 							password: sess.password,
@@ -2042,6 +2438,49 @@ app.get('/view/0/:ref_id', async(req,res)=>{
 							improvement_percent2		: ass.comparative2.improvement.num,
 							zoning_percent2				: ass.comparative2.zoning.num,
 							computation_percent2		: ass.comparative2.computation.num2,
+
+							/* COMPARATIVE 3
+							//	COMPARATIVE III
+							price_per_sqm3		: ass.comparative3.price_per_sqm,
+							ref_date3			: ass.comparative3.ref_date.date, //idk if this works
+							lot_loc3			: ass.comparative3.lot_loc,
+							property_type3		: ass.comparative3.property_type.str,
+							property_interest3	: ass.comparative3.property_interest.str,
+							// property_images: [imageSchema],
+							lot_size3			: ass.comparative3.lot_size.num1,
+							shape3				: ass.comparative3.shape.str,
+							topo3				: ass.comparative3.topo.str,
+							frontage3			: ass.comparative3.frontage.str,
+							terms_of_sale3		: ass.comparative3.terms_of_sale.str,
+							corner3				: ass.comparative3.corner.bool,
+							prime3				: ass.comparative3.prime.bool,
+							hospital3			: ass.comparative3.hospital.bool,
+							school3				: ass.comparative3.school.bool,
+							mall3				: ass.comparative3.mall.bool,
+							public_transpo3		: ass.comparative3.public_transpo.str,
+							improvement3		: ass.comparative3.improvement.bool,
+							zoning3				: ass.comparative3.zoning.str,
+							computation3		: ass.comparative3.computation.num1,
+
+							// COMPARATIVE III - percent3's
+							ref_date_percent3			: ass.comparative3.ref_date.num,
+							property_type_percent3		: ass.comparative3.property_type.num,
+							property_interest_percent3	: ass.comparative3.property_interest.num,
+							lot_size_percent3			: ass.comparative3.lot_size.num2,
+							shape_percent3				: ass.comparative3.shape.num,
+							topo_percent3			: ass.comparative3.topo.num,
+							frontage_percent3			: ass.comparative3.frontage.num,
+							terms_of_sale_percent3		: ass.comparative3.terms_of_sale.num,
+							corner_percent3				: ass.comparative3.corner.num,
+							prime_percent3				: ass.comparative3.prime.num,
+							hospital_percent3			: ass.comparative3.hospital.num,
+							school_percent3				: ass.comparative3.school.num,
+							mall_percent3				: ass.comparative3.mall.num,
+							public_transpo_percent3		: ass.comparative3.public_transpo.num,
+							improvement_percent3		: ass.comparative3.improvement.num,
+							zoning_percent3				: ass.comparative3.zoning.num,
+							computation_percent3		: ass.comparative3.computation.num2,
+							*/
 
 							username: sess.username,
 							password: sess.password,
@@ -2249,6 +2688,30 @@ app.post('/submit-assignment', function(req,res) {
 				zoning: {str: "No", num:0},
 				computation: {num1: 0, num2: 0}
 			}
+
+			/* COMPARATIVE 3
+			comparative3 : {
+				price_per_sqm: 0,
+				ref_date: {date: 0, num: 0},
+				lot_loc: "",
+				property_type: {str: "", num:0},
+				property_interest: {str:"Lease Hold",num:0},
+				// property_images: [imageSchema],
+				lot_size: {num1: 0, num2: 0},
+				shape: {str: "", num:0},
+				topo: {str: "", num:0},
+				frontage: {str: "", num:0},
+				terms_of_sale: {str: "", num:0},
+				corner: {str: "No",num:0},
+				prime: {str: "No",num:0},
+				hospital: {str: "Near",num:0},
+				school: {str: "Near",num:0},
+				mall: {str: "Near",num:0},
+				public_transpo: {str:"Near", num:0},
+				improvement: {str: "No",num:0},
+				zoning: {str: "No", num:0},
+				computation: {num1: 0, num2: 0}
+			} */
 		})
 	}
 	catch(err)
@@ -2715,15 +3178,15 @@ app.get('/assignments', async(req,res)=> {
 
 app.get('/profile', async(req,res)=> {
 	sess = req.session;
-	
+
 	const stats_his = await Assignment.countDocuments({
 				assigned_to: sess.username,
 				comment: "Approved."})
-				
+
 	const stats_ass = await Assignment.countDocuments({
 				assigned_to: sess.username,
-				comment: {$ne: "Approved."}})	
-	
+				comment: {$ne: "Approved."}})
+
 	if(sess.username){
 		res.render('profile.hbs', {
 			stats_assignments : stats_ass,
@@ -2825,7 +3288,7 @@ app.get('/save-ass', async(req,res)=> {
 				res.redirect('/assignments') //if admin, just redirct to assignmets
 				//res.redirect('/view/0/'+ req.query.ref_id)
 			}
-			
+
 			catch(err)
 			{
 				console.log(err)
@@ -3012,7 +3475,81 @@ app.get('/save-ass', async(req,res)=> {
 							num1: req.query.computation[3],
 							num2: req.query.computation[4]
 						}
-					}
+
+						/*COMPARATIVE 3
+						comparative3:{
+							price_per_sqm: req.query.price_per_sqm[4],
+							ref_date: {
+								date: req.query.ref_date[4],
+								num: req.query.ref_date[5]
+								},
+							lot_loc: req.query.lot_loc[4],
+							property_type: {
+								str: req.query.property_type[5],
+								num: req.query.property_type[6]
+								},
+							property_interest: {
+								str: req.query.property_interest[5],
+								num: req.query.property_interest[6]
+								},
+							lot_size: {
+								num1: req.query.lot_size[5],
+								num2: req.query.lot_size[6]
+								},
+							shape: {
+								str: req.query.shape[5],
+								num: req.query.shape[6]
+							},
+							topo: {
+								str: req.query.topo[5],
+								num: req.query.topo[6]
+								},
+							frontage: {
+								str: req.query.frontage[5],
+								num: req.query.frontage[6]
+								},
+							terms_of_sale: {
+								str: req.query.terms_of_sale[5],
+								num: req.query.terms_of_sale[6]
+								},
+							corner: {
+								str: req.query.corner[5],
+								num: req.query.corner[6]
+								},
+							prime: {
+								str: req.query.prime[5],
+								num: req.query.prime[6]
+								},
+							hospital: {
+								str: req.query.hospital[5],
+								num: req.query.hospital[6]
+								},
+							school: {
+								str: req.query.school[5],
+								num: req.query.school[6]
+								},
+							mall: {
+								str: req.query.mall[5],
+								num: req.query.mall[6]
+								},
+							improvement: {
+								str: req.query.improvement[5],
+								num: req.query.improvement[6]
+								},
+							public_transpo: {
+								str: req.query.public_transpo[5],
+								num: req.query.public_transpo[6]
+								},
+
+							zoning: {
+								str: req.query.zoning[5],
+								num: req.query.zoning[6]
+								},
+							computation: {
+								num1: req.query.computation[5],
+								num2: req.query.computation[6]
+							}
+					} */
 				})
 
 				//res.redirect('/assignments')

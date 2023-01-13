@@ -12,7 +12,7 @@ const documentSchema = new mongoose.Schema({
     //market_value: String, //final computation
     //parcel_id: String, //assignment
     improvements: String,
-    zoning_classification: String, 
+    zoning_classification: String,
     //interest_appraised: String, //assignment
 
     //Start of Body of Document
@@ -62,7 +62,9 @@ const documentSchema = new mongoose.Schema({
     //comparatives
     /*subject: comparativeSchema,
     comp1: comparativeSchema,
-    comp2: comparativeSchema,*/
+    comp2: comparativeSchema,
+		comp3: comparativeSchema,
+		*/
     comment: {type:String, default:"New!"}
 })
 
